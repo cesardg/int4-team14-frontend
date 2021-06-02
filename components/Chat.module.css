@@ -1,0 +1,33 @@
+.messages{
+    display: flex;
+    flex-direction: column;
+}
+
+.message{
+    background-color: azure;
+    width: fit-content;
+    padding: 1rem;
+    margin: .2rem;
+    font-size: 1.2rem;
+}
+
+.textarea{
+    font-size: 1.2rem;
+    height: 5rem
+}
+
+.button{
+    font-size: 1.4rem;
+    padding: 1rem;
+    background-color: aqua;
+    color: black;
+    border: .1rem solid black;
+    height: 5rem;
+    margin-left: 2rem;
+}
+
+.form{
+    display: flex;
+    margin-top: 2rem;
+    align-items: center;
+}

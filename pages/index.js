@@ -16,6 +16,7 @@ export default function Home() {
       <main>
         <h1 className="title">The better team 14 groupchat - Next.js x Ably x Spongebob live Chat Demo</h1>
         <Chat/>
+        <Spongebob />
       </main>
 
     </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useChannel } from "./ChatReactEffect";
 import styles from './Chat.module.css';
 
-const AblyChatComponent = () => {
+const Chat = () => {
 
   let inputBox = null;
   let messageEnd = null;
@@ -65,4 +65,4 @@ const AblyChatComponent = () => {
   )
 }
 
-export default AblyChatComponent;
+export default Chat;

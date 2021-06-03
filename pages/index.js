@@ -38,12 +38,12 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Better team 14 groupchat</title>
+        <title>Team 14 groupchat</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
-        <h1 className="title">The better team 14 groupchat - Next.js x Ably x Spongebob live Chat Demo</h1>
+        <h1 className="title">Team 14 groupchat - Next.js x Ably x Arduino demo</h1>
         <Chat/>
         <GameBoard currentField={field}/>
       </main>

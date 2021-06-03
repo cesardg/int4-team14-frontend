@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
-import styles from './../styles/Home.module.css'
 import GameBoard from '../components/GameBoard';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
@@ -41,7 +40,7 @@ export default function Testing() {
 
 
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Team 14 groupchat</title>
         <link rel="icon" href="/favicon.ico" />

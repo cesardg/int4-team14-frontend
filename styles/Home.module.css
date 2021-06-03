@@ -1,3 +1,42 @@
-.container{
-  padding: 2rem;
+.intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 50vh auto;
+  column-gap: 10rem;
+}
+
+.center {
+  text-align: center;
+}
+
+.left {
+  composes: center;
+  grid-column-start: 1;
+}
+
+.right {
+  composes: center;
+  grid-column-start: 2;
+}
+
+.bottom {
+  composes: center;
+  grid-column: 1 / span 2;
+  grid-row-start: 2;
+}
+
+.players {
+  display: flex;
+  justify-content: space-between;
+}
+
+.player {
+  composes: center;
+  width: 45%;
+}
+
+.btnBack {
+  left: 2rem;
+  position: absolute;
+  top: 2rem;
 }

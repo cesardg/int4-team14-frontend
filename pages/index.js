@@ -5,7 +5,8 @@ import { nanoid } from 'nanoid'
 
 export default function Home() {
 
-  const gameCode = nanoid(5);
+  //const gameCode = nanoid(5);
+  const gameCode = "hardCoded123"
 
 
   return (
@@ -17,11 +18,23 @@ export default function Home() {
 
       <main className={styles.container}>
         <h1 className="title">Us3r vs H4ck3r</h1>
-        <p>Room code: <span>{gameCode}</span></p>
+
+        <article>
+          <h2>Code</h2>
+          <p>Room code: <span>{gameCode}</span></p>
+          <form className={styles.form} onSubmit={(e) => handleSubmit(e)} >
+            <label className={styles.label} >
+              Fill in room code
+              <input className={styles.input} type="text" name="code" required />
+            </label>
+            <input className={styles.button} type="submit" value="Join game" />
+          </form>
+        </article>
+       
         <article>
           <h2>Choose</h2>
-           <Link  href={`/user?game=2RF456`}><a className={styles.link}>Us3r | </a></Link>
-           <Link  href={`/hacker?game=2RF456`}><a className={styles.link}>H4ck3r</a></Link>
+           <Link  href={`/user?game=`+ gameCode}><a className={styles.link}>Us3r | </a></Link>
+           <Link  href={`/hacker?game=`+ gameCode}><a className={styles.link}>H4ck3r</a></Link>
         </article>
       </main>
 

@@ -1,11 +1,16 @@
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import styles from './../styles/Home.module.css'
-import Pressdown from '../components/Pressdown';
+import useKeyPress from '../components/Pressdown';
 
 const Chat = dynamic(() => import('../components/Chat'), { ssr: false });
 
 export default function Home() {
+
+  //Regelt keydown event
+  const key = useKeyPress()
+  console.log(key)
+
   return (
     <div className={styles.container}>
       <Head>
@@ -16,8 +21,8 @@ export default function Home() {
       <main>
         <h1 className="title">The better team 14 groupchat - Next.js x Ably x Spongebob live Chat Demo</h1>
         <Chat/>
-        <Pressdown/>
-        <p>ddsvd</p>
+        Start
+        End
       </main>
 
     </div>

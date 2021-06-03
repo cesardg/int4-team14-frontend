@@ -1,5 +1,15 @@
 .bordvak{
-    width: 4rem;
-    height: 4rem;
     border: .2rem solid black;
+    height: 10rem;
+    margin-left: -.2rem;
+    width: 10rem;
+}
+
+.container{
+    display: flex;
+}
+
+.pion{
+    font-size: 10rem;
+    margin: -5rem auto
 }

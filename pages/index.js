@@ -8,30 +8,23 @@ const Chat = dynamic(() => import('../components/Chat'), { ssr: false });
 
 export default function Home() {
 
-
-  const [keyPressed, setKeyPressed] = useState(false);
   let arr = []
-
+  let tempField;
+  const [field, setField] = useState(1);
   // If pressed key is our target key then set to true
   const downHandler = ({key}) => {
-      setKeyPressed(key);
-      // if toestenbord else spelbord
-      if (key === "V"){
-       initArray(key)
-      }
-      if (key === "Q" || key === "K" ){
-        addArray(key)
-      }
+    arr.push(key);
+    const index =   arr.indexOf("K")
+    if (index != -1 && arr[index - 1] == "Q" && arr[index - 2] == "V" ){
+      tempField = arr[index + 1]
+      if (tempField){
+        setField(tempField)
+        arr = [];
+      } 
+    } 
   }
 
-  const initArray = (key) => {
-    arr.push(key)
-  }
 
-  const addArray = (key) => {
-    arr.push(key)
-    console.log(arr);
-  }
 
   // Add event listeners
   useEffect(() => {
@@ -52,7 +45,7 @@ export default function Home() {
       <main>
         <h1 className="title">The better team 14 groupchat - Next.js x Ably x Spongebob live Chat Demo</h1>
         <Chat/>
-        <GameBoard pion={keyPressed} />
+        <GameBoard currentField={field}/>
       </main>
 
     </div>

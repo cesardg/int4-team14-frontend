@@ -3,10 +3,15 @@ import dynamic from 'next/dynamic'
 import styles from './../styles/Home.module.css'
 import GameBoard from '../components/GameBoard';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router'
 
 const Chat = dynamic(() => import('../components/Chat'), { ssr: false });
 
 export default function Testing() {
+
+  const router = useRouter()
+  const gameCode = router.query
+  console.log(gameCode);
 
   let arr = []
   let tempField;
@@ -44,10 +49,11 @@ export default function Testing() {
 
       <main>
         <h1 className="title">Team 14 groupchat - Next.js x Ably x Arduino demo</h1>
-        <Chat/>
+        <Chat gameCode={gameCode.game}/>
         <GameBoard currentField={field}/>
       </main>
 
     </div>
   )
 }
+

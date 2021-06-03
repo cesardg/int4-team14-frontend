@@ -2,22 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { useChannel } from "./ChatReactEffect";
 import styles from './Chat.module.css';
 
-const Chat = () => {
+const Chat = ({gameCode}) => {
+  
 
   let inputBox = null;
-  let messageEnd = null;
 
   const [messageText, setMessageText] = useState("");
   const [receivedMessages, setMessages] = useState([]);
   const messageTextIsEmpty = messageText.trim().length === 0;
 
-  const [channel, ably] = useChannel("chat-demo", (message) => {
+  const [channel, ably] = useChannel(gameCode, (message) => {
     const history = receivedMessages.slice(-199);
     setMessages([...history, message]);
   });
 
   const sendChatMessage = (messageText) => {
-    channel.publish({ name: "chat-message", data: messageText });
+    channel.publish({ name: gameCode, data: messageText });
     setMessageText("");
     inputBox.focus();
   }
@@ -40,16 +40,12 @@ const Chat = () => {
     return <span key={index} className={styles.message} data-author={author}>{message.data}</span>;
   });
 
-  useEffect(() => {
-    //messageEnd.scrollIntoView({ behaviour: "smooth" });
-
-  });
 
   return (
     <div className={styles.container}>
       <div className={styles.messages}>
         {messages}
-        <div ref={(element) => { messageEnd = element; }}></div>
+    
       </div>
       <form onSubmit={handleFormSubmission} className={styles.form}>
         <textarea

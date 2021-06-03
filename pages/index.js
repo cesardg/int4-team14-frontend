@@ -6,7 +6,7 @@ import { nanoid } from 'nanoid'
 export default function Home() {
 
   //const gameCode = nanoid(5);
-  const gameCode = "hardCoded123"
+  const gameCode = "chat-demo"
 
 
   return (
@@ -36,6 +36,7 @@ export default function Home() {
            <Link  href={`/user?game=`+ gameCode}><a className={styles.link}>Us3r | </a></Link>
            <Link  href={`/hacker?game=`+ gameCode}><a className={styles.link}>H4ck3r</a></Link>
         </article>
+            <Link  href={`/testing?game=`+ gameCode}><a className={styles.link}>testing page</a></Link>
       </main>
 
     </div>

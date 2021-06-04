@@ -17,3 +17,9 @@ a {
 .hidden {
   display: none;
 }
+
+.btnBack {
+  left: 2rem;
+  position: absolute;
+  top: 2rem;
+}

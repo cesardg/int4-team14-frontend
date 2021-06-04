@@ -34,9 +34,3 @@
   composes: center;
   width: 45%;
 }
-
-.btnBack {
-  left: 2rem;
-  position: absolute;
-  top: 2rem;
-}

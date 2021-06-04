@@ -19,7 +19,7 @@ export default function Testing() {
   const downHandler = ({key}) => {
     arr.push(key);
     const index =   arr.indexOf("K")
-    if (index != -1 && arr[index - 1] == "Q" && arr[index - 2] == "V" ){
+    if (index != -1 && arr[index - 1] == "V" && arr[index - 2] == "D" && arr[index - 3] == "R" && arr[index - 4] == "B"){
       tempField = arr[index + 1]
       if (tempField){
         setField(tempField)

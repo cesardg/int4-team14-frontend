@@ -48,7 +48,7 @@ export default function Testing() {
 
       <main>
         <h1 className="title">Team 14 groupchat - Next.js x Ably x Arduino demo</h1>
-        <Chat gameCode={gamecode}/>
+        <Chat gamecode={gamecode}/>
         <GameBoard currentField={field}/>
       </main>
 

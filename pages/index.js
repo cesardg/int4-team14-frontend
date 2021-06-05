@@ -22,10 +22,6 @@ const Home = () => {
 
   // ---- begin game toevoegen aan database ----
   const handeClickStartGame = () => {
-    if (playerOne === "hacker") { setPlayerTwo("user")}
-    if (playerOne === "user") { setPlayerTwo("hacker")}
-    console.log(playerOne)
-    console.log(playerTwo)
     const data = {
       gamecode: gamecode,
       playerone: playerOne,
@@ -37,15 +33,14 @@ const Home = () => {
   const onSubmit = async (data) => {
 
   const response = await fetch(
-      `http://localhost:1337/games/`,
-      {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    `http://localhost:1337/games/`,
+    {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     if (response.ok) {
       console.log("game zit nu in db ")
     }

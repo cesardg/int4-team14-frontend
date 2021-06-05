@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useChannel } from "./ChatReactEffect";
 import styles from './Chat.module.css';
 
-const Chat = ({gameCode}) => {
+const Chat = ({gamecode}) => {
   
 
   let inputBox = null;
@@ -11,13 +11,13 @@ const Chat = ({gameCode}) => {
   const [receivedMessages, setMessages] = useState([]);
   const messageTextIsEmpty = messageText.trim().length === 0;
 
-  const [channel, ably] = useChannel(gameCode, (message) => {
+  const [channel, ably] = useChannel(gamecode, (message) => {
     const history = receivedMessages.slice(-199);
     setMessages([...history, message]);
   });
 
   const sendChatMessage = (messageText) => {
-    channel.publish({ name: gameCode, data: messageText });
+    channel.publish({ name: gamecode, data: messageText });
     setMessageText("");
     inputBox.focus();
   }

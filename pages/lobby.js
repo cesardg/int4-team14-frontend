@@ -13,7 +13,13 @@ const Lobby = () => {
 
   const [members, setMembers] = useState(1);
 
-  const [channel] = useChannel(gamecode);
+  const [channel] = useChannel(gamecode, (message) => {
+    console.log(message)
+    if (message.data === "game-data=start-game"){
+       Router.push(`/${player}?gamecode=${gamecode}`)
+    }
+  });
+
   channel.presence.subscribe('enter', async () => { updateActiveCount(channel); });
   channel.presence.subscribe('leave', async () => { updateActiveCount(channel); });
   channel.presence.enter();
@@ -21,6 +27,10 @@ const Lobby = () => {
   const updateActiveCount = async(channel) => {
     const membersArr = await channel.presence.get();
     setMembers(membersArr.length);
+  }
+
+  const handleCLickStart = () => {
+    channel.publish({ name: gamecode, data: "game-data=start-game" });
   }
 
   return (
@@ -61,8 +71,8 @@ const Lobby = () => {
           </div>
           : 
           <div>
-            <Link href={`/testing?gamecode=${gamecode}&player=${player}`}><a>Start game</a></Link>
-            starting game in
+            <Link href={`${player}/?gamecode=${gamecode}`}><a onClick={handleCLickStart}>Start game</a></Link>
+          <p onClick={handleCLickStart}>dit vervangt even de link</p>
           </div>
         }
         <Link href={`/`}><a className={"btnBack"}>Terug</a></Link>

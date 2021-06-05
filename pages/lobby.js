@@ -1,11 +1,11 @@
 import Layout from "../components/Layout"
 import styles from './../styles/Game.module.css'
-import { useChannel } from "./../components/ChatReactEffect"
+import { useChannel } from "../components/ChatReactEffect"
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from "next/link"
 
-const Game = () => {
+const Lobby = () => {
   const router = useRouter()
   const gamecode = router.query.gamecode
   const player = router.query.player
@@ -71,5 +71,5 @@ const Game = () => {
   )
 }
 
-export default Game
+export default Lobby
         

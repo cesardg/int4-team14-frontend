@@ -8,27 +8,28 @@ import { nanoid } from 'nanoid'
 const Home = () => {
   const [screen, setScreen] = useState("start");
   const [playerOne, setPlayerOne] = useState("hacker");
-  const [playerTwo, setPlayerTwo] = useState();
+  const [playerTwo, setPlayerTwo] = useState("user");
   const [gamecode, setGamecode] = useState(nanoid(5));
+
+
   
   const handleSubmitGamecode = (e) => {
     e.preventDefault();
     setGamecode(e.target.gamecode.value)
     setScreen("participate")
-    if (playerOne === "hacker") { setPlayerTwo("user")}
-    if (playerOne === "user") { setPlayerTwo("hacker")}
-    // hier gebeurt er nog iets vreemds, hij draait de users om?
-    console.log(playerOne);
-    console.log(e.target.gamecode.value);
-    Router.push(`/game?gamecode=${e.target.gamecode.value}&player=${playerOne}`)
+    Router.push(`/lobby?gamecode=${e.target.gamecode.value}&player=to-be-find-out-in-next-page?`)
   }
 
   // ---- begin game toevoegen aan database ----
   const handeClickStartGame = () => {
-    console.log("start game")
+    if (playerOne === "hacker") { setPlayerTwo("user")}
+    if (playerOne === "user") { setPlayerTwo("hacker")}
+    console.log(playerOne)
+    console.log(playerTwo)
     const data = {
       gamecode: gamecode,
-      playerone: playerOne 
+      playerone: playerOne,
+      playertwo: playerTwo
     };
     onSubmit(data)
   }
@@ -89,7 +90,7 @@ const Home = () => {
                   name="player"
                   value="hacker"
                   checked={playerOne === "hacker"}
-                  onChange={(e) => {setPlayerOne(e.target.value)}}
+                  onChange={() => {setPlayerOne("hacker"), setPlayerTwo("user")}}
                   className="form-check-input"
                 />
                 <img src="hacker.png" alt="" />
@@ -108,7 +109,7 @@ const Home = () => {
                   name="player"
                   value="user"
                   checked={playerOne === "user"}
-                  onChange={(e) => {setPlayerOne(e.target.value)}}
+                  onChange={() => {setPlayerOne("user"), setPlayerTwo("hacker")}}
                   className="form-check-input"
                 />
                 <img src="/user.png" alt="" />
@@ -121,7 +122,7 @@ const Home = () => {
             </div>
             
           </div>
-          <Link href={`/game?gamecode=${gamecode}&player=${playerOne}`}><a onClick={handeClickStartGame} className={styles.link}>Start game →</a></Link>
+          <Link href={`/lobby?gamecode=${gamecode}&player=${playerOne}`}><a onClick={handeClickStartGame} className={styles.link}>Start game →</a></Link>
           <button onClick={() => {setScreen("start")} } className={"btnBack"}>Terug</button>
         </section>
       : ""}

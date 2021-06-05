@@ -92,7 +92,7 @@ const Lobby = () => {
           </div>
           : 
           <div>
-            <Link href={`${player}/?gamecode=${gamecode}`}><a onClick={handleCLickStart}>Start game</a></Link>
+            <Link href={`${player}setup/?gamecode=${gamecode}`}><a onClick={handleCLickStart}>Start game</a></Link>
           </div>
         }
         <Link href={`/`}><a className={"btnBack"}>Terug</a></Link>

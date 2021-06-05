@@ -23,6 +23,35 @@ const Home = () => {
     Router.push(`/game?gamecode=${e.target.gamecode.value}&player=${playerOne}`)
   }
 
+  // ---- begin game toevoegen aan database ----
+  const handeClickStartGame = () => {
+    console.log("start game")
+    const data = {
+      gamecode: gamecode,
+      playerone: playerOne 
+    };
+    onSubmit(data)
+  }
+
+  const onSubmit = async (data) => {
+
+  const response = await fetch(
+      `http://localhost:1337/games/`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.ok) {
+      console.log("game zit nu in db ")
+    }
+  };
+
+    // ---- einde game toevoegen aan database ----
+
   return (
     <Layout>
       {screen == "start" ?
@@ -92,7 +121,7 @@ const Home = () => {
             </div>
             
           </div>
-          <Link href={`/game?gamecode=${gamecode}&player=${playerOne}`}><a className={styles.link}>Start game →</a></Link>
+          <Link href={`/game?gamecode=${gamecode}&player=${playerOne}`}><a onClick={handeClickStartGame} className={styles.link}>Start game →</a></Link>
           <button onClick={() => {setScreen("start")} } className={"btnBack"}>Terug</button>
         </section>
       : ""}

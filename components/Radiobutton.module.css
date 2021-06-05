@@ -1,0 +1,11 @@
+.hidden{
+    display: none;
+}
+
+.label{
+    padding: 1rem;
+}
+
+.img{
+    cursor: pointer;
+}

@@ -2,8 +2,9 @@ import Layout from "../components/Layout";
 import styles from './../styles/Home.module.css';
 import { useState } from 'react';
 import Link from "next/link";
-import Router from 'next/router'
-import { nanoid } from 'nanoid'
+import Router from 'next/router';
+import { nanoid } from 'nanoid';
+import Image from 'next/image'
 
 const Home = () => {
   const [screen, setScreen] = useState("start");
@@ -102,7 +103,12 @@ const Home = () => {
                   onChange={() => {setPlayerOne("hacker"), setPlayerTwo("user")}}
                   className="form-check-input"
                 />
-                <img src="hacker.png" alt="" />
+                <Image
+                    src="/img/hacker.png"
+                    alt="Picture of the hacker"
+                    width={30}
+                    height={30}
+                   />
                 <p>Hacker</p>
                 <ul>
                   <li>Hack het paswoord van de user</li>
@@ -121,7 +127,12 @@ const Home = () => {
                   onChange={() => {setPlayerOne("user"), setPlayerTwo("hacker")}}
                   className="form-check-input"
                 />
-                <img src="/user.png" alt="" />
+                <Image
+                    src="/img/user.png"
+                    alt="Picture of the user"
+                    width={30}
+                    height={30}
+                  />
                 <p>User</p>
                 <ul>
                   <li>Bescherm je wachtwoord als de beste</li>

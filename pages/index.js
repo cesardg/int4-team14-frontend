@@ -12,12 +12,27 @@ const Home = () => {
   const [gamecode, setGamecode] = useState(nanoid(5));
 
 
-  
-  const handleSubmitGamecode = (e) => {
+  const fetchDataGames = async () => {
+    const req = await fetch(`http://localhost:1337/games/`);
+    const res = await req.json();
+    return res;
+  };
+
+  const handleSubmitGamecode = async (e) => {
     e.preventDefault();
-    setGamecode(e.target.gamecode.value)
-    setScreen("participate")
-    Router.push(`/lobby?gamecode=${e.target.gamecode.value}&player=to-be-find-out-in-next-page?`)
+    // controleert of de game code wel bestaat
+    const data =  await fetchDataGames();
+    data.forEach(game => {
+      console.log(game.gamecode)
+      if (game.gamecode === e.target.gamecode.value) {
+        console.log("game bestaat")
+        setGamecode(e.target.gamecode.value)
+        setScreen("participate")
+        Router.push(`/lobby?gamecode=${e.target.gamecode.value}&player=${game.playertwo}`)
+      } else {
+        console.log("game bestaat niet")
+      }
+    });
   }
 
   // ---- begin game toevoegen aan database ----
@@ -62,7 +77,7 @@ const Home = () => {
             <p>Neem deel aan een spel</p>
             <p>Heb je al een game code? Neem snel deel aan het spel</p>
             <form onSubmit={(e) => handleSubmitGamecode(e)}>
-              <input type="text" name="gamecode" id="gamecode" />
+              <input type="text" name="gamecode" id="gamecode" required />
               <input type="submit" value="→" />
             </form>
           </div>
@@ -134,4 +149,4 @@ const Home = () => {
 }
 
 export default Home
-        
+      

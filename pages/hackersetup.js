@@ -2,7 +2,6 @@ import Head from 'next/head';
 import styles from './../styles/Usersetup.module.css';
 import Image from 'next/image';
 import {useState} from "react";
-import Checkbox from "../components/Checkbox";
 import Radiobutton from "../components/Radiobutton";
 import { useRouter } from 'next/router'
 

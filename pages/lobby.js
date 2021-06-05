@@ -4,6 +4,7 @@ import { useChannel } from "../components/ChatReactEffect"
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from "next/link"
+import Router from 'next/router'
 
 const Lobby = () => {
   const router = useRouter()
@@ -11,16 +12,24 @@ const Lobby = () => {
   const player = router.query.player
 
   const [members, setMembers] = useState(1);
+  const [counter, setCounter] = useState(5);
 
-  const [channel, ably] = useChannel(gamecode, (message) => {
-    const history = receivedMessages.slice(-199);
-    setMessages([...history, message]);
-  });
+  const [channel, ably] = useChannel(gamecode);
 
   const updateActiveCount = async(channel) => {
     const membersArr = await channel.presence.get();
-    setMembers(membersArr.length)
+    setMembers(membersArr.length);
   }
+
+  useEffect(() => {
+    if (counter > 0 && members > 1){
+      setTimeout(() => setCounter(counter - 1), 1000);
+    } else if (counter == 0) {
+      console.log("done")
+      Router.push(`/testing?gamecode=${gamecode}&player=${player}`)
+    }
+  }, []);
+
 
   channel.presence.subscribe('enter', async () => { updateActiveCount(channel); });
   channel.presence.subscribe('leave', async () => { updateActiveCount(channel); });
@@ -62,7 +71,11 @@ const Lobby = () => {
             <p className={styles.gamecode}>{gamecode}</p>
             <p className={styles.text}>Deel de game code met je tegenspeler om het spel te starten</p>
           </div>
-          : <Link href={`/testing`}><a>Start game</a></Link>
+          : 
+          <div>
+            <Link href={`/testing?gamecode=${gamecode}&player=${player}`}><a>Start game</a></Link>
+            starting game in {counter}
+          </div>
         }
         <Link href={`/`}><a className={"btnBack"}>Terug</a></Link>
         

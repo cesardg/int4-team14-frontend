@@ -12,28 +12,16 @@ const Lobby = () => {
   const player = router.query.player
 
   const [members, setMembers] = useState(1);
-  const [counter, setCounter] = useState(5);
 
-  const [channel, ably] = useChannel(gamecode);
+  const [channel] = useChannel(gamecode);
+  channel.presence.subscribe('enter', async () => { updateActiveCount(channel); });
+  channel.presence.subscribe('leave', async () => { updateActiveCount(channel); });
+  channel.presence.enter();
 
   const updateActiveCount = async(channel) => {
     const membersArr = await channel.presence.get();
     setMembers(membersArr.length);
   }
-
-  useEffect(() => {
-    if (counter > 0 && members > 1){
-      setTimeout(() => setCounter(counter - 1), 1000);
-    } else if (counter == 0) {
-      console.log("done")
-      Router.push(`/testing?gamecode=${gamecode}&player=${player}`)
-    }
-  }, []);
-
-
-  channel.presence.subscribe('enter', async () => { updateActiveCount(channel); });
-  channel.presence.subscribe('leave', async () => { updateActiveCount(channel); });
-  channel.presence.enter();
 
   return (
     <Layout>
@@ -74,7 +62,7 @@ const Lobby = () => {
           : 
           <div>
             <Link href={`/testing?gamecode=${gamecode}&player=${player}`}><a>Start game</a></Link>
-            starting game in {counter}
+            starting game in
           </div>
         }
         <Link href={`/`}><a className={"btnBack"}>Terug</a></Link>

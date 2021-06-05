@@ -23,7 +23,6 @@ const Home = () => {
     // controleert of de game code wel bestaat
     const data =  await fetchDataGames();
     data.forEach(game => {
-      console.log(game.gamecode)
       if (game.gamecode === e.target.gamecode.value) {
         console.log("game bestaat")
         setGamecode(e.target.gamecode.value)

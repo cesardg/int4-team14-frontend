@@ -13,7 +13,7 @@ const Home = () => {
 
 
   const fetchDataGames = async () => {
-    const req = await fetch(`http://localhost:1337/games/`);
+    const req = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/games/`);
     const res = await req.json();
     return res;
   };
@@ -47,7 +47,7 @@ const Home = () => {
   const onSubmit = async (data) => {
 
   const response = await fetch(
-    `http://localhost:1337/games/`,
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/games/`,
     {
       method: "POST",
       body: JSON.stringify(data),

@@ -72,7 +72,6 @@ const Lobby = () => {
           : 
           <div>
             <Link href={`${player}/?gamecode=${gamecode}`}><a onClick={handleCLickStart}>Start game</a></Link>
-          <p onClick={handleCLickStart}>dit vervangt even de link</p>
           </div>
         }
         <Link href={`/`}><a className={"btnBack"}>Terug</a></Link>

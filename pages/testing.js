@@ -9,8 +9,8 @@ const Chat = dynamic(() => import('../components/Chat'), { ssr: false });
 export default function Testing() {
 
   const router = useRouter()
-  const gameCode = router.query
-  console.log(gameCode);
+  const gamecode = router.query.gamecode
+  console.log(gamecode);
 
   let arr = []
   let tempField;
@@ -48,7 +48,7 @@ export default function Testing() {
 
       <main>
         <h1 className="title">Team 14 groupchat - Next.js x Ably x Arduino demo</h1>
-        <Chat gameCode={gameCode.game}/>
+        <Chat gameCode={gamecode}/>
         <GameBoard currentField={field}/>
       </main>
 

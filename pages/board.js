@@ -20,6 +20,13 @@ export default function Board() {
     if (index != -1 && arr[index - 1] == "V" && arr[index - 2] == "D" && arr[index - 3] == "R" && arr[index - 4] == "B"){
       tempField = arr[index + 1]
       if (tempField){
+        if (tempField === "X") {
+          tempField = 10
+        } else if (tempField === "Y") {
+          tempField = 11
+        } else if (tempField === "Z") {
+            tempField = 12
+        }
         setField1(tempField)
         arr = [];
       } 

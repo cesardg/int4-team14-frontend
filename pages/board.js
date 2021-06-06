@@ -1,14 +1,8 @@
 import Head from 'next/head'
 import GameBoard from '../components/GameBoard';
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router'
 
-
-export default function Testing() {
-
-  const router = useRouter()
-  const gamecode = router.query.gamecode
-  console.log(gamecode);
+export default function Board() {
 
   let arr = []
   let tempField;
@@ -21,6 +15,7 @@ export default function Testing() {
 
   const downHandler = ({key}) => {
     arr.push(key);
+    console.log(key)
     const index =   arr.indexOf("K")
     if (index != -1 && arr[index - 1] == "V" && arr[index - 2] == "D" && arr[index - 3] == "R" && arr[index - 4] == "B"){
       tempField = arr[index + 1]
@@ -45,7 +40,7 @@ export default function Testing() {
   return (
     <div>
       <Head>
-        <title>Team 14 groupchat</title>
+        <title>Digital board</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

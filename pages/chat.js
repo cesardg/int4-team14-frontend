@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 const Chat = dynamic(() => import('../components/Chat'), { ssr: false });
 
-export default function Groupchat() {
+export default function Chat() {
 
   const router = useRouter()
   const gamecode = router.query.gamecode
@@ -18,7 +18,7 @@ export default function Groupchat() {
       </Head>
 
       <main>
-        <h1 className="title">Chat room demo</h1>
+        <h1 className="title">Live chat demo</h1>
         <Chat gamecode={gamecode}/>
       </main>
 

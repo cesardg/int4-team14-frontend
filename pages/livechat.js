@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 const Chat = dynamic(() => import('../components/Chat'), { ssr: false });
 
-export default function Chat() {
+export default function Livechat() {
 
   const router = useRouter()
   const gamecode = router.query.gamecode

@@ -1,10 +1,8 @@
 import Head from 'next/head'
-import dynamic from 'next/dynamic'
 import GameBoard from '../components/GameBoard';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
 
-const Chat = dynamic(() => import('../components/Chat'), { ssr: false });
 
 export default function Testing() {
 
@@ -14,15 +12,20 @@ export default function Testing() {
 
   let arr = []
   let tempField;
-  const [field, setField] = useState(1);
-  // If pressed key is our target key then set to true- test branch
+
+  // Pion speler 1
+  const [field1, setField1] = useState(1);
+
+  //Pion speler 2 - nu nog hardcoded, later moet de computer detecteren wie er aan de beurt is
+  const [field2, setField2] = useState(1);
+
   const downHandler = ({key}) => {
     arr.push(key);
     const index =   arr.indexOf("K")
     if (index != -1 && arr[index - 1] == "V" && arr[index - 2] == "D" && arr[index - 3] == "R" && arr[index - 4] == "B"){
       tempField = arr[index + 1]
       if (tempField){
-        setField(tempField)
+        setField1(tempField)
         arr = [];
       } 
     } 
@@ -47,9 +50,8 @@ export default function Testing() {
       </Head>
 
       <main>
-        <h1 className="title">Team 14 groupchat - Next.js x Ably x Arduino demo</h1>
-        <Chat gamecode={gamecode}/>
-        <GameBoard currentField={field}/>
+        <h1 className="title">Game board demo with Arduino</h1>
+        <GameBoard currentField1={field1} currentField2={field2}/>
       </main>
 
     </div>

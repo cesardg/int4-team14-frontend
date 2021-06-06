@@ -27,7 +27,7 @@
     composes: pion1;
     margin-top: -12rem;
     margin-left: 3rem;
-    color: blueviolet;
+    color: blue;
 }
 
 .row1{
@@ -48,5 +48,5 @@
 
 .player2Stats{
     composes: player1Stats;
-    color: blueviolet
+    color: blue
 }

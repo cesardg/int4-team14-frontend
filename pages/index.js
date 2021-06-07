@@ -3,16 +3,27 @@ import styles from './../styles/Home.module.css';
 import { useState } from 'react';
 import Link from "next/link";
 import Router from 'next/router';
-import { nanoid } from 'nanoid';
 import Image from 'next/image'
 
 const Home = () => {
+
+  const getStartingGamecode = (length) => {
+    const result = [];
+    const characters = '0123456789';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < length; i++ ) { result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));}
+    return result.join('');
+  }
+
+  const playerOptions = ["user", "hacker"];
+  const randomStarter = playerOptions[Math.floor(Math.random() * playerOptions.length)];
+
   const [screen, setScreen] = useState("start");
   const [playerOne, setPlayerOne] = useState("hacker");
   const [playerTwo, setPlayerTwo] = useState("user");
-  const [gamecode, setGamecode] = useState(nanoid(5));
+  const [gamecode, setGamecode] = useState(getStartingGamecode(6));
 
-
+  
   const fetchDataGames = async () => {
     const req = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/games/`);
     const res = await req.json();
@@ -35,12 +46,12 @@ const Home = () => {
     });
   }
 
-  // ---- begin game toevoegen aan database ----
   const handeClickStartGame = () => {
     const data = {
       gamecode: gamecode,
       playerone: playerOne,
-      playertwo: playerTwo
+      playertwo: playerTwo,
+      startingPlayer: randomStarter
     };
     onSubmit(data)
   }
@@ -61,7 +72,6 @@ const Home = () => {
     }
   };
 
-    // ---- einde game toevoegen aan database ----
 
   return (
     <Layout>

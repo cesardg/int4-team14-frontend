@@ -21,7 +21,7 @@ const User = (data) => {
         < UserInfo/>
       </main>
     </div>
-  )
+  );
 }
 
 export default User

@@ -1,4 +1,4 @@
-import styles from "./../styles/Notes.module.css";
+import styles from "./Notes.module.css";
 import { useState } from "react";
 
 const Notes = ({ data }) => {

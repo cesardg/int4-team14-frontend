@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from "next/link"
 import Router from 'next/router'
+import Image from 'next/image';
 
 const Lobby = () => {
   const router = useRouter()
@@ -16,7 +17,7 @@ const Lobby = () => {
   const [channel] = useChannel(gamecode, (message) => {
     console.log(message)
     if (message.data === "game-data=start-game"){
-       Router.push(`/${player}?gamecode=${gamecode}`)
+       Router.push(`/${player}setup?gamecode=${gamecode}`)
     }
   });
 
@@ -41,24 +42,44 @@ const Lobby = () => {
           ? <div className={styles.players}>
               <article className={styles.player}>
                 <p>user</p>
-                <img src="/user.png" alt="" />
+                     <Image
+                    src="/img/user.png"
+                    alt="Picture of the user"
+                    width={30}
+                    height={30}
+                   />
                 <p>jij</p>
               </article>
               <article className={styles.player}>
                 <p>hacker</p>
-                <img src="/hacker.png" alt="" />
+                    <Image
+                    src="/img/hacker.png"
+                    alt="Picture of the hacker"
+                    width={30}
+                    height={30}
+                   />
                 <p>{members === 1 ? "wachten..." : "tegenspeler"}</p>
               </article>
             </div>
         : <div className={styles.players}>
             <article className={styles.player}>
               <p>hacker</p>
-              <img src="/hacker.png" alt="" />
+                   <Image
+                    src="/img/hacker.png"
+                    alt="Picture of the hacker"
+                    width={30}
+                    height={30}
+                   />
               <p>jij</p>
             </article>
             <article className={styles.player}>
               <p>user</p>
-              <img src="/user.png" alt="" />
+                   <Image
+                    src="/img/user.png"
+                    alt="Picture of the user"
+                    width={30}
+                    height={30}
+                   />
               <p>{members === 1 ? "wachten..." : "tegenspeler"}</p>
             </article>
           </div>
@@ -71,7 +92,7 @@ const Lobby = () => {
           </div>
           : 
           <div>
-            <Link href={`${player}/?gamecode=${gamecode}`}><a onClick={handleCLickStart}>Start game</a></Link>
+            <Link href={`${player}setup/?gamecode=${gamecode}`}><a onClick={handleCLickStart}>Start game</a></Link>
           </div>
         }
         <Link href={`/`}><a className={"btnBack"}>Terug</a></Link>

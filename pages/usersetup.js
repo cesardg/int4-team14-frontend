@@ -34,14 +34,20 @@ const Usersetup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let intrests = "";
     if (e.target.password.value === e.target.reppassword.value){
+      userIntrests.forEach(userIntrest => {
+        intrests = intrests + "-" + userIntrest;
+      });
       const data = {
-        name: e.target.name.value,
-        surname: e.target.surname.value,
         password: e.target.password.value,
         username: e.target.username.value,
-        picture: profilePicture
-    };
+        email: e.target.email.value,
+        intrests: intrests,
+        picture: profilePicture,
+      };
+
+      
     e.target.reset();
     onSubmit(data);
     } else {

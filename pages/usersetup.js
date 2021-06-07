@@ -59,19 +59,19 @@ const Usersetup = () => {
     const id = await fetchGameId(gamecode)
     data.game = id;
     const response = await fetch(
-        `${process.env.NEXT_PUBLIC_STRAPI_URL}/userinfos/`,
-        {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      if (response.ok) {
-        console.log("joepie")
-        router.push(`/user/${gamecode}`)
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/userinfos/`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
+    );
+    if (response.ok) {
+      console.log("joepie")
+      router.push(`/user/${gamecode}`)
+    }
   };
 
 

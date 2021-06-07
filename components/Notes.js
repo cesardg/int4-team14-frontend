@@ -1,16 +1,19 @@
-import styles from "./../styles/User.module.css";
+import styles from "./../styles/Notes.module.css";
 import { useState } from "react";
 
-const Notes = () => {
+const Notes = ({ data }) => {
   const [notes, setNotes] = useState([]);
-  const [note, setNote] = useState();
 
-  console.log(notes);
+  console.log(data)
 
-  const handleFormSubmission = (event) => {
-    event.preventDefault();
-    setNotes([...notes, ...note]);
-    console.log("notes", notes);
+  const handleFormSubmission = (e) => {
+    e.preventDefault();
+    if (e.target.note.value !== "") {
+      const temp = [...notes];
+      temp.push(e.target.note.value);
+      setNotes(temp);
+      e.target.reset();
+    }
   };
 
   return (
@@ -21,7 +24,7 @@ const Notes = () => {
       </p>
       {notes.length > 0 ? (
         <ul>
-         {notes.forEach(note => <li>{note}</li>)} 
+         {notes.map((note, index) => <li key={index}>{note}</li>)} 
         </ul>
       ) : (
         <p>
@@ -32,10 +35,9 @@ const Notes = () => {
 
       <form onSubmit={handleFormSubmission} className={styles.form}>
         <textarea
-          value={note}
           placeholder="Maak een notitie..."
-          onChange={(e) => setNote(e.target.value)}
           className={styles.textarea}
+          name="note"
         ></textarea>
         <button
           type="submit"

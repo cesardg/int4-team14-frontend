@@ -1,11 +1,18 @@
-export default function Hacker() {
-  return (
-    <div>
-     
-      <main>
-        <h1>H4ck3r</h1>
-      </main>
+import GameLayout from '../components/GameLayout';
+import HackerInfo from '../components/HackerInfo';
+import Notes from '../components/Notes';
+import { useRouter } from 'next/router';
 
-    </div>
-  )
-}
+const Hacker = (data) => {
+  const router = useRouter();
+  const gamecode = router.query.gamecode;
+
+  return (
+    <GameLayout>
+      <HackerInfo></HackerInfo>
+      <Notes></Notes>
+    </GameLayout>
+  );
+};
+
+export default Hacker;

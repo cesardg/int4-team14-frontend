@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import styles from './../styles/Usersetup.module.css';
 import Image from 'next/image';
-import {useState} from "react";
-import Radiobutton from "../components/Radiobutton";
+import {useState} from 'react';
+import Radiobutton from '../components/Radiobutton';
 import { useRouter } from 'next/router'
 
 const Hackersetup = () => {
@@ -75,7 +75,7 @@ const Hackersetup = () => {
     
 
             <label className={styles.label} >
-              Username
+              Gebruikersnaam
               <input className={styles.input} type="text" name="username" required />
             </label>
 

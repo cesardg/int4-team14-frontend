@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import styles from './../styles/Usersetup.module.css';
 import Image from 'next/image';
-import {useState} from "react";
-import Checkbox from "../components/Checkbox";
-import Radiobutton from "../components/Radiobutton";
+import {useState} from 'react';
+import Checkbox from '../components/Checkbox';
+import Radiobutton from '../components/Radiobutton';
 import { useRouter } from 'next/router'
 
 const Usersetup = () => {
@@ -11,17 +11,17 @@ const Usersetup = () => {
   const router = useRouter()
   const gamecode = router.query.gamecode
   const profilePicturesOptions = ["user", "hacker" ];
-  const userIntrestsOptions = ["Paardrijden", "Knutsellen", "roblox", "koken"];  
-  const [userIntrests, setUserIntrests] = useState([]);
+  const userInterestsOptions = ["Paardrijden", "Knutsellen", "roblox", "koken"];  
+  const [userInterests, setUserInterests] = useState([]);
   const [profilePicture, setProfilePicture] = useState("user");
 
   const handleClickCheckbox = (value) => {
-    if (userIntrests.includes(value)) {
-      const copyArr = userIntrests.filter(e => e !== value); 
-      setUserIntrests (copyArr);
+    if (userInterests.includes(value)) {
+      const copyArr = userInterests.filter(e => e !== value); 
+      setUserInterests (copyArr);
     } else {
-      const copyArr = [...userIntrests, value];
-      setUserIntrests(copyArr);
+      const copyArr = [...userInterests, value];
+      setUserInterests(copyArr);
     }
   }
 
@@ -34,16 +34,16 @@ const Usersetup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let intrests = "";
+    let interests = "";
     if (e.target.password.value === e.target.reppassword.value){
-      userIntrests.forEach(userIntrest => {
-        intrests = intrests + "-" + userIntrest;
+      userInterests.forEach(userInterest => {
+        interests = interests + "-" + userInterest;
       });
       const data = {
         password: e.target.password.value,
         username: e.target.username.value,
         email: e.target.email.value,
-        intrests: intrests,
+        interests: interests,
         picture: profilePicture,
       };
 
@@ -70,12 +70,12 @@ const Usersetup = () => {
       );
       if (response.ok) {
         console.log("joepie")
-        router.push(`/user?gamecode=${gamecode}`)
+        router.push(`/user/${gamecode}`)
       }
   };
 
 
-console.log(userIntrests, profilePicture)
+console.log(userInterests, profilePicture)
 
   return (
     <div>
@@ -146,11 +146,11 @@ console.log(userIntrests, profilePicture)
               />
             </label>
             <div className={styles.radiobuttons}>
-              {userIntrestsOptions.map((item) => (
+              {userInterestsOptions.map((item) => (
                 <Checkbox
                   key={item}
                   item={item}
-                  name={"user-intrests"}
+                  name={"user-interests"}
                   onClickButton={(value) => handleClickCheckbox(value)}
                 />
               ))}

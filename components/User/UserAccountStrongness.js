@@ -3,8 +3,6 @@ import Image from 'next/image';
 
 const UserAccountStrongness = ( ) => {
 
-
-
   return (
     <article className={styles.article}>
       <h2>Account sterkte</h2>

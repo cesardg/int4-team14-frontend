@@ -4,7 +4,6 @@ import Link from "next/link";
 
 const Layout = ({ children }) => {
   return (
-
     <div className={styles.container}>
       <Head>
         <title>Us3r vs H4ck3r</title>

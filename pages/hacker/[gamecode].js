@@ -1,8 +1,17 @@
 import GameLayout from '../../components/GameLayout';
-import HackerInfo from '../../components/HackerInfo';
-import Notes from '../../components/Notes';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
+import Turn from "../../components/Turn";
+import Notes from "../../components/Notes";
+import HackerAction from "../../components/Hacker/HackerAction";
+import HackerInfo from "../../components/Hacker/HackerInfo";
+import HackerDiscoveries from "../../components/Hacker/HackerDiscoveries";
+import HackerAd from '../../components/Hacker/HackerAd';
+import HackerDecryption from '../../components/Hacker/HackerDecryption';
+import HackerInterests from '../../components/Hacker/HackerInterests';
+import HackerScreencapture from '../../components/Hacker/HackerScreencapture';
+import HackerVpn from "../../components/Hacker/HackerVpn";
+import HackerHack from "../../components/Hacker/HackerHack";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 const Hacker = ({ data }) => {
   const [gameData, setGameData] = useState(data[0])
@@ -13,7 +22,16 @@ const Hacker = ({ data }) => {
   return (
     <GameLayout>
       <HackerInfo />
-      <Notes gameData={gameData} player="hacker"/>
+      <Turn who={"hacker"} />
+      <Notes gameData={gameData} player="hacker" />
+      <HackerDiscoveries />
+      <HackerAction />
+      <HackerAd />
+      <HackerDecryption />
+      <HackerHack />
+      <HackerInterests />
+      <HackerScreencapture />
+      <HackerVpn />
     </GameLayout>
   );
 };

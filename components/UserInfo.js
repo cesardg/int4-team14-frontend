@@ -2,9 +2,13 @@ import styles from "./UserInfo.module.css";
 import Image from 'next/image';
 
 const UserInfo = ( {userinfo} ) => {
+
+  const interArr = (userinfo.interests.split('-'));
+  interArr.shift();
+
   return (
-        <article>
-          <h2 className={styles.article}>User info</h2>
+        <article className={styles.article}>
+          <h2>User info</h2>
           <Image
             src={`/img/${userinfo.picture}.png`}
             alt="Picture of the user"
@@ -12,7 +16,12 @@ const UserInfo = ( {userinfo} ) => {
             height={30}
           />
           <p>{userinfo.username}</p>
-             <p>{userinfo.interests}</p>
+          interesses:
+          <ul>
+            {interArr.map((item, index) => <li key={index}>{item}</li>) }
+          </ul>
+          wachtwoord op dit moment:
+          <p>{userinfo.password}</p>
         </article>
   );
 };

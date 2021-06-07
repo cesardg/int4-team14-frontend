@@ -1,26 +1,24 @@
-import Head from 'next/head'
-import styles from './../../styles/User.module.css'
-import Image from 'next/image'
-import UserInfo from "../../components/UserInfo";
-import { useRouter } from 'next/router'
+import UserInfo from '../../components/UserInfo';
+import Turn from '../../components/Turn';
+import Notes from '../../components/Notes';
+import UserWaring from '../../components/UserWarning';
 import { useState } from 'react';
+import GameLayout from '../../components/GameLayout';
 
 const User = ({data}) => {
 
   const [gameData, setGameData] = useState(data[0])
-  console.log(gameData.userinfo.interests)
 
   return (
-    <div>
-      <Head>
-        <title>Us3r vs H4ck3r</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main className={styles.container}>
+    <>
+      <GameLayout>
         <h1 className="title">Us3r</h1>
-        < UserInfo userinfo={gameData.userinfo} />
-      </main>
-    </div>
+        <UserInfo userinfo={gameData.userinfo} />
+        <Turn who={"hacker"} />
+        <UserWaring/>
+        <Notes/>
+      </GameLayout>
+    </>
   );
 }
 

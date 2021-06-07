@@ -17,8 +17,8 @@ const Notes = ({ data }) => {
   };
 
   return (
-    <article>
-      <h2 className={styles.article}>Notities</h2>
+    <article className={styles.article}>
+      <h2>Notities</h2>
       <p>
         Houd zelf extra notities bij en blijf je hacker altijd een stapje voor
       </p>

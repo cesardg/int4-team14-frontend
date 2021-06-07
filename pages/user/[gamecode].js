@@ -4,6 +4,9 @@ import Notes from '../../components/Notes';
 import UserWaring from '../../components/UserWarning';
 import { useState } from 'react';
 import GameLayout from '../../components/GameLayout';
+import UserAccountStrongness from '../../components/UserAccountStrongness';
+import UserVpn from '../../components/UserVpn';
+import UserAction from '../../components/UserAction';
 
 const User = ({data}) => {
 
@@ -17,6 +20,9 @@ const User = ({data}) => {
         <Turn who={"hacker"} />
         <UserWaring/>
         <Notes/>
+        <UserAccountStrongness/>
+        <UserVpn/>
+        <UserAction/>
       </GameLayout>
     </>
   );

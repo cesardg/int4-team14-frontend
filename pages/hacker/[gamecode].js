@@ -7,10 +7,13 @@ import { useState } from 'react';
 const Hacker = ({ data }) => {
   const [gameData, setGameData] = useState(data[0])
 
+  console.log("hallooo werk", gameData);
+  console.log("whyyyy", data);
+
   return (
     <GameLayout>
       <HackerInfo />
-      <Notes data={gameData} />
+      <Notes gameData={gameData} player="hacker"/>
     </GameLayout>
   );
 };

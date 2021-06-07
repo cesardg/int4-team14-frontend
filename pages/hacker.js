@@ -1,7 +1,4 @@
-
 export default function Hacker() {
-
-
   return (
     <div>
      

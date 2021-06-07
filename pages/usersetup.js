@@ -82,54 +82,83 @@ console.log(userIntrests, profilePicture)
         <h1 className="title">Us3r</h1>
         <article>
           <h2>Creeër uw account</h2>
-           <Image
-              src={`/img/${profilePicture}.png`}
-              alt="Picture of the user"
-              width={30}
-              height={30}
+          <Image
+            src={`/img/${profilePicture}.png`}
+            alt="Picture of the user"
+            width={30}
+            height={30}
+          />
+          <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
+            <div className={styles.radiobuttons}>
+              {profilePicturesOptions.map((item) => (
+                <Radiobutton
+                  key={item}
+                  item={item}
+                  name={"profile-picture"}
+                  onClickButton={(value) => setProfilePicture(value)}
+                />
+              ))}
+            </div>
+
+            <label className={styles.label}>
+              Gebruikersnaam
+              <input
+                className={styles.input}
+                type="text"
+                name="username"
+                required
               />
-          <form className={styles.form} onSubmit={(e) => handleSubmit(e)} >
+            </label>
+
+            <label className={styles.label}>
+              Emailadres
+              <input
+                className={styles.input}
+                type="email"
+                name="email"
+                required
+              />
+            </label>
+
+            <label className={styles.label}>
+              Wachtwoord
+              <input
+                className={styles.input}
+                type="password"
+                name="password"
+                required
+              />
+            </label>
+
+            <label className={styles.label}>
+              Herhaal wachtwoord
+              <input
+                className={styles.input}
+                type="password"
+                name="reppassword"
+                required
+              />
+            </label>
             <div className={styles.radiobuttons}>
-            {profilePicturesOptions.map((item) => (
-                <Radiobutton key={item} item={item} name={"profile-picture"} onClickButton={(value) => setProfilePicture(value)} />
-               ))}
-             </div>
-            <label className={styles.label} >
-              Naam
-              <input className={styles.input} type="text" name="surname" required />
-            </label>
-
-            <label className={styles.label} >
-              Achternaam
-              <input className={styles.input} type="text" name="name" required />
-            </label>
-
-            <label className={styles.label} >
-              Username
-              <input className={styles.input} type="text" name="username" required />
-            </label>
-
-            <label className={styles.label} >
-              Passwoord
-              <input className={styles.input} type="password" name="password" required />
-            </label>
-
-            <label className={styles.label} >
-              Herhaal Paswoord
-              <input className={styles.input} type="password" name="reppassword" required />
-            </label>
-            <div className={styles.radiobuttons}>
-            {userIntrestsOptions.map((item) => (
-                <Checkbox key={item} item={item} name={"user-intrests"} onClickButton={(value) => handleClickCheckbox(value)} />
-               ))}
-             </div>
-            <input className={styles.button} type="submit" value="Start game as a user" />
+              {userIntrestsOptions.map((item) => (
+                <Checkbox
+                  key={item}
+                  item={item}
+                  name={"user-intrests"}
+                  onClickButton={(value) => handleClickCheckbox(value)}
+                />
+              ))}
+            </div>
+            <input
+              className={styles.button}
+              type="submit"
+              value="Start game as a user"
+            />
           </form>
         </article>
       </main>
-
     </div>
-  )
+  );
 }
 
 export default Usersetup;

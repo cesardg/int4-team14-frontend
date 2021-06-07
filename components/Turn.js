@@ -4,7 +4,8 @@ import Image from 'next/image';
 const UserInfo = ( {who} ) => {
   return (
         <article className={styles.article}>
-          <h2>Wie zijn beurt?</h2>
+          <h2>spelbord</h2>
+          <p>Wie zijn beurt?</p>
           <p>{who}</p>
         </article>
   );

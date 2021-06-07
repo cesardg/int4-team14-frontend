@@ -49,8 +49,8 @@ const Notes = ({ gameData, player }) => {
   };
 
   return (
-    <article>
-      <h2 className={styles.article}>Notities</h2>
+    <article className={styles.article}>
+      <h2>Notities</h2>
       <p>
         Houd zelf extra notities bij en blijf je {player} altijd een stapje voor
       </p>

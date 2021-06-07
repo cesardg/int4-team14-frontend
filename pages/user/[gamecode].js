@@ -5,10 +5,10 @@ import UserInfo from "../../components/UserInfo";
 import { useRouter } from 'next/router'
 import { useState } from 'react';
 
-const User = (data) => {
+const User = ({data}) => {
 
-    console.log(data);
-
+  const [gameData, setGameData] = useState(data[0])
+  console.log(gameData.userinfo.interests)
 
   return (
     <div>
@@ -18,7 +18,7 @@ const User = (data) => {
       </Head>
       <main className={styles.container}>
         <h1 className="title">Us3r</h1>
-        < UserInfo/>
+        < UserInfo userinfo={gameData.userinfo} />
       </main>
     </div>
   );
@@ -26,9 +26,10 @@ const User = (data) => {
 
 export default User
 
-export async function getServerSideProps(context) {
+export const getServerSideProps = async (context) => {
   const { gamecode } = context.query;
   const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/games/?gamecode=${gamecode}`);
   const data = await res.json();
   return { props: { data } };
 }
+

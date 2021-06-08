@@ -17,7 +17,8 @@ const User = ({ data }) => {
   const [gameData, setGameData] = useState(data[0]);
   const field1 = 5;
   const field2 = 7;
-  
+
+  console.log('data', data);
   return (
     <>
       <GameLayout>
@@ -26,7 +27,7 @@ const User = ({ data }) => {
         <UserInfo userinfo={gameData.userinfo} />
         <Turn who={"hacker"} />
         <UserWarning />
-        <Notes />
+        <Notes gameData={gameData} player="user" />
         <UserAccountStrongness />
         <UserVpn />
         <UserAction />

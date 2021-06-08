@@ -6,8 +6,25 @@ const Notes = ({ gameData, player }) => {
   const router = useRouter();
   const [notes, setNotes] = useState([]);
 
-  console.log("gamedata", gameData);
-  console.log("player", player);
+  const fetchNotes = async () => {
+    let playerId;
+    if (player === "user") {
+      playerId = gameData.userinfo.id;
+    } else if (player === "hacker") {
+      playerId = gameData.hackerinfo.id;
+    }
+    const req = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/${player}infos/${playerId}`
+    );
+    const res = await req.json();
+    let notesArr = []
+    if (player === "user") { notesArr = res.usernotes } else if (player === "hacker") { notesArr = res.hackernotes }
+      const tempNotes = []
+      notesArr.map(noteObj => tempNotes.push(noteObj.note))
+      setNotes(tempNotes)    
+  }
+
+  fetchNotes();
 
   const handleFormSubmission = async (e) => {
     e.preventDefault();
@@ -15,10 +32,8 @@ const Notes = ({ gameData, player }) => {
       const temp = [...notes];
       temp.push(e.target.note.value);
       setNotes(temp);
-      e.target.reset();
       
       let data = null;
-
       if (player === "hacker") {
         data = {
           note: e.target.note.value,
@@ -43,8 +58,9 @@ const Notes = ({ gameData, player }) => {
       );
       if (response.ok) {
         console.log("joepie");
-        router.push(`/${player}/${gameData.gamecode}`);
       }
+
+      e.target.reset();
     }
   };
 

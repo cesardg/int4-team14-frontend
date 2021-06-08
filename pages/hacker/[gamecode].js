@@ -18,9 +18,6 @@ const Hacker = ({ data }) => {
   const [gameData, setGameData] = useState(data[0])
   const field1 = 5;
   const field2 = 7;
-  
-  console.log("hallooo werk", gameData);
-  console.log("whyyyy", data);
 
   return (
     <GameLayout>

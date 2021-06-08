@@ -19,6 +19,7 @@ const Hacker = ({ data }) => {
   const field1 = 5;
   const field2 = 7;
 
+  console.log(gameData);
   return (
     <GameLayout>
       <HackerInfo />

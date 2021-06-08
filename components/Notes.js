@@ -1,53 +1,34 @@
 import styles from "./Notes.module.css";
-import { useState } from "react";
-import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
 const Notes = ({ gameData, player }) => {
-  const router = useRouter();
-  const [notes, setNotes] = useState([]);
+  const tempArr = [];
 
-  const fetchNotes = async () => {
-    let playerId;
-    if (player === "user") {
-      playerId = gameData.userinfo.id;
-    } else if (player === "hacker") {
-      playerId = gameData.hackerinfo.id;
-    }
-    const req = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/${player}infos/${playerId}`
-    );
-    const res = await req.json();
-    let notesArr = []
-    if (player === "user") { notesArr = res.usernotes } else if (player === "hacker") { notesArr = res.hackernotes }
-      const tempNotes = []
-      notesArr.map(noteObj => tempNotes.push(noteObj.note))
-      setNotes(tempNotes)    
+  if (player === "user") {
+    gameData.usernotes.map((noteObj) => {
+      tempArr.push(noteObj.note);
+    });
+  } else if (player === "hacker") {
+    gameData.hackernotes.map((noteObj) => {
+      tempArr.push(noteObj.note);
+    });
   }
 
-  fetchNotes();
+  const [notes, setNotes] = useState(tempArr);
 
   const handleFormSubmission = async (e) => {
     e.preventDefault();
     if (e.target.note.value !== "") {
-      const temp = [...notes];
-      temp.push(e.target.note.value);
-      setNotes(temp);
-      
-      let data = null;
-      if (player === "hacker") {
-        data = {
-          note: e.target.note.value,
-          hackerinfo: gameData.hackerinfo,
-        };
-      } else if (player === "user") {
-        data = {
-          note: e.target.note.value,
-          userinfo: gameData.userinfo,
-        };
-      }
+      const copyArr = [...notes, e.target.note.value];
+      setNotes(copyArr);
+      const data = {
+        note: e.target.note.value,
+        game: gameData.id,
+      };
 
+      console.log("id", gameData.id);
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_STRAPI_URL}/${player}notes/`,
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/${player}notes`,
         {
           method: "POST",
           body: JSON.stringify(data),
@@ -87,9 +68,7 @@ const Notes = ({ gameData, player }) => {
           className={styles.textarea}
           name="note"
         ></textarea>
-        <button
-          type="submit"
-          className={styles.button}        >
+        <button type="submit" className={styles.button}>
           +
         </button>
       </form>

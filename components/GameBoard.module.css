@@ -1,42 +1,90 @@
-.fieldRow1{
-    border: .2rem solid black;
-    height: 10rem;
-    margin-left: -.2rem;
-    width: 10rem;
-}
-
-.fieldRow2{
-    composes: fieldRow1;
-    margin-bottom: -.2rem;
-}
-
 .container{
     display: flex;
     flex-direction: column;
     margin-left: 2rem;
 }
 
-.pion1{
-    font-size: 8rem;
-    margin-top: -5rem;
+.board {
+    display: grid;
+    grid-template-columns: 5rem 35rem 5rem;
+    grid-template-rows: 5rem 35rem 5rem;
+}
+
+.row1 {
+    align-self: flex-start;
+    display: flex;
+    justify-self: flex-start;
+    grid-column: 1 / span 3;
+    grid-row: 1 / span 1;
+}
+
+.row2 {
+    display: flex;
+    flex-direction: column;
+    justify-self: right;
+    grid-column: 3 / span 1;
+    grid-row: 2 / span 1;
+}
+
+.row3 {
+    display: flex;
+    flex-direction: row-reverse;
+    grid-column: 1 / span 3;
+    grid-row: 3 / span 1;
+}
+
+.row4 {
+    display: flex;
+    flex-direction: column-reverse;
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+}
+
+.fieldRow {
+    border: .2rem solid black;
+    height: 5rem;
+    width: 5rem;
+}
+
+.fieldRow1 {
+  composes: fieldRow;
+  border-right: none;
+}
+
+.fieldRow1:last-of-type {
+    border-right: .2rem solid black;
+}
+
+.fieldRow2 {
+    composes: fieldRow;
+    border-bottom: none;
+}
+
+.fieldRow3 {
+    composes: fieldRow;
+    border-left: none;
+}
+
+.fieldRow3:last-of-type {
+    border-left: .2rem solid black;
+}
+
+.fieldRow4 {
+    composes: fieldRow;
+    border-top: none;
+}
+
+.pion1 {
+    font-size: 3rem;
     color: green;
     line-height: 1;
 }
 
-.pion2{
+.pion2 {
     composes: pion1;
-    margin-top: -12rem;
-    margin-left: 3rem;
+    margin-top: -4rem;
+    margin-left: 2rem;
     color: blue;
-}
-
-.row1{
-    display: flex;
-}
-
-.board{
-    display: flex;
-    flex-direction: row;
 }
 
 .player1Stats{

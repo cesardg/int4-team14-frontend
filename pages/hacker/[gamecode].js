@@ -1,6 +1,7 @@
 import GameLayout from '../../components/GameLayout';
 import Turn from "../../components/Turn";
 import Notes from "../../components/Notes";
+import GameBoard from "../../components/GameBoard";
 import HackerAction from "../../components/Hacker/HackerAction";
 import HackerInfo from "../../components/Hacker/HackerInfo";
 import HackerDiscoveries from "../../components/Hacker/HackerDiscoveries";
@@ -15,13 +16,16 @@ import { useState } from "react";
 
 const Hacker = ({ data }) => {
   const [gameData, setGameData] = useState(data[0])
-
+  const field1 = 5;
+  const field2 = 7;
+  
   console.log("hallooo werk", gameData);
   console.log("whyyyy", data);
 
   return (
     <GameLayout>
       <HackerInfo />
+      <GameBoard currentField1={field1} currentField2={field2} />
       <Turn who={"hacker"} />
       <Notes gameData={gameData} player="hacker" />
       <HackerDiscoveries />

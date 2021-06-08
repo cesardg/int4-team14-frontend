@@ -1,6 +1,7 @@
 import GameLayout from "../../components/GameLayout";
 import Turn from "../../components/Turn";
 import Notes from "../../components/Notes";
+import GameBoard from "../../components/GameBoard";
 import UserInfo from "../../components/User/UserInfo";
 import UserWarning from "../../components/User/UserWarning";
 import UserAccountStrongness from "../../components/User/UserAccountStrongness";
@@ -14,11 +15,14 @@ import { useState } from "react";
 
 const User = ({ data }) => {
   const [gameData, setGameData] = useState(data[0]);
-
+  const field1 = 5;
+  const field2 = 7;
+  
   return (
     <>
       <GameLayout>
         <h1 className="title">Us3r</h1>
+        <GameBoard currentField1={field1} currentField2={field2} />
         <UserInfo userinfo={gameData.userinfo} />
         <Turn who={"hacker"} />
         <UserWarning />

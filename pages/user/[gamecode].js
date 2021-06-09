@@ -18,15 +18,15 @@ const User = ({ data }) => {
   let arr = []
   let tempField;
   let fields = [
-    {nummer: 1, command: 1, action:"start" },
-    {nummer: 2, command: 2, action:"empty" },
-    {nummer: 3, command: 3, action:"action" },
-    {nummer: 4, command: 4, action:"empty" },
-    {nummer: 5, command: 5, action:"action" },
-    {nummer: 6, command: 6, action:"start" },
-    {nummer: 7, command: 7, action:"action" },
-    {nummer: 8, command: 8, action:"empty" },
-    {nummer: 9, command: 9, action:"nog beslist worden" },
+    {nummer: 1, command: "1", action:"start" },
+    {nummer: 2, command: "2", action:"empty" },
+    {nummer: 3, command: "3", action:"action" },
+    {nummer: 4, command: "4", action:"empty" },
+    {nummer: 5, command: "5", action:"random" },
+    {nummer: 6, command: "6", action:"empty" },
+    {nummer: 7, command: "7", action:"action" },
+    {nummer: 8, command: "8", action:"empty" },
+    {nummer: 9, command: "9", action:"nog beslist worden" },
     {nummer: 10, command: "Q", action:"empty" },
     {nummer: 11, command: "B", action:"action" },
     {nummer: 12, command: "C", action:"empty" },
@@ -54,20 +54,34 @@ const User = ({ data }) => {
 
   const [gameData, setGameData] = useState(data[0]);
   const [currentPlayer, setCurrentPlayer] = useState(gameData.startingPlayer);
-  const [field1, setField1] = useState(1);
-  const [field2, setField2] = useState(1);
-  console.log("field1", field1)
+  const [fieldUser, setFieldUser] = useState([1, "start"]);
+  const [fieldPlayer, setFieldPlayer] = useState([1, "start"]);
+  console.log(fieldUser, fieldPlayer)
+ 
 
   const downHandler = ({key}) => {
     arr.push(key);
     const index =   arr.indexOf("X")
     if (index != -1 && arr[index - 1] == "R" && arr[index - 2] == "N" && arr[index - 3] == "K" && arr[index - 4] == "V" && arr[index - 5] == "D" && arr[index - 6] == "R" && arr[index - 7] == "B"){
-      tempField = arr[index + 1]
+      tempField = arr[index + 1];
       if (tempField){
-        setField1(tempField)
+        pionDetection(tempField);
         arr = [];
       } 
     } 
+  }
+
+  const pionDetection = (tempField) => {
+    fields.forEach(element => {
+      if (tempField == element.command){
+      console.log(element)
+       if (currentPlayer === "user"){
+          setFieldUser([element.nummer, element.action])
+        } else {
+          setFieldPlayer([element.nummer, element.action])
+        }
+      }
+    });
   }
 
   useEffect(() => {
@@ -82,7 +96,7 @@ const User = ({ data }) => {
     <>
       <GameLayout>
         <h1 className="title">Us3r</h1>
-        <GameBoard currentField1={field1} currentField2={field2} />
+        <GameBoard currentField1={fieldUser} currentField2={fieldPlayer} />
         <UserInfo userinfo={gameData.userinfo} />
         <Turn who={"hacker"} />
         <UserWarning />

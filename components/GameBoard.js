@@ -1,7 +1,7 @@
 import styles from "./GameBoard.module.css";
 
-const GameBoard = ({ currentField1, currentField2, player }) => {
- 
+const GameBoard = ({ boardInfo }) => {
+
   let fieldsRow1 = [
     [1, 1, "start"],
     [2, 2, "empty"],
@@ -45,19 +45,19 @@ const GameBoard = ({ currentField1, currentField2, player }) => {
 
   return (
     <div className={styles.container}>
-      <p>Player = {player}</p>
-      <p className={styles.player1Stats}>Player 1: Vak {currentField1}</p>
-      <p className={styles.player2Stats}>Player 2: Vak {currentField2}</p>
+      <p>current Player = {boardInfo.currentPlayer}</p>
+      <p className={styles.player1Stats}>Player 1 (user): Vak {boardInfo.fieldUser}, actie: {boardInfo.actionUser} </p>
+      <p className={styles.player2Stats}>Player 2 (hacker): Vak {boardInfo.fieldHacker}, actie: {boardInfo.actionHacker}</p>
       <div className={styles.board}>
         <div className={styles.row1}>
           {fieldsRow1.map((field) => (
             <div key={field[0]} className={styles.fieldRow1}>
               <p>{field[0]}</p>
               <p className={styles.pion1}>
-                {currentField1[0] == field[1] ? "♟" : ""}
+                {boardInfo.fieldUser == field[1] ? "♟" : ""}
               </p>
               <p className={styles.pion2}>
-                {currentField2[0] == field[1] ? "♟" : ""}
+                {boardInfo.fieldHacker == field[1] ? "♟" : ""}
               </p>
             </div>
           ))}
@@ -67,10 +67,10 @@ const GameBoard = ({ currentField1, currentField2, player }) => {
             <div key={field[0]} className={styles.fieldRow2}>
               <p>{field[0]}</p>
               <p className={styles.pion1}>
-                {currentField1[0] == field[1] ? "♟" : ""}
+                {boardInfo.fieldUser == field[1] ? "♟" : ""}
               </p>
               <p className={styles.pion2}>
-                {currentField2[0] == field[1] ? "♟" : ""}
+                {boardInfo.fieldHacker == field[1] ? "♟" : ""}
               </p>
             </div>
           ))}
@@ -80,10 +80,10 @@ const GameBoard = ({ currentField1, currentField2, player }) => {
             <div key={field[0]} className={styles.fieldRow3}>
               <p>{field[0]}</p>
               <p className={styles.pion1}>
-                {currentField1[0] == field[1] ? "♟" : ""}
+                {boardInfo.fieldUser == field[1] ? "♟" : ""}
               </p>
               <p className={styles.pion2}>
-                {currentField2[0] == field[1] ? "♟" : ""}
+                {boardInfo.fieldHacker == field[1] ? "♟" : ""}
               </p>
             </div>
           ))}
@@ -93,10 +93,10 @@ const GameBoard = ({ currentField1, currentField2, player }) => {
             <div key={field[0]} className={styles.fieldRow4}>
               <p>{field[0]}</p>
               <p className={styles.pion1}>
-                {currentField1[0] == field[1] ? "♟" : ""}
+                {boardInfo.fieldUser == field[1] ? "♟" : ""}
               </p>
               <p className={styles.pion2}>
-                {currentField2[0] == field[1] ? "♟" : ""}
+                {boardInfo.fieldHacker == field[1] ? "♟" : ""}
               </p>
             </div>
           ))}

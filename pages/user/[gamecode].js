@@ -58,16 +58,20 @@ const User = ({ data }) => {
   ]
 
   const [gameData, setGameData] = useState(data[0]);
-  const [currentPlayer, setCurrentPlayer] = useState(data[0].startingPlayer);
-  const [fieldUser, setFieldUser] = useState([1, "start"]);
-  const [fieldHacker, setFieldHacker] = useState([1, "start"]);
+  const [realtimeGameData, setRealtimeGameData] = useState({currentPlayer: data[0].startingPlayer, fieldUser: 1, actionUser: "start", fieldHacker: 1, actionHacker: "start"})
 
   const [channel] = useChannel(gamecode, (message) => {
-    const data = message.data.split('-');
-    console.log("data", data)
-    //setCurrentPlayer(data[1].split('=')[1].split(',')[0])
-    //setFieldUser([data[1].split('=')[1].split(',')[0], data[1].split('=')[1].split(',')[1]])
-    //setFieldHacker([data[O].split('=')[1].split(',')[0], data[0].split('=')[1].split(',')[1]])
+    const type = message.data.split('-')[0];
+    const sender = message.data.split('-')[1];
+    const newHackerField = message.data.split('-')[2];
+    const newHackerAction = message.data.split('-')[3];
+    const newUserField = message.data.split('-')[4];
+    const newUserAction = message.data.split('-')[5];
+    console.log(type, sender, newHackerField, newHackerAction, newUserField, newUserAction)
+    setRealtimeGameData({
+      ...realtimeGameData,
+      fieldUser: newUserField, actionUser: newUserAction, fieldHacker: newHackerField, actionHacker: newHackerAction
+    })
   });
 
   //console.log('player', currentPlayer);
@@ -91,12 +95,18 @@ const User = ({ data }) => {
   const pionDetection = (tempField) => {
     fields.forEach(element => {
       if (tempField == element.command){
-       if (currentPlayer === "user"){
-          setFieldUser([element.nummer, element.action])
-           //channel.publish({ name: gamecode, data: `hacker=${fieldHacker}-user=${element.nummer, element.action}-player=${currentPlayer}` });
+       if (realtimeGameData.currentPlayer === "user"){
+          setRealtimeGameData({
+            ...realtimeGameData,
+            fieldUser: element.nummer, actionUser: element.action 
+          })
+           channel.publish({ name: gamecode, data: `boardchange-user-${realtimeGameData.fieldHacker}-${realtimeGameData.actionHacker}-${element.nummer}-${element.action}` });
         } else {
-          setFieldHacker([element.nummer, element.action])
-          channel.publish({ name: gamecode, data: `hacker=${element.nummer},${element.action}-user=${fieldUser}-player=${currentPlayer}` });
+          setRealtimeGameData({
+            ...realtimeGameData,
+            fieldHacker: element.nummer, actionHacker: element.action
+           })
+          channel.publish({ name: gamecode, data: `boardchange-hacker-${element.nummer}-${element.action}-${realtimeGameData.fieldUser}-${realtimeGameData.actionUser}` });
         } 
        //channel.publish({ name: gamecode, data: `hacker=${fieldHacker}-user=${fieldUser}-player=${currentPlayer}` });
       }
@@ -116,7 +126,7 @@ const User = ({ data }) => {
     <>
       <GameLayout>
         <h1 className="title">Us3r</h1>
-        <GameBoard currentField1={fieldUser} currentField2={fieldHacker} player={currentPlayer}/>
+        <GameBoard boardInfo={realtimeGameData}/>
         <UserInfo userinfo={gameData.userinfo} />
         <Turn who={"hacker"} />
         <UserWarning />

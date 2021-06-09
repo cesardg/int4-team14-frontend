@@ -44,6 +44,7 @@
     border: .2rem solid black;
     height: 5rem;
     width: 5rem;
+    display: flex;
 }
 
 .fieldRow1 {
@@ -82,8 +83,6 @@
 
 .pion2 {
     composes: pion1;
-    margin-top: -4rem;
-    margin-left: 2rem;
     color: blue;
 }
 

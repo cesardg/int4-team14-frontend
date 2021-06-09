@@ -1,6 +1,7 @@
 import styles from "./GameBoard.module.css";
 
 const GameBoard = ({ currentField1, currentField2 }) => {
+  console.log(currentField1, currentField2);
   let fieldsRow1 = [
     [1, 1, "start"],
     [2, 2, "empty"],
@@ -52,10 +53,10 @@ const GameBoard = ({ currentField1, currentField2 }) => {
             <div key={field[0]} className={styles.fieldRow1}>
               <p>{field[0]}</p>
               <p className={styles.pion1}>
-                {currentField1 == field[1] ? "♟" : ""}
+                {currentField1[0] == field[1] ? "♟" : ""}
               </p>
               <p className={styles.pion2}>
-                {currentField2 == field[1] ? "♟" : ""}
+                {currentField2[0] == field[1] ? "♟" : ""}
               </p>
             </div>
           ))}
@@ -65,10 +66,10 @@ const GameBoard = ({ currentField1, currentField2 }) => {
             <div key={field[0]} className={styles.fieldRow2}>
               <p>{field[0]}</p>
               <p className={styles.pion1}>
-                {currentField1 == field[1] ? "♟" : ""}
+                {currentField1[0] == field[1] ? "♟" : ""}
               </p>
               <p className={styles.pion2}>
-                {currentField2 == field[1] ? "♟" : ""}
+                {currentField2[0] == field[1] ? "♟" : ""}
               </p>
             </div>
           ))}
@@ -78,10 +79,10 @@ const GameBoard = ({ currentField1, currentField2 }) => {
             <div key={field[0]} className={styles.fieldRow3}>
               <p>{field[0]}</p>
               <p className={styles.pion1}>
-                {currentField1 == field[1] ? "♟" : ""}
+                {currentField1[0] == field[1] ? "♟" : ""}
               </p>
               <p className={styles.pion2}>
-                {currentField2 == field[1] ? "♟" : ""}
+                {currentField2[0] == field[1] ? "♟" : ""}
               </p>
             </div>
           ))}
@@ -91,10 +92,10 @@ const GameBoard = ({ currentField1, currentField2 }) => {
             <div key={field[0]} className={styles.fieldRow4}>
               <p>{field[0]}</p>
               <p className={styles.pion1}>
-                {currentField1 == field[1] ? "♟" : ""}
+                {currentField1[0] == field[1] ? "♟" : ""}
               </p>
               <p className={styles.pion2}>
-                {currentField2 == field[1] ? "♟" : ""}
+                {currentField2[0] == field[1] ? "♟" : ""}
               </p>
             </div>
           ))}

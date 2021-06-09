@@ -57,7 +57,7 @@ const Hacker = ({ data }) => {
     {nummer: 32, command: "W", action:"empty" },
   ]
 
-const [gameData, setGameData] = useState(data[0]);
+  const [gameData, setGameData] = useState(data[0]);
   const [realtimeGameData, setRealtimeGameData] = useState({currentPlayer: data[0].startingPlayer, fieldUser: 1, actionUser: "start", fieldHacker: 1, actionHacker: "start"})
 
   const [channel] = useChannel(gamecode, (message) => {
@@ -68,13 +68,22 @@ const [gameData, setGameData] = useState(data[0]);
       const newHackerAction = message.data.split('-')[3];
       const newUserField = message.data.split('-')[4];
       const newUserAction = message.data.split('-')[5];
+      const lastAction = message.data.split('-')[6];
+      let newUser = realtimeGameData.currentPlayer
+      if (lastAction === "empty" && realtimeGameData.currentPlayer === "hacker"){
+        newUser = "user"
+      } else if (lastAction === "empty" && realtimeGameData.currentPlayer === "user"){
+        newUser = "hacker"
+      }
       //console.log(type, sender, newHackerField, newHackerAction, newUserField, newUserAction)
       setRealtimeGameData({
         ...realtimeGameData,
-        fieldUser: newUserField, actionUser: newUserAction, fieldHacker: newHackerField, actionHacker: newHackerAction
+        fieldUser: newUserField, actionUser: newUserAction, fieldHacker: newHackerField, actionHacker: newHackerAction, currentPlayer: newUser
       })
     }
   });
+
+  console.log(realtimeGameData)
 
   const downHandler = ({key}) => {
     arr.push(key);
@@ -82,20 +91,19 @@ const [gameData, setGameData] = useState(data[0]);
     if (index != -1 && arr[index - 1] == "R" && arr[index - 2] == "N" && arr[index - 3] == "K" && arr[index - 4] == "V" && arr[index - 5] == "D" && arr[index - 6] == "R" && arr[index - 7] == "B"){
       tempField = arr[index + 1];
       if (tempField){
-        pionDetection(tempField, realtimeGameData);
+        pionDetection(tempField);
         arr = [];
       } 
     } 
   }
 
-  const pionDetection = (tempField,) => {
-
+  const pionDetection = (tempField) => {
     fields.forEach(element => {
       if (tempField == element.command){
        if (realtimeGameData.currentPlayer == "user"){
-          channel.publish({ name: gamecode, data: `boardchange-user-${realtimeGameData.fieldHacker}-${realtimeGameData.actionHacker}-${element.nummer}-${element.action}` });
+          channel.publish({ name: gamecode, data: `boardchange-user-${realtimeGameData.fieldHacker}-${realtimeGameData.actionHacker}-${element.nummer}-${element.action}-${element.action}` });
         } else if (realtimeGameData.currentPlayer == "hacker") {
-          channel.publish({ name: gamecode, data: `boardchange-hacker-${element.nummer}-${element.action}-${realtimeGameData.fieldUser}-${realtimeGameData.actionUser}` });
+          channel.publish({ name: gamecode, data: `boardchange-hacker-${element.nummer}-${element.action}-${realtimeGameData.fieldUser}-${realtimeGameData.actionUser}-${element.action}` });
         } 
       }
     });
@@ -107,6 +115,7 @@ const [gameData, setGameData] = useState(data[0]);
       window.removeEventListener('keydown', downHandler);
     };
   }, []);
+
 
 
   return (

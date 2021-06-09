@@ -1,5 +1,5 @@
 import styles from "./Notes.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const Notes = ({ gameData, player }) => {
   const tempArr = [];

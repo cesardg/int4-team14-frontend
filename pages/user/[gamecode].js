@@ -33,7 +33,7 @@ const User = ({ data }) => {
         <UserAction />
         <UserDeleteCookies />
         <UserWarningMail />
-        <UserAdjustPassword />
+        <UserAdjustPassword gameData={gameData} />
         <UserAd />
       </GameLayout>
     </>

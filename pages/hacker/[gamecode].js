@@ -17,7 +17,7 @@ import { useChannel } from '../../components/ChatReactEffect';
 
 const Hacker = ({ data }) => {
 
-    const router = useRouter();
+  const router = useRouter();
   const gamecode = router.query.gamecode;
   
   let arr = []
@@ -57,62 +57,49 @@ const Hacker = ({ data }) => {
     {nummer: 32, command: "W", action:"empty" },
   ]
 
-  const [gameData, setGameData] = useState(data[0]);
+const [gameData, setGameData] = useState(data[0]);
   const [realtimeGameData, setRealtimeGameData] = useState({currentPlayer: data[0].startingPlayer, fieldUser: 1, actionUser: "start", fieldHacker: 1, actionHacker: "start"})
 
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split('-')[0];
-    const sender = message.data.split('-')[1];
-    const newHackerField = message.data.split('-')[2];
-    const newHackerAction = message.data.split('-')[3];
-    const newUserField = message.data.split('-')[4];
-    const newUserAction = message.data.split('-')[5];
-    console.log(type, sender, newHackerField, newHackerAction, newUserField, newUserAction)
-    setRealtimeGameData({
-      ...realtimeGameData,
-      fieldUser: newUserField, actionUser: newUserAction, fieldHacker: newHackerField, actionHacker: newHackerAction
-    })
+    if (type === "boardchange"){
+      const sender = message.data.split('-')[1];
+      const newHackerField = message.data.split('-')[2];
+      const newHackerAction = message.data.split('-')[3];
+      const newUserField = message.data.split('-')[4];
+      const newUserAction = message.data.split('-')[5];
+      //console.log(type, sender, newHackerField, newHackerAction, newUserField, newUserAction)
+      setRealtimeGameData({
+        ...realtimeGameData,
+        fieldUser: newUserField, actionUser: newUserAction, fieldHacker: newHackerField, actionHacker: newHackerAction
+      })
+    }
   });
 
-  //console.log('player', currentPlayer);
-  //console.log('user',fieldUser);
-  //console.log('user',fieldHacker);
-
- 
-  
   const downHandler = ({key}) => {
     arr.push(key);
     const index =   arr.indexOf("X")
     if (index != -1 && arr[index - 1] == "R" && arr[index - 2] == "N" && arr[index - 3] == "K" && arr[index - 4] == "V" && arr[index - 5] == "D" && arr[index - 6] == "R" && arr[index - 7] == "B"){
       tempField = arr[index + 1];
       if (tempField){
-        pionDetection(tempField);
+        pionDetection(tempField, realtimeGameData);
         arr = [];
       } 
     } 
   }
 
-  const pionDetection = (tempField) => {
+  const pionDetection = (tempField,) => {
+
     fields.forEach(element => {
       if (tempField == element.command){
-       if (realtimeGameData.currentPlayer === "user"){
-          setRealtimeGameData({
-            ...realtimeGameData,
-            fieldUser: element.nummer, actionUser: element.action 
-          })
-           channel.publish({ name: gamecode, data: `boardchange-user-${realtimeGameData.fieldHacker}-${realtimeGameData.actionHacker}-${element.nummer}-${element.action}` });
-        } else {
-          setRealtimeGameData({
-            ...realtimeGameData,
-            fieldHacker: element.nummer, actionHacker: element.action
-           })
+       if (realtimeGameData.currentPlayer == "user"){
+          channel.publish({ name: gamecode, data: `boardchange-user-${realtimeGameData.fieldHacker}-${realtimeGameData.actionHacker}-${element.nummer}-${element.action}` });
+        } else if (realtimeGameData.currentPlayer == "hacker") {
           channel.publish({ name: gamecode, data: `boardchange-hacker-${element.nummer}-${element.action}-${realtimeGameData.fieldUser}-${realtimeGameData.actionUser}` });
         } 
-       //channel.publish({ name: gamecode, data: `hacker=${fieldHacker}-user=${fieldUser}-player=${currentPlayer}` });
       }
     });
   }
-
 
   useEffect(() => {
     window.addEventListener('keydown', downHandler);
@@ -126,7 +113,7 @@ const Hacker = ({ data }) => {
     <GameLayout>
       <HackerInfo />
       <GameBoard boardInfo={realtimeGameData}/>
-      <Turn who={"hacker"} />
+      <Turn who={realtimeGameData.currentPlayer} />
       <Notes gameData={gameData} player="hacker" />
       <HackerDiscoveries />
       <HackerAction />

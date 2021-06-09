@@ -62,24 +62,29 @@ const User = ({ data }) => {
 
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split('-')[0];
-    const sender = message.data.split('-')[1];
-    const newHackerField = message.data.split('-')[2];
-    const newHackerAction = message.data.split('-')[3];
-    const newUserField = message.data.split('-')[4];
-    const newUserAction = message.data.split('-')[5];
-    console.log(type, sender, newHackerField, newHackerAction, newUserField, newUserAction)
-    setRealtimeGameData({
-      ...realtimeGameData,
-      fieldUser: newUserField, actionUser: newUserAction, fieldHacker: newHackerField, actionHacker: newHackerAction
-    })
+    if (type === "boardchange"){
+      const sender = message.data.split('-')[1];
+      const newHackerField = message.data.split('-')[2];
+      const newHackerAction = message.data.split('-')[3];
+      const newUserField = message.data.split('-')[4];
+      const newUserAction = message.data.split('-')[5];
+      const lastAction = message.data.split('-')[6];
+      let newUser = realtimeGameData.currentPlayer
+      if (lastAction === "empty" && realtimeGameData.currentPlayer === "hacker"){
+        newUser = "user"
+      } else if (lastAction === "empty" && realtimeGameData.currentPlayer === "user"){
+        newUser = "hacker"
+      }
+      //console.log(type, sender, newHackerField, newHackerAction, newUserField, newUserAction)
+      setRealtimeGameData({
+        ...realtimeGameData,
+        fieldUser: newUserField, actionUser: newUserAction, fieldHacker: newHackerField, actionHacker: newHackerAction, currentPlayer: newUser
+      })
+    }
   });
 
-  //console.log('player', currentPlayer);
-  //console.log('user',fieldUser);
-  //console.log('user',fieldHacker);
+  console.log(realtimeGameData)
 
- 
-  
   const downHandler = ({key}) => {
     arr.push(key);
     const index =   arr.indexOf("X")
@@ -95,24 +100,14 @@ const User = ({ data }) => {
   const pionDetection = (tempField) => {
     fields.forEach(element => {
       if (tempField == element.command){
-       if (realtimeGameData.currentPlayer === "user"){
-          setRealtimeGameData({
-            ...realtimeGameData,
-            fieldUser: element.nummer, actionUser: element.action 
-          })
-           channel.publish({ name: gamecode, data: `boardchange-user-${realtimeGameData.fieldHacker}-${realtimeGameData.actionHacker}-${element.nummer}-${element.action}` });
-        } else {
-          setRealtimeGameData({
-            ...realtimeGameData,
-            fieldHacker: element.nummer, actionHacker: element.action
-           })
-          channel.publish({ name: gamecode, data: `boardchange-hacker-${element.nummer}-${element.action}-${realtimeGameData.fieldUser}-${realtimeGameData.actionUser}` });
+       if (realtimeGameData.currentPlayer == "user"){
+          channel.publish({ name: gamecode, data: `boardchange-user-${realtimeGameData.fieldHacker}-${realtimeGameData.actionHacker}-${element.nummer}-${element.action}-${element.action}` });
+        } else if (realtimeGameData.currentPlayer == "hacker") {
+          channel.publish({ name: gamecode, data: `boardchange-hacker-${element.nummer}-${element.action}-${realtimeGameData.fieldUser}-${realtimeGameData.actionUser}-${element.action}` });
         } 
-       //channel.publish({ name: gamecode, data: `hacker=${fieldHacker}-user=${fieldUser}-player=${currentPlayer}` });
       }
     });
   }
-
 
   useEffect(() => {
     window.addEventListener('keydown', downHandler);
@@ -121,19 +116,18 @@ const User = ({ data }) => {
     };
   }, []);
 
-
   return (
     <>
       <GameLayout>
         <h1 className="title">Us3r</h1>
         <GameBoard boardInfo={realtimeGameData}/>
         <UserInfo userinfo={gameData.userinfo} />
-        <Turn who={"hacker"} />
+        <Turn who={realtimeGameData.currentPlayer} />
         <UserWarning />
         <Notes gameData={gameData} player="user" />
         <UserAccountStrongness />
         <UserVpn />
-        <UserAction />
+        {realtimeGameData.currentPlayer === "user" && realtimeGameData.actionUser === "action" ?<UserAction /> : ""}
         <UserDeleteCookies />
         <UserWarningMail />
         <UserAdjustPassword gameData={gameData} action={"add1capital"} />

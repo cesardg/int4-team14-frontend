@@ -12,10 +12,13 @@ import HackerScreencapture from '../../components/Hacker/HackerScreencapture';
 import HackerVpn from "../../components/Hacker/HackerVpn";
 import HackerHack from "../../components/Hacker/HackerHack";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useChannel } from '../../components/ChatReactEffect';
 
 const Hacker = ({ data }) => {
-
+  const router = useRouter();
+  const gamecode = router.query.gamecode;
+  
   let arr = []
   let tempField;
   let fields = [
@@ -54,12 +57,24 @@ const Hacker = ({ data }) => {
   ]
 
   const [gameData, setGameData] = useState(data[0]);
-  const [currentPlayer, setCurrentPlayer] = useState(gameData.startingPlayer);
+  const [currentPlayer, setCurrentPlayer] = useState(data[0].startingPlayer);
   const [fieldUser, setFieldUser] = useState([1, "start"]);
-  const [fieldPlayer, setFieldPlayer] = useState([1, "start"]);
-  console.log(fieldUser, fieldPlayer)
- 
+  const [fieldHacker, setFieldHacker] = useState([1, "start"]);
 
+  const [channel] = useChannel(gamecode, (message) => {
+    const data = message.data.split('-');
+    console.log("data", data)
+    //setCurrentPlayer(data[1].split('=')[1].split(',')[0])
+    //setFieldUser([data[1].split('=')[1].split(',')[0], data[1].split('=')[1].split(',')[1]])
+    //setFieldHacker([data[O].split('=')[1].split(',')[0], data[0].split('=')[1].split(',')[1]])
+  });
+
+  //console.log('player', currentPlayer);
+  //console.log('user',fieldUser);
+  //console.log('user',fieldHacker);
+
+  //channel.publish({ name: gamecode, data: `hacker=${fieldHacker}-user=${fieldUser}-player=${currentPlayer}` });
+  
   const downHandler = ({key}) => {
     arr.push(key);
     const index =   arr.indexOf("X")
@@ -75,21 +90,30 @@ const Hacker = ({ data }) => {
   const pionDetection = (tempField) => {
     fields.forEach(element => {
       if (tempField == element.command){
-      console.log(element)
        if (currentPlayer === "user"){
           setFieldUser([element.nummer, element.action])
+           //channel.publish({ name: gamecode, data: `hacker=${fieldHacker}-user=${element.nummer, element.action}-player=${currentPlayer}` });
         } else {
-          setFieldPlayer([element.nummer, element.action])
-        }
+          setFieldHacker([element.nummer, element.action])
+           channel.publish({ name: gamecode, data: `hacker=${element.nummer},${element.action}-user=${fieldUser}-player=${currentPlayer}` });
+        } 
+       
       }
     });
   }
 
-  console.log(gameData);
+
+  useEffect(() => {
+    window.addEventListener('keydown', downHandler);
+    return () => {
+      window.removeEventListener('keydown', downHandler);
+    };
+  }, []);
+
   return (
     <GameLayout>
       <HackerInfo />
-      <GameBoard currentField1={fieldUser} currentField2={fieldPlayer} />
+      <GameBoard currentField1={fieldUser} currentField2={fieldHacker} player={currentPlayer} />
       <Turn who={"hacker"} />
       <Notes gameData={gameData} player="hacker" />
       <HackerDiscoveries />

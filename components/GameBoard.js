@@ -1,7 +1,7 @@
 import styles from "./GameBoard.module.css";
 
-const GameBoard = ({ currentField1, currentField2 }) => {
-  console.log(currentField1, currentField2);
+const GameBoard = ({ currentField1, currentField2, player }) => {
+ 
   let fieldsRow1 = [
     [1, 1, "start"],
     [2, 2, "empty"],
@@ -45,6 +45,7 @@ const GameBoard = ({ currentField1, currentField2 }) => {
 
   return (
     <div className={styles.container}>
+      <p>Player = {player}</p>
       <p className={styles.player1Stats}>Player 1: Vak {currentField1}</p>
       <p className={styles.player2Stats}>Player 2: Vak {currentField2}</p>
       <div className={styles.board}>

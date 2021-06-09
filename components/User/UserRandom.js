@@ -1,9 +1,11 @@
 import styles from "./UserRandom.module.css";
 
-const UserRandom = () => {
+const UserRandom = ({randomCard, onClickButton}) => {
   return (
     <article className={styles.article}>
       <h2>Random vak</h2>
+      <p>{randomCard.text}</p>
+      <button onClick={() => onClickButton(randomCard.action)}>OK</button>
     </article>
   );
 };

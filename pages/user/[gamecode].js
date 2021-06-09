@@ -76,9 +76,12 @@ const User = ({ data }) => {
 
   const [gameData, setGameData] = useState(data[0]);
   const [realtimeGameData, setRealtimeGameData] = useState({currentPlayer: data[0].startingPlayer, fieldUser: 1, actionUser: "start", fieldHacker: 1, actionHacker: "start"})
+  const [randomOption, setRandomOption] = useState(randomOptions[Math.floor(Math.random() * randomOptions.length)]);
+
 
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split('-')[0];
+
     if (type === "boardchange"){
       const sender = message.data.split('-')[1];
       const newHackerField = message.data.split('-')[2];
@@ -87,17 +90,36 @@ const User = ({ data }) => {
       const newUserAction = message.data.split('-')[5];
       const lastAction = message.data.split('-')[6];
       let newUser = realtimeGameData.currentPlayer
+
+      // player veraderen bij empty
       if (lastAction === "empty" && realtimeGameData.currentPlayer === "hacker"){
         newUser = "user"
       } else if (lastAction === "empty" && realtimeGameData.currentPlayer === "user"){
         newUser = "hacker"
       }
-      //console.log(type, sender, newHackerField, newHackerAction, newUserField, newUserAction)
+   
+      // user komt op een random vak
+      if (realtimeGameData.currentPlayer === "user" &&  realtimeGameData.actionUser === "random"){
+        setRandomOption(randomOptions[Math.floor(Math.random() * randomOptions.length)]);
+      }
+
       setRealtimeGameData({
         ...realtimeGameData,
         fieldUser: newUserField, actionUser: newUserAction, fieldHacker: newHackerField, actionHacker: newHackerAction, currentPlayer: newUser
       })
     }
+
+
+    if (type === "playerchange"){
+      console.log("from user:", message.data)
+      setRealtimeGameData({
+        ...realtimeGameData,
+      currentPlayer: message.data.split('-')[2]
+      })
+    }
+
+
+
   });
 
   const downHandler = ({key}) => {
@@ -124,6 +146,19 @@ const User = ({ data }) => {
     });
   }
 
+
+  const handleClickRandom = (value) => {
+    console.log("random is oke")
+    console.log(value)
+    channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
+  }
+
+  const handleClickAction = (value) => {
+    console.log("actie is oke")
+    console.log(value)
+  }
+
+
   useEffect(() => {
     window.addEventListener('keydown', downHandler);
     return () => {
@@ -142,12 +177,12 @@ const User = ({ data }) => {
         <Notes gameData={gameData} player="user" />
         <UserAccountStrongness />
         <UserVpn />
-        {realtimeGameData.currentPlayer === "user" && realtimeGameData.actionUser === "action" ?<UserAction /> : ""}
+        {realtimeGameData.currentPlayer === "user" && realtimeGameData.actionUser === "action" ?<UserAction onClickButton={(value) => handleClickAction(value)}/> : ""}
         <UserDeleteCookies />
         <UserWarningMail />
         <UserAdjustPassword gameData={gameData} action={"add1capital"} />
         <UserAd />
-         {realtimeGameData.currentPlayer === "user" && realtimeGameData.actionUser === "random" ? <UserRandom/> : ""}
+        {realtimeGameData.currentPlayer === "user" && realtimeGameData.actionUser === "random" ? <UserRandom randomCard={randomOption} onClickButton={(value) => handleClickRandom(value)} /> : ""}
   
       </GameLayout>
     </>

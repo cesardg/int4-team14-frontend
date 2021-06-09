@@ -14,6 +14,7 @@ import UserAd from "../../components/User/UserAd";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useChannel } from '../../components/ChatReactEffect';
+import UserRandom from "../../components/User/UserRandom";
 
 const User = ({ data }) => {
 
@@ -22,7 +23,23 @@ const User = ({ data }) => {
   
   let arr = []
   let tempField;
-  let fields = [
+
+  const randomOptions= [
+    {type: "good", action: "2kleineletters", text: "Je hebt je account op privé gezet. Voeg 2 extra letters toe aan je wachtwoord"},
+    {type: "good", action: "veranderletter", text: "Je gebruikt een veilige internetbrowser zoals DuckDuckGo in plaats van Google. Verander 1 kleine letter van je wachtwoord"},
+    {type: "good", action: "2kleineletters", text: "Je hebt je locatie uitgezet, zo kunnen hackers je locatie niet volgen. Voeg 2 extra letters toe aan je wachtwoord"},
+    {type: "good", action: "letternaarhoofdletter", text: "Je hebt een antivirus-scanner gedownload om je computer extra te beveiligen. Verander 1 kleine letter in een hoofdletter"},
+    {type: "good", action: "letternaarcijfer", text: "Je gebruikt de incognito-modus om te surfen. Verander 1 kleine letter in een cijfer"},
+    {type: "good", action: "letternaarcijfer", text: "Je hebt een webcam-cover over je webcam geplaatst. Verander 1 kleine letter in een cijfer"},
+    {type: "bad", action: "letterweghalen", text: "Je hebt een webcam-cover over je webcam geplaatst. Verander 1 kleine letter in een cijfer"},
+    {type: "bad", action: "beurtoverlsaan", text: "Je raakt afgeleid door een complot-theorie op het internet. Sla een beurt over"},
+    {type: "bad",  action: "beurtoverlsaan", text: "Je bent verdwaald tussen alle vreemde YouTube-filmpjes waardoor je nu alleen nog teenkaas-filmpjes te zien krijgt. Sla een beurt over"},
+    {type: "bad",  action: "beurtoverlsaan", text: "De hacker ontdekt je oude Roblox-account en gebruikt dit om extra info over jou te ontdekken. Sla een beurt over"},
+    {type: "bad",  action: "letterweghalen", text: "Je probeert Minecraft te downloaden op een verdachte website, hierdoor heb je een virus. Haal 1 letter of cijfer uit je wachtwoord"},
+    {type: "bad",  action: "beurtoverlsaan", text: "Je probeert gratis muziek te downloaden op een verdachte website, hierdoor loopt je computer vast. Sla een beurt over"}
+  ]
+
+  const fields = [
     {nummer: 1, command: "1", action:"start" },
     {nummer: 2, command: "2", action:"empty" },
     {nummer: 3, command: "3", action:"action" },
@@ -83,7 +100,6 @@ const User = ({ data }) => {
     }
   });
 
-
   const downHandler = ({key}) => {
     arr.push(key);
     const index =   arr.indexOf("X")
@@ -96,12 +112,8 @@ const User = ({ data }) => {
     } 
   }
 
-
-
   const pionDetection = (tempField) => {
     fields.forEach(element => {
-        // dit lukt niet 
-         console.log(realtimeGameData.currentPlayer)
       if (tempField == element.command){
        if (realtimeGameData.currentPlayer == "user"){
           channel.publish({ name: gamecode, data: `boardchange-user-${realtimeGameData.fieldHacker}-${realtimeGameData.actionHacker}-${element.nummer}-${element.action}-${element.action}` });
@@ -135,6 +147,8 @@ const User = ({ data }) => {
         <UserWarningMail />
         <UserAdjustPassword gameData={gameData} action={"add1capital"} />
         <UserAd />
+         {realtimeGameData.currentPlayer === "user" && realtimeGameData.actionUser === "random" ? <UserRandom/> : ""}
+  
       </GameLayout>
     </>
   );

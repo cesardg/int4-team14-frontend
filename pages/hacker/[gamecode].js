@@ -14,16 +14,32 @@ import HackerHack from "../../components/Hacker/HackerHack";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useChannel } from '../../components/ChatReactEffect';
+import HackerRandom from '../../components/Hacker/HackerRandom';
 
 const Hacker = ({ data }) => {
 
-  
   const router = useRouter();
   const gamecode = router.query.gamecode;
   
   let arr = []
   let tempField;
-  let fields = [
+
+  const randomOptions= [
+    {type: "good", action: "1hoofdletter", text: "Er is een data-lek bij Facebook. Je krijgt 1 hoofdletter uit het wachtwoord"},
+    {type: "good", action: "2kleineletters", text: "Je ontvangt data van je hackergroep. Je krijgt 2 kleine letters uit het wachtwoord"},
+    {type: "good", action: "2kleineletters", text: "Je ontvangt data van je hackergroep. Je krijgt 2 kleine letters uit het wachtwoord"},
+    {type: "good", action: "1cijfer", text: "Je leert een nieuw hack-commando. Je krijgt 1 cijfer uit het wachtwoord"},
+    {type: "good", action: "2kleineletters", text: "Je vindt een oude foto van de user en chanteert hem/haar hiermee. Je krijgt 2 kleine letters van het wachtwoord"},
+    {type: "good", action: "1hoofdletter", text: "Je vindt het oude Roblox-account van de user en kan het wachtwoord hacken. Je krijgt 1 hoofdletter van het wachtwoord"},
+    {type: "bad", action: "beurtoverlsaan", text: "Je botst op een firewall. Sla een beurt over"},
+    {type: "bad", action: "notitiegewist", text: "De user surft in incognito-modus en is dus onvindbaar. Sla een beurt over"},
+    {type: "bad", action: "beurtoverlsaan", text: "De user is slim genoeg om een slechte advertentie te ontwijken. Sla een beurt over"},
+    {type: "bad", action: "notitiegewist", text:  "De Federal Computer Crime Unit zit je op de hielen, ze hebben je notities gezien. Je laatste notitie wordt gewist"},
+    {type: "bad", action: "beurtoverlsaan", text: "Je morst je energiedrankje over je toetsenbord en moet wachten op een nieuwe computer. Sla een beurt over"},
+    {type: "bad", action: "notitiegewist", text: "De user heeft al zijn/haar oude Roblox- en Brawl Stars-accounts verwijderd. Je laatste notitie wordt gewist"}
+  ]
+
+  const fields = [
     {nummer: 1, command: "1", action:"start" },
     {nummer: 2, command: "2", action:"empty" },
     {nummer: 3, command: "3", action:"action" },
@@ -84,7 +100,6 @@ const Hacker = ({ data }) => {
     }
   });
 
-
   const downHandler = ({key}) => {
     arr.push(key);
     const index =   arr.indexOf("X")
@@ -101,8 +116,6 @@ const Hacker = ({ data }) => {
 
   const pionDetection = (tempField) => {
     fields.forEach(element => {
-        // dit lukt niet 
-         console.log(realtimeGameData.currentPlayer)
       if (tempField == element.command){
        if (realtimeGameData.currentPlayer == "user"){
           channel.publish({ name: gamecode, data: `boardchange-user-${realtimeGameData.fieldHacker}-${realtimeGameData.actionHacker}-${element.nummer}-${element.action}-${element.action}` });
@@ -120,22 +133,22 @@ const Hacker = ({ data }) => {
     };
   }, [realtimeGameData]);
 
-
-
   return (
     <GameLayout>
-      <HackerInfo />
+       <h1 className="title">Hacker</h1>
       <GameBoard boardInfo={realtimeGameData}/>
+      <HackerInfo />
       <Turn who={realtimeGameData.currentPlayer} />
       <Notes gameData={gameData} player="hacker" />
       <HackerDiscoveries />
-      <HackerAction />
+      {realtimeGameData.currentPlayer === "hacker" && realtimeGameData.actionHacker === "action" ?  <HackerAction /> : ""}
       <HackerAd />
       <HackerDecryption />
       <HackerHack />
       <HackerInterests />
       <HackerScreencapture />
       <HackerVpn />
+       {realtimeGameData.currentPlayer === "hacker" && realtimeGameData.actionHacker === "random" ? <HackerRandom/> : ""}
     </GameLayout>
   );
 };

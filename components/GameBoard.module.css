@@ -6,9 +6,10 @@
 
 .board {
     display: grid;
-    grid-template-columns: 1rem 7rem 1rem;
-    grid-template-rows: 1rem 7rem 1rem;
-    font-size: .4rem;
+    grid-template-columns: 2rem 14rem 2rem;
+    grid-template-rows: 2rem 14rem 2rem;
+    font-size: .5rem;
+  
 }
 
 .row1 {
@@ -43,8 +44,8 @@
 
 .fieldRow {
     border: .1rem solid black;
-    height: 1rem;
-    width: 1rem;
+    height: 2rem;
+    width: 2rem;
     display: flex;
 }
 
@@ -77,7 +78,7 @@
 }
 
 .pion1 {
-    font-size: .5rem;
+    font-size: 1rem;
     color: green;
 }
 

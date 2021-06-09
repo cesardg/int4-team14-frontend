@@ -83,7 +83,6 @@ const User = ({ data }) => {
     }
   });
 
-  console.log(realtimeGameData)
 
   const downHandler = ({key}) => {
     arr.push(key);
@@ -97,8 +96,12 @@ const User = ({ data }) => {
     } 
   }
 
+
+
   const pionDetection = (tempField) => {
     fields.forEach(element => {
+        // dit lukt niet 
+         console.log(realtimeGameData.currentPlayer)
       if (tempField == element.command){
        if (realtimeGameData.currentPlayer == "user"){
           channel.publish({ name: gamecode, data: `boardchange-user-${realtimeGameData.fieldHacker}-${realtimeGameData.actionHacker}-${element.nummer}-${element.action}-${element.action}` });
@@ -114,7 +117,7 @@ const User = ({ data }) => {
     return () => {
       window.removeEventListener('keydown', downHandler);
     };
-  }, []);
+  }, [realtimeGameData]);
 
   return (
     <>

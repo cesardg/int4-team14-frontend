@@ -17,6 +17,7 @@ import { useChannel } from '../../components/ChatReactEffect';
 
 const Hacker = ({ data }) => {
 
+  
   const router = useRouter();
   const gamecode = router.query.gamecode;
   
@@ -83,7 +84,6 @@ const Hacker = ({ data }) => {
     }
   });
 
-  console.log(realtimeGameData)
 
   const downHandler = ({key}) => {
     arr.push(key);
@@ -97,8 +97,12 @@ const Hacker = ({ data }) => {
     } 
   }
 
+
+
   const pionDetection = (tempField) => {
     fields.forEach(element => {
+        // dit lukt niet 
+         console.log(realtimeGameData.currentPlayer)
       if (tempField == element.command){
        if (realtimeGameData.currentPlayer == "user"){
           channel.publish({ name: gamecode, data: `boardchange-user-${realtimeGameData.fieldHacker}-${realtimeGameData.actionHacker}-${element.nummer}-${element.action}-${element.action}` });
@@ -114,7 +118,7 @@ const Hacker = ({ data }) => {
     return () => {
       window.removeEventListener('keydown', downHandler);
     };
-  }, []);
+  }, [realtimeGameData]);
 
 
 

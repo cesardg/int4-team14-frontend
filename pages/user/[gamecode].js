@@ -11,14 +11,73 @@ import UserDeleteCookies from "../../components/User/UserDeleteCookies";
 import UserWarningMail from "../../components/User/UserWarningMail";
 import UserAdjustPassword from "../../components/User/UserAdjustPassword";
 import UserAd from "../../components/User/UserAd";
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 
 const User = ({ data }) => {
-  const [gameData, setGameData] = useState(data[0]);
-  const field1 = 5;
-  const field2 = 7;
 
-  console.log('data', data);
+  let arr = []
+  let tempField;
+  let fields = [
+    {nummer: 1, command: 1, action:"start" },
+    {nummer: 2, command: 2, action:"empty" },
+    {nummer: 3, command: 3, action:"action" },
+    {nummer: 4, command: 4, action:"empty" },
+    {nummer: 5, command: 5, action:"action" },
+    {nummer: 6, command: 6, action:"start" },
+    {nummer: 7, command: 7, action:"action" },
+    {nummer: 8, command: 8, action:"empty" },
+    {nummer: 9, command: 9, action:"nog beslist worden" },
+    {nummer: 10, command: "Q", action:"empty" },
+    {nummer: 11, command: "B", action:"action" },
+    {nummer: 12, command: "C", action:"empty" },
+    {nummer: 13, command: "D", action:"random" },
+    {nummer: 14, command: "E", action:"empty" },
+    {nummer: 15, command: "F", action:"action" },
+    {nummer: 16, command: "G", action:"empty" },
+    {nummer: 17, command: "H", action:"spam" },
+    {nummer: 18, command: "I", action:"empty" },
+    {nummer: 19, command: "J", action:"action" },
+    {nummer: 20, command: "L", action:"empty" },
+    {nummer: 21, command: "0", action:"random" },
+    {nummer: 22, command: "N", action:"empty" },
+    {nummer: 23, command: "O", action:"action" },
+    {nummer: 24, command: "P", action:"empty" },
+    {nummer: 25, command: "A", action:"wifi" },
+    {nummer: 26, command: "R", action:"empty" },
+    {nummer: 27, command: "S", action:"action" },
+    {nummer: 28, command: "T", action:"empty" },
+    {nummer: 29, command: "U", action:"random" },
+    {nummer: 30, command: "Z", action:"empty" },
+    {nummer: 31, command: "Y", action:"action" },
+    {nummer: 32, command: "W", action:"empty" },
+  ]
+
+  const [gameData, setGameData] = useState(data[0]);
+  const [currentPlayer, setCurrentPlayer] = useState(gameData.startingPlayer);
+  const [field1, setField1] = useState(1);
+  const [field2, setField2] = useState(1);
+  console.log("field1", field1)
+
+  const downHandler = ({key}) => {
+    arr.push(key);
+    const index =   arr.indexOf("X")
+    if (index != -1 && arr[index - 1] == "R" && arr[index - 2] == "N" && arr[index - 3] == "K" && arr[index - 4] == "V" && arr[index - 5] == "D" && arr[index - 6] == "R" && arr[index - 7] == "B"){
+      tempField = arr[index + 1]
+      if (tempField){
+        setField1(tempField)
+        arr = [];
+      } 
+    } 
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', downHandler);
+    return () => {
+      window.removeEventListener('keydown', downHandler);
+    };
+  }, []);
+
+
   return (
     <>
       <GameLayout>

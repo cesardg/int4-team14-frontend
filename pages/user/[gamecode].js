@@ -14,6 +14,7 @@ import UserAd from "../../components/User/UserAd";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useChannel } from '../../components/ChatReactEffect';
+import UserRandom from "../../components/User/UserRandom";
 
 const User = ({ data }) => {
 
@@ -22,7 +23,23 @@ const User = ({ data }) => {
   
   let arr = []
   let tempField;
-  let fields = [
+
+  const randomOptions= [
+    {type: "good", action: "2kleineletters", text: "Je hebt je account op privé gezet. Voeg 2 extra letters toe aan je wachtwoord"},
+    {type: "good", action: "veranderletter", text: "Je gebruikt een veilige internetbrowser zoals DuckDuckGo in plaats van Google. Verander 1 kleine letter van je wachtwoord"},
+    {type: "good", action: "2kleineletters", text: "Je hebt je locatie uitgezet, zo kunnen hackers je locatie niet volgen. Voeg 2 extra letters toe aan je wachtwoord"},
+    {type: "good", action: "letternaarhoofdletter", text: "Je hebt een antivirus-scanner gedownload om je computer extra te beveiligen. Verander 1 kleine letter in een hoofdletter"},
+    {type: "good", action: "letternaarcijfer", text: "Je gebruikt de incognito-modus om te surfen. Verander 1 kleine letter in een cijfer"},
+    {type: "good", action: "letternaarcijfer", text: "Je hebt een webcam-cover over je webcam geplaatst. Verander 1 kleine letter in een cijfer"},
+    {type: "bad", action: "letterweghalen", text: "Je hebt een webcam-cover over je webcam geplaatst. Verander 1 kleine letter in een cijfer"},
+    {type: "bad", action: "beurtoverlsaan", text: "Je raakt afgeleid door een complot-theorie op het internet. Sla een beurt over"},
+    {type: "bad",  action: "beurtoverlsaan", text: "Je bent verdwaald tussen alle vreemde YouTube-filmpjes waardoor je nu alleen nog teenkaas-filmpjes te zien krijgt. Sla een beurt over"},
+    {type: "bad",  action: "beurtoverlsaan", text: "De hacker ontdekt je oude Roblox-account en gebruikt dit om extra info over jou te ontdekken. Sla een beurt over"},
+    {type: "bad",  action: "letterweghalen", text: "Je probeert Minecraft te downloaden op een verdachte website, hierdoor heb je een virus. Haal 1 letter of cijfer uit je wachtwoord"},
+    {type: "bad",  action: "beurtoverlsaan", text: "Je probeert gratis muziek te downloaden op een verdachte website, hierdoor loopt je computer vast. Sla een beurt over"}
+  ]
+
+  const fields = [
     {nummer: 1, command: "1", action:"start" },
     {nummer: 2, command: "2", action:"empty" },
     {nummer: 3, command: "3", action:"action" },
@@ -59,27 +76,52 @@ const User = ({ data }) => {
 
   const [gameData, setGameData] = useState(data[0]);
   const [realtimeGameData, setRealtimeGameData] = useState({currentPlayer: data[0].startingPlayer, fieldUser: 1, actionUser: "start", fieldHacker: 1, actionHacker: "start"})
+  const [randomOption, setRandomOption] = useState(randomOptions[Math.floor(Math.random() * randomOptions.length)]);
+
 
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split('-')[0];
-    const sender = message.data.split('-')[1];
-    const newHackerField = message.data.split('-')[2];
-    const newHackerAction = message.data.split('-')[3];
-    const newUserField = message.data.split('-')[4];
-    const newUserAction = message.data.split('-')[5];
-    console.log(type, sender, newHackerField, newHackerAction, newUserField, newUserAction)
-    setRealtimeGameData({
-      ...realtimeGameData,
-      fieldUser: newUserField, actionUser: newUserAction, fieldHacker: newHackerField, actionHacker: newHackerAction
-    })
+
+    if (type === "boardchange"){
+      const sender = message.data.split('-')[1];
+      const newHackerField = message.data.split('-')[2];
+      const newHackerAction = message.data.split('-')[3];
+      const newUserField = message.data.split('-')[4];
+      const newUserAction = message.data.split('-')[5];
+      const lastAction = message.data.split('-')[6];
+      let newUser = realtimeGameData.currentPlayer
+
+      // player veraderen bij empty
+      if (lastAction === "empty" && realtimeGameData.currentPlayer === "hacker"){
+        newUser = "user"
+      } else if (lastAction === "empty" && realtimeGameData.currentPlayer === "user"){
+        newUser = "hacker"
+      }
+   
+      // user komt op een random vak
+      if (realtimeGameData.currentPlayer === "user" &&  realtimeGameData.actionUser === "random"){
+        setRandomOption(randomOptions[Math.floor(Math.random() * randomOptions.length)]);
+      }
+
+      setRealtimeGameData({
+        ...realtimeGameData,
+        fieldUser: newUserField, actionUser: newUserAction, fieldHacker: newHackerField, actionHacker: newHackerAction, currentPlayer: newUser
+      })
+    }
+
+
+    if (type === "playerchange"){
+      console.log("from user:", message.data)
+      setRealtimeGameData({
+        ...realtimeGameData,
+      currentPlayer: message.data.split('-')[2]
+      })
+    }
+
+
+
   });
 
-  //console.log('player', currentPlayer);
-  //console.log('user',fieldUser);
-  //console.log('user',fieldHacker);
-
- 
-  
   const downHandler = ({key}) => {
     arr.push(key);
     const index =   arr.indexOf("X")
@@ -95,22 +137,25 @@ const User = ({ data }) => {
   const pionDetection = (tempField) => {
     fields.forEach(element => {
       if (tempField == element.command){
-       if (realtimeGameData.currentPlayer === "user"){
-          setRealtimeGameData({
-            ...realtimeGameData,
-            fieldUser: element.nummer, actionUser: element.action 
-          })
-           channel.publish({ name: gamecode, data: `boardchange-user-${realtimeGameData.fieldHacker}-${realtimeGameData.actionHacker}-${element.nummer}-${element.action}` });
-        } else {
-          setRealtimeGameData({
-            ...realtimeGameData,
-            fieldHacker: element.nummer, actionHacker: element.action
-           })
-          channel.publish({ name: gamecode, data: `boardchange-hacker-${element.nummer}-${element.action}-${realtimeGameData.fieldUser}-${realtimeGameData.actionUser}` });
+       if (realtimeGameData.currentPlayer == "user"){
+          channel.publish({ name: gamecode, data: `boardchange-user-${realtimeGameData.fieldHacker}-${realtimeGameData.actionHacker}-${element.nummer}-${element.action}-${element.action}` });
+        } else if (realtimeGameData.currentPlayer == "hacker") {
+          channel.publish({ name: gamecode, data: `boardchange-hacker-${element.nummer}-${element.action}-${realtimeGameData.fieldUser}-${realtimeGameData.actionUser}-${element.action}` });
         } 
-       //channel.publish({ name: gamecode, data: `hacker=${fieldHacker}-user=${fieldUser}-player=${currentPlayer}` });
       }
     });
+  }
+
+
+  const handleClickRandom = (value) => {
+    console.log("random is oke")
+    console.log(value)
+    channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
+  }
+
+  const handleClickAction = (value) => {
+    console.log("actie is oke")
+    console.log(value)
   }
 
 
@@ -119,8 +164,7 @@ const User = ({ data }) => {
     return () => {
       window.removeEventListener('keydown', downHandler);
     };
-  }, []);
-
+  }, [realtimeGameData]);
 
   return (
     <>
@@ -128,16 +172,18 @@ const User = ({ data }) => {
         <h1 className="title">Us3r</h1>
         <GameBoard boardInfo={realtimeGameData}/>
         <UserInfo userinfo={gameData.userinfo} />
-        <Turn who={"hacker"} />
+        <Turn who={realtimeGameData.currentPlayer} />
         <UserWarning />
         <Notes gameData={gameData} player="user" />
         <UserAccountStrongness />
         <UserVpn />
-        <UserAction />
+        {realtimeGameData.currentPlayer === "user" && realtimeGameData.actionUser === "action" ?<UserAction onClickButton={(value) => handleClickAction(value)}/> : ""}
         <UserDeleteCookies />
         <UserWarningMail />
         <UserAdjustPassword gameData={gameData} action={"change1capital"} />
         <UserAd />
+        {realtimeGameData.currentPlayer === "user" && realtimeGameData.actionUser === "random" ? <UserRandom randomCard={randomOption} onClickButton={(value) => handleClickRandom(value)} /> : ""}
+  
       </GameLayout>
     </>
   );

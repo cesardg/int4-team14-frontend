@@ -6,8 +6,10 @@
 
 .board {
     display: grid;
-    grid-template-columns: 5rem 35rem 5rem;
-    grid-template-rows: 5rem 35rem 5rem;
+    grid-template-columns: 2rem 14rem 2rem;
+    grid-template-rows: 2rem 14rem 2rem;
+    font-size: .5rem;
+  
 }
 
 .row1 {
@@ -41,9 +43,9 @@
 }
 
 .fieldRow {
-    border: .2rem solid black;
-    height: 5rem;
-    width: 5rem;
+    border: .1rem solid black;
+    height: 2rem;
+    width: 2rem;
     display: flex;
 }
 
@@ -53,7 +55,7 @@
 }
 
 .fieldRow1:last-of-type {
-    border-right: .2rem solid black;
+    border-right: .1rem solid black;
 }
 
 .fieldRow2 {
@@ -67,7 +69,7 @@
 }
 
 .fieldRow3:last-of-type {
-    border-left: .2rem solid black;
+    border-left: .1rem solid black;
 }
 
 .fieldRow4 {
@@ -76,9 +78,8 @@
 }
 
 .pion1 {
-    font-size: 3rem;
+    font-size: 1rem;
     color: green;
-    line-height: 1;
 }
 
 .pion2 {

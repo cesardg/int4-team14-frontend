@@ -14,15 +14,32 @@ import HackerHack from "../../components/Hacker/HackerHack";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useChannel } from '../../components/ChatReactEffect';
+import HackerRandom from '../../components/Hacker/HackerRandom';
 
 const Hacker = ({ data }) => {
 
-    const router = useRouter();
+  const router = useRouter();
   const gamecode = router.query.gamecode;
   
   let arr = []
   let tempField;
-  let fields = [
+
+  const randomOptions= [
+    {type: "good", action: "1hoofdletter", text: "Er is een data-lek bij Facebook. Je krijgt 1 hoofdletter uit het wachtwoord"},
+    {type: "good", action: "2kleineletters", text: "Je ontvangt data van je hackergroep. Je krijgt 2 kleine letters uit het wachtwoord"},
+    {type: "good", action: "2kleineletters", text: "Je ontvangt data van je hackergroep. Je krijgt 2 kleine letters uit het wachtwoord"},
+    {type: "good", action: "1cijfer", text: "Je leert een nieuw hack-commando. Je krijgt 1 cijfer uit het wachtwoord"},
+    {type: "good", action: "2kleineletters", text: "Je vindt een oude foto van de user en chanteert hem/haar hiermee. Je krijgt 2 kleine letters van het wachtwoord"},
+    {type: "good", action: "1hoofdletter", text: "Je vindt het oude Roblox-account van de user en kan het wachtwoord hacken. Je krijgt 1 hoofdletter van het wachtwoord"},
+    {type: "bad", action: "beurtoverlsaan", text: "Je botst op een firewall. Sla een beurt over"},
+    {type: "bad", action: "notitiegewist", text: "De user surft in incognito-modus en is dus onvindbaar. Sla een beurt over"},
+    {type: "bad", action: "beurtoverlsaan", text: "De user is slim genoeg om een slechte advertentie te ontwijken. Sla een beurt over"},
+    {type: "bad", action: "notitiegewist", text:  "De Federal Computer Crime Unit zit je op de hielen, ze hebben je notities gezien. Je laatste notitie wordt gewist"},
+    {type: "bad", action: "beurtoverlsaan", text: "Je morst je energiedrankje over je toetsenbord en moet wachten op een nieuwe computer. Sla een beurt over"},
+    {type: "bad", action: "notitiegewist", text: "De user heeft al zijn/haar oude Roblox- en Brawl Stars-accounts verwijderd. Je laatste notitie wordt gewist"}
+  ]
+
+  const fields = [
     {nummer: 1, command: "1", action:"start" },
     {nummer: 2, command: "2", action:"empty" },
     {nummer: 3, command: "3", action:"action" },
@@ -59,27 +76,51 @@ const Hacker = ({ data }) => {
 
   const [gameData, setGameData] = useState(data[0]);
   const [realtimeGameData, setRealtimeGameData] = useState({currentPlayer: data[0].startingPlayer, fieldUser: 1, actionUser: "start", fieldHacker: 1, actionHacker: "start"})
+  const [randomOption, setRandomOption] = useState(randomOptions[Math.floor(Math.random() * randomOptions.length)]);
 
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split('-')[0];
-    const sender = message.data.split('-')[1];
-    const newHackerField = message.data.split('-')[2];
-    const newHackerAction = message.data.split('-')[3];
-    const newUserField = message.data.split('-')[4];
-    const newUserAction = message.data.split('-')[5];
-    console.log(type, sender, newHackerField, newHackerAction, newUserField, newUserAction)
-    setRealtimeGameData({
-      ...realtimeGameData,
-      fieldUser: newUserField, actionUser: newUserAction, fieldHacker: newHackerField, actionHacker: newHackerAction
-    })
+
+    if (type === "boardchange"){
+      const sender = message.data.split('-')[1];
+      const newHackerField = message.data.split('-')[2];
+      const newHackerAction = message.data.split('-')[3];
+      const newUserField = message.data.split('-')[4];
+      const newUserAction = message.data.split('-')[5];
+      const lastAction = message.data.split('-')[6];
+      let newUser = realtimeGameData.currentPlayer;
+
+      // player veranderen bij empty 
+      if (lastAction === "empty" && realtimeGameData.currentPlayer === "hacker"){
+        newUser = "user"
+      } else if (lastAction === "empty" && realtimeGameData.currentPlayer === "user"){
+        newUser = "hacker"
+      }
+      
+      // hacker komt op een random vak
+      if (realtimeGameData.currentPlayer === "hacker" &&  realtimeGameData.actionHacker === "random"){
+        setRandomOption(randomOptions[Math.floor(Math.random() * randomOptions.length)]);
+      }
+
+      setRealtimeGameData({
+        ...realtimeGameData,
+        fieldUser: newUserField, actionUser: newUserAction, fieldHacker: newHackerField, actionHacker: newHackerAction, currentPlayer: newUser
+      })
+    }
+
+    if (type === "playerchange"){
+      console.log("from hacker:", message.data)
+      setRealtimeGameData({
+        ...realtimeGameData,
+       currentPlayer: message.data.split('-')[2]
+      })
+    }
+
+
+
+
   });
 
-  //console.log('player', currentPlayer);
-  //console.log('user',fieldUser);
-  //console.log('user',fieldHacker);
-
- 
-  
   const downHandler = ({key}) => {
     arr.push(key);
     const index =   arr.indexOf("X")
@@ -92,50 +133,54 @@ const Hacker = ({ data }) => {
     } 
   }
 
+
+
   const pionDetection = (tempField) => {
     fields.forEach(element => {
       if (tempField == element.command){
-       if (realtimeGameData.currentPlayer === "user"){
-          setRealtimeGameData({
-            ...realtimeGameData,
-            fieldUser: element.nummer, actionUser: element.action 
-          })
-           channel.publish({ name: gamecode, data: `boardchange-user-${realtimeGameData.fieldHacker}-${realtimeGameData.actionHacker}-${element.nummer}-${element.action}` });
-        } else {
-          setRealtimeGameData({
-            ...realtimeGameData,
-            fieldHacker: element.nummer, actionHacker: element.action
-           })
-          channel.publish({ name: gamecode, data: `boardchange-hacker-${element.nummer}-${element.action}-${realtimeGameData.fieldUser}-${realtimeGameData.actionUser}` });
+       if (realtimeGameData.currentPlayer == "user"){
+          channel.publish({ name: gamecode, data: `boardchange-user-${realtimeGameData.fieldHacker}-${realtimeGameData.actionHacker}-${element.nummer}-${element.action}-${element.action}` });
+        } else if (realtimeGameData.currentPlayer == "hacker") {
+          channel.publish({ name: gamecode, data: `boardchange-hacker-${element.nummer}-${element.action}-${realtimeGameData.fieldUser}-${realtimeGameData.actionUser}-${element.action}` });
         } 
-       //channel.publish({ name: gamecode, data: `hacker=${fieldHacker}-user=${fieldUser}-player=${currentPlayer}` });
       }
     });
   }
 
+  const handleClickRandom = (value) => {
+    console.log("random is oke")
+    console.log(value)
+    channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
+  }
+
+  const handleClickAction = (value) => {
+    console.log("actie is oke", value)
+  }
 
   useEffect(() => {
     window.addEventListener('keydown', downHandler);
     return () => {
       window.removeEventListener('keydown', downHandler);
     };
-  }, []);
+  }, [realtimeGameData]);
 
 
   return (
     <GameLayout>
-      <HackerInfo />
+       <h1 className="title">Hacker</h1>
       <GameBoard boardInfo={realtimeGameData}/>
-      <Turn who={"hacker"} />
+      <HackerInfo />
+      <Turn who={realtimeGameData.currentPlayer} />
       <Notes gameData={gameData} player="hacker" />
       <HackerDiscoveries />
-      <HackerAction />
+      {realtimeGameData.currentPlayer === "hacker" && realtimeGameData.actionHacker === "action" ?  <HackerAction onClickButton={(value) => handleClickAction(value)} /> : ""}
       <HackerAd />
       <HackerDecryption />
       <HackerHack />
       <HackerInterests />
       <HackerScreencapture />
       <HackerVpn />
+       {realtimeGameData.currentPlayer === "hacker" && realtimeGameData.actionHacker === "random" ? <HackerRandom randomCard={randomOption}  onClickButton={(value) => handleClickRandom(value)} /> : ""}
     </GameLayout>
   );
 };

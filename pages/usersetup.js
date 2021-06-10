@@ -19,13 +19,15 @@ const Usersetup = () => {
   const [currentField, setCurrentField] = useState("account");
 
   const handleClickCheckbox = (value) => {
-    if (userInterests.includes(value)) {
-      const copyArr = userInterests.filter(e => e !== value); 
-      setUserInterests (copyArr);
-    } else {
-      const copyArr = [...userInterests, value];
-      setUserInterests(copyArr);
-    }
+
+      if (userInterests.includes(value)) {
+        const copyArr = userInterests.filter(e => e !== value); 
+        setUserInterests (copyArr);
+      } else {
+        const copyArr = [...userInterests, value];
+        setUserInterests(copyArr);
+      }
+ 
   }
 
   const fetchGameId = async (code) => {
@@ -38,7 +40,7 @@ const Usersetup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let interests = "";
-    if ( profileInput.password ===  profileInput.reppassword){
+   
       userInterests.forEach(userInterest => {
         interests = interests + "-" + userInterest;
       });
@@ -49,12 +51,8 @@ const Usersetup = () => {
         picture: profilePicture,
       };
 
-      
     e.target.reset();
     onSubmit(data);
-    } else {
-      console.log("niet het zelfde")
-    }
   };
 
   const onSubmit = async (data) => {
@@ -213,12 +211,16 @@ console.log(profileError)
                   />
                 ))}
               </div>
-              <p>Selecteer nog 3 interesses</p>
+        
+             {userInterests.length < 3 ? 
+              <p>Selecteer nog minstens {3 - (userInterests.length)} interesses</p>
+              :
               <input
                 className={styles.button}
                 type="submit"
                 value="Start game as a user"
               />
+             }
             </div>
               : ""}
           </form>

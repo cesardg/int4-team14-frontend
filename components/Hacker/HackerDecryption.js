@@ -3,25 +3,76 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 const HackerDecryption = ({ gameData }) => {
-  const [discoveries, setDiscoveries] = useState(gameData.hacker_discoveries);
-  const [password, setPassword] = useState(gameData.userinfo.password);
   const action = "get2characters";
 
-  
   console.log("------")
-  let totalDiscovery = "";
+  let discoveryArr = [];
+  let passwordArr = gameData.userinfo.password.split("");
 
-  const getDiscovery = () => {
-    for (let i = 0; i < password.length; i++) {
+// nog voorbije discoveries checken
+  const updateDatabaseDiscoveries = async () => {
+    const discovery = discoveryArr.join("")
+    console.log(discovery);
 
-      console.log(password.charAt(i));
-      totalDiscovery.concat("*")
+    const data = {
+      Discovery: discoveryArr.join(""),
+      game: gameData
+    };
+
+    console.log(data);
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/hacker-discoveries`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.ok) {
+      console.log("joepie");
     }
-
-    console.log(totalDiscovery)
   }
 
-  getDiscovery()
+  const updateDiscovery = () => {
+    while (passwordArr.length !== discoveryArr.length) {
+      discoveryArr.push("*");
+    }
+  }
+
+  const getDiscoveredCharacters = () => {
+    let discoveredCharacters = 0
+    discoveryArr.map((char, index) => {
+      if (char === "*") {
+        if (action === "get2characters" && discoveredCharacters < 2) {
+          if (/[a-z]/.test(passwordArr[index])) {
+            discoveryArr[index] = passwordArr[index]
+            discoveredCharacters++
+          }
+        } else if (action === "get1capital" && discoveredCharacters < 1) {
+          if (/[A-Z]/.test(passwordArr[index])) {
+            discoveryArr[index] = passwordArr[index];
+            discoveredCharacters++;
+          }
+        } else if (action === "get1number" && discoveredCharacters < 1) {
+          if (/[0-9]/.test(passwordArr[index])) {
+            discoveryArr[index] = passwordArr[index];
+            discoveredCharacters++;
+          }
+        }
+      }
+    })
+    
+    updateDatabaseDiscoveries()
+  }
+
+  updateDiscovery()
+  getDiscoveredCharacters()
+
+  console.log("disc arr", discoveryArr);
+
   return (
     <article className={styles.article}>
       <h2>Wachtwoord ontsleutelaar</h2>

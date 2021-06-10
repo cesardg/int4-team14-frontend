@@ -144,8 +144,7 @@ const Hacker = ({ data }) => {
   }
 
   const handleClickRandom = (value) => {
-    console.log("random is oke")
-    console.log(value)
+    console.log("random is oke", value);
     channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
   }
 
@@ -162,22 +161,27 @@ const Hacker = ({ data }) => {
     return res[0];
   };
 
-
   const hackerGetInterest = async () => {
     const obtainedInterests = await fetchData();
-    console.log(obtainedInterests.obtainedInterests)
-    const userInterests = gameData.userinfo.interests.split('-');
-    userInterests.shift()
-    console.log(userInterests);
-    const data = {
-      obtainedInterests: userInterests[1],
-    };
-
+    const hackerInterestsArray = obtainedInterests.obtainedInterests.split('-');
+    const userInterestsArray = gameData.userinfo.interests.split('-');
+    userInterestsArray.shift()
+    let newInterest = []
+    userInterestsArray.forEach(element => { 
+      if (!hackerInterestsArray.includes(element)) {
+      newInterest.push(element) 
+      } else {
+        console.log("De hacker heeft al alle interests")
+      }
+    });
+    const latest = newInterest.shift()
+    hackerInterestsArray.push(latest);
+    const string = hackerInterestsArray.join('-');
+    const data = { obtainedInterests: string };
     sendData(data)
   }
 
   const sendData = async (data) => {
-    console.log(data)
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/hackerinfos/${gameData.hackerinfo.id}`,
       {

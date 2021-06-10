@@ -23,7 +23,6 @@ const Home = () => {
   const [playerTwo, setPlayerTwo] = useState("user");
   const [gamecode, setGamecode] = useState(getStartingGamecode(6));
 
-  
   // if meegeven in url gamecode=temp....
   const fetchDataGames = async (code) => {
     const req = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/games/?gamecode=${code}`);
@@ -70,7 +69,6 @@ const Home = () => {
       console.log("game zit nu in db ")
     }
   };
-
 
   return (
     <Layout>

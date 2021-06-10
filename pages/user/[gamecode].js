@@ -180,7 +180,7 @@ const User = ({ data }) => {
         {realtimeGameData.currentPlayer === "user" && realtimeGameData.actionUser === "action" ?<UserAction onClickButton={(value) => handleClickAction(value)}/> : ""}
         <UserDeleteCookies />
         <UserWarningMail />
-        <UserAdjustPassword gameData={gameData} action={"change1capital"} />
+        <UserAdjustPassword gameData={gameData} action={"change1number"} />
         <UserAd />
         {realtimeGameData.currentPlayer === "user" && realtimeGameData.actionUser === "random" ? <UserRandom randomCard={randomOption} onClickButton={(value) => handleClickRandom(value)} /> : ""}
   

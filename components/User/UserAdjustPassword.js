@@ -7,6 +7,8 @@ const UserAdjustPassword = ({ gameData, action }) => {
     gameData.userinfo.password.split("")
   );
   const actions = ["add2letters", "add1capital", "add1number", "change1capital"]
+  // let tempPassword = [...password];
+  const [tempPassword, setTempPassword] = useState([...password])
 
   const validateNewCharacter = (char) => {
     if (action === "add2letters") {
@@ -30,52 +32,52 @@ const UserAdjustPassword = ({ gameData, action }) => {
     }
   }
 
-
-  let newPassword;
   const handleChangeCharacter = (e, index) => {
+    let copyTemp = [...tempPassword];
     let changes = 0;
-    let newPassword = [...password];
-    newPassword[index] = e.target.value;
-    newPassword.map((char, index) => {
-      if (char !== password[index]) {
+    let char
+    if (e.target.value !== "") {
+      char = e.target.value
+    } else {
+      char = password[index];
+    }
+    copyTemp[index] = char;
+    setTempPassword(copyTemp);
+    console.log("-------");
+    console.log("temp", tempPassword);
+    console.log("copy", copyTemp);
+
+    copyTemp.map((char, index) => {
+      if (char != password[index]) {
         changes++;
       }
     });
-    console.log(e.target.value);
-    console.log(index);
-    
-    console.log(newPassword);
-    
-
+    console.log("changes", changes);
     if (changes > 1) {
-      setError("Je mag maar 1 letter aanpassen")
+      console.log("veel aanpassing");
+      setError("Je mag maar 1 letter aanpassen");
+    } else if (changes === 0) {
+      setError("je moet 1 letter aanpassen");
+      console.log("geen aanpassing");
+    } else if (changes === 1) {
+      setError("");
+      console.log("juist 1 aanpassing");
     }
-
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let tempPassword;
     if (action.includes("add")) {
       if (e.target.char2) {
-        tempPassword = [
-          ...password,
-          e.target.char1.value,
-          e.target.char2.value,
-        ];
+        tempPassword.push(e.target.char1.value, e.target.char2.value);
       } else {
-        tempPassword = [...password, e.target.char1.value];
-      }
-    } else if (action.includes("change")) {
-
+        tempPassword.push(e.target.char1.value);
+      }      
     }
     
-
     setPassword(tempPassword);
-
-    const data = {
-      password: tempPassword.join(""),
-    };
+    let data = { password: tempPassword.join("") };
+   
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/userinfos/${gameData.userinfo.id}`,
       {

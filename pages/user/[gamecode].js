@@ -136,7 +136,7 @@ const User = ({ data }) => {
         <UserAction />
         <UserDeleteCookies />
         <UserWarningMail />
-        <UserAdjustPassword gameData={gameData} action={"add1capital"} />
+        <UserAdjustPassword gameData={gameData} action={"change1capital"} />
         <UserAd />
       </GameLayout>
     </>

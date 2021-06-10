@@ -14,6 +14,9 @@ const Usersetup = () => {
   const userInterestsOptions = ["Paardrijden", "Knutsellen", "roblox", "koken"];  
   const [userInterests, setUserInterests] = useState([]);
   const [profilePicture, setProfilePicture] = useState("user");
+  const [profileInput, setProfileInput] = useState({username: "", password:"", reppassword:""});
+  const [profileError, setProfileError] = useState({username: "", password:"", reppassword:""});
+  const [currentField, setCurrentField] = useState("account");
 
   const handleClickCheckbox = (value) => {
     if (userInterests.includes(value)) {
@@ -35,14 +38,13 @@ const Usersetup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let interests = "";
-    if (e.target.password.value === e.target.reppassword.value){
+    if ( profileInput.password ===  profileInput.reppassword){
       userInterests.forEach(userInterest => {
         interests = interests + "-" + userInterest;
       });
       const data = {
-        password: e.target.password.value,
-        username: e.target.username.value,
-        email: e.target.email.value,
+        password: profileInput.password,
+        username: profileInput.username,
         interests: interests,
         picture: profilePicture,
       };
@@ -74,13 +76,53 @@ const Usersetup = () => {
     }
   };
 
+  const handleClickButton = (e, action) => {
+  e.preventDefault();
+    if (action === "submit"){
+      validateForm(e);
+    } else {
+      setCurrentField(action)
+    }
+  }
 
-console.log(userInterests, profilePicture)
+  const validateForm = (e) => {
+
+    const tmp = { ...profileError };
+    const entries = Object.entries(profileInput)
+    entries.forEach(element => {
+      if (element[1] === ""){
+        tmp[element[0]] = `${element[0]} niet ingevuld`;
+        setProfileError(tmp);
+      } else {
+         tmp[element[0]] = "";
+        setProfileError(tmp);
+      }
+    });
+
+    if (profileInput.reppassword != "" && profileInput.password != "" && profileInput.username != "" ){
+      if ( profileInput.password !=  profileInput.reppassword){
+      setProfileError({ ...profileError, password: "paswoorden niet het zelde", reppassword: "paswoorden niet het zelde" })
+      } else {
+        console.log("wachtwoord wel het zelfde")
+        setCurrentField("interests")
+    }
+  }
+  }
+
+console.log(profileError)
+
+  const setInput = (channel, e) => {
+    const tmp = { ...profileInput };
+    tmp[channel] = e.target.value;
+    setProfileInput(tmp);
+  };
+
+
 
   return (
     <div>
       <Head>
-        <title>Us3r vs H4ck3r</title>
+        <title>Hack-tic</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -95,6 +137,11 @@ console.log(userInterests, profilePicture)
             height={30}
           />
           <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
+            {currentField === "picture" ? 
+            <div>
+            <p>Kies een profielfoto</p>
+            <button onClick={(e) => handleClickButton(e, "account")}>terug</button>
+            <button onClick={(e) => handleClickButton(e, "account")}>klaar</button>
             <div className={styles.radiobuttons}>
               {profilePicturesOptions.map((item) => (
                 <Radiobutton
@@ -104,62 +151,76 @@ console.log(userInterests, profilePicture)
                   onClickButton={(value) => setProfilePicture(value)}
                 />
               ))}
+              </div>
             </div>
-
-            <label className={styles.label}>
-              Gebruikersnaam
-              <input
-                className={styles.input}
-                type="text"
-                name="username"
-                required
-              />
-            </label>
-
-            <label className={styles.label}>
-              Emailadres
-              <input
-                className={styles.input}
-                type="email"
-                name="email"
-                required
-              />
-            </label>
-
-            <label className={styles.label}>
-              Wachtwoord
-              <input
-                className={styles.input}
-                type="password"
-                name="password"
-                required
-              />
-            </label>
-
-            <label className={styles.label}>
-              Herhaal wachtwoord
-              <input
-                className={styles.input}
-                type="password"
-                name="reppassword"
-                required
-              />
-            </label>
-            <div className={styles.radiobuttons}>
-              {userInterestsOptions.map((item) => (
-                <Checkbox
-                  key={item}
-                  item={item}
-                  name={"user-interests"}
-                  onClickButton={(value) => handleClickCheckbox(value)}
+            : ""}
+           {currentField === "account" ? <button onClick={(e) => handleClickButton(e, "picture")} >Kies profielfoto</button> : "" }
+           {currentField === "account" ? 
+            <div>
+              <label className={styles.label}>
+                Gebruikersnaam
+                <input
+                  className={styles.input}
+                  type="text"
+                  name="username"
+                  value={profileInput.username}
+                  onChange={(value) => setInput("username", value)}
+                  required
                 />
-              ))}
+              </label>
+              <span>{profileError.username}</span>
+            
+            
+              <label className={styles.label}>
+                Wachtwoord
+                <input
+                  className={styles.input}
+                  type="password"
+                  name="password"
+                  value={profileInput.password}
+                  onChange={(value) => setInput("password", value)}
+                  required
+                />
+              </label>
+              <span>{profileError.password}</span>
+              <label className={styles.label}>
+                Herhaal wachtwoord
+                <input
+                  className={styles.input}
+                  type="password"
+                  name="reppassword"
+                  value={profileInput.reppassword}
+                  onChange={(value) => setInput("reppassword", value)}
+                  required
+                />
+              </label>
+              <span>{profileError.reppassword}</span>
             </div>
-            <input
-              className={styles.button}
-              type="submit"
-              value="Start game as a user"
-            />
+            : ""}
+          {currentField === "account" ? <button onClick={(e) => handleClickButton(e, "submit")} >Volgende stappp</button> : "" }
+          {currentField === "interests" ? 
+            <div>
+              <button onClick={(e) => handleClickButton(e, "account")}>terug</button>
+              <p>Vul je profiel aan met jouw interesses</p>
+              <p>Om je gebruikers-profiel verder aan te vullen hebben we nog jouw 5 favoriete interesses nodig.</p>
+              <div className={styles.radiobuttons}>
+                {userInterestsOptions.map((item) => (
+                  <Checkbox
+                    key={item}
+                    item={item}
+                    name={"user-interests"}
+                    onClickButton={(value) => handleClickCheckbox(value)}
+                  />
+                ))}
+              </div>
+              <p>Selecteer nog 3 interesses</p>
+              <input
+                className={styles.button}
+                type="submit"
+                value="Start game as a user"
+              />
+            </div>
+              : ""}
           </form>
         </article>
       </main>

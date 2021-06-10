@@ -1,9 +1,33 @@
 import styles from "./HackerDiscoveries.module.css";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
-const HackerDiscoveries = () => {
-  const discoveries = ["az****", "**er**", "****ty"];
-  
+const HackerDiscoveries = ({ gameData }) => {
+  // const discoveries = ["az****", "**er**", "****ty"];
+
+  const [discoveries, setDiscoveries] = useState([])
+  const [password, setPassword] = useState()
+
+  const fetchUpdatedGamedata = async (code) => {
+    const req = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/games/?gamecode=${gameData.gamecode}`
+    );
+    const res = await req.json();
+    return res[0];
+
+  };
+
+  const updateData = async () => {
+    const updatedData = await fetchUpdatedGamedata();
+    console.log(updatedData);
+    // setDiscoveries(updatedData.hackerdiscoveries);
+    // setPassword(updatedData.userinfo.password);
+  };
+
+    updateData();
+
+  console.log(password);
+  console.log(discoveries);
   return (
     <article className={styles.article}>
       <h2>Ontdekkingen</h2>

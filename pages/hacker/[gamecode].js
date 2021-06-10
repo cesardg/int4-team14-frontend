@@ -17,7 +17,6 @@ import { useChannel } from '../../components/ChatReactEffect';
 import HackerRandom from '../../components/Hacker/HackerRandom';
 
 const Hacker = ({ data }) => {
-
   const router = useRouter();
   const gamecode = router.query.gamecode;
   
@@ -161,7 +160,6 @@ const Hacker = ({ data }) => {
     };
   }, [realtimeGameData]);
 
-
   return (
     <GameLayout>
        <h1 className="title">Hacker</h1>
@@ -169,7 +167,7 @@ const Hacker = ({ data }) => {
       <HackerInfo />
       <Turn who={realtimeGameData.currentPlayer} />
       <Notes gameData={gameData} player="hacker" />
-      <HackerDiscoveries />
+      <HackerDiscoveries gameData={gameData} />
       {realtimeGameData.currentPlayer === "hacker" && realtimeGameData.actionHacker === "action" ?  <HackerAction onClickButton={(value) => handleClickAction(value)} /> : ""}
       <HackerAd />
       <HackerDecryption />

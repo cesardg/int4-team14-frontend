@@ -77,7 +77,6 @@ const UserAdjustPassword = ({ gameData, action }) => {
     
     setPassword(tempPassword);
     let data = { password: tempPassword.join("") };
-   
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/userinfos/${gameData.userinfo.id}`,
       {

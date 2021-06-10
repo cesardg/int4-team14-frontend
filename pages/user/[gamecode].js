@@ -38,7 +38,6 @@ const User = ({ data }) => {
     {type: "bad",  action: "letterweghalen", text: "Je probeert Minecraft te downloaden op een verdachte website, hierdoor heb je een virus. Haal 1 letter of cijfer uit je wachtwoord"},
     {type: "bad",  action: "beurtoverlsaan", text: "Je probeert gratis muziek te downloaden op een verdachte website, hierdoor loopt je computer vast. Sla een beurt over"}
   ]
-
   const fields = [
     {nummer: 1, command: "1", action:"start" },
     {nummer: 2, command: "2", action:"empty" },

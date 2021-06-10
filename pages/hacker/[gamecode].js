@@ -149,9 +149,49 @@ const Hacker = ({ data }) => {
     channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
   }
 
-  const handleClickAction = (value) => {
-    console.log("actie is oke", value)
+  const handleClickAction = (action) => {
+    console.log("actie is oke", action)
+    if (action === "get interest"){
+      hackerGetInterest();
+    }
   }
+
+  const fetchData = async () => {
+    const req = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/hackerinfos/?id=${gameData.hackerinfo.id}`);
+    const res = await req.json();
+    return res[0];
+  };
+
+
+  const hackerGetInterest = async () => {
+    const obtainedInterests = await fetchData();
+    console.log(obtainedInterests.obtainedInterests)
+    const userInterests = gameData.userinfo.interests.split('-');
+    userInterests.shift()
+    console.log(userInterests);
+    const data = {
+      obtainedInterests: userInterests[1],
+    };
+
+    sendData(data)
+  }
+
+  const sendData = async (data) => {
+    console.log(data)
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/hackerinfos/${gameData.hackerinfo.id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.ok) {
+      console.log("joepie")
+    }
+  };
 
   useEffect(() => {
     window.addEventListener('keydown', downHandler);

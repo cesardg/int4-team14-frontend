@@ -1,9 +1,12 @@
 import styles from "./HackerInterests.module.css";
 import Image from "next/image";
 
-const HackerInterests = () => {
-  const interests = ["paardrijden", "dansen"];
-  
+const HackerInterests = ({gameData}) => {
+
+  const interests = gameData.hackerinfo.obtainedInterests.split('-')
+  interests.shift();
+  console.log(interests)
+
   return (
     <article className={styles.article}>
       <h2>User interesses</h2>

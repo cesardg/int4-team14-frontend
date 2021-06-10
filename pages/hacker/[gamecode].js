@@ -76,6 +76,7 @@ const Hacker = ({ data }) => {
   const [gameData, setGameData] = useState(data[0]);
   const [realtimeGameData, setRealtimeGameData] = useState({currentPlayer: data[0].startingPlayer, fieldUser: 1, actionUser: "start", fieldHacker: 1, actionHacker: "start"})
   const [randomOption, setRandomOption] = useState(randomOptions[Math.floor(Math.random() * randomOptions.length)]);
+  const [windowAd, setWindowAd] = useState(true); // later naar false
 
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split('-')[0];
@@ -188,6 +189,7 @@ const Hacker = ({ data }) => {
     } else {
       console.log("de hacker heeft alle inter")
     }
+    updatedGameData();
   }
 
   const sendData = async (data) => {
@@ -207,7 +209,12 @@ const Hacker = ({ data }) => {
   };
 
   const hackerSendAd = () => {
-    console.log("send add")
+    setWindowAd(true)
+  }
+
+  const handleClickAd = (ad) => {
+    console.log("ad", ad)
+    channel.publish({ name: gamecode, data: `sendad-hacker-${ad}` });
   }
 
   useEffect(() => {
@@ -227,11 +234,10 @@ const Hacker = ({ data }) => {
       <Notes gameData={gameData} player="hacker" />
       <HackerDiscoveries gameData={gameData} />
       {realtimeGameData.currentPlayer === "hacker" && realtimeGameData.actionHacker === "action" ?  <HackerAction onClickButton={(value) => handleClickAction(value)} /> : ""}
-      <HackerAd />
-      <HackerAction onClickButton={(value) => handleClickAction(value)} />
+      {windowAd ? <HackerAd gameData={gameData} onClickButton={(value) => handleClickAd(value)} /> : ""}
       <HackerDecryption gameData={gameData}/>
       <HackerHack />
-      <HackerInterests />
+      <HackerInterests gameData={gameData} />
       <HackerScreencapture />
       <HackerVpn />
        {realtimeGameData.currentPlayer === "hacker" && realtimeGameData.actionHacker === "random" ? <HackerRandom randomCard={randomOption}  onClickButton={(value) => handleClickRandom(value)} /> : ""}

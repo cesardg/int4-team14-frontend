@@ -74,6 +74,7 @@ const User = ({ data }) => {
   ]
 
   const [gameData, setGameData] = useState(data[0]);
+  const [receiveAdFromHacker, setReceiveAdFromHacker] = useState(false);
   const [realtimeGameData, setRealtimeGameData] = useState({currentPlayer: data[0].startingPlayer, fieldUser: 1, actionUser: "start", fieldHacker: 1, actionHacker: "start"})
   const [randomOption, setRandomOption] = useState(randomOptions[Math.floor(Math.random() * randomOptions.length)]);
 
@@ -114,6 +115,11 @@ const User = ({ data }) => {
         ...realtimeGameData,
       currentPlayer: message.data.split('-')[2]
       })
+    }
+
+    if (type === "sendad"){
+      console.log("de ad van de hacker is toegekomen bij de user, onderwerp:", message.data.split('-')[2])
+      setReceiveAdFromHacker(message.data.split('-')[2])
     }
   });
 
@@ -175,7 +181,7 @@ const User = ({ data }) => {
         <UserDeleteCookies />
         <UserWarningMail />
         <UserAdjustPassword gameData={gameData} action={"change1number"} />
-        <UserAd />
+        {receiveAdFromHacker ? <UserAd subject={receiveAdFromHacker} /> : ""}
         {realtimeGameData.currentPlayer === "user" && realtimeGameData.actionUser === "random" ? <UserRandom randomCard={randomOption} onClickButton={(value) => handleClickRandom(value)} /> : ""}
   
       </GameLayout>

@@ -1,17 +1,40 @@
 import styles from "./HackerAd.module.css";
-import Image from "next/image";
+import { useState} from "react";
 
-const HackerAd = () => {
+const HackerAd = ({gameData, onClickButton}) => {
+  
+  const interests = gameData.hackerinfo.obtainedInterests.split('-')
+  interests.shift();
+
+  const options = [
+    {interest: "Paardrijden", content: "bent u fan van paardrijden? open deze mail/ad"},
+    {interest: "koken", content: "bent u fan van koken? open deze mail/ad"},
+    {interest: "Knutsellen", content: "bent u fan van knutsellen? open deze mail/ad"},
+    {interest: "roblox" ,content: "bent u fan van roblox? open deze mail/ad"}
+  ]
+
+  const [currentInterest, setCurrentInterest] = useState(interests[0]);
+
+  let tempContent;
+  options.forEach(element => {if (element.interest === currentInterest)tempContent = element.content });
+
+  const onChangeButton = (value) => {
+    setCurrentInterest(value)
+  }
   
   return (
     <article className={styles.article}>
       <h2>Stuur een gepersonaliseerde advertentie</h2>
-      <p>
-        Stuur de user deze persoonlijke advertentie over slijm maken. Hierdoor
-        moet de user 2 beurten overslaan
-      </p>
-      <Image src={`/img/vpn.png`} alt="vpn" width={30} height={30} />{" "}
-      <button>Persoonlijke advertentie versturen</button>
+        <form >
+        {interests.map((item) => (
+          <label key={item}>
+            {item}
+            <input onChange={(e) => onChangeButton(e.target.value)} type="radio" checked={item === currentInterest ? "checked" : ""} name="ad" value={item}></input>
+          </label>
+        ))}
+        </form>
+       <p>{tempContent}</p>
+      <button onClick={() => onClickButton(currentInterest)} >Persoonlijke advertentie versturen</button>
     </article>
   );
 };

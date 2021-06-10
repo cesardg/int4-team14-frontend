@@ -18,7 +18,7 @@ const HackerAction = ({onClickButton}) => {
         <p>Wachtwoord ontsleutelaar</p>
         <p>Ontdek 1 cijfer</p>
       </button>
-      <button onClick={() => onClickButton("intresse")}>
+      <button onClick={() => onClickButton("get interest")}>
         <p>Ontdek interesses</p>
         <p>Ontdek de interesses van de user om een gepersonaliseerde ad te sturen</p>
       </button>

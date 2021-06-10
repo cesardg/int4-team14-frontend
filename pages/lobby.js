@@ -15,7 +15,6 @@ const Lobby = () => {
   const [members, setMembers] = useState(1);
 
   const [channel] = useChannel(gamecode, (message) => {
-    console.log(message)
     if (message.data === "game-data=start-game"){
        Router.push(`/${player}setup?gamecode=${gamecode}`)
     }
@@ -103,4 +102,3 @@ const Lobby = () => {
 }
 
 export default Lobby
-        

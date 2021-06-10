@@ -152,6 +152,8 @@ const Hacker = ({ data }) => {
     console.log("actie is oke", action)
     if (action === "get interest"){
       hackerGetInterest();
+    } else if (action === "send ad") {
+      hackerSendAd();
     }
   }
 
@@ -167,18 +169,16 @@ const Hacker = ({ data }) => {
     const userInterestsArray = gameData.userinfo.interests.split('-');
     userInterestsArray.shift()
     let newInterest = []
-    userInterestsArray.forEach(element => { 
-      if (!hackerInterestsArray.includes(element)) {
-      newInterest.push(element) 
-      } else {
-        console.log("De hacker heeft al alle interests")
-      }
-    });
+    userInterestsArray.forEach(element => { if (!hackerInterestsArray.includes(element)) newInterest.push(element) });
     const latest = newInterest.shift()
     hackerInterestsArray.push(latest);
     const string = hackerInterestsArray.join('-');
     const data = { obtainedInterests: string };
-    sendData(data)
+    if (latest) {
+      sendData(data)
+    } else {
+      console.log("de hacker heeft alle inter")
+    }
   }
 
   const sendData = async (data) => {
@@ -196,6 +196,10 @@ const Hacker = ({ data }) => {
       console.log("joepie")
     }
   };
+
+  const hackerSendAd = () => {
+    console.log("send add")
+  }
 
   useEffect(() => {
     window.addEventListener('keydown', downHandler);

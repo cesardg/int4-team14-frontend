@@ -3,8 +3,6 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 const HackerDiscoveries = ({ gameData }) => {
-  // const discoveries = ["az****", "**er**", "****ty"];
-
   const [discoveries, setDiscoveries] = useState([])
   const [password, setPassword] = useState()
 
@@ -19,20 +17,22 @@ const HackerDiscoveries = ({ gameData }) => {
 
   const updateData = async () => {
     const updatedData = await fetchUpdatedGamedata();
-    console.log(updatedData);
-    // setDiscoveries(updatedData.hackerdiscoveries);
+    console.log("updateddata", updatedData);
+    // setDiscoveries(updatedData.hacker_discoveries);
     // setPassword(updatedData.userinfo.password);
   };
 
-    updateData();
+  
+  updateData();
+  
 
-  console.log(password);
-  console.log(discoveries);
+  console.log("pw", password);
+  console.log("disc", discoveries);
   return (
     <article className={styles.article}>
       <h2>Ontdekkingen</h2>
       <p>Ontdekkingen houden bij welke letters en cijfers je al ontdekt hebt</p>
-      {discoveries.length > 0 ? (
+      {/* {discoveries.length > 0 ? (
         <ul>
           {discoveries.map((discovery, index) => (
             <li key={index}>{discovery}</li>
@@ -43,7 +43,7 @@ const HackerDiscoveries = ({ gameData }) => {
           Je hebt nog geen ontdekkingen. Gebruik je acties om een deel van het
           wachtwoord te ontdekken
         </p>
-      )}
+      )} */}
     </article>
   );
 };

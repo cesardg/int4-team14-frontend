@@ -24,8 +24,9 @@ const Home = () => {
   const [gamecode, setGamecode] = useState(getStartingGamecode(6));
 
   
-  const fetchDataGames = async () => {
-    const req = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/games/`);
+  // if meegeven in url gamecode=temp....
+  const fetchDataGames = async (code) => {
+    const req = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/games/?gamecode=${code}`);
     const res = await req.json();
     return res;
   };
@@ -33,17 +34,15 @@ const Home = () => {
   const handleSubmitGamecode = async (e) => {
     e.preventDefault();
     // controleert of de game code wel bestaat
-    const data =  await fetchDataGames();
-    data.forEach(game => {
-      if (game.gamecode === e.target.gamecode.value) {
+    const data =  await fetchDataGames(e.target.gamecode.value);
+    if (data.length != "0") {
         console.log("game bestaat")
         setGamecode(e.target.gamecode.value)
         setScreen("participate")
-        Router.push(`/lobby?gamecode=${e.target.gamecode.value}&player=${game.playertwo}`)
+        Router.push(`/lobby?gamecode=${e.target.gamecode.value}&player=${data[0].playertwo}`)
       } else {
         console.log("game bestaat niet")
       }
-    });
   }
 
   const handeClickStartGame = () => {

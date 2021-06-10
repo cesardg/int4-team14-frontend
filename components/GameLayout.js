@@ -6,7 +6,7 @@ const GameLayout = ({ children }) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Naam te bepalen</title>
+        <title>Hack-tic</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className={styles.header}>

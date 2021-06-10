@@ -116,9 +116,6 @@ const Hacker = ({ data }) => {
       })
     }
 
-
-
-
   });
 
   const downHandler = ({key}) => {

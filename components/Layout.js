@@ -6,13 +6,13 @@ const Layout = ({ children }) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Us3r vs H4ck3r</title>
+        <title>Hack-tic</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className={styles.header}>
         <h1 className={styles.title}>
           <Link href="/">
-            <a>Us3r vs H4ck3r</a>
+            <a>Hack-tic</a>
           </Link>
         </h1>
       </header>

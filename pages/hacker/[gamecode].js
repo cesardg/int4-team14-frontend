@@ -154,17 +154,25 @@ const Hacker = ({ data }) => {
     if (action === "get interest"){
       hackerGetInterest();
     }
+    if (action === "get2characters" || action === "get1capital" || action === "get1number") {
+      getUpdatedGamedata();
+    }
   }
 
-  const fetchData = async () => {
-    const req = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/hackerinfos/?id=${gameData.hackerinfo.id}`);
+
+  const fetchData = async (collection, id) => {
+    const req = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/${collection}/?id=${id}`);
     const res = await req.json();
     return res[0];
   };
 
+  const getUpdatedGamedata = async () => {
+    const updatedGameData = await fetchData("games", gameData.id)
+    setGameData(updatedGameData)
+  }
 
   const hackerGetInterest = async () => {
-    const obtainedInterests = await fetchData();
+    const obtainedInterests = await fetchData("hackerinfos", gameData.hackerinfo.id);
     console.log(obtainedInterests.obtainedInterests)
     const userInterests = gameData.userinfo.interests.split('-');
     userInterests.shift()
@@ -200,6 +208,7 @@ const Hacker = ({ data }) => {
     };
   }, [realtimeGameData]);
 
+  console.log(realtimeGameData);
   return (
     <GameLayout>
        <h1 className="title">Hacker</h1>
@@ -210,7 +219,8 @@ const Hacker = ({ data }) => {
       <HackerDiscoveries gameData={gameData} />
       {realtimeGameData.currentPlayer === "hacker" && realtimeGameData.actionHacker === "action" ?  <HackerAction onClickButton={(value) => handleClickAction(value)} /> : ""}
       <HackerAd />
-      <HackerDecryption />
+      <HackerAction onClickButton={(value) => handleClickAction(value)} />
+      <HackerDecryption gameData={gameData}/>
       <HackerHack />
       <HackerInterests />
       <HackerScreencapture />

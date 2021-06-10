@@ -6,15 +6,15 @@ const HackerAction = ({onClickButton}) => {
     <article className={styles.article}>
       <h2>spelbord</h2>
       <p>Je staat op een actievak</p>
-      <button onClick={() => onClickButton("2letters")}>
+      <button onClick={() => onClickButton("get2characters")}>
         <p>Wachtwoord ontsleutelaar</p>
         <p>Ontdek 2 kleine letters</p>
       </button>
-      <button onClick={() => onClickButton("1hoodfletter")}>
+      <button onClick={() => onClickButton("get1capital")}>
         <p>Wachtwoord ontsleutelaar</p>
         <p>Ontdek 1 hoofdletter</p>
       </button>
-      <button onClick={() => onClickButton("1cijfer")}>
+      <button onClick={() => onClickButton("get1number")}>
         <p>Wachtwoord ontsleutelaar</p>
         <p>Ontdek 1 cijfer</p>
       </button>

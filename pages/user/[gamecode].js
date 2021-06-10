@@ -108,7 +108,6 @@ const User = ({ data }) => {
       })
     }
 
-
     if (type === "playerchange"){
       console.log("from user:", message.data)
       setRealtimeGameData({
@@ -116,9 +115,6 @@ const User = ({ data }) => {
       currentPlayer: message.data.split('-')[2]
       })
     }
-
-
-
   });
 
   const downHandler = ({key}) => {
@@ -144,7 +140,6 @@ const User = ({ data }) => {
       }
     });
   }
-
 
   const handleClickRandom = (value) => {
     console.log("random is oke")

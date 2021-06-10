@@ -1,7 +1,27 @@
 import styles from "./HackerDecryption.module.css";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
-const HackerDecryption = () => {
+const HackerDecryption = ({ gameData }) => {
+  const [discoveries, setDiscoveries] = useState(gameData.hacker_discoveries);
+  const [password, setPassword] = useState(gameData.userinfo.password);
+  const action = "get2characters";
+
+  
+  console.log("------")
+  let totalDiscovery = "";
+
+  const getDiscovery = () => {
+    for (let i = 0; i < password.length; i++) {
+
+      console.log(password.charAt(i));
+      totalDiscovery.concat("*")
+    }
+
+    console.log(totalDiscovery)
+  }
+
+  getDiscovery()
   return (
     <article className={styles.article}>
       <h2>Wachtwoord ontsleutelaar</h2>

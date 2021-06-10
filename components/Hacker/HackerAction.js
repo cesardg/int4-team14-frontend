@@ -26,7 +26,7 @@ const HackerAction = ({onClickButton}) => {
         <p>Schermovername</p>
         <p>Ontdek de laatste aanpassing van de user aan het wachtwoord</p>
       </button>
-      <button onClick={() => onClickButton("ad")}>
+      <button onClick={() => onClickButton("send ad")}>
         <p>Je kan deze actie 1 keer per ronde gebruiken</p>
         <p>Deze optie wordt geactiveerd wanneer je start passeert</p>
         <p>Stuur een gepersonaliseerde ad</p>

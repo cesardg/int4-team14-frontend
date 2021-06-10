@@ -144,8 +144,7 @@ const Hacker = ({ data }) => {
   }
 
   const handleClickRandom = (value) => {
-    console.log("random is oke")
-    console.log(value)
+    console.log("random is oke", value);
     channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
   }
 
@@ -153,6 +152,8 @@ const Hacker = ({ data }) => {
     console.log("actie is oke", action)
     if (action === "get interest"){
       hackerGetInterest();
+    } else if (action === "send ad") {
+      hackerSendAd();
     }
     if (action === "get2characters" || action === "get1capital" || action === "get1number") {
       getUpdatedGamedata();
@@ -172,20 +173,24 @@ const Hacker = ({ data }) => {
   }
 
   const hackerGetInterest = async () => {
-    const obtainedInterests = await fetchData("hackerinfos", gameData.hackerinfo.id);
-    console.log(obtainedInterests.obtainedInterests)
-    const userInterests = gameData.userinfo.interests.split('-');
-    userInterests.shift()
-    console.log(userInterests);
-    const data = {
-      obtainedInterests: userInterests[1],
-    };
-
-    sendData(data)
+    const obtainedInterests = await fetchData();
+    const hackerInterestsArray = obtainedInterests.obtainedInterests.split('-');
+    const userInterestsArray = gameData.userinfo.interests.split('-');
+    userInterestsArray.shift()
+    let newInterest = []
+    userInterestsArray.forEach(element => { if (!hackerInterestsArray.includes(element)) newInterest.push(element) });
+    const latest = newInterest.shift()
+    hackerInterestsArray.push(latest);
+    const string = hackerInterestsArray.join('-');
+    const data = { obtainedInterests: string };
+    if (latest) {
+      sendData(data)
+    } else {
+      console.log("de hacker heeft alle inter")
+    }
   }
 
   const sendData = async (data) => {
-    console.log(data)
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/hackerinfos/${gameData.hackerinfo.id}`,
       {
@@ -200,6 +205,10 @@ const Hacker = ({ data }) => {
       console.log("joepie")
     }
   };
+
+  const hackerSendAd = () => {
+    console.log("send add")
+  }
 
   useEffect(() => {
     window.addEventListener('keydown', downHandler);

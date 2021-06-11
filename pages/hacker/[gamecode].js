@@ -215,6 +215,11 @@ const Hacker = ({ data }) => {
   const handleClickAd = (ad) => {
     console.log("ad", ad)
     channel.publish({ name: gamecode, data: `sendad-hacker-${ad}` });
+    deleteAdByHacker(ad)
+  }
+
+  const deleteAdByHacker = (ad) => {
+    console.log(ad)
   }
 
   useEffect(() => {

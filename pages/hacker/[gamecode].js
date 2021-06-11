@@ -20,6 +20,16 @@ const Hacker = ({ data }) => {
   const router = useRouter();
   const gamecode = router.query.gamecode;
 
+  const [gameData, setGameData] = useState(data[0]);
+  const [realtimeGameData, setRealtimeGameData] = useState({
+    currentPlayer: data[0].startingPlayer,
+    fieldUser: 1,
+    actionUser: "start",
+    fieldHacker: 1,
+    actionHacker: "start",
+  });
+  const [hackerDiscoveries, setHackerDiscoveries] = useState([]);
+
   let arr = [];
   let tempField;
 
@@ -121,14 +131,7 @@ const Hacker = ({ data }) => {
     { nummer: 32, command: "W", action: "empty" },
   ];
 
-  const [gameData, setGameData] = useState(data[0]);
-  const [realtimeGameData, setRealtimeGameData] = useState({
-    currentPlayer: data[0].startingPlayer,
-    fieldUser: 1,
-    actionUser: "start",
-    fieldHacker: 1,
-    actionHacker: "start",
-  });
+  
   const [randomOption, setRandomOption] = useState(
     randomOptions[Math.floor(Math.random() * randomOptions.length)]
   );
@@ -248,6 +251,7 @@ const Hacker = ({ data }) => {
     }
   };
 
+  // general function to fetch data
   const fetchData = async (collection, id) => {
     const req = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/${collection}/?id=${id}`
@@ -307,9 +311,13 @@ const Hacker = ({ data }) => {
     channel.publish({ name: gamecode, data: `sendad-hacker-${ad}` });
   };
 
-  const handleClickDiscovery = (discovery) => {
-    console.log("test");
-    console.log("discovery", discovery);
+  const updateHackerDiscoveries = async (id) => {
+    let discoveries = [];
+    const data = await fetchData("games", id)
+    data.hackerdiscoveries.map((discovery) => {
+      discoveries.push(discovery.discovery);
+    });
+    setHackerDiscoveries(discoveries)
   };
 
   const deleteAdByHacker = (ad) => {
@@ -324,6 +332,7 @@ const Hacker = ({ data }) => {
   }, [realtimeGameData]);
 
   console.log(realtimeGameData);
+
   return (
     <GameLayout>
       <h1 className="title">Hacker</h1>
@@ -331,7 +340,7 @@ const Hacker = ({ data }) => {
       <HackerInfo />
       <Turn who={realtimeGameData.currentPlayer} />
       <Notes gameData={gameData} player="hacker" />
-      <HackerDiscoveries gameData={gameData} />
+      <HackerDiscoveries discoveries={hackerDiscoveries} />
       {realtimeGameData.currentPlayer === "hacker" &&
       realtimeGameData.actionHacker === "action" ? (
         <HackerAction onClickButton={(value) => handleClickAction(value)} />
@@ -349,7 +358,7 @@ const Hacker = ({ data }) => {
       <HackerAction onClickButton={(value) => handleClickAction(value)} />
       <HackerDecryption
         gameData={gameData}
-        onClickButton={(value) => handleClickDiscovery(value)}
+        onClickButton={(id) => updateHackerDiscoveries(id)}
       />
       <HackerHack />
       <HackerInterests gameData={gameData} />

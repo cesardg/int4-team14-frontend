@@ -1,11 +1,16 @@
 import styles from "./HackerInterests.module.css";
 import Image from "next/image";
 
-const HackerInterests = ({gameData}) => {
-
-  const interests = gameData.hackerinfo.obtainedInterests.split('-')
-  interests.shift();
-  console.log(interests)
+const HackerInterests = ({ gameData }) => {
+  let interests = gameData.hackerinfo.obtainedInterests;
+  if (interests) {
+    console.log("er zijn");
+    interests = gameData.hackerinfo.obtainedInterests.split("-");
+    interests.shift();
+    console.log(interets);
+  } else {
+    console.log("er zijn er geen");
+  }
 
   return (
     <article className={styles.article}>
@@ -14,7 +19,7 @@ const HackerInterests = ({gameData}) => {
         Gebruik deze interesses om gepersonaliseerde ads te sturen naar de
         gebruiker
       </p>
-      {interests.length > 0 ? (
+      {interests ? (
         <ul>
           {interests.map((interest, index) => (
             <li key={index}>{interest}</li>

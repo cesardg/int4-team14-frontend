@@ -4,8 +4,6 @@ import Image from "next/image";
 
 const HackerDecryption = ({ gameData, onClickButton }) => {
   const action = "get2characters";
-
-  console.log("------")
   let discoveryArr = [];
   let passwordArr = gameData.userinfo.password.split("");
   let discovery = ""
@@ -13,13 +11,13 @@ const HackerDecryption = ({ gameData, onClickButton }) => {
 // nog voorbije discoveries checken
   const updateDatabaseDiscoveries = async () => {
     const data = {
-      Discovery: discoveryArr.join(""),
+      discovery: discovery,
       game: gameData
     };
 
     console.log("data", data);
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/hacker-discoveries`,
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/hackerdiscoveries`,
       {
         method: "POST",
         body: JSON.stringify(data),
@@ -61,7 +59,7 @@ const HackerDecryption = ({ gameData, onClickButton }) => {
         }
       }
     })
-    
+    discovery = discoveryArr.join("")
     updateDatabaseDiscoveries()
   }
 
@@ -77,7 +75,7 @@ const HackerDecryption = ({ gameData, onClickButton }) => {
       <p>Ontdek 1 cijfer van het wachtwoord</p>
       <p>Huidig wachtwoord van de user</p>
       <p>**er**</p>
-      <button onClick={() => onClickButton(discovery)}>Voeg dit toe aan je ontdekkingen</button>
+      <button onClick={() => onClickButton(gameData.id)}>Voeg dit toe aan je ontdekkingen</button>
     </article>
   );
 };

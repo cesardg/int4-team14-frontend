@@ -4,7 +4,7 @@ import { useState } from "react";
 const HackerAd = ({ gameData, onClickButton }) => {
   console.log(gameData.hackerinfo);
   // const interests = gameData.hackerinfo.obtainedInterests.split('-')
-  interests.shift();
+  // interests.shift();
 
   const options = [
     {
@@ -20,7 +20,7 @@ const HackerAd = ({ gameData, onClickButton }) => {
   ];
 
   const [currentInterest, setCurrentInterest] = useState();
-  let interests = null;
+  let interests = gameData.hackerinfo.obtainedInterests;
   let defaulChecked;
   let tempContent;
   if (interests) {

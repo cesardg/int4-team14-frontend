@@ -11,7 +11,7 @@ const Usersetup = () => {
   const router = useRouter()
   const gamecode = router.query.gamecode
   const profilePicturesOptions = ["user", "hacker" ];
-  const userInterestsOptions = ["Paardrijden", "Knutsellen", "roblox", "koken"];  
+  const userInterestsOptions = ["paardrijden", "knutselen", "roblox", "koken"];  
   const [userInterests, setUserInterests] = useState([]);
   const [profilePicture, setProfilePicture] = useState("user");
   const [profileInput, setProfileInput] = useState({username: "", password:"", reppassword:""});

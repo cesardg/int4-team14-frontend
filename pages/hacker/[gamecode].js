@@ -312,6 +312,10 @@ const Hacker = ({ data }) => {
     console.log("discovery", discovery);
   };
 
+  const deleteAdByHacker = (ad) => {
+    console.log(ad)
+  }
+
   useEffect(() => {
     window.addEventListener("keydown", downHandler);
     return () => {

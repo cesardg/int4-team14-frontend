@@ -2,25 +2,22 @@ import styles from "./HackerDecryption.module.css";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-const HackerDecryption = ({ gameData }) => {
+const HackerDecryption = ({ gameData, onClickButton }) => {
   const action = "get2characters";
 
   console.log("------")
   let discoveryArr = [];
   let passwordArr = gameData.userinfo.password.split("");
+  let discovery = ""
 
 // nog voorbije discoveries checken
   const updateDatabaseDiscoveries = async () => {
-    const discovery = discoveryArr.join("")
-    console.log(discovery);
-
     const data = {
       Discovery: discoveryArr.join(""),
       game: gameData
     };
 
-    console.log(data);
-
+    console.log("data", data);
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/hacker-discoveries`,
       {
@@ -70,8 +67,7 @@ const HackerDecryption = ({ gameData }) => {
 
   updateDiscovery()
   getDiscoveredCharacters()
-
-  console.log("disc arr", discoveryArr);
+  console.log("decr disc", discovery);
 
   return (
     <article className={styles.article}>
@@ -81,7 +77,7 @@ const HackerDecryption = ({ gameData }) => {
       <p>Ontdek 1 cijfer van het wachtwoord</p>
       <p>Huidig wachtwoord van de user</p>
       <p>**er**</p>
-      <button>Voeg dit toe aan je ontdekkingen</button>
+      <button onClick={() => onClickButton(discovery)}>Voeg dit toe aan je ontdekkingen</button>
     </article>
   );
 };

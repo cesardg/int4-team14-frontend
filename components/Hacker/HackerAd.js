@@ -2,14 +2,14 @@ import styles from "./HackerAd.module.css";
 import { useState} from "react";
 
 const HackerAd = ({gameData, onClickButton}) => {
-  
+  console.log(gameData.hackerinfo);
   const interests = gameData.hackerinfo.obtainedInterests.split('-')
   interests.shift();
 
   const options = [
     {interest: "Paardrijden", content: "bent u fan van paardrijden? open deze mail/ad"},
     {interest: "koken", content: "bent u fan van koken? open deze mail/ad"},
-    {interest: "Knutsellen", content: "bent u fan van knutsellen? open deze mail/ad"},
+    {interest: "Knutselen", content: "bent u fan van knutselen? open deze mail/ad"},
     {interest: "roblox" ,content: "bent u fan van roblox? open deze mail/ad"}
   ]
 
@@ -33,7 +33,7 @@ const HackerAd = ({gameData, onClickButton}) => {
           </label>
         ))}
         </form>
-       <p>{tempContent}</p>
+      <p>{tempContent}</p>
       <button onClick={() => onClickButton(currentInterest)} >Persoonlijke advertentie versturen</button>
     </article>
   );

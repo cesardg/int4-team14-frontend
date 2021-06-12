@@ -108,7 +108,7 @@ const Usersetup = () => {
           tmp["reppassword"] = `paswoord moet bestaan uit 6 karakters`
       } else {
         if (numbersOrCapitals) {
-         console.log('niet geod, h of l')
+         console.log('niet geod, h of c')
          tmp["password"] = `paswoord mag nog geen nummers of hoofdletters bevaten`
           tmp["reppassword"] = `paswoord mag nog geen nummers of hoofdletters bevaten`
         } else {
@@ -125,10 +125,11 @@ const Usersetup = () => {
 
   const checkForNumbersAndCapitals =  (password) => {
   let error = false
-   password.forEach(element => {
-      console.log(element)
-      if (element == element.toUpperCase()) {error = true}
-   });
+    password.forEach(element => {
+        console.log(element)
+        if (element == element.toUpperCase()) {error = true}
+        if (!isNaN(element)) {error = true}
+    });
    console.log(error)
    return error
   }

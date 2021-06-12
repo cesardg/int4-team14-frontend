@@ -279,7 +279,6 @@ const Hacker = ({ data }) => {
     const string = hackerInterestsArray.join("-");
     const data = { obtainedInterests: string };
     if (latest) {
-       console.log(data)
       sendData(data);
     } else {
       console.log("de hacker heeft alle inter");
@@ -310,6 +309,7 @@ const Hacker = ({ data }) => {
   const handleClickAd = (ad) => {
     console.log("ad", ad);
     channel.publish({ name: gamecode, data: `sendad-hacker-${ad}` });
+    deleteInterestAdByHacker
   };
 
   const updateHackerDiscoveries = async (id) => {
@@ -321,7 +321,7 @@ const Hacker = ({ data }) => {
     setHackerDiscoveries(discoveries)
   };
 
-  const deleteAdByHacker = (ad) => {
+  const deleteInterestAdByHacker = (ad) => {
     console.log(ad)
   }
 

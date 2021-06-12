@@ -2,7 +2,7 @@ import Ably from "ably/promises";
 import { useEffect } from "react";
 
 const ably = new Ably.Realtime.Promise({
-  authUrl: "http://localhost:3000/api/createTokenRequest",
+  authUrl: `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/createTokenRequest`,
 });
 
 export function useChannel(channelName, callbackOnMessage) {

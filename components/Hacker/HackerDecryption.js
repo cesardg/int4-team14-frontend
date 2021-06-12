@@ -2,7 +2,7 @@ import styles from "./HackerDecryption.module.css";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-const HackerDecryption = ({ gameData, onClickButton }) => {
+const HackerDecryption = ({ gameData, handleUpdatedDiscoveries, hackerActionDiscovery }) => {
   const action = "get2characters";
   let discoveryArr = [];
   let passwordArr = gameData.userinfo.password.split("");
@@ -27,17 +27,14 @@ const HackerDecryption = ({ gameData, onClickButton }) => {
       }
     );
     if (response.ok) {
-      console.log("joepie");
-    }
-  }
-
-  const updateDiscovery = () => {
-    while (passwordArr.length !== discoveryArr.length) {
-      discoveryArr.push("*");
+      console.log("joepie hacker descr");
     }
   }
 
   const getDiscoveredCharacters = () => {
+    while (passwordArr.length !== discoveryArr.length) {
+      discoveryArr.push("*");
+    }
     let discoveredCharacters = 0
     discoveryArr.map((char, index) => {
       if (char === "*") {
@@ -63,8 +60,9 @@ const HackerDecryption = ({ gameData, onClickButton }) => {
     updateDatabaseDiscoveries()
   }
 
-  updateDiscovery()
-  getDiscoveredCharacters()
+  if (hackerActionDiscovery) {
+    getDiscoveredCharacters();
+  }
   console.log("decr disc", discovery);
 
   return (
@@ -75,7 +73,9 @@ const HackerDecryption = ({ gameData, onClickButton }) => {
       <p>Ontdek 1 cijfer van het wachtwoord</p>
       <p>Huidig wachtwoord van de user</p>
       <p>**er**</p>
-      <button onClick={() => onClickButton(gameData.id)}>Voeg dit toe aan je ontdekkingen</button>
+      <button onClick={() => handleUpdatedDiscoveries(gameData.id)}>
+        Voeg dit toe aan je ontdekkingen
+      </button>
     </article>
   );
 };

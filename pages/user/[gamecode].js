@@ -85,6 +85,7 @@ const User = ({ data }) => {
       text: "Je probeert gratis muziek te downloaden op een verdachte website, hierdoor loopt je computer vast. Sla een beurt over",
     },
   ];
+
   const fields = [
     { nummer: 1, command: "1", action: "start" },
     { nummer: 2, command: "2", action: "empty" },
@@ -122,22 +123,33 @@ const User = ({ data }) => {
 
   const [gameData, setGameData] = useState(data[0]);
   const [receiveAdFromHacker, setReceiveAdFromHacker] = useState(false);
-  const [realtimeGameData, setRealtimeGameData] = useState({currentPlayer: data[0].startingPlayer, fieldUser: 1, actionUser: "start", fieldHacker: 1, actionHacker: "start"})
-  const [randomOption, setRandomOption] = useState(randomOptions[Math.floor(Math.random() * randomOptions.length)]);
-  const [accountStrongness, setAccountStrongness] = useState(data[0].userinfo.score) // kan ook in gamedata zitten
+  const [realtimeGameData, setRealtimeGameData] = useState({
+    currentPlayer: data[0].startingPlayer,
+    fieldUser: 1,
+    actionUser: "start",
+    fieldHacker: 1,
+    actionHacker: "start",
+  });
+  const [randomOption, setRandomOption] = useState(
+    randomOptions[Math.floor(Math.random() * randomOptions.length)]
+  );
+  const [accountStrongness, setAccountStrongness] = useState(
+    data[0].userinfo.score
+  ); // kan ook in gamedata zitten
   const [userStart, setUserStart] = useState(false);
+  const [userDoubleTurn, setUserDoubleTurn] = useState(0);
+  const [hackerDoubleTurn, setHackerDoubleTurn] = useState(0);
 
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split("-")[0];
 
     if (type === "boardchange") {
-      const sender = message.data.split("-")[1];
       const newHackerField = message.data.split("-")[2];
       const newHackerAction = message.data.split("-")[3];
       const newUserField = message.data.split("-")[4];
       const newUserAction = message.data.split("-")[5];
       const lastAction = message.data.split("-")[6];
-      let newUser = realtimeGameData.currentPlayer;
+      let newPlayer = realtimeGameData.currentPlayer;
 
       const checkPreviousField = async () => {
         const data = await fetchData("userinfos", gameData.userinfo.id);
@@ -156,12 +168,26 @@ const User = ({ data }) => {
         lastAction === "empty" &&
         realtimeGameData.currentPlayer === "hacker"
       ) {
-        newUser = "user";
+        if (hackerDoubleTurn > 0) {
+          newPlayer = "hacker";
+          const turns = hackerDoubleTurn - 1;
+          channel.publish({ name: gamecode, data: `playerchange-hacker-hacker` });
+          setHackerDoubleTurn(turns);
+        } else {
+          newPlayer = "user";
+        }
       } else if (
         lastAction === "empty" &&
         realtimeGameData.currentPlayer === "user"
       ) {
-        newUser = "hacker";
+        if (userDoubleTurn > 0) {
+          newPlayer = "user";
+          const turns = userDoubleTurn - 1;
+          channel.publish({ name: gamecode, data: `playerchange-user-user` });
+          setUserDoubleTurn(turns);
+        } else {
+          newPlayer = "hacker";
+        }
       }
 
       // user komt op een random vak
@@ -180,7 +206,7 @@ const User = ({ data }) => {
         actionUser: newUserAction,
         fieldHacker: newHackerField,
         actionHacker: newHackerAction,
-        currentPlayer: newUser,
+        currentPlayer: newPlayer,
       });
     }
 
@@ -249,10 +275,20 @@ const User = ({ data }) => {
   const handleClickAction = (value) => {
     console.log("actie is oke");
     if (value === "vpn") {
-      setUserStart(false)
+      setUserStart(false);
+      setUserDoubleTurn(2);
     }
-    console.log(value);
+    console.log(userDoubleTurn);
   };
+  console.log(userDoubleTurn);
+
+  const handleUpdatedPassword = (score) => {
+    setAccountStrongness(score)
+    channel.publish({
+      name: gamecode,
+      data: `playerchange-user-hacker`,
+    });
+  }
 
   // general fetch functions
   const fetchData = async (collection, id) => {
@@ -299,13 +335,20 @@ const User = ({ data }) => {
         <UserVpn />
         {realtimeGameData.currentPlayer === "user" &&
         realtimeGameData.actionUser === "action" ? (
-          <UserAction onClickButton={(value) => handleClickAction(value)} start={userStart} />
+          <UserAction
+            onClickButton={(value) => handleClickAction(value)}
+            start={userStart}
+          />
         ) : (
           ""
         )}
         <UserDeleteCookies />
         <UserWarningMail />
-        <UserAdjustPassword gameData={gameData} action={"change1number"} updateUserScore={(score) => setAccountStrongness(score)} />
+        <UserAdjustPassword
+          gameData={gameData}
+          action={"change1number"}
+          handleUpdatedPassword={(score) => handleUpdatedPassword(score)}
+        />
         {receiveAdFromHacker ? <UserAd subject={receiveAdFromHacker} /> : ""}
         {realtimeGameData.currentPlayer === "user" &&
         realtimeGameData.actionUser === "random" ? (

@@ -30,8 +30,10 @@ const Hacker = ({ data }) => {
   });
   const [hackerDiscoveries, setHackerDiscoveries] = useState([]);
   const [hackerGuessFeedback, setHackerGuessFeedback] = useState();
-  const [hackerStart, setHackerStart] = useState(false)
-
+  const [hackerStart, setHackerStart] = useState(false);
+  const [hackerDoubleTurn, setHackerDoubleTurn] = useState(0);
+  const [userDoubleTurn, setUserDoubleTurn] = useState(0);
+ const [hackerActionDiscovery, setHackerActionDiscovery] = useState(false)
   let arr = [];
   let tempField;
 
@@ -133,17 +135,15 @@ const Hacker = ({ data }) => {
     { nummer: 32, command: "W", action: "empty" },
   ];
 
-  
   const [randomOption, setRandomOption] = useState(
     randomOptions[Math.floor(Math.random() * randomOptions.length)]
   );
-  const [windowAd, setWindowAd] = useState(false);
 
+  const [windowComponent, setWindowComponent] = useState("");
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split("-")[0];
 
     if (type === "boardchange") {
-      const sender = message.data.split("-")[1];
       const newHackerField = message.data.split("-")[2];
       const newHackerAction = message.data.split("-")[3];
       const newUserField = message.data.split("-")[4];
@@ -151,13 +151,14 @@ const Hacker = ({ data }) => {
       const lastAction = message.data.split("-")[6];
       let newPlayer = realtimeGameData.currentPlayer;
 
+      // start passeren
       const checkPreviousField = async () => {
         const data = await fetchData("hackerinfos", gameData.hackerinfo.id);
         if (data.previousfield > 26 && newHackerField < 6) {
-          setHackerStart(true)
+          setHackerStart(true);
         }
-      }
-      checkPreviousField()
+      };
+      checkPreviousField();
 
       putData("hackerinfos", gameData.hackerinfo.id, {
         previousfield: newHackerField,
@@ -168,12 +169,29 @@ const Hacker = ({ data }) => {
         lastAction === "empty" &&
         realtimeGameData.currentPlayer === "hacker"
       ) {
-        newPlayer = "user";
+        if (hackerDoubleTurn > 0) {
+          newPlayer = "hacker";
+          const turns = hackerDoubleTurn - 1;
+          channel.publish({
+            name: gamecode,
+            data: `playerchange-hacker-hacker`,
+          });
+          setHackerDoubleTurn(turns);
+        } else {
+          newPlayer = "user";
+        }
       } else if (
         lastAction === "empty" &&
         realtimeGameData.currentPlayer === "user"
       ) {
-        newPlayer = "hacker";
+        if (userDoubleTurn > 0) {
+          newPlayer = "user";
+          const turns = userDoubleTurn - 1;
+          channel.publish({ name: gamecode, data: `playerchange-user-user` });
+          setUserDoubleTurn(turns);
+        } else {
+          newPlayer = "hacker";
+        }
       }
 
       // hacker komt op een random vak
@@ -210,7 +228,7 @@ const Hacker = ({ data }) => {
     const index = arr.indexOf("X");
     if (
       index != -1 &&
-      arr[index - 1] == "R" 
+      arr[index - 1] == "R"
       // // arr[index - 2] == "N" &&
       // // arr[index - 3] == "K" &&
       // // arr[index - 4] == "V" &&
@@ -255,12 +273,13 @@ const Hacker = ({ data }) => {
       hackerGetInterest();
     } else if (action === "send ad") {
       hackerSendAd();
-    }
-    if (
+    } else if (
       action === "get2characters" ||
       action === "get1capital" ||
       action === "get1number"
     ) {
+      setHackerActionDiscovery(true)
+      setWindowComponent("decryption");
       getUpdatedGamedata();
     }
   };
@@ -288,7 +307,7 @@ const Hacker = ({ data }) => {
     if (response.ok) {
       console.log("joepie");
     }
-  }
+  };
 
   const putData = async (collection, id, data) => {
     const response = await fetch(
@@ -302,9 +321,9 @@ const Hacker = ({ data }) => {
       }
     );
     if (response.ok) {
-      console.log("joepie");
+      console.log("put data joepie");
     }
-  }
+  };
 
   const getUpdatedGamedata = async () => {
     const updatedGameData = await fetchData("games", gameData.id);
@@ -312,7 +331,10 @@ const Hacker = ({ data }) => {
   };
 
   const hackerGetInterest = async () => {
-    const obtainedInterests = await fetchData("hackerinfos", gameData.hackerinfo.id);
+    const obtainedInterests = await fetchData(
+      "hackerinfos",
+      gameData.hackerinfo.id
+    );
     const hackerInterestsArray = obtainedInterests.obtainedInterests.split("-");
     const userInterestsArray = gameData.userinfo.interests.split("-");
     userInterestsArray.shift();
@@ -329,6 +351,10 @@ const Hacker = ({ data }) => {
     } else {
       console.log("de hacker heeft alle inter");
     }
+    channel.publish({
+      name: gamecode,
+      data: `playerchange-hacker-user`,
+    });
   };
 
   const sendDataToHacker = async (data) => {
@@ -349,46 +375,58 @@ const Hacker = ({ data }) => {
   };
 
   const hackerSendAd = () => {
-    setWindowAd(true);
+    setWindowComponent("ad");
   };
 
   const handleClickAd = (ad) => {
     console.log("ad", ad);
     channel.publish({ name: gamecode, data: `sendad-hacker-${ad}` });
-    deleteInterestAdByHacker(ad)
+    deleteInterestAdByHacker(ad);
+    setHackerDoubleTurn(2);
   };
 
   const updateHackerDiscoveries = async (id) => {
-    let discoveries = [];
-    const data = await fetchData("games", id)
-    data.hackerdiscoveries.map((discovery) => {
-      discoveries.push(discovery.discovery);
-    });
-    setHackerDiscoveries(discoveries)
+    
   };
 
   const deleteInterestAdByHacker = (ad) => {
-    console.log("delete", ad)
-    const obtainedInterests = gameData.hackerinfo.obtainedInterests.split('-');
+    console.log("delete", ad);
+    const obtainedInterests = gameData.hackerinfo.obtainedInterests.split("-");
     const index = obtainedInterests.indexOf(ad);
-    if (index > -1) { obtainedInterests.splice(index, 1);}
+    if (index > -1) {
+      obtainedInterests.splice(index, 1);
+    }
     const string = obtainedInterests.join("-");
-    console.log(string)
+    console.log(string);
     const data = { obtainedInterests: string };
     sendDataToHacker(data);
-  }
+  };
 
   const handleFormGuessPass = (e) => {
     e.preventDefault();
-    if (e.target.hackpass.value == gameData.userinfo.password){
-      console.log("het is juist, de hacker heeft gewonnen")
-      setHackerGuessFeedback("het is juist, de hacker heeft gewonnen")
+    if (e.target.hackpass.value == gameData.userinfo.password) {
+      console.log("het is juist, de hacker heeft gewonnen");
+      setHackerGuessFeedback("het is juist, de hacker heeft gewonnen");
     } else {
-      console.log("het paswoord is niet juist!")
-      setHackerGuessFeedback("het paswoord is niet juist!")
-      setHackerStart(false)
+      console.log("het paswoord is niet juist!");
+      setHackerGuessFeedback("het paswoord is niet juist!");
+      setHackerStart(false);
     }
-  }
+  };
+
+  const handleUpdatedDiscoveries = async () => {
+    let discoveries = [];
+    const data = await fetchData("games", id);
+    data.hackerdiscoveries.map((discovery) => {
+      discoveries.push(discovery.discovery);
+    });
+    setHackerDiscoveries(discoveries);
+    console.log("discoveries", discoveries);
+
+    console.log("triggerd");
+    channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
+    setHackerActionDiscovery(false)
+  };
 
   useEffect(() => {
     window.addEventListener("keydown", downHandler);
@@ -413,7 +451,7 @@ const Hacker = ({ data }) => {
       ) : (
         ""
       )}
-      {windowAd ? (
+      {windowComponent === "ad" ? (
         <HackerAd
           gameData={gameData}
           onClickButton={(value) => handleClickAd(value)}
@@ -421,11 +459,19 @@ const Hacker = ({ data }) => {
       ) : (
         ""
       )}
-      <HackerDecryption
-        gameData={gameData}
-        onClickButton={(id) => updateHackerDiscoveries(id)}
+      {windowComponent === "decryption" ? (
+        <HackerDecryption
+          gameData={gameData}
+          // onClickButton={(id) => updateHackerDiscoveries(id)}
+          handleUpdatedDiscoveries={(id) => handleUpdatedDiscoveries(id)}
+          hackerActionDiscovery={hackerActionDiscovery}
+        />
+      ) : ""}
+      <HackerHack
+        handleSubmitForm={(value) => handleFormGuessPass(value)}
+        feedback={hackerGuessFeedback}
+        start={hackerStart}
       />
-      <HackerHack handleSubmitForm={(value) => handleFormGuessPass(value)} feedback={hackerGuessFeedback} start={hackerStart} />
       <HackerInterests gameData={gameData} />
       <HackerScreencapture />
       <HackerVpn />

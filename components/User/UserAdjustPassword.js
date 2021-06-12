@@ -1,7 +1,7 @@
 import styles from "./UserAdjustPassword.module.css";
 import { useState } from "react";
 
-const UserAdjustPassword = ({ gameData, action, updateUserScore }) => {
+const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
   const [error, setError] = useState("")
   const [password, setPassword] = useState(
     gameData.userinfo.password.split("")
@@ -90,7 +90,7 @@ const UserAdjustPassword = ({ gameData, action, updateUserScore }) => {
     );
     if (response.ok) {
       console.log("joepie user adjust pw");
-      updateUserScore(newScore)
+      handleUpdatedPassword(newScore)
     }
     e.target.reset();
   }

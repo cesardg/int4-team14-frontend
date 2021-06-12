@@ -77,7 +77,7 @@ const User = ({ data }) => {
   const [receiveAdFromHacker, setReceiveAdFromHacker] = useState(false);
   const [realtimeGameData, setRealtimeGameData] = useState({currentPlayer: data[0].startingPlayer, fieldUser: 1, actionUser: "start", fieldHacker: 1, actionHacker: "start"})
   const [randomOption, setRandomOption] = useState(randomOptions[Math.floor(Math.random() * randomOptions.length)]);
-  const [accountStrongness, setAccountStrongness] = useState(20) // nog nog hardcoded
+  const [accountStrongness, setAccountStrongness] = useState(data[0].userinfo.score) // kan ook in gamedata zitten
 
 
   const [channel] = useChannel(gamecode, (message) => {
@@ -181,7 +181,7 @@ const User = ({ data }) => {
         {realtimeGameData.currentPlayer === "user" && realtimeGameData.actionUser === "action" ?<UserAction onClickButton={(value) => handleClickAction(value)}/> : ""}
         <UserDeleteCookies />
         <UserWarningMail />
-        <UserAdjustPassword gameData={gameData} action={"change1number"} />
+        <UserAdjustPassword gameData={gameData} action={"change1number"} updateUserScore={(score) => setAccountStrongness(score)} />
         {receiveAdFromHacker ? <UserAd subject={receiveAdFromHacker} /> : ""}
         {realtimeGameData.currentPlayer === "user" && realtimeGameData.actionUser === "random" ? <UserRandom randomCard={randomOption} onClickButton={(value) => handleClickRandom(value)} /> : ""}
   

@@ -2,9 +2,6 @@ import styles from "./HackerAd.module.css";
 import { useState } from "react";
 
 const HackerAd = ({ gameData, onClickButton }) => {
-  console.log(gameData.hackerinfo);
-  // const interests = gameData.hackerinfo.obtainedInterests.split('-')
-  // interests.shift();
 
   const options = [
     {

@@ -29,6 +29,7 @@ const Hacker = ({ data }) => {
     actionHacker: "start",
   });
   const [hackerDiscoveries, setHackerDiscoveries] = useState([]);
+  const [hackerGuessFeedback, setHackerGuessFeedback] = useState();
 
   let arr = [];
   let tempField;
@@ -332,6 +333,17 @@ const Hacker = ({ data }) => {
     sendDataToHacker(data);
   }
 
+  const handleFormGuessPass = (e) => {
+    e.preventDefault();
+    if (e.target.hackpass.value == gameData.userinfo.password){
+      console.log("het is juist, de hacker heeft gewonnen")
+      setHackerGuessFeedback("het is juist, de hacker heeft gewonnen")
+    } else {
+      console.log("het paswoord is niet juist!")
+      setHackerGuessFeedback("het paswoord is niet juist!")
+    }
+  }
+
   useEffect(() => {
     window.addEventListener("keydown", downHandler);
     return () => {
@@ -368,7 +380,7 @@ const Hacker = ({ data }) => {
         gameData={gameData}
         onClickButton={(id) => updateHackerDiscoveries(id)}
       />
-      <HackerHack />
+      <HackerHack handleSubmitForm={(value) => handleFormGuessPass(value)} feedback={hackerGuessFeedback} />
       <HackerInterests gameData={gameData} />
       <HackerScreencapture />
       <HackerVpn />

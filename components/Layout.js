@@ -1,6 +1,7 @@
 import styles from "./Layout.module.css";
 import Head from "next/head";
 import Link from "next/link";
+import Image from 'next/image';
 
 const Layout = ({ children }) => {
   return (
@@ -10,11 +11,17 @@ const Layout = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className={styles.header}>
-        <h1 className={styles.title}>
+        <h1 className={styles.title}>Hack-tic</h1>
           <Link href="/">
-            <a>Hack-tic</a>
+            <a className={styles.logo}>
+              <Image
+                src={`/assets/img/logo.svg`}
+                alt="Picture of the user"
+                width={273}
+                height={62}
+                />
+            </a>
           </Link>
-        </h1>
       </header>
       <main className={styles.main}>{children}</main>
     </div>

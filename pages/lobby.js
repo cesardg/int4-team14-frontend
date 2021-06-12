@@ -42,7 +42,7 @@ const Lobby = () => {
               <article className={styles.player}>
                 <p>user</p>
                      <Image
-                    src="/img/user.png"
+                    src="/assets/img/user.png"
                     alt="Picture of the user"
                     width={30}
                     height={30}
@@ -52,7 +52,7 @@ const Lobby = () => {
               <article className={styles.player}>
                 <p>hacker</p>
                     <Image
-                    src="/img/hacker.png"
+                    src="/assets/img/hacker.png"
                     alt="Picture of the hacker"
                     width={30}
                     height={30}
@@ -64,7 +64,7 @@ const Lobby = () => {
             <article className={styles.player}>
               <p>hacker</p>
                    <Image
-                    src="/img/hacker.png"
+                    src="/assets/img/hacker.png"
                     alt="Picture of the hacker"
                     width={30}
                     height={30}
@@ -74,7 +74,7 @@ const Lobby = () => {
             <article className={styles.player}>
               <p>user</p>
                    <Image
-                    src="/img/user.png"
+                    src="/assets/img/user.png"
                     alt="Picture of the user"
                     width={30}
                     height={30}

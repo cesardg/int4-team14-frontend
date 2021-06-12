@@ -10,7 +10,7 @@ const UserInfo = ({ userinfo }) => {
     <article className={styles.article}>
       <h2>User info</h2>
       <Image
-        src={`/img/${userinfo.picture}.png`}
+        src={`/assets/img/${userinfo.picture}.png`}
         alt="Picture of the user"
         width={30}
         height={30}

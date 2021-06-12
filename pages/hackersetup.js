@@ -61,7 +61,7 @@ const Hackersetup = () => {
         <article>
           <h2>Creeër uw account</h2>
            <Image
-              src={`/img/${profilePicture}.png`}
+              src={`/assets/img/${profilePicture}.png`}
               alt="Picture of the user"
               width={30}
               height={30}

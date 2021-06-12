@@ -6,7 +6,7 @@ const HackerInfo = () => {
     <article>
       <h2 className={styles.article}>Hacker info</h2>
       <Image
-        src="/img/hacker.png"
+        src="/assets/img/hacker.png"
         alt="Picture of the hacker"
         width={30}
         height={30}

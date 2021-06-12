@@ -110,7 +110,7 @@ const Home = () => {
                   className="form-check-input"
                 />
                 <Image
-                    src="/img/hacker.png"
+                    src="/assets/img/hacker.png"
                     alt="Picture of the hacker"
                     width={30}
                     height={30}
@@ -134,7 +134,7 @@ const Home = () => {
                   className="form-check-input"
                 />
                 <Image
-                    src="/img/user.png"
+                    src="/assets/img/user.png"
                     alt="Picture of the user"
                     width={30}
                     height={30}

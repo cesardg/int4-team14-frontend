@@ -1,9 +1,9 @@
-import Head from 'next/head';
 import styles from './../styles/Usersetup.module.css';
 import Image from 'next/image';
 import {useState} from 'react';
 import Checkbox from '../components/Checkbox';
 import Radiobutton from '../components/Radiobutton';
+import Layout from '../components/Layout';
 import { useRouter } from 'next/router'
 
 const Usersetup = () => {
@@ -143,13 +143,7 @@ const Usersetup = () => {
 
 
   return (
-    <div>
-      <Head>
-        <title>Hack-tic</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.container}>
+     <Layout>
         <h1 className="title">Us3r</h1>
         <article>
           <h2>Creeër uw account</h2>
@@ -250,8 +244,7 @@ const Usersetup = () => {
               : ""}
           </form>
         </article>
-      </main>
-    </div>
+</Layout>
   );
 }
 

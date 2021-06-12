@@ -1,4 +1,9 @@
 :root {
-  --color-text: black;
-  --color-background: lightgray;
+  --black: black;
+  --brown: #fcf7eb;
+  --red: #ff0d5b;
+  --orange: #ff3c1d;
+  --yellow: #fdfb76;
+  --green: #00db96;
+  --gridorange: #fe745a;
 }

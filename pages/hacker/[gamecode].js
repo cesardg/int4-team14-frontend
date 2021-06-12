@@ -30,6 +30,7 @@ const Hacker = ({ data }) => {
   });
   const [hackerDiscoveries, setHackerDiscoveries] = useState([]);
   const [hackerGuessFeedback, setHackerGuessFeedback] = useState();
+  const [hackerStart, setHackerStart] = useState(false)
 
   let arr = [];
   let tempField;
@@ -148,19 +149,31 @@ const Hacker = ({ data }) => {
       const newUserField = message.data.split("-")[4];
       const newUserAction = message.data.split("-")[5];
       const lastAction = message.data.split("-")[6];
-      let newUser = realtimeGameData.currentPlayer;
+      let newPlayer = realtimeGameData.currentPlayer;
+
+      const checkPreviousField = async () => {
+        const data = await fetchData("hackerinfos", gameData.hackerinfo.id);
+        if (data.previousfield > 26 && newHackerField < 6) {
+          setHackerStart(true)
+        }
+      }
+      checkPreviousField()
+
+      putData("hackerinfos", gameData.hackerinfo.id, {
+        previousfield: newHackerField,
+      });
 
       // player veranderen bij empty
       if (
         lastAction === "empty" &&
         realtimeGameData.currentPlayer === "hacker"
       ) {
-        newUser = "user";
+        newPlayer = "user";
       } else if (
         lastAction === "empty" &&
         realtimeGameData.currentPlayer === "user"
       ) {
-        newUser = "hacker";
+        newPlayer = "hacker";
       }
 
       // hacker komt op een random vak
@@ -179,7 +192,7 @@ const Hacker = ({ data }) => {
         actionUser: newUserAction,
         fieldHacker: newHackerField,
         actionHacker: newHackerAction,
-        currentPlayer: newUser,
+        currentPlayer: newPlayer,
       });
     }
 
@@ -197,13 +210,13 @@ const Hacker = ({ data }) => {
     const index = arr.indexOf("X");
     if (
       index != -1 &&
-      arr[index - 1] == "R" &&
-      arr[index - 2] == "N" &&
-      arr[index - 3] == "K" &&
-      arr[index - 4] == "V" &&
-      arr[index - 5] == "D" &&
-      arr[index - 6] == "R" &&
-      arr[index - 7] == "B"
+      arr[index - 1] == "R" 
+      // // arr[index - 2] == "N" &&
+      // // arr[index - 3] == "K" &&
+      // // arr[index - 4] == "V" &&
+      // // arr[index - 5] == "D" &&
+      // arr[index - 6] == "R" &&
+      // arr[index - 7] == "B"
     ) {
       tempField = arr[index + 1];
       if (tempField) {
@@ -252,7 +265,7 @@ const Hacker = ({ data }) => {
     }
   };
 
-  // general function to fetch data
+  // general functions to fetch data
   const fetchData = async (collection, id) => {
     const req = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/${collection}/?id=${id}`
@@ -260,6 +273,38 @@ const Hacker = ({ data }) => {
     const res = await req.json();
     return res[0];
   };
+
+  const postData = async (collection, data) => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/${collection}`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.ok) {
+      console.log("joepie");
+    }
+  }
+
+  const putData = async (collection, id, data) => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/${collection}/${id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.ok) {
+      console.log("joepie");
+    }
+  }
 
   const getUpdatedGamedata = async () => {
     const updatedGameData = await fetchData("games", gameData.id);
@@ -341,6 +386,7 @@ const Hacker = ({ data }) => {
     } else {
       console.log("het paswoord is niet juist!")
       setHackerGuessFeedback("het paswoord is niet juist!")
+      setHackerStart(false)
     }
   }
 
@@ -379,7 +425,7 @@ const Hacker = ({ data }) => {
         gameData={gameData}
         onClickButton={(id) => updateHackerDiscoveries(id)}
       />
-      <HackerHack handleSubmitForm={(value) => handleFormGuessPass(value)} feedback={hackerGuessFeedback} />
+      <HackerHack handleSubmitForm={(value) => handleFormGuessPass(value)} feedback={hackerGuessFeedback} start={hackerStart} />
       <HackerInterests gameData={gameData} />
       <HackerScreencapture />
       <HackerVpn />

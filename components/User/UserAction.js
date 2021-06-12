@@ -1,7 +1,7 @@
 import styles from "./UserAction.module.css";
-import Image from 'next/image';
+import Image from "next/image";
 
-const UserAction = ({onClickButton}) => {
+const UserAction = ({ onClickButton, start }) => {
   return (
     <article className={styles.article}>
       <h2>spelbord</h2>
@@ -26,9 +26,12 @@ const UserAction = ({onClickButton}) => {
         <p>Ontvang een waarschuwingsmail</p>
         <p>Ontdek de laatste zet van de hacker</p>
       </button>
-      <button onClick={() => onClickButton("vpn")}>
-        <p>Je kan deze actie 1 keer per ronde gebruiken</p>
-        <p>Deze optie wordt geactiveerd wanneer je start passeert</p>
+      <button onClick={() => onClickButton("vpn")} disabled={start ? false : true}>
+        {start ? (
+          <p>Je kan deze actie 1 keer per ronde gebruiken</p>
+        ) : (
+          <p>Deze optie wordt geactiveerd wanneer je start passeert</p>
+        )}
         <p>Installeer je VPN</p>
         <p>De hacker moet 2 beurten overslaan</p>
       </button>

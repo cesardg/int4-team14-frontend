@@ -2,6 +2,7 @@ import styles from "./HackerInterests.module.css";
 import Image from "next/image";
 
 const HackerInterests = ({ gameData }) => {
+  console.log("inter", gameData)
   let interests = gameData.hackerinfo.obtainedInterests;
   if (interests) {
     console.log("er zijn");

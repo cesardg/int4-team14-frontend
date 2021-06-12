@@ -279,14 +279,13 @@ const Hacker = ({ data }) => {
     const string = hackerInterestsArray.join("-");
     const data = { obtainedInterests: string };
     if (latest) {
-      sendData(data);
+      sendDataToHacker(data);
     } else {
       console.log("de hacker heeft alle inter");
     }
-   getUpdatedGamedata();
   };
 
-  const sendData = async (data) => {
+  const sendDataToHacker = async (data) => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/hackerinfos/${gameData.hackerinfo.id}`,
       {
@@ -299,6 +298,7 @@ const Hacker = ({ data }) => {
     );
     if (response.ok) {
       console.log("joepie");
+      getUpdatedGamedata();
     }
   };
 
@@ -309,7 +309,7 @@ const Hacker = ({ data }) => {
   const handleClickAd = (ad) => {
     console.log("ad", ad);
     channel.publish({ name: gamecode, data: `sendad-hacker-${ad}` });
-    deleteInterestAdByHacker
+    deleteInterestAdByHacker(ad)
   };
 
   const updateHackerDiscoveries = async (id) => {
@@ -322,7 +322,15 @@ const Hacker = ({ data }) => {
   };
 
   const deleteInterestAdByHacker = (ad) => {
-    console.log(ad)
+    console.log("delete", ad)
+    const obtainedInterests = gameData.hackerinfo.obtainedInterests.split('-');
+    const index = obtainedInterests.indexOf(ad);
+    if (index > -1) { obtainedInterests.splice(index, 1);}
+    const string = obtainedInterests.join("-");
+    console.log(string)
+    const data = { obtainedInterests: string };
+    sendDataToHacker(data);
+    getUpdatedGamedata()
   }
 
   useEffect(() => {

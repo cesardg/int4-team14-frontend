@@ -83,7 +83,7 @@ const Usersetup = () => {
     }
   }
 
-  const validateForm = (e) => {
+  const validateForm = () => {
 
     const tmp = { ...profileError };
     const entries = Object.entries(profileInput)
@@ -98,16 +98,40 @@ const Usersetup = () => {
     });
 
     if (profileInput.reppassword != "" && profileInput.password != "" && profileInput.username != "" ){
-      if ( profileInput.password !=  profileInput.reppassword){
-      setProfileError({ ...profileError, password: "paswoorden niet het zelde", reppassword: "paswoorden niet het zelde" })
+      const length = profileInput.password.split("").length;
+      console.log(length)
+      const numbersOrCapitals = checkForNumbersAndCapitals(profileInput.password.split(""))
+      console.log(numbersOrCapitals)
+      if (length != 6) {
+          console.log('niet goeed, te kort of te lang')
+          tmp["password"] = `paswoord moet bestaan uit 6 karakters`
+          tmp["reppassword"] = `paswoord moet bestaan uit 6 karakters`
       } else {
-        console.log("wachtwoord wel het zelfde")
-        setCurrentField("interests")
+        if (numbersOrCapitals) {
+         console.log('niet geod, h of l')
+         tmp["password"] = `paswoord mag nog geen nummers of hoofdletters bevaten`
+          tmp["reppassword"] = `paswoord mag nog geen nummers of hoofdletters bevaten`
+        } else {
+          if ( profileInput.password !=  profileInput.reppassword){
+          setProfileError({ ...profileError, password: "paswoorden niet het zelde", reppassword: "paswoorden niet het zelde" })
+          } else {
+            console.log("wachtwoord wel het zelfde, GOED")
+            setCurrentField("interests")
+          }
+       }
+      }
     }
   }
-  }
 
-console.log(profileError)
+  const checkForNumbersAndCapitals =  (password) => {
+  let error = false
+   password.forEach(element => {
+      console.log(element)
+      if (element == element.toUpperCase()) {error = true}
+   });
+   console.log(error)
+   return error
+  }
 
   const setInput = (channel, e) => {
     const tmp = { ...profileInput };

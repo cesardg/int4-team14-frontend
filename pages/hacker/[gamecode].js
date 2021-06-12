@@ -330,7 +330,6 @@ const Hacker = ({ data }) => {
     console.log(string)
     const data = { obtainedInterests: string };
     sendDataToHacker(data);
-    getUpdatedGamedata()
   }
 
   useEffect(() => {

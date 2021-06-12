@@ -136,7 +136,7 @@ const Hacker = ({ data }) => {
   const [randomOption, setRandomOption] = useState(
     randomOptions[Math.floor(Math.random() * randomOptions.length)]
   );
-  const [windowAd, setWindowAd] = useState(true); // later naar false
+  const [windowAd, setWindowAd] = useState(false);
 
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split("-")[0];
@@ -375,7 +375,6 @@ const Hacker = ({ data }) => {
       ) : (
         ""
       )}
-      <HackerAction onClickButton={(value) => handleClickAction(value)} />
       <HackerDecryption
         gameData={gameData}
         onClickButton={(id) => updateHackerDiscoveries(id)}

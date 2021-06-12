@@ -4,3 +4,14 @@
   margin: 1rem;
   padding: 1rem;
 }
+
+.bar{
+  border: .1rem solid red;
+  height: 1rem;
+}
+
+.progess{
+  background-color: blue;
+  height: 1rem;
+  transition: .5s all ease-in-out;
+}

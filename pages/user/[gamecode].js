@@ -77,6 +77,7 @@ const User = ({ data }) => {
   const [receiveAdFromHacker, setReceiveAdFromHacker] = useState(false);
   const [realtimeGameData, setRealtimeGameData] = useState({currentPlayer: data[0].startingPlayer, fieldUser: 1, actionUser: "start", fieldHacker: 1, actionHacker: "start"})
   const [randomOption, setRandomOption] = useState(randomOptions[Math.floor(Math.random() * randomOptions.length)]);
+  const [accountStrongness, setAccountStrongness] = useState(20) // nog nog hardcoded
 
 
   const [channel] = useChannel(gamecode, (message) => {
@@ -175,7 +176,7 @@ const User = ({ data }) => {
         <Turn who={realtimeGameData.currentPlayer} />
         <UserWarning />
         <Notes gameData={gameData} player="user" />
-        <UserAccountStrongness />
+        <UserAccountStrongness value={accountStrongness} />
         <UserVpn />
         {realtimeGameData.currentPlayer === "user" && realtimeGameData.actionUser === "action" ?<UserAction onClickButton={(value) => handleClickAction(value)}/> : ""}
         <UserDeleteCookies />

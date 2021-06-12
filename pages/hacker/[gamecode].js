@@ -266,7 +266,7 @@ const Hacker = ({ data }) => {
   };
 
   const hackerGetInterest = async () => {
-    const obtainedInterests = await fetchData();
+    const obtainedInterests = await fetchData("hackerinfos", gameData.hackerinfo.id);
     const hackerInterestsArray = obtainedInterests.obtainedInterests.split("-");
     const userInterestsArray = gameData.userinfo.interests.split("-");
     userInterestsArray.shift();
@@ -279,11 +279,12 @@ const Hacker = ({ data }) => {
     const string = hackerInterestsArray.join("-");
     const data = { obtainedInterests: string };
     if (latest) {
+       console.log(data)
       sendData(data);
     } else {
       console.log("de hacker heeft alle inter");
     }
-    updatedGameData();
+   getUpdatedGamedata();
   };
 
   const sendData = async (data) => {

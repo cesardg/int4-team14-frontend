@@ -7,7 +7,6 @@ const HackerInterests = ({ gameData }) => {
     console.log("er zijn");
     interests = gameData.hackerinfo.obtainedInterests.split("-");
     interests.shift();
-    console.log(interets);
   } else {
     console.log("er zijn er geen");
   }

@@ -1,7 +1,7 @@
 import styles from "./UserAdjustPassword.module.css";
 import { useState } from "react";
 
-const UserAdjustPassword = ({ gameData, action }) => {
+const UserAdjustPassword = ({ gameData, action, updateUserScore }) => {
   const [error, setError] = useState("")
   const [password, setPassword] = useState(
     gameData.userinfo.password.split("")
@@ -66,6 +66,7 @@ const UserAdjustPassword = ({ gameData, action }) => {
   }
 
   const handleSubmit = async (e) => {
+    const newScore = gameData.userinfo.score + 10;
     e.preventDefault();
     if (action.includes("add")) {
       if (e.target.char2) {
@@ -76,7 +77,7 @@ const UserAdjustPassword = ({ gameData, action }) => {
     }
     
     setPassword(tempPassword);
-    let data = { password: tempPassword.join("") };
+    let data = { password: tempPassword.join(""), score: newScore };
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/userinfos/${gameData.userinfo.id}`,
       {
@@ -88,7 +89,8 @@ const UserAdjustPassword = ({ gameData, action }) => {
       }
     );
     if (response.ok) {
-      console.log("joepie");
+      console.log("joepie user adjust pw");
+      updateUserScore(newScore)
     }
     e.target.reset();
   }

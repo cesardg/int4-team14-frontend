@@ -12,7 +12,7 @@ const HackerVpn = () => {
         overslaan
       </p>
       <Image
-        src={`/img/user.png`}
+        src={`/assets/img/user.png`}
         alt="vpn"
         width={30}
         height={30}

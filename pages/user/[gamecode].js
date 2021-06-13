@@ -139,6 +139,9 @@ const User = ({ data }) => {
   const [userStart, setUserStart] = useState(false);
   const [userDoubleTurn, setUserDoubleTurn] = useState(0);
   const [hackerDoubleTurn, setHackerDoubleTurn] = useState(0);
+  const [userPasswordAction, setUserPasswordAction] = useState("");
+
+  const [windowComponent, setWindowComponent] = useState("");
 
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split("-")[0];
@@ -171,7 +174,10 @@ const User = ({ data }) => {
         if (hackerDoubleTurn > 0) {
           newPlayer = "hacker";
           const turns = hackerDoubleTurn - 1;
-          channel.publish({ name: gamecode, data: `playerchange-hacker-hacker` });
+          channel.publish({
+            name: gamecode,
+            data: `playerchange-hacker-hacker`,
+          });
           setHackerDoubleTurn(turns);
         } else {
           newPlayer = "user";
@@ -272,23 +278,40 @@ const User = ({ data }) => {
     channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
   };
 
-  const handleClickAction = (value) => {
-    console.log("actie is oke");
-    if (value === "vpn") {
+  const handleClickAction = (action) => {
+    if (action === "vpn") {
       setUserStart(false);
       setUserDoubleTurn(2);
+    } else if (
+      action === "add2letters" ||
+      action === "add1capital" ||
+      action === "add1number"
+    ) {
+      getUpdatedGamedata();
+      setUserPasswordAction(action);
+      setWindowComponent("password");
     }
+    setRealtimeGameData({
+      ...realtimeGameData,
+      actionHacker: "",
+    });
   };
 
   const handleUpdatedPassword = (score) => {
-    setAccountStrongness(score)
+    setAccountStrongness(score);
     channel.publish({
       name: gamecode,
       data: `playerchange-user-hacker`,
     });
-  }
+    setWindowComponent("");
+  };
 
   // general fetch functions
+  const getUpdatedGamedata = async () => {
+    const updatedGameData = await fetchData("games", gameData.id);
+    setGameData(updatedGameData);
+  };
+
   const fetchData = async (collection, id) => {
     const req = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/${collection}/?id=${id}`
@@ -334,19 +357,23 @@ const User = ({ data }) => {
         {realtimeGameData.currentPlayer === "user" &&
         realtimeGameData.actionUser === "action" ? (
           <UserAction
-            onClickButton={(value) => handleClickAction(value)}
+            onClickButton={(action) => handleClickAction(action)}
             start={userStart}
           />
         ) : (
           ""
         )}
-        <UserDeleteCookies />
-        <UserWarningMail />
-        <UserAdjustPassword
-          gameData={gameData}
-          action={"change1number"}
-          handleUpdatedPassword={(score) => handleUpdatedPassword(score)}
-        />
+        {windowComponent === "cookies" ? <UserDeleteCookies /> : ""}
+        {windowComponent === "warning" ? <UserWarningMail /> : ""}
+        {windowComponent === "password" ? (
+          <UserAdjustPassword
+            gameData={gameData}
+            action={userPasswordAction}
+            handleUpdatedPassword={(score) => handleUpdatedPassword(score)}
+          />
+        ) : (
+          ""
+        )}
         {receiveAdFromHacker ? <UserAd subject={receiveAdFromHacker} /> : ""}
         {realtimeGameData.currentPlayer === "user" &&
         realtimeGameData.actionUser === "random" ? (

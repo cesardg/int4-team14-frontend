@@ -6,15 +6,15 @@ const UserAction = ({ onClickButton, start }) => {
     <article className={styles.article}>
       <h2>spelbord</h2>
       <p>Je staat op een actievak</p>
-      <button onClick={() => onClickButton("voegtweeletterstoe")}>
+      <button onClick={() => onClickButton("add2letters")}>
         <p>Versterk je wachtwoord</p>
         <p>Voeg twee kleine letters toe</p>
       </button>
-      <button onClick={() => onClickButton("voeghoofdlettertoe")}>
+      <button onClick={() => onClickButton("add1capital")}>
         <p>Versterk je wachtwoord</p>
         <p>Voeg 1 hoofdletter toe</p>
       </button>
-      <button onClick={() => onClickButton("voegcijfertoe")}>
+      <button onClick={() => onClickButton("add1number")}>
         <p>Versterk je wachtwoord</p>
         <p>Voeg 1 cijfer toe</p>
       </button>
@@ -26,7 +26,10 @@ const UserAction = ({ onClickButton, start }) => {
         <p>Ontvang een waarschuwingsmail</p>
         <p>Ontdek de laatste zet van de hacker</p>
       </button>
-      <button onClick={() => onClickButton("vpn")} disabled={start ? false : true}>
+      <button
+        onClick={() => onClickButton("vpn")}
+        disabled={start ? false : true}
+      >
         {start ? (
           <p>Je kan deze actie 1 keer per ronde gebruiken</p>
         ) : (

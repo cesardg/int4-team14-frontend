@@ -16,8 +16,10 @@ const Usersetup = () => {
   const userInterestsOptions = ["paardrijden", "knutselen", "roblox", "koken"];  
   const [userInterests, setUserInterests] = useState([]);
   const [profilePicture, setProfilePicture] = useState("pf1");
-  const [profileInput, setProfileInput] = useState({username: "", password:"", reppassword:""});
-  const [profileError, setProfileError] = useState({username: "", password:"", reppassword:""});
+  const [profilePass, setProfilePass] = useState(["","", "", "", "", ""]);
+  const [passField, setPassField] = useState();
+  const [profileInput, setProfileInput] = useState({username: "", password:"", email:""});
+  const [profileError, setProfileError] = useState({username: "", password:"", email:""});
   const [currentField, setCurrentField] = useState("account");
 
   const handleClickCheckbox = (value) => {
@@ -51,6 +53,7 @@ const Usersetup = () => {
         username: profileInput.username,
         interests: interests,
         picture: profilePicture,
+        email: profileInput.email
       };
 
     e.target.reset();
@@ -85,6 +88,18 @@ const Usersetup = () => {
     }
   }
 
+  const handelChangePas = (value, index) => {
+    const copyArr = [...profilePass];
+    copyArr[index] = value.target.value;
+    setProfilePass(copyArr);
+    setPassField(index + 1);
+    const tmp = { ...profileInput };
+    tmp["password"] = copyArr.join("");
+    setProfileInput(tmp);
+    }
+
+
+
   const validateForm = () => {
 
     const tmp = { ...profileError };
@@ -101,25 +116,15 @@ const Usersetup = () => {
 
     if (profileInput.reppassword != "" && profileInput.password != "" && profileInput.username != "" ){
       const length = profileInput.password.split("").length;
-      console.log(length)
       const numbersOrCapitals = checkForNumbersAndCapitals(profileInput.password.split(""))
-      console.log(numbersOrCapitals)
+
       if (length != 6) {
-          console.log('niet goeed, te kort of te lang')
           tmp["password"] = `paswoord moet bestaan uit 6 karakters`
-          tmp["reppassword"] = `paswoord moet bestaan uit 6 karakters`
       } else {
         if (numbersOrCapitals) {
-         console.log('niet geod, h of c')
          tmp["password"] = `paswoord mag nog geen nummers of hoofdletters bevaten`
-          tmp["reppassword"] = `paswoord mag nog geen nummers of hoofdletters bevaten`
         } else {
-          if ( profileInput.password !=  profileInput.reppassword){
-          setProfileError({ ...profileError, password: "paswoorden niet het zelde", reppassword: "paswoorden niet het zelde" })
-          } else {
-            console.log("wachtwoord wel het zelfde, GOED")
             setCurrentField("interests")
-          }
        }
       }
     }
@@ -199,9 +204,11 @@ const Usersetup = () => {
          
           {currentField === "account" ? 
            <legend className={styles.legend}>
-              <label className={styles.label}>
+              <label  className={styles.label}>
                 Gebruikersnaam
+                     <span className={styles.error}>{profileError.username}</span>
                 <input
+                
                   className={styles.input}
                   type="text"
                   name="username"
@@ -210,33 +217,89 @@ const Usersetup = () => {
                   required
                 />
               </label>
-              <span>{profileError.username}</span>
+          <label className={styles.label}>
+                Email adres
+                <span className={styles.error}>{profileError.email}</span>
+                <input
+                  className={styles.input}
+                  type="email"
+                  name="mail"
+                  value={profileInput.email}
+                  onChange={(value) => setInput("email", value)}
+                  required
+                />
+              </label>
             
             
               <label className={styles.label}>
                 Wachtwoord
+                <span className={styles.error}>{profileError.password}</span>
+                <span  className={styles.passwordInfo}>Je wachtwoord moet exact 6 kleine letters bevatten. Hoofdletters, leestekens of speciale tekens zijn niet toegelaten.</span>
+                <div className={styles.passwordWrapper}>
                 <input
-                  className={styles.input}
-                  type="password"
+                  className={styles.smallInput}
+                  type="text"
+                  maxLength="1"
                   name="password"
-                  value={profileInput.password}
-                  onChange={(value) => setInput("password", value)}
+                  value={profilePass[0]}
+                  onChange={(value) => handelChangePas(value, "0")}
                   required
                 />
-              </label>
-              <span>{profileError.password}</span>
-              <label className={styles.label}>
-                Herhaal wachtwoord
-                <input
-                  className={styles.input}
-                  type="password"
-                  name="reppassword"
-                  value={profileInput.reppassword}
-                  onChange={(value) => setInput("reppassword", value)}
+               <span className={styles.smallInputStripe}>-</span>
+                 <input
+                  className={styles.smallInput}
+                  type="text"
+                  name="password"
+                  maxLength="1"
+                  value={profilePass[1]}
+                  onChange={(value) => handelChangePas(value, "1")}
                   required
                 />
+                   <span className={styles.smallInputStripe}>-</span>
+                 <input
+                  className={styles.smallInput}
+                  type="text"
+                  name="password"
+                  maxLength="1"
+                  value={profilePass[2]}
+                  onChange={(value) => handelChangePas(value, "2")}
+                  required
+                />
+                   <span className={styles.smallInputStripe}>-</span>
+                 <input
+                  className={styles.smallInput}
+                  type="text"
+                  name="password"
+                  maxLength="1"
+                  value={profilePass[3]}
+                  onChange={(value) => handelChangePas(value, "3")}
+                  required
+                />
+                   <span className={styles.smallInputStripe}>-</span>
+                 <input
+                  className={styles.smallInput}
+                  type="text"
+                  name="password"
+                  maxLength="1"
+                  value={profilePass[4]}
+                  onChange={(value) => handelChangePas(value, "4")}
+                  required
+                />
+                    <span className={styles.smallInputStripe}>-</span>
+                 <input
+                  className={styles.smallInput}
+                  type="text"
+                  name="password"
+                  maxLength="1"
+                  value={profilePass[5]}
+                  onChange={(value) => handelChangePas(value, "5")}
+                  required
+                />
+                </div>
               </label>
-              <span>{profileError.reppassword}</span>
+             
+    
+          
             </legend>
             : ""}
        

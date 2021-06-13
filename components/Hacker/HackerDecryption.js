@@ -19,8 +19,6 @@ const HackerDecryption = ({
   let passwordArr = gameData.userinfo.password.split("");
   let discovery = "";
 
-  console.log(gameData);
-
   const getDiscoveredCharacters = () => {
     while (passwordArr.length !== discoveryArr.length) {
       discoveryArr.push("*");
@@ -29,16 +27,12 @@ const HackerDecryption = ({
     gameData.hackerdiscoveries.forEach((discoveryObj) => {
       let arr = discoveryObj.discovery.split("");
       arr.forEach((element, index) => {
-        console.log(index, ": ", element);
         if (element !== "*") {
           discoveryArr[index] = "-";
         }
       });
-      console.log("dit was 1 woord");
     });
 
-    console.log(discoveryArr);
-    
     let discoveredCharacters = 0;
     discoveryArr.map((char, index) => {
       if (char === "*") {
@@ -77,8 +71,6 @@ const HackerDecryption = ({
     });
 
     discovery = discoveryArr.join("");
-
-    console.log("decryption", discovery);
     updateDatabaseDiscoveries();
   };
 
@@ -88,6 +80,7 @@ const HackerDecryption = ({
       game: gameData,
     };
 
+    console.log("triggered");
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/hackerdiscoveries`,
       {

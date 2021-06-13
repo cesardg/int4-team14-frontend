@@ -1,7 +1,7 @@
 import styles from "./HackerAction.module.css";
 import Image from "next/image";
 
-const HackerAction = ({onClickButton}) => {
+const HackerAction = ({ onClickButton, start }) => {
   return (
     <article className={styles.article}>
       <h2>spelbord</h2>
@@ -20,15 +20,23 @@ const HackerAction = ({onClickButton}) => {
       </button>
       <button onClick={() => onClickButton("get interest")}>
         <p>Ontdek interesses</p>
-        <p>Ontdek de interesses van de user om een gepersonaliseerde ad te sturen</p>
+        <p>
+          Ontdek de interesses van de user om een gepersonaliseerde ad te sturen
+        </p>
       </button>
-      <button onClick={() => onClickButton("schermovername")}>
+      <button onClick={() => onClickButton("screencapture")}>
         <p>Schermovername</p>
         <p>Ontdek de laatste aanpassing van de user aan het wachtwoord</p>
       </button>
-      <button onClick={() => onClickButton("send ad")}>
-        <p>Je kan deze actie 1 keer per ronde gebruiken</p>
-        <p>Deze optie wordt geactiveerd wanneer je start passeert</p>
+      <button
+        onClick={() => onClickButton("send ad")}
+        disabled={start ? false : true}
+      >
+        {start ? (
+          <p>Je kan deze actie 1 keer per ronde gebruiken</p>
+        ) : (
+          <p>Deze optie wordt geactiveerd wanneer je start passeert</p>
+        )}
         <p>Stuur een gepersonaliseerde ad</p>
         <p>De user moet 2 beurten overslaan</p>
       </button>

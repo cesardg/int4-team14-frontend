@@ -1,21 +1,25 @@
 import styles from "./UserAdjustPassword.module.css";
 import { useState } from "react";
 
-const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
-  const [error, setError] = useState("")
+const UserAdjustPassword = ({
+  gameData,
+  action,
+  handleUpdatedPassword,
+}) => {
+  const [error, setError] = useState("");
   const [password, setPassword] = useState(
     gameData.userinfo.password.split("")
   );
-  const actions = ["add2letters", "add1capital", "add1number", "change1capital"]
-  // let tempPassword = [...password];
-  const [tempPassword, setTempPassword] = useState([...password])
+
+  const [tempPassword, setTempPassword] = useState([...password]);
 
   const validateNewCharacter = (char) => {
+    console.log(char);
     if (action === "add2letters") {
       if (/[a-z]/.test(char)) {
         setError("");
       } else {
-        setError("Je nieuwe letters mogen enkel kleine letters zijn")
+        setError("Je nieuwe letters mogen enkel kleine letters zijn");
       }
     } else if (action === "add1capital" || action === "change1capital") {
       if (/[A-Z]/.test(char)) {
@@ -30,14 +34,14 @@ const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
         setError("Je nieuwe karakter mag enkel een cijfer zijn");
       }
     }
-  }
+  };
 
   const handleChangeCharacter = (e, index) => {
     let copyTemp = [...tempPassword];
     let changes = 0;
-    let char
+    let char;
     if (e.target.value !== "") {
-      char = e.target.value
+      char = e.target.value;
     } else {
       char = password[index];
     }
@@ -63,7 +67,7 @@ const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
       setError("");
       console.log("juist 1 aanpassing");
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
     const newScore = gameData.userinfo.score + 10;
@@ -73,9 +77,9 @@ const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
         tempPassword.push(e.target.char1.value, e.target.char2.value);
       } else {
         tempPassword.push(e.target.char1.value);
-      }      
+      }
     }
-    
+
     setPassword(tempPassword);
     let data = { password: tempPassword.join(""), score: newScore };
     const response = await fetch(
@@ -90,10 +94,10 @@ const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
     );
     if (response.ok) {
       console.log("joepie user adjust pw");
-      handleUpdatedPassword(newScore)
+      handleUpdatedPassword(newScore);
     }
     e.target.reset();
-  }
+  };
 
   return (
     <article className={styles.article}>
@@ -119,7 +123,7 @@ const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
           ))}
           <input
             className={styles.input}
-            type={action === "add1capital" ? "number" : "text"}
+            type={action === "add1number" ? "number" : "text"}
             name="char1"
             maxLength="1"
             onChange={(e) => validateNewCharacter(e.target.value)}
@@ -132,7 +136,7 @@ const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
               name="char2"
               maxLength="1"
               required
-              onKeyPress={(e) => validateNewCharacter(e.target.value)}
+              onChange={(e) => validateNewCharacter(e.target.value)}
             />
           ) : (
             ""

@@ -21,7 +21,7 @@ const HackerAd = ({ gameData, onClickButton }) => {
   let defaulChecked;
   let tempContent;
   if (interests) {
-    console.log("er zijn");
+    // console.log("er zijn");
     interests = gameData.hackerinfo.obtainedInterests.split("-");
     interests.shift();
     defaulChecked = interests[0];
@@ -29,7 +29,7 @@ const HackerAd = ({ gameData, onClickButton }) => {
       if (element.interest === currentInterest) tempContent = element.content;
     });
   } else {
-    console.log("er zijn er geen");
+    // console.log("er zijn er geen");
   }
 
   const onChangeButton = (value) => {

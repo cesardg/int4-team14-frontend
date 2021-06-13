@@ -33,7 +33,7 @@ const Hacker = ({ data }) => {
   const [hackerStart, setHackerStart] = useState(false);
   const [hackerDoubleTurn, setHackerDoubleTurn] = useState(0);
   const [userDoubleTurn, setUserDoubleTurn] = useState(0);
-  const [hackerDecryptionAction, setHackerDecryptionAction] = useState("")
+  const [hackerDecryptionAction, setHackerDecryptionAction] = useState("");
   let arr = [];
   let tempField;
 
@@ -263,12 +263,10 @@ const Hacker = ({ data }) => {
   };
 
   const handleClickRandom = (value) => {
-    console.log("random is oke", value);
     channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
   };
 
   const handleClickAction = (action) => {
-    console.log("actie is oke", action);
     if (action === "get interest") {
       hackerGetInterest();
     } else if (action === "send ad") {
@@ -278,12 +276,13 @@ const Hacker = ({ data }) => {
       action === "get1capital" ||
       action === "get1number"
     ) {
-      setHackerDecryptionAction(action)
+      getUpdatedGamedata();
+      setHackerDecryptionAction(action);
       setWindowComponent("decryption");
     }
     setRealtimeGameData({
       ...realtimeGameData,
-      actionHacker: ""
+      actionHacker: "",
     });
   };
 
@@ -352,7 +351,7 @@ const Hacker = ({ data }) => {
     if (latest) {
       sendDataToHacker(data);
     } else {
-      console.log("de hacker heeft alle inter");
+      // console.log("de hacker heeft alle inter");
     }
     channel.publish({
       name: gamecode,
@@ -382,18 +381,16 @@ const Hacker = ({ data }) => {
   };
 
   const handleClickAd = (ad) => {
-    console.log("ad", ad);
+    // console.log("ad", ad);
     channel.publish({ name: gamecode, data: `sendad-hacker-${ad}` });
     deleteInterestAdByHacker(ad);
     setHackerDoubleTurn(2);
   };
 
-  const updateHackerDiscoveries = async (id) => {
-    
-  };
+  const updateHackerDiscoveries = async (id) => {};
 
   const deleteInterestAdByHacker = (ad) => {
-    console.log("delete", ad);
+    // console.log("delete", ad);
     const obtainedInterests = gameData.hackerinfo.obtainedInterests.split("-");
     const index = obtainedInterests.indexOf(ad);
     if (index > -1) {
@@ -431,8 +428,6 @@ const Hacker = ({ data }) => {
     };
   }, [realtimeGameData]);
 
-  console.log("realtime gamedata", realtimeGameData);
-console.log(gameData);
   return (
     <GameLayout>
       <h1 className="title">Hacker</h1>
@@ -462,7 +457,9 @@ console.log(gameData);
           handleUpdatedDiscoveries={(id) => handleUpdatedDiscoveries(id)}
           hackerDecryptionAction={hackerDecryptionAction}
         />
-      ) : ""}
+      ) : (
+        ""
+      )}
       <HackerHack
         handleSubmitForm={(value) => handleFormGuessPass(value)}
         feedback={hackerGuessFeedback}

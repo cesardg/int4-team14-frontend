@@ -7,16 +7,38 @@ const HackerDecryption = ({
   handleUpdatedDiscoveries,
   hackerDecryptionAction,
 }) => {
-  console.log(hackerDecryptionAction);
   let discoveryArr = [];
+
+  if (gameData.hackerdiscoveries.length > 0) {
+    discoveryArr =
+      gameData.hackerdiscoveries[
+        gameData.hackerdiscoveries.length - 1
+      ].discovery.split("");
+  }
+
   let passwordArr = gameData.userinfo.password.split("");
   let discovery = "";
+
+  console.log(gameData);
 
   const getDiscoveredCharacters = () => {
     while (passwordArr.length !== discoveryArr.length) {
       discoveryArr.push("*");
     }
 
+    gameData.hackerdiscoveries.forEach((discoveryObj) => {
+      let arr = discoveryObj.discovery.split("");
+      arr.forEach((element, index) => {
+        console.log(index, ": ", element);
+        if (element !== "*") {
+          discoveryArr[index] = "-";
+        }
+      });
+      console.log("dit was 1 woord");
+    });
+
+    console.log(discoveryArr);
+    
     let discoveredCharacters = 0;
     discoveryArr.map((char, index) => {
       if (char === "*") {
@@ -47,9 +69,17 @@ const HackerDecryption = ({
         }
       }
     });
+
+    discoveryArr.map((discovery, index) => {
+      if (discovery === "-") {
+        discoveryArr[index] = "*";
+      }
+    });
+
     discovery = discoveryArr.join("");
+
     console.log("decryption", discovery);
-    updateDatabaseDiscoveries()
+    updateDatabaseDiscoveries();
   };
 
   const updateDatabaseDiscoveries = async () => {

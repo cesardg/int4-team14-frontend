@@ -278,9 +278,7 @@ const User = ({ data }) => {
       setUserStart(false);
       setUserDoubleTurn(2);
     }
-    console.log(userDoubleTurn);
   };
-  console.log(userDoubleTurn);
 
   const handleUpdatedPassword = (score) => {
     setAccountStrongness(score)

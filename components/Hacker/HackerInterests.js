@@ -5,11 +5,11 @@ const HackerInterests = ({ gameData }) => {
 
   let interests = gameData.hackerinfo.obtainedInterests;
   if (interests) {
-    console.log("er zijn");
+    // console.log("er zijn");
     interests = gameData.hackerinfo.obtainedInterests.split("-");
     interests.shift();
   } else {
-    console.log("er zijn er geen");
+    // console.log("er  zijn er geen");
   }
 
   return (

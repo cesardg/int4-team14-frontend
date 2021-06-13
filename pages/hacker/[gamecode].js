@@ -33,7 +33,7 @@ const Hacker = ({ data }) => {
   const [hackerStart, setHackerStart] = useState(false);
   const [hackerDoubleTurn, setHackerDoubleTurn] = useState(0);
   const [userDoubleTurn, setUserDoubleTurn] = useState(0);
- const [hackerActionDiscovery, setHackerActionDiscovery] = useState(false)
+  const [hackerDecryptionAction, setHackerDecryptionAction] = useState("")
   let arr = [];
   let tempField;
 
@@ -278,10 +278,13 @@ const Hacker = ({ data }) => {
       action === "get1capital" ||
       action === "get1number"
     ) {
-      setHackerActionDiscovery(true)
+      setHackerDecryptionAction(action)
       setWindowComponent("decryption");
-      getUpdatedGamedata();
     }
+    setRealtimeGameData({
+      ...realtimeGameData,
+      actionHacker: ""
+    });
   };
 
   // general functions to fetch data
@@ -414,18 +417,11 @@ const Hacker = ({ data }) => {
     }
   };
 
-  const handleUpdatedDiscoveries = async () => {
-    let discoveries = [];
-    const data = await fetchData("games", id);
-    data.hackerdiscoveries.map((discovery) => {
-      discoveries.push(discovery.discovery);
-    });
-    setHackerDiscoveries(discoveries);
-    console.log("discoveries", discoveries);
-
-    console.log("triggerd");
+  const handleUpdatedDiscoveries = async (id) => {
     channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
-    setHackerActionDiscovery(false)
+    setHackerDecryptionAction("");
+    setWindowComponent("");
+    getUpdatedGamedata();
   };
 
   useEffect(() => {
@@ -435,8 +431,8 @@ const Hacker = ({ data }) => {
     };
   }, [realtimeGameData]);
 
-  console.log(realtimeGameData);
-
+  console.log("realtime gamedata", realtimeGameData);
+console.log(gameData);
   return (
     <GameLayout>
       <h1 className="title">Hacker</h1>
@@ -444,7 +440,7 @@ const Hacker = ({ data }) => {
       <HackerInfo />
       <Turn who={realtimeGameData.currentPlayer} />
       <Notes gameData={gameData} player="hacker" />
-      <HackerDiscoveries discoveries={hackerDiscoveries} />
+      <HackerDiscoveries gameData={gameData} />
       {realtimeGameData.currentPlayer === "hacker" &&
       realtimeGameData.actionHacker === "action" ? (
         <HackerAction onClickButton={(value) => handleClickAction(value)} />
@@ -464,7 +460,7 @@ const Hacker = ({ data }) => {
           gameData={gameData}
           // onClickButton={(id) => updateHackerDiscoveries(id)}
           handleUpdatedDiscoveries={(id) => handleUpdatedDiscoveries(id)}
-          hackerActionDiscovery={hackerActionDiscovery}
+          hackerDecryptionAction={hackerDecryptionAction}
         />
       ) : ""}
       <HackerHack

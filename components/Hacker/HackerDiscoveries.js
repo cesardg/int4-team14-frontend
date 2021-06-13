@@ -2,7 +2,12 @@ import styles from "./HackerDiscoveries.module.css";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-const HackerDiscoveries = ({ discoveries }) => {  
+const HackerDiscoveries = ({ gameData }) => {
+  let discoveries = [];
+  gameData.hackerdiscoveries.map((discovery) => {
+    discoveries.push(discovery.discovery);
+  });
+
   return (
     <article className={styles.article}>
       <h2>Ontdekkingen</h2>

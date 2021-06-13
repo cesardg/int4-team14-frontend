@@ -1,0 +1,24 @@
+.outerWindow{
+    background-color: var(--green);
+    border: .1rem solid var(--black);
+    box-shadow: .5rem .5rem var(--shadow);
+    padding: 1.2rem;
+}
+
+.innerWindow{
+    background-color: var(--brown);
+    border: .1rem solid var(--black);
+}
+
+.title{
+    background-color: var(--green);
+    border-bottom: .1rem solid var(--black);
+    font-family: "pixel";
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: .7rem;
+    line-height: 1;
+    margin-top: -.02rem;
+}

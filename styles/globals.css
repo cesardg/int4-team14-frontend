@@ -23,21 +23,21 @@
 
 @font-face{
   font-family: "sohne-fett";
-  src: url('/assets/fonts/soehne/soehne-test-fett.woff') format('woff');
+  src: url('/assets/fonts/sohne/soehne-test-fett.woff') format('woff');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face{
   font-family: "sohne-semifett";
-  src: url('/assets/fonts/soehne/soehne-test-dreiviertelfett.woff') format('woff');
+  src: url('/assets/fonts/sohne/soehne-test-dreiviertelfett.woff') format('woff');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face{
   font-family: "sohne";
-  src: url('/assets/fonts/soehne/soehne-test-buch.woff') format('woff');
+  src: url('/assets/fonts/sohne/soehne-test-buch.woff') format('woff');
   font-weight: 400;
   font-style: normal;
 }
@@ -50,12 +50,23 @@
   font-style: normal;
 }
   
-html,
+
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: inherit;
+    height: 100%;
+}
+
 body {
-  padding: 0;
-  margin: 0;
-  font-family: Helvetica Neue, sans-serif;
-  filter: saturate(1.1);
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
 }
 
 a {
@@ -63,16 +74,6 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 .hidden {
   display: none;
-}
-
-.btnBack {
-  left: 2rem;
-  position: absolute;
-  top: 2rem;
 }

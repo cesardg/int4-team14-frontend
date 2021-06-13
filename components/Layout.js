@@ -17,8 +17,8 @@ const Layout = ({ children }) => {
               <Image
                 src={`/assets/img/logo.svg`}
                 alt="Picture of the user"
-                width={273}
-                height={62}
+                width={246}
+                height={56}
                 />
             </a>
           </Link>

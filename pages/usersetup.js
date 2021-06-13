@@ -1,4 +1,4 @@
-import styles from './../styles/Usersetup.module.css';
+import styles from './../styles/Setup.module.css';
 import Image from 'next/image';
 import {useState, useCallback} from 'react';
 import Checkbox from '../components/Checkbox';
@@ -6,7 +6,6 @@ import Radiobutton from '../components/Radiobutton';
 import WindowLayout from '../components/WindowLayout'
 import Layout from '../components/Layout';
 import { useRouter } from 'next/router';
-import Link from "next/link";
 import Router from 'next/router';
 
 const Usersetup = () => {
@@ -171,7 +170,7 @@ const Usersetup = () => {
 
 
   return (
-  <Layout>
+  <Layout style="user">
     <section className={styles.section}>
       <div className={styles.backButton}>
  

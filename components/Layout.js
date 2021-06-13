@@ -3,14 +3,15 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from 'next/image';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, style }) => {
+  console.log(style)
   return (
-    <div className={styles.container}>
+    <div className={style === "user" ? styles.userContainer :  styles.hackerContainer}>
       <Head>
         <title>Hack-tic</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header className={styles.header}>
+      <header className={style === "user" ? styles.userHeader :  styles.hackerHeader}>
         <h1 className={styles.title}>Hack-tic</h1>
           <Link href="/">
             <a className={styles.logo}>

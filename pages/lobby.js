@@ -34,7 +34,7 @@ const Lobby = () => {
   }
 
   return (
-    <Layout>
+    <Layout style="user">
       <section>
         <h2>Deel de game code</h2>
         {player === "user"

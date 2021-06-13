@@ -70,7 +70,7 @@ const Home = () => {
   };
 
   return (
-    <Layout>
+    <Layout style="user">
       {screen == "start" ?
         <section className={styles.intro}>
           <h2 className="hidden">Start een spel</h2>

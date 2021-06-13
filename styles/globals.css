@@ -49,6 +49,14 @@
   font-weight: 400;
   font-style: normal;
 }
+
+@font-face{
+  font-family: "pixelarial";
+  src: url('/assets/fonts/pixelarial/pixelarial.woff2') format('woff2'),
+        url('/assets/fonts/pixelarial/pixelarial.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
   
 
 

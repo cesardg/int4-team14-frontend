@@ -1,0 +1,54 @@
+.label {
+  display:block;
+  border:solid .1rem var(--black);
+  width: 18rem;
+  padding: 3rem 0;
+  font-size: 1.8rem;
+  font-family: "pixelarial";
+  text-align:center;
+  background-color: var(--green);
+  margin-right: 5rem;
+  margin-bottom: 5rem;
+  box-shadow:
+    .1rem .1rem 0 0 var(--black),
+    .2rem .2rem 0 0 var(--black),
+    .3rem .3rem 0 0 var(--black),
+    .4rem .4rem 0 0 var(--black),
+    .5rem .5rem 0 0 var(--black),
+    .6rem  .6rem 0 0 var(--black),
+    .7rem .7rem #D3CFC5,
+    .8rem .8rem #D3CFC5,
+    .9rem .9rem #D3CFC5,
+     1rem 1rem #D3CFC5;
+}
+
+.input {
+  display: none;
+  transition: .2 all ease;
+}
+
+.input:checked + .label {
+transform: translate(.2rem, .2rem);
+  background-color: var(--yellow);  
+  box-shadow:
+  .1rem .1rem 0 0 var(--black),
+  .2rem .2rem 0 0 var(--black);
+}
+
+.input:active + .label {
+transform: translate(.2rem, .2rem);
+  background-color: var(--yellow); 
+  box-shadow:
+  .1rem .1rem 0 0 var(--black),
+  .2rem .2rem 0 0 var(--black);
+}
+
+.input:hover + .label {
+transform: translate(.2rem, .2rem);
+  cursor: pointer;
+  box-shadow:
+  .1rem .1rem 0 0 var(--black),
+  .2rem .2rem 0 0 var(--black);
+}
+
+

@@ -1,19 +1,20 @@
 import styles from './../styles/Usersetup.module.css';
 import Image from 'next/image';
-import {useState, useRef, useEffectn, useCallback} from 'react';
+import {useState, useCallback} from 'react';
 import Checkbox from '../components/Checkbox';
 import Radiobutton from '../components/Radiobutton';
 import WindowLayout from '../components/WindowLayout'
 import Layout from '../components/Layout';
 import { useRouter } from 'next/router';
 import Link from "next/link";
+import Router from 'next/router';
 
 const Usersetup = () => {
 
   const router = useRouter()
   const gamecode = router.query.gamecode
   const profilePicturesOptions = ["pf1", "pf2", "pf3", "pf4" ];
-  const userInterestsOptions = ["paardrijden", "knutselen", "roblox", "koken"];  
+  const userInterestsOptions = ["knutselen", "sporten", "buiten spelen", "Roblox", "Minecraft", "Brawl Stars", "Youtube", "Slijm maken", "Tik Tok"];  
   const [userInterests, setUserInterests] = useState([]);
   const [profilePicture, setProfilePicture] = useState("pf1");
   const [profilePass, setProfilePass] = useState(["","", "", "", "", ""]);
@@ -95,9 +96,9 @@ const Usersetup = () => {
     const tmp = { ...profileInput };
     tmp["password"] = copyArr.join("");
     setProfileInput(tmp);
-    console.log(value.target.value)
+    const newIndex = Number(index) + 1;
     if (value.target.value){
-      setPassField(Number(index) + 1)
+      setPassField(newIndex)
       }
     }
 
@@ -150,6 +151,17 @@ const Usersetup = () => {
     setProfileInput(tmp);
   };
 
+  console.log(currentField)
+
+  const handleClickBack = () => {
+    if (currentField === "account"){
+      Router.push('/')
+    } else if (currentField === "interests"){
+      setCurrentField("account")
+    } else if (currentField === "picture"){
+      setCurrentField("account")
+    }
+  }
 
   const callbackRef = useCallback( (field) => inputElement  => {
     if (field == passField && inputElement) {
@@ -162,8 +174,8 @@ const Usersetup = () => {
   <Layout>
     <section className={styles.section}>
       <div className={styles.backButton}>
-         <Link href="/">
-            <a className={styles.logo}>
+ 
+            <a onClick={handleClickBack} className={styles.logo}>
               <Image
                 src={`/assets/img/backbutton.svg`}
                 alt="Picture of the user"
@@ -172,18 +184,23 @@ const Usersetup = () => {
                />
             <p className={styles.back}>Terug</p>
           </a>
-        </Link>
+     
       </div>
       <h1 className={styles.title}>Gebruiker pagina</h1>
         <div className={styles.layoutWrapper}>
         <WindowLayout title="account aanmaken">
           <div className={styles.container}>
-          <p className={styles.intro}>Maak je user-profiel en kies je eerste wachtwoord</p>
-          <p className={styles.info}>Beveilig je account met een sterk wachtwoord van letters. De hacker zal dit wachtwoord proberen te kraken maar gelukkig kan jij je wachtwoord later  versterken met extra letters, hoofdletters en cijfers.</p>
+          {currentField === "account"? <p className={styles.intro}>Maak je user-profiel en kies je eerste wachtwoord</p> : ""}
+          {currentField === "picture"? <p className={styles.intro}>Kies een profielfoto</p> : ""}
+          {currentField === "interests"? <p className={styles.intro}>Vul je profiel aan met jouw interesses</p> : ""}
+          {currentField === "account"?   <p className={styles.info}>Beveilig je account met een sterk wachtwoord van letters. De hacker zal dit wachtwoord proberen te kraken maar gelukkig kan jij je wachtwoord later  versterken met extra letters, hoofdletters en cijfers.</p> : ""}
+          {currentField === "interests"? <p className={styles.info}>Om je gebruikers-profiel verder aan te vullen hebben we nog jouw 3 favoriete interesses nodig.</p>  : ""}
           <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
             <div className={styles.formContainer}>
+              {currentField === "account" || currentField === "picture" ?  
             <legend className={styles.legend}>
-                <div className={styles.img}>
+                {currentField === "picture" ?  "" : 
+                <div onClick={(e) => handleClickButton(e, "picture")} className={styles.img}>
                   <Image
                     src={`/assets/img/userpics/${profilePicture}.svg`}
                     alt="Picture of the user"
@@ -191,25 +208,25 @@ const Usersetup = () => {
                     height={212}
                   />
                   </div>
+                  }
                 {currentField === "picture" ? 
                 <div>
-                <p>Kies een profielfoto</p>
-                <button onClick={(e) => handleClickButton(e, "account")}>terug</button>
-                <button onClick={(e) => handleClickButton(e, "account")}>klaar</button>
-                <div className={styles.radiobuttons}>
-                  {profilePicturesOptions.map((item) => (
-                    <Radiobutton
-                      key={item}
-                      item={item}
-                      name={"profile-picture"}
-                      onClickButton={(value) => setProfilePicture(value)}
-                    />
-                  ))}
-                  </div>
+                  <div className={styles.radiobuttons}>
+                    {profilePicturesOptions.map((item) => (
+                      <Radiobutton
+                        key={item}
+                        item={item}
+                        name={"profile-picture"}
+                        onClickButton={(value) => setProfilePicture(value)}
+                      />
+                    ))}
+                    </div>
+                    <button onClick={(e) => handleClickButton(e, "account")}>Selecteer</button>
                 </div>
                 : ""}
-              {currentField === "account" ? <button className={styles.secButton} onClick={(e) => handleClickButton(e, "picture")} >Kies je profielfoto</button> : "" }
+            {currentField === "account" ?  <button className={styles.secButton} onClick={(e) => handleClickButton(e, "picture")} >Kies je profielfoto</button> : ""}
           </legend>
+          : "" }
          
           {currentField === "account" ? 
            <legend className={styles.legend}>
@@ -320,11 +337,8 @@ const Usersetup = () => {
        
         
           {currentField === "interests" ? 
-            <legend>
-              <button onClick={(e) => handleClickButton(e, "account")}>terug</button>
-              <p>Vul je profiel aan met jouw interesses</p>
-              <p>Om je gebruikers-profiel verder aan te vullen hebben we nog jouw 5 favoriete interesses nodig.</p>
-              <div className={styles.radiobuttons}>
+            <legend className={styles.checkBoxLegend}>
+              <div className={styles.checkboxes}>
                 {userInterestsOptions.map((item) => (
                   <Checkbox
                     key={item}
@@ -334,14 +348,14 @@ const Usersetup = () => {
                   />
                 ))}
               </div>
-        
+                
             {userInterests.length < 3 ? 
-              <p>Selecteer nog minstens {3 - (userInterests.length)} interesses</p>
+              <p className={styles.checkBoxInfo} >Selecteer nog minstens <span className={styles.checkBoxInfoNummer}> {3 - (userInterests.length)} </span> interesses</p>
               :
               <input
-                className={styles.button}
+                className={styles.primButton}
                 type="submit"
-                value="Start game as a user"
+                value="Naar het spelbord ->"
               />
             }
             </legend>

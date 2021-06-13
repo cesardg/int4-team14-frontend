@@ -1,6 +1,6 @@
 import styles from './../styles/Usersetup.module.css';
 import Image from 'next/image';
-import {useState} from 'react';
+import {useState, useRef, useEffectn, useCallback} from 'react';
 import Checkbox from '../components/Checkbox';
 import Radiobutton from '../components/Radiobutton';
 import WindowLayout from '../components/WindowLayout'
@@ -92,10 +92,13 @@ const Usersetup = () => {
     const copyArr = [...profilePass];
     copyArr[index] = value.target.value;
     setProfilePass(copyArr);
-    setPassField(index + 1);
     const tmp = { ...profileInput };
     tmp["password"] = copyArr.join("");
     setProfileInput(tmp);
+    console.log(value.target.value)
+    if (value.target.value){
+      setPassField(Number(index) + 1)
+      }
     }
 
 
@@ -147,6 +150,12 @@ const Usersetup = () => {
     setProfileInput(tmp);
   };
 
+
+  const callbackRef = useCallback( (field) => inputElement  => {
+    if (field == passField && inputElement) {
+     inputElement.focus();
+    }
+  }, [passField]);
 
 
   return (
@@ -241,6 +250,7 @@ const Usersetup = () => {
                   type="text"
                   maxLength="1"
                   name="password"
+                  ref={callbackRef(0)}
                   value={profilePass[0]}
                   onChange={(value) => handelChangePas(value, "0")}
                   required
@@ -251,6 +261,7 @@ const Usersetup = () => {
                   type="text"
                   name="password"
                   maxLength="1"
+                  ref={callbackRef(1)}
                   value={profilePass[1]}
                   onChange={(value) => handelChangePas(value, "1")}
                   required
@@ -261,6 +272,7 @@ const Usersetup = () => {
                   type="text"
                   name="password"
                   maxLength="1"
+                  ref={callbackRef(2)}
                   value={profilePass[2]}
                   onChange={(value) => handelChangePas(value, "2")}
                   required
@@ -271,6 +283,7 @@ const Usersetup = () => {
                   type="text"
                   name="password"
                   maxLength="1"
+                  ref={callbackRef(3)}
                   value={profilePass[3]}
                   onChange={(value) => handelChangePas(value, "3")}
                   required
@@ -281,6 +294,7 @@ const Usersetup = () => {
                   type="text"
                   name="password"
                   maxLength="1"
+                  ref={callbackRef(4)}
                   value={profilePass[4]}
                   onChange={(value) => handelChangePas(value, "4")}
                   required
@@ -291,6 +305,7 @@ const Usersetup = () => {
                   type="text"
                   name="password"
                   maxLength="1"
+                  ref={callbackRef(5)}
                   value={profilePass[5]}
                   onChange={(value) => handelChangePas(value, "5")}
                   required

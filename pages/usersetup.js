@@ -217,11 +217,10 @@ const Usersetup = () => {
                         key={item}
                         item={item}
                         name={"profile-picture"}
-                        onClickButton={(value) => setProfilePicture(value)}
+                        onClickButton={(value) => {setProfilePicture(value), setCurrentField("account")}}
                       />
                     ))}
                     </div>
-                    <button onClick={(e) => handleClickButton(e, "account")}>Selecteer</button>
                 </div>
                 : ""}
             {currentField === "account" ?  <button className={styles.secButton} onClick={(e) => handleClickButton(e, "picture")} >Kies je profielfoto</button> : ""}

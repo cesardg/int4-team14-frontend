@@ -183,6 +183,11 @@ height: 4rem;
  justify-content: center;
 }
 
+.radiobuttons{
+  composes: checkboxes;
+  margin-top: -2.4rem;
+}
+
 .checkBoxInfo{
 font-size: 2rem;
 margin-bottom: 3.1rem;

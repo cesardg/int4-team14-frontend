@@ -1,11 +1,36 @@
-.hidden{
-    display: none;
+.input {
+  opacity: 0;
 }
 
-.label{
-    padding: 1rem;
+.input:checked + .img {
+    transform: translate(.2rem, .2rem);
+    box-shadow:
+    .1rem .1rem 0 0 var(--black),
+    .2rem .2rem 0 0 var(--black);
 }
 
-.img{
+.img {
+    background-color: var(--black);
+    transition: .2s all ease;
+    margin-right: 3rem;
+    margin-bottom: 3rem;
+    box-shadow:
+    .1rem .1rem 0 0 var(--black),
+    .2rem .2rem 0 0 var(--black),
+    .3rem .3rem 0 0 var(--black),
+    .4rem .4rem 0 0 var(--black),
+    .5rem .5rem 0 0 var(--black),
+    .6rem  .6rem 0 0 var(--black),
+    .7rem .7rem #D3CFC5,
+    .8rem .8rem #D3CFC5,
+    .9rem .9rem #D3CFC5,
+        1rem 1rem #D3CFC5;
+}
+
+.img:hover {
     cursor: pointer;
+    transform: translate(.2rem, .2rem); 
+    box-shadow:
+  .1rem .1rem 0 0 var(--black),
+  .2rem .2rem 0 0 var(--black);
 }

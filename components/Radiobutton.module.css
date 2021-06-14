@@ -3,10 +3,8 @@
 }
 
 .input:checked + .img {
-    transform: translate(.2rem, .2rem);
-    box-shadow:
-    .1rem .1rem 0 0 var(--black),
-    .2rem .2rem 0 0 var(--black);
+    transform: translate(.6rem, .6rem);
+    box-shadow: none;
 }
 
 .img {
@@ -27,9 +25,21 @@
         1rem 1rem #D3CFC5;
 }
 
+.hackerImg {
+    composes: img;
+    box-shadow:
+    .1rem .1rem 0 0 var(--yellow),
+    .2rem .2rem 0 0 var(--yellow),
+    .3rem .3rem 0 0 var(--yellow),
+    .4rem .4rem 0 0 var(--yellow),
+    .5rem .5rem 0 0 var(--yellow),
+    .6rem  .6rem 0 0 var(--yellow);
+
+}
+
 .img:hover {
     cursor: pointer;
-    transform: translate(.2rem, .2rem); 
+    transform: translate(.6rem, .6rem); 
     box-shadow:
   .1rem .1rem 0 0 var(--black),
   .2rem .2rem 0 0 var(--black);

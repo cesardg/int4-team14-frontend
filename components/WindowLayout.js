@@ -1,9 +1,10 @@
 import styles from "./WindowLayout.module.css";
 
-const Layout = ({ children, title }) => {
+const WindowLayout = ({ children, title, bg }) => {
+  console.log(bg)
  return (
     <div className={styles.outerWindow}>
-      <article className={styles.innerWindow}>
+      <article className={styles.innerWindow} style={{backgroundColor: bg}}>
         <h2 className={styles.title}>{title}</h2>
         {children}
       </article>
@@ -11,4 +12,4 @@ const Layout = ({ children, title }) => {
   );
 };
 
-export default Layout;
+export default WindowLayout;

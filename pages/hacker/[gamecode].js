@@ -17,9 +17,9 @@ import { useChannel } from "../../components/ChatReactEffect";
 import HackerRandom from "../../components/Hacker/HackerRandom";
 
 const Hacker = ({ data }) => {
+  // game
   const router = useRouter();
   const gamecode = router.query.gamecode;
-
   const [gameData, setGameData] = useState(data[0]);
   const [realtimeGameData, setRealtimeGameData] = useState({
     currentPlayer: data[0].startingPlayer,
@@ -28,15 +28,14 @@ const Hacker = ({ data }) => {
     fieldHacker: 1,
     actionHacker: "start",
   });
-  const [hackerDiscoveries, setHackerDiscoveries] = useState([]);
-  const [hackerGuessFeedback, setHackerGuessFeedback] = useState();
+
+  // board
+  let arr = [];
+  let tempField;
+  const [windowComponent, setWindowComponent] = useState("");
   const [hackerStart, setHackerStart] = useState(false);
   const [hackerDoubleTurn, setHackerDoubleTurn] = useState(0);
   const [userDoubleTurn, setUserDoubleTurn] = useState(0);
-  const [hackerDecryptionAction, setHackerDecryptionAction] = useState("");
-  let arr = [];
-  let tempField;
-
   const randomOptions = [
     {
       type: "good",
@@ -99,7 +98,6 @@ const Hacker = ({ data }) => {
       text: "De user heeft al zijn/haar oude Roblox- en Brawl Stars-accounts verwijderd. Je laatste notitie wordt gewist",
     },
   ];
-
   const fields = [
     { nummer: 1, command: "1", action: "start" },
     { nummer: 2, command: "2", action: "empty" },
@@ -134,12 +132,15 @@ const Hacker = ({ data }) => {
     { nummer: 31, command: "Y", action: "action" },
     { nummer: 32, command: "W", action: "empty" },
   ];
-
   const [randomOption, setRandomOption] = useState(
     randomOptions[Math.floor(Math.random() * randomOptions.length)]
   );
 
-  const [windowComponent, setWindowComponent] = useState("");
+  // specific logic
+  const [hackerDecryptionAction, setHackerDecryptionAction] = useState("");
+  const [hackerGuessFeedback, setHackerGuessFeedback] = useState();
+
+  // channel
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split("-")[0];
 
@@ -202,7 +203,15 @@ const Hacker = ({ data }) => {
         setRandomOption(
           randomOptions[Math.floor(Math.random() * randomOptions.length)]
         );
+        // setWindowComponent("random");
       }
+
+      // if (
+      //   realtimeGameData.currentPlayer === "hacker" &&
+      //   realtimeGameData.actionHacker === "action"
+      // ) {
+      //   setWindowComponent("action");
+      // }
 
       setRealtimeGameData({
         ...realtimeGameData,
@@ -212,6 +221,8 @@ const Hacker = ({ data }) => {
         actionHacker: newHackerAction,
         currentPlayer: newPlayer,
       });
+
+      console.log("hacker realtime", realtimeGameData.actionHacker);
     }
 
     if (type === "playerchange") {
@@ -223,6 +234,7 @@ const Hacker = ({ data }) => {
     }
   });
 
+  // check board input
   const downHandler = ({ key }) => {
     arr.push(key);
     const index = arr.indexOf("X");
@@ -288,52 +300,7 @@ const Hacker = ({ data }) => {
     });
   };
 
-  // general functions to fetch data
-  const fetchData = async (collection, id) => {
-    const req = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/${collection}/?id=${id}`
-    );
-    const res = await req.json();
-    return res[0];
-  };
-
-  const postData = async (collection, data) => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/${collection}`,
-      {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (response.ok) {
-      console.log("joepie");
-    }
-  };
-
-  const putData = async (collection, id, data) => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/${collection}/${id}`,
-      {
-        method: "PUT",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (response.ok) {
-      console.log("put data joepie");
-    }
-  };
-
-  const getUpdatedGamedata = async () => {
-    const updatedGameData = await fetchData("games", gameData.id);
-    setGameData(updatedGameData);
-  };
-
+  // logic functions
   const hackerGetInterest = async () => {
     const obtainedInterests = await fetchData(
       "hackerinfos",
@@ -419,6 +386,52 @@ const Hacker = ({ data }) => {
     channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
   };
 
+  // general functions to fetch data
+  const fetchData = async (collection, id) => {
+    const req = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/${collection}/?id=${id}`
+    );
+    const res = await req.json();
+    return res[0];
+  };
+
+  const postData = async (collection, data) => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/${collection}`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.ok) {
+      console.log("joepie");
+    }
+  };
+
+  const putData = async (collection, id, data) => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/${collection}/${id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.ok) {
+      console.log("put data joepie");
+    }
+  };
+
+  const getUpdatedGamedata = async () => {
+    const updatedGameData = await fetchData("games", gameData.id);
+    setGameData(updatedGameData);
+  };
+
   useEffect(() => {
     window.addEventListener("keydown", downHandler);
     return () => {
@@ -435,6 +448,11 @@ const Hacker = ({ data }) => {
       <Notes gameData={gameData} player="hacker" />
       <HackerDiscoveries gameData={gameData} />
       <HackerInterests gameData={gameData} />
+      <HackerHack
+        handleSubmitForm={(value) => handleFormGuessPass(value)}
+        feedback={hackerGuessFeedback}
+        start={hackerStart}
+      />
       {/* acties */}
       {realtimeGameData.currentPlayer === "hacker" &&
       realtimeGameData.actionHacker === "action" ? (
@@ -465,12 +483,7 @@ const Hacker = ({ data }) => {
       ) : (
         ""
       )}
-      <HackerHack
-        handleSubmitForm={(value) => handleFormGuessPass(value)}
-        feedback={hackerGuessFeedback}
-        start={hackerStart}
-      />
-      {windowComponent === "decryption" ? <HackerScreencapture /> : ""}
+      {windowComponent === "screencapture" ? <HackerScreencapture /> : ""}
       {windowComponent === "vpn" ? <HackerVpn /> : ""}
       {realtimeGameData.currentPlayer === "hacker" &&
       realtimeGameData.actionHacker === "random" ? (

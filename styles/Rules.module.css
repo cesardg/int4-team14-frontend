@@ -167,6 +167,7 @@
     justify-content: space-between;
     z-index: 2;
     margin-top: -15rem;
+    margin-bottom: 4rem;
 }
 
 .userLayoutWrapper{
@@ -179,6 +180,22 @@
 
 .imageContainer{
    margin: -.1rem
+}
+
+.userContainer{
+    padding: 2rem;
+}
+
+.hackerContainer{
+    composes: userContainer;
+    color: var(--brown);
+}
+
+.smallTitle{
+    color: var(--purple);
+    font-size: 2.4rem;
+    font-family: "sohne-breit-semifett";
+    text-transform: capitalize;
 }
 
 @media only screen and (max-width: 1100px) {

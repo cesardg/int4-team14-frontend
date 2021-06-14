@@ -267,6 +267,7 @@ const Hacker = ({ data }) => {
   };
 
   const handleClickAction = (action) => {
+    console.log("clickaction triggered");
     if (action === "get interest") {
       hackerGetInterest();
     } else if (action === "send ad") {
@@ -407,11 +408,16 @@ const Hacker = ({ data }) => {
     }
   };
 
-  const handleUpdatedDiscoveries = async () => {
-    channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
+  const handleUpdatedDiscoveries = async (gameData, discovery) => {
+    const data = {
+      discovery: discovery,
+      game: gameData,
+    };
+    await postData("hackerdiscoveries", data);
     setHackerDecryptionAction("");
     setWindowComponent("");
     getUpdatedGamedata();
+    channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
   };
 
   useEffect(() => {
@@ -449,8 +455,8 @@ const Hacker = ({ data }) => {
       {windowComponent === "decryption" ? (
         <HackerDecryption
           gameData={gameData}
-          handleUpdatedDiscoveries={() => handleUpdatedDiscoveries()}
-          hackerDecryptionAction={hackerDecryptionAction}
+          handleUpdatedDiscoveries={(gameData, discovery) => handleUpdatedDiscoveries(gameData, discovery)}
+          action={hackerDecryptionAction}
         />
       ) : (
         ""

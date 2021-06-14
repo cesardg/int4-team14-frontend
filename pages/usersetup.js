@@ -3,7 +3,7 @@ import Image from 'next/image';
 import {useState, useCallback} from 'react';
 import Checkbox from '../components/Checkbox';
 import Radiobutton from '../components/Radiobutton';
-import WindowLayout from '../components/WindowLayout'
+import WindowLayout from '../components/WindowLayout';
 import Layout from '../components/Layout';
 import { useRouter } from 'next/router';
 import Router from 'next/router';
@@ -174,7 +174,7 @@ const Usersetup = () => {
     <section className={styles.section}>
       <div className={styles.backButton}>
  
-            <a onClick={handleClickBack} className={styles.logo}>
+            <a onClick={handleClickBack}>
               <Image
                 src={`/assets/img/backbutton.svg`}
                 alt="Picture of the user"
@@ -187,7 +187,7 @@ const Usersetup = () => {
       </div>
       <h1 className={styles.title}>Gebruiker pagina</h1>
         <div className={styles.layoutWrapper}>
-        <WindowLayout title="account aanmaken" bg="#fcf7eb">
+        <WindowLayout title="account aanmaken" bg="var(--brown)" border="var(--green)">
           <div className={styles.container}>
           {currentField === "account"? <p className={styles.intro}>Maak je user-profiel en kies je eerste wachtwoord</p> : ""}
           {currentField === "picture"? <p className={styles.intro}>Kies een profielfoto</p> : ""}

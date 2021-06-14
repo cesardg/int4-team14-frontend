@@ -12,8 +12,8 @@ const Hackersetup = () => {
 
   const router = useRouter()
   const gamecode = router.query.gamecode
-  const profilePicturesOptions = ["user", "hacker" ];
-  const [profilePicture, setProfilePicture] = useState("user");
+  const profilePicturesOptions = ["pf1", "pf2", "pf3", "pf4" ];
+  const [profilePicture, setProfilePicture] = useState("pf1");
   const [currentField, setCurrentField] = useState("account");
   const [profileError, setProfileError] = useState({username: "", email:""});
   const [profileInput, setProfileInput] = useState({username: "",  email:""});
@@ -27,8 +27,9 @@ const Hackersetup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
-      username: e.target.username.value,
-      picture: profilePicture
+      username: profileInput.username,
+      picture: profilePicture,
+      email: profileInput.email
     };
     e.target.reset();
     onSubmit(data);
@@ -64,6 +65,12 @@ const Hackersetup = () => {
     }
   }
 
+  const setInput = (channel, e) => {
+    const tmp = { ...profileInput };
+    tmp[channel] = e.target.value;
+    setProfileInput(tmp);
+  };
+
 
 
   return (
@@ -78,27 +85,26 @@ const Hackersetup = () => {
                 width={75}
                 height={75}
                />
-            <p className={styles.back}>Terug</p>
+            <p className={styles.hackerBack}>Terug</p>
           </a>
      
       </div>
       <h1 className={styles.title}>Gebruiker pagina</h1>
         <div className={styles.layoutWrapper}>
-        <WindowLayout title="account aanmaken">
+        <WindowLayout title="account aanmaken" bg="black">
           <div className={styles.container}>
-          {currentField === "account"? <p className={styles.intro}>Maak je user-profiel en kies je eerste wachtwoord</p> : ""}
-          {currentField === "picture"? <p className={styles.intro}>Kies een profielfoto</p> : ""}
-          {currentField === "interests"? <p className={styles.intro}>Vul je profiel aan met jouw interesses</p> : ""}
-          {currentField === "account"?   <p className={styles.info}>Beveilig je account met een sterk wachtwoord van letters. De hacker zal dit wachtwoord proberen te kraken maar gelukkig kan jij je wachtwoord later  versterken met extra letters, hoofdletters en cijfers.</p> : ""}
-          {currentField === "interests"? <p className={styles.info}>Om je gebruikers-profiel verder aan te vullen hebben we nog jouw 3 favoriete interesses nodig.</p>  : ""}
+          {currentField === "account"? <p className={styles.hackerIntro}>Maak je hacker-profiel en kies een goede schuilnaam</p> : ""}
+          {currentField === "picture"? <p className={styles.hackerIntro}>Kies een profielfoto</p> : ""}
+          {currentField === "account"? <p className={styles.hackerInfo}>Elke succesvolle hacker heeft schuilnaam nodig,
+          zo kan de computer politie jou niet snel ontdekken en ontmaskeren</p> : ""}
           <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
             <div className={styles.formContainer}>
-              {currentField === "account" || currentField === "picture" ?  
+   
             <legend className={styles.legend}>
                 {currentField === "picture" ?  "" : 
-                <div onClick={(e) => handleClickButton(e, "picture")} className={styles.img}>
+                <div onClick={() => setCurrentField("picture")} className={styles.img}>
                   <Image
-                    src={`/assets/img/userpics/${profilePicture}.svg`}
+                    src={`/assets/img/hackerpics/${profilePicture}.svg`}
                     alt="Picture of the user"
                     width={331}
                     height={212}
@@ -112,6 +118,8 @@ const Hackersetup = () => {
                       <Radiobutton
                         key={item}
                         item={item}
+                        defaultCheck={profilePicture}
+                        folder={"hackerpics"}
                         name={"profile-picture"}
                         onClickButton={(value) => {setProfilePicture(value), setCurrentField("account")}}
                       />
@@ -119,18 +127,18 @@ const Hackersetup = () => {
                     </div>
                 </div>
                 : ""}
-            {currentField === "account" ?  <button className={styles.secButton} onClick={(e) => handleClickButton(e, "picture")} >Kies je profielfoto</button> : ""}
+            {currentField === "account" ?  <button className={styles.secButton} onClick={(e) => setCurrentField("picture")} >Kies je profielfoto</button> : ""}
           </legend>
-          : "" }
+          
          
           {currentField === "account" ? 
            <legend className={styles.legend}>
-              <label  className={styles.label}>
+              <label  className={styles.hackerLabel}>
                 Gebruikersnaam
-                     <span className={styles.error}>{profileError.username}</span>
+                <span className={styles.error}>{profileError.username}</span>
                 <input
                 
-                  className={styles.input}
+                  className={styles.hackerInput}
                   type="text"
                   name="username"
                   value={profileInput.username}
@@ -138,11 +146,12 @@ const Hackersetup = () => {
                   required
                 />
               </label>
-          <label className={styles.label}>
+          <label className={styles.hackerLabel}>
                 Email adres
                 <span className={styles.error}>{profileError.email}</span>
+                <span  className={styles.hackerPasswordInfo}>Dit e-mail adres mag volledig zelf verzonnen zijn.</span>
                 <input
-                  className={styles.input}
+                  className={styles.hackerInput}
                   type="email"
                   name="mail"
                   value={profileInput.email}
@@ -150,37 +159,17 @@ const Hackersetup = () => {
                   required
                 />
               </label>
-            
-    
-             
-  
-          
             </legend>
             : ""}
-       
-        
-          {currentField === "interests" ? 
-            <legend className={styles.checkBoxLegend}>
-  
-                
-            {userInterests.length < 3 ? 
-              <p className={styles.checkBoxInfo} >Selecteer nog minstens <span className={styles.checkBoxInfoNummer}> {3 - (userInterests.length)} </span> interesses</p>
-              :
-              <input
-                className={styles.primButton}
+              </div>
+              {currentField === "account" ?
+                <input
+                className={styles.hackerPrimButton}
                 type="submit"
                 value="Naar het spelbord ->"
               />
-            }
-            </legend>
-              : ""}
-              </div>
-                {currentField === "account" ? <button className={styles.primButton} onClick={(e) => handleClickButton(e, "submit")} >selecteer je interesses  <Image
-                    src={`/assets/img/arrow.svg`}
-                    alt="arrow"
-                    width={30}
-                    height={12}
-                  /> </button> : "" }
+               : ""}
+            
           </form>
           </div>
     </WindowLayout>

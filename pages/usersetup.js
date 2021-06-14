@@ -187,7 +187,7 @@ const Usersetup = () => {
       </div>
       <h1 className={styles.title}>Gebruiker pagina</h1>
         <div className={styles.layoutWrapper}>
-        <WindowLayout title="account aanmaken">
+        <WindowLayout title="account aanmaken" bg="#fcf7eb">
           <div className={styles.container}>
           {currentField === "account"? <p className={styles.intro}>Maak je user-profiel en kies je eerste wachtwoord</p> : ""}
           {currentField === "picture"? <p className={styles.intro}>Kies een profielfoto</p> : ""}
@@ -215,6 +215,8 @@ const Usersetup = () => {
                       <Radiobutton
                         key={item}
                         item={item}
+                        defaultCheck={profilePicture}
+                        folder={"userpics"}
                         name={"profile-picture"}
                         onClickButton={(value) => {setProfilePicture(value), setCurrentField("account")}}
                       />

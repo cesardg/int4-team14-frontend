@@ -1,18 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="73" height="75" viewBox="0 0 73 75">
-  <g id="Group_14484" data-name="Group 14484" transform="translate(-90 -172)">
-    <path id="Path_7452" data-name="Path 7452" d="M7134.862,3355.623l36.478.146,5.19,7.025,7.1,6.156.257,36.406-7.3,6.555-5.74,8.18-35.016-.531-1.66-1.178-5.708-6.471-7.076-6.059.041-36.8,7.13-6.049Z" transform="translate(-7026.5 -3178.867)" fill="#fdfb76"/>
-    <rect id="Rectangle_120849" data-name="Rectangle 120849" width="37" height="5" transform="translate(108 172)"/>
-    <rect id="Rectangle_120850" data-name="Rectangle 120850" width="6" height="7" transform="translate(102 177)"/>
-    <rect id="Rectangle_120851" data-name="Rectangle 120851" width="7" height="6" transform="translate(95 184)"/>
-    <rect id="Rectangle_120852" data-name="Rectangle 120852" width="5" height="7" transform="translate(145 177)"/>
-    <rect id="Rectangle_120853" data-name="Rectangle 120853" width="7" height="6" transform="translate(150 184)"/>
-    <rect id="Rectangle_120854" data-name="Rectangle 120854" width="6" height="37" transform="translate(157 190)"/>
-    <rect id="Rectangle_120855" data-name="Rectangle 120855" width="5" height="37" transform="translate(90 190)"/>
-    <rect id="Rectangle_120856" data-name="Rectangle 120856" width="7" height="6" transform="translate(95 227)"/>
-    <rect id="Rectangle_120857" data-name="Rectangle 120857" width="6" height="7" transform="translate(102 233)"/>
-    <rect id="Rectangle_120858" data-name="Rectangle 120858" width="7" height="6" transform="translate(150 227)"/>
-    <rect id="Rectangle_120859" data-name="Rectangle 120859" width="5" height="7" transform="translate(145 233)"/>
-    <rect id="Rectangle_120860" data-name="Rectangle 120860" width="37" height="5" transform="translate(108 240)"/>
-    <text id="_" data-name="&lt;" transform="translate(125 231)" font-size="64" font-family="NeuePixelGrotesk, Neue Pixel Grotesk"><tspan x="-12.032" y="0">&lt;</tspan></text>
+<svg xmlns="http://www.w3.org/2000/svg" width="73" height="73" viewBox="0 0 73 73">
+  <g id="Group_15510" data-name="Group 15510" transform="translate(-922.232 -503.5)">
+    <path id="Path_7452" data-name="Path 7452" d="M940.375,508.485h36.834l4.975,7.033,7.39,6.407-.489,36.754-6.9,5.792-4.974,7.1H940.377l-6.005-7.1-7.256-5.792v-37.19l7.256-5.971Z" fill="#fdfb76"/>
+    <rect id="Rectangle_120849" data-name="Rectangle 120849" width="37" height="5" transform="translate(940.232 503.5)"/>
+    <rect id="Rectangle_120850" data-name="Rectangle 120850" width="6" height="7" transform="translate(934.232 508.5)"/>
+    <rect id="Rectangle_120851" data-name="Rectangle 120851" width="7" height="6" transform="translate(927.232 515.5)"/>
+    <rect id="Rectangle_120852" data-name="Rectangle 120852" width="5" height="7" transform="translate(977.232 508.5)"/>
+    <rect id="Rectangle_120853" data-name="Rectangle 120853" width="7" height="6" transform="translate(982.232 515.5)"/>
+    <rect id="Rectangle_120854" data-name="Rectangle 120854" width="6" height="37" transform="translate(989.232 521.5)"/>
+    <rect id="Rectangle_120855" data-name="Rectangle 120855" width="5" height="37" transform="translate(922.232 521.5)"/>
+    <rect id="Rectangle_120856" data-name="Rectangle 120856" width="7" height="6" transform="translate(927.232 558.5)"/>
+    <rect id="Rectangle_120857" data-name="Rectangle 120857" width="6" height="7" transform="translate(934.232 564.5)"/>
+    <rect id="Rectangle_120858" data-name="Rectangle 120858" width="7" height="6" transform="translate(982.232 558.5)"/>
+    <rect id="Rectangle_120859" data-name="Rectangle 120859" width="5" height="7" transform="translate(977.232 564.5)"/>
+    <rect id="Rectangle_120860" data-name="Rectangle 120860" width="37" height="5" transform="translate(940.232 571.5)"/>
+    <g id="_" data-name=" " style="isolation: isolate">
+      <g id="Group_15511" data-name="Group 15511" style="isolation: isolate">
+        <path id="Path_87829" data-name="Path 87829" d="M946.208,536.436h6.017v6.016h-6.017Zm6.017-6.016h6.015v6.016h-6.015Zm0,12.032h6.015v6.016h-6.015ZM958.24,524.4h6.017v6.016H958.24Zm0,24.064h6.017v6.016H958.24Z"/>
+      </g>
+    </g>
   </g>
 </svg>

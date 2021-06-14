@@ -88,10 +88,12 @@ const Rules = () => {
         </div>
       </div>
         <div className={styles.gameImageWrapper}>
-            <Image src={`/assets/img/hackerpicstr/pf3.svg`} alt="logo" width={416} height={331} />
-            <div className={styles.startLayoutWrapper}>
-              <WindowLayout title="opstart" bg="var(--brown)" border="var(--purple)">
-                <div className={styles.container}>
+            <div className={styles.gameImage}>
+             <Image src={`/assets/img/hackerpicstr/pf3.svg`} alt="logo" width={416} height={331} />
+            </div>
+            <div className={styles.gameLayoutWrapper}>
+              <WindowLayout title="het spel" bg="var(--brown)" border="var(--purple)">
+                <div className={styles.gameContainer}>
                <article className={styles.article}>
                 <h3 className={styles.subTitle}>Het spel</h3>
                 <p >
@@ -103,6 +105,40 @@ const Rules = () => {
           </WindowLayout>
           
         </div>
+        </div>
+        <div className={styles.hackerUserWrapper}>
+          <div className={styles.userLayoutWrapper}>
+              <WindowLayout title="de user" bg="var(--brown)" border="var(--red)">
+                <div className={styles.imageContainer}>
+                <Image
+                src={`/assets/img/userpics/pf2.svg`}
+                alt="picture of user"
+                width={470}
+                height={302}
+                 />
+                </div>
+                <div className={styles.userContainer}>
+                  <article className={styles.article}>
+                  <h3 className={styles.subTitle}>De user</h3>
+                  <p >
+                    Als u aan de beurt bent gooit u de dobbelsteen en verplaatst u uw pion het gegooide aantal vakjes. Zorg ervoor dat u enkel stevig doorklikt op het laatste vakje waar de pion moet blijven staan. Afhankelijk van het vakje waarop u terecht komt, heeft u verschillende positieve of negatieve acties. Deze zullen anders zijn wanneer u als hacker of als user speelt.
+                  </p>
+                  </article>
+                </div>
+              </WindowLayout>
+            </div>
+          <div className={styles.hackerLayoutWrapper}>
+              <WindowLayout title="de hacker" bg="var(--black)" border="var(--green)">
+                <div className={styles.hackerContainer}>
+                  <article className={styles.article}>
+                  <h3 className={styles.subTitle}>De user</h3>
+                  <p >
+                    Als u aan de beurt bent gooit u de dobbelsteen en verplaatst u uw pion het gegooide aantal vakjes. Zorg ervoor dat u enkel stevig doorklikt op het laatste vakje waar de pion moet blijven staan. Afhankelijk van het vakje waarop u terecht komt, heeft u verschillende positieve of negatieve acties. Deze zullen anders zijn wanneer u als hacker of als user speelt.
+                  </p>
+                  </article>
+                </div>
+              </WindowLayout>
+            </div>
         </div>
     </section>
     

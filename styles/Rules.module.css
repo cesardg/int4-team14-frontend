@@ -5,6 +5,12 @@
   margin-top: 4rem;
 }
 
+.section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
 
 .back{
   font-size: 2.5rem;
@@ -110,20 +116,69 @@
 
 .startLayoutWrapper{
     composes: layoutWrapper;
-    max-width: 90rem;
+    max-width: 80rem;
     margin-top: -7rem;
+    margin-right: 5rem;
     z-index: 2;
     display: flex;
     align-self: flex-end;
 }
 
 .para{
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     margin-top: 1rem;
 }
 
 .para:last-of-type{
-    margin-bottom: -5rem;
+    margin-bottom: -4rem;
+}
+
+.gameImageWrapper{
+    align-self: center;
+    margin-right: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: -30rem;
+}
+
+.gameImage{
+    transform: translate(-8rem, 7.8rem);
+    z-index: 1;
+}
+
+.gameLayoutWrapper{
+    composes: layoutWrapper;
+    min-width: 120rem;
+    z-index: 2;
+}
+
+.gameContainer{
+    composes: container;
+    width: 100%;
+    margin-bottom: 20rem;
+    padding-right: 20rem;
+}
+
+.hackerUserWrapper{
+    margin: auto;
+    width: 106rem;
+    display: flex;
+    justify-content: space-between;
+    z-index: 2;
+    margin-top: -15rem;
+}
+
+.userLayoutWrapper{
+    width: 49rem
+}
+
+.hackerLayoutWrapper{
+    composes: userLayoutWrapper;
+}
+
+.imageContainer{
+   margin: -.1rem
 }
 
 @media only screen and (max-width: 1100px) {

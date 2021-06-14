@@ -17,12 +17,25 @@ import { useChannel } from "../../components/ChatReactEffect";
 import UserRandom from "../../components/User/UserRandom";
 
 const User = ({ data }) => {
+  // game
   const router = useRouter();
   const gamecode = router.query.gamecode;
+  const [gameData, setGameData] = useState(data[0]);
+  const [realtimeGameData, setRealtimeGameData] = useState({
+    currentPlayer: data[0].startingPlayer,
+    fieldUser: 1,
+    actionUser: "start",
+    fieldHacker: 1,
+    actionHacker: "start",
+  });
 
+  // board
   let arr = [];
   let tempField;
-
+  const [windowComponent, setWindowComponent] = useState("");
+  const [userStart, setUserStart] = useState(false);
+  const [userDoubleTurn, setUserDoubleTurn] = useState(0);
+  const [hackerDoubleTurn, setHackerDoubleTurn] = useState(0);
   const randomOptions = [
     {
       type: "good",
@@ -85,7 +98,6 @@ const User = ({ data }) => {
       text: "Je probeert gratis muziek te downloaden op een verdachte website, hierdoor loopt je computer vast. Sla een beurt over",
     },
   ];
-
   const fields = [
     { nummer: 1, command: "1", action: "start" },
     { nummer: 2, command: "2", action: "empty" },
@@ -120,29 +132,18 @@ const User = ({ data }) => {
     { nummer: 31, command: "Y", action: "action" },
     { nummer: 32, command: "W", action: "empty" },
   ];
-
-  const [gameData, setGameData] = useState(data[0]);
-  const [receiveAdFromHacker, setReceiveAdFromHacker] = useState(false);
-  const [realtimeGameData, setRealtimeGameData] = useState({
-    currentPlayer: data[0].startingPlayer,
-    fieldUser: 1,
-    actionUser: "start",
-    fieldHacker: 1,
-    actionHacker: "start",
-  });
   const [randomOption, setRandomOption] = useState(
     randomOptions[Math.floor(Math.random() * randomOptions.length)]
   );
+
+  // specific logic
+  const [userPasswordAction, setUserPasswordAction] = useState("");
+  const [receiveAdFromHacker, setReceiveAdFromHacker] = useState(false);
   const [accountStrongness, setAccountStrongness] = useState(
     data[0].userinfo.score
-  ); // kan ook in gamedata zitten
-  const [userStart, setUserStart] = useState(false);
-  const [userDoubleTurn, setUserDoubleTurn] = useState(0);
-  const [hackerDoubleTurn, setHackerDoubleTurn] = useState(0);
-  const [userPasswordAction, setUserPasswordAction] = useState("");
+  );
 
-  const [windowComponent, setWindowComponent] = useState("");
-
+  // channel
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split("-")[0];
 
@@ -154,6 +155,7 @@ const User = ({ data }) => {
       const lastAction = message.data.split("-")[6];
       let newPlayer = realtimeGameData.currentPlayer;
 
+      // start passeren
       const checkPreviousField = async () => {
         const data = await fetchData("userinfos", gameData.userinfo.id);
         if (data.previousfield > 26 && newUserField < 6) {
@@ -204,7 +206,19 @@ const User = ({ data }) => {
         setRandomOption(
           randomOptions[Math.floor(Math.random() * randomOptions.length)]
         );
+        // setWindowComponent("random");
       }
+
+      // if (
+      //   realtimeGameData.currentPlayer === "user" &&
+      //   realtimeGameData.actionUser === "action"
+      // ) {
+      //   console.log(realtimeGameData.actionUser);
+      //   console.log("action");
+      //   setWindowComponent("action");
+      // }
+
+      // console.log("User realtime", realtimeGameData.actionUser);
 
       setRealtimeGameData({
         ...realtimeGameData,
@@ -233,6 +247,7 @@ const User = ({ data }) => {
     }
   });
 
+  // check board input
   const downHandler = ({ key }) => {
     arr.push(key);
     const index = arr.indexOf("X");
@@ -272,6 +287,7 @@ const User = ({ data }) => {
     });
   };
 
+  // logic functions
   const handleClickRandom = (value) => {
     console.log("random is oke");
     console.log(value);
@@ -354,8 +370,9 @@ const User = ({ data }) => {
         <Notes gameData={gameData} player="user" />
         <UserAccountStrongness value={accountStrongness} />
         <UserVpn />
+        {/* acties */}
         {realtimeGameData.currentPlayer === "user" &&
-        realtimeGameData.actionUser === "action" ? (
+        realtimeGameData.actionUser === "action"  ? (
           <UserAction
             onClickButton={(action) => handleClickAction(action)}
             start={userStart}
@@ -377,7 +394,7 @@ const User = ({ data }) => {
         )}
         {receiveAdFromHacker ? <UserAd subject={receiveAdFromHacker} /> : ""}
         {realtimeGameData.currentPlayer === "user" &&
-        realtimeGameData.actionUser === "random" ? (
+        realtimeGameData.actionUser === "random"  ? (
           <UserRandom
             randomCard={randomOption}
             onClickButton={(value) => handleClickRandom(value)}

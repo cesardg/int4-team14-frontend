@@ -1,11 +1,7 @@
 import styles from "./UserAdjustPassword.module.css";
 import { useState } from "react";
 
-const UserAdjustPassword = ({
-  gameData,
-  action,
-  handleUpdatedPassword,
-}) => {
+const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
   const [error, setError] = useState("");
   const [password, setPassword] = useState(
     gameData.userinfo.password.split("")
@@ -14,7 +10,7 @@ const UserAdjustPassword = ({
   const [tempPassword, setTempPassword] = useState([...password]);
 
   const validateNewCharacter = (char) => {
-    console.log(char);
+    console.log("vlaidate", char);
     if (action === "add2letters") {
       if (/[a-z]/.test(char)) {
         setError("");
@@ -39,33 +35,66 @@ const UserAdjustPassword = ({
   const handleChangeCharacter = (e, index) => {
     let copyTemp = [...tempPassword];
     let changes = 0;
+    let checkChar = false;
     let char;
-    if (e.target.value !== "") {
+
+    if (e.target.value !== "" && e.target.value !== password[index]) {
       char = e.target.value;
+      console.log("char", char);
+      
+      if (action === "change1letter") {
+        if (/[a-z]/.test(char)) {
+          setError("");
+          checkChar = true;
+        } else {
+          setError("Je nieuwe letter mag enkel een kleine letter zijn");
+          checkChar = false;
+        }
+      } else if (action === "change1capital") {
+        if (/[A-Z]/.test(char)) {
+          setError("");
+          checkChar = true;
+        } else {
+          setError("Je nieuwe letter mag enkel een hoofdletter zijn");
+          checkChar = false;
+        }
+      } else if (action === "change1number") {
+        if (/[0-9]/.test(char)) {
+          setError("");
+          checkChar = true;
+        } else {
+          setError("Je nieuwe karakter mag enkel een cijfer zijn");
+          checkChar = false;
+        }
+      }
     } else {
       char = password[index];
+      checkChar = true;
     }
-    copyTemp[index] = char;
-    setTempPassword(copyTemp);
-    console.log("-------");
-    console.log("temp", tempPassword);
-    console.log("copy", copyTemp);
 
-    copyTemp.map((char, index) => {
-      if (char != password[index]) {
-        changes++;
+    if (checkChar === true) {
+      copyTemp[index] = char;
+      setTempPassword(copyTemp);
+      console.log("-------");
+      console.log("temp", tempPassword);
+      console.log("copy", copyTemp);
+
+      copyTemp.map((char, index) => {
+        if (char != password[index]) {
+          changes++;
+        }
+      });
+      console.log("changes", changes);
+      if (changes > 1) {
+        console.log("veel aanpassing");
+        setError("Je mag maar 1 letter aanpassen");
+      } else if (changes === 0) {
+        setError("je moet 1 letter aanpassen");
+        console.log("geen aanpassing");
+      } else if (changes === 1) {
+        setError("");
+        console.log("juist 1 aanpassing");
       }
-    });
-    console.log("changes", changes);
-    if (changes > 1) {
-      console.log("veel aanpassing");
-      setError("Je mag maar 1 letter aanpassen");
-    } else if (changes === 0) {
-      setError("je moet 1 letter aanpassen");
-      console.log("geen aanpassing");
-    } else if (changes === 1) {
-      setError("");
-      console.log("juist 1 aanpassing");
     }
   };
 

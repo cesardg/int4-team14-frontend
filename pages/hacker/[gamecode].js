@@ -267,7 +267,6 @@ const Hacker = ({ data }) => {
   };
 
   const handleClickAction = (action) => {
-    console.log("clickaction triggered");
     if (action === "get interest") {
       hackerGetInterest();
     } else if (action === "send ad") {
@@ -439,7 +438,10 @@ const Hacker = ({ data }) => {
       {/* acties */}
       {realtimeGameData.currentPlayer === "hacker" &&
       realtimeGameData.actionHacker === "action" ? (
-        <HackerAction onClickButton={(action) => handleClickAction(action)} />
+        <HackerAction
+          onClickButton={(action) => handleClickAction(action)}
+          start={hackerStart}
+        />
       ) : (
         ""
       )}
@@ -455,7 +457,9 @@ const Hacker = ({ data }) => {
       {windowComponent === "decryption" ? (
         <HackerDecryption
           gameData={gameData}
-          handleUpdatedDiscoveries={(gameData, discovery) => handleUpdatedDiscoveries(gameData, discovery)}
+          handleUpdatedDiscoveries={(gameData, discovery) =>
+            handleUpdatedDiscoveries(gameData, discovery)
+          }
           action={hackerDecryptionAction}
         />
       ) : (

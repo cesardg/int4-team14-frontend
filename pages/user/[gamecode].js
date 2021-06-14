@@ -293,7 +293,7 @@ const User = ({ data }) => {
     }
     setRealtimeGameData({
       ...realtimeGameData,
-      actionHacker: "",
+      actionUser: "",
     });
   };
 
@@ -368,6 +368,7 @@ const User = ({ data }) => {
         {windowComponent === "password" ? (
           <UserAdjustPassword
             gameData={gameData}
+            // action={"change1capital"}
             action={userPasswordAction}
             handleUpdatedPassword={(score) => handleUpdatedPassword(score)}
           />

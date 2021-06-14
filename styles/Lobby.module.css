@@ -1,0 +1,82 @@
+.playersContainer {
+  margin: 1rem auto;
+  width: 90%;
+}
+
+.playersInside {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+}
+
+.playersTitle {
+  font-family: sohne-breit-fett;
+  font-size: 3.1rem;
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+  padding: 3rem 0 0;
+  text-align: center;
+}
+
+.rulesButton {
+  composes: buttonPurple from "./ButtonStyles.module.css";
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  justify-self: flex-end;
+  margin: 3rem;
+}
+
+.players {
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 5rem auto;
+}
+
+.player {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0 2rem;
+}
+
+.playerTitle {
+  font-family: sohne-breit-semifett;
+  font-size: 3rem;
+}
+
+.playerName {
+  font-size: 2.6rem;
+}
+
+.playerImg {
+  margin: 3rem 0;
+}
+
+.vs {
+  font-family: pixel;
+  font-size: 15rem;
+  color: var(--purple);
+  margin: 0 7rem;
+}
+
+.gamecode {
+  display: flex;
+ justify-content: center;
+}
+
+.gamecodeChar {
+  background-color: var(--yellow);
+  border: 2px solid var(--black);
+  font-family: pixel;
+  font-size: 4rem;
+  margin: 2rem 1rem;
+  padding: 1rem 1.5rem 0;
+}
+
+.text {
+  font-size: 2.4rem;
+  margin: 2rem auto 5rem;
+  text-align: center;
+  width: 50vw;
+}

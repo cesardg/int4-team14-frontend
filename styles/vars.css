@@ -1,12 +1,13 @@
 :root {
-  --black: black;
+  --white: white;
+  --black: #0e0e0f;
   --brown: #fcf7eb;
   --red: #ff0d5b;
   --orange: #ff3c1d;
   --yellow: #fdfb76;
   --green: #00db96;
   --gridorange: #fe745a;
-  --gridyellow:#B0AF52;
-  --purple: #8E1AF8;
+  --gridyellow: #b0af52;
+  --purple: #8e1af8;
   --shadow: rgba(0, 0, 0, 0.2);
 }

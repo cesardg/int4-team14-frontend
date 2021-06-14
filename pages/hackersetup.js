@@ -91,7 +91,7 @@ const Hackersetup = () => {
       </div>
       <h1 className={styles.title}>Gebruiker pagina</h1>
         <div className={styles.layoutWrapper}>
-        <WindowLayout title="account aanmaken" bg="black">
+        <WindowLayout title="account aanmaken" bg="var(--black)" border="var(--green)">
           <div className={styles.container}>
           {currentField === "account"? <p className={styles.hackerIntro}>Maak je hacker-profiel en kies een goede schuilnaam</p> : ""}
           {currentField === "picture"? <p className={styles.hackerIntro}>Kies een profielfoto</p> : ""}

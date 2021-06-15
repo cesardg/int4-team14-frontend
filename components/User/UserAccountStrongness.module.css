@@ -1,18 +1,48 @@
 .article {
-  border: .1rem solid black;
+  align-items: center;
+  background-color: var(--brown);
+  border-left: 2px solid var(--gridorange);
+  border-top: 2px solid var(--gridorange);
+  display: flex;
+  flex-direction: column;
+  height: -webkit-fill-available;
+  justify-content: center;
+  margin: 1rem 0 0;
   width: fit-content;
-  margin: 1rem;
-  padding: 1rem;
-  background-color: var(--color-text);
 }
 
-.bar{
-  border: .1rem solid red;
-  height: 1rem;
+.title {
+  font-family: sohne-breit-fett;
+  font-size: 1.8rem;
+  grid-column: 1 / span 2;
+  padding: 3rem 2rem 1rem;
+  text-transform: uppercase;
 }
 
-.progess{
-  background-color: blue;
-  height: 1rem;
-  transition: .5s all ease-in-out;
+.text {
+  text-align: center;
+  width: 75%;
+}
+
+.percentage {
+  font-size: 2rem;
+  padding: 2rem 0 1.5rem;
+}
+
+.progressEmpty {
+  border: 0.1rem solid red;
+  height: 2rem;
+}
+
+.bar {
+  border: 0.1rem solid red;
+  height: 3rem;
+  margin-bottom: 3rem;
+  width: 40rem;
+}
+
+.progess {
+  background-color: var(--green);
+  height: 3rem;
+  transition: 0.5s all ease-in-out;
 }

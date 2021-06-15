@@ -36,6 +36,12 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  min-height: 40rem;
+}
+
+.bottom .inside {
+  min-height: 10rem;
 }
 
 .title {

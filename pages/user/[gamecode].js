@@ -11,6 +11,7 @@ import UserDeleteCookies from "../../components/User/UserDeleteCookies";
 import UserWarningMail from "../../components/User/UserWarningMail";
 import UserAdjustPassword from "../../components/User/UserAdjustPassword";
 import UserAd from "../../components/User/UserAd";
+import styles from "./../../styles/Game.module.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useChannel } from "../../components/ChatReactEffect";
@@ -360,8 +361,8 @@ const User = ({ data }) => {
   }, [realtimeGameData]);
 
   return (
-    <>
-      <GameLayout>
+    <div>
+      <GameLayout className={styles.grid}>
         <h1 className="title">Us3r</h1>
         <GameBoard boardInfo={realtimeGameData} />
         <UserInfo userinfo={gameData.userinfo} />
@@ -372,7 +373,7 @@ const User = ({ data }) => {
         <UserVpn />
         {/* acties */}
         {realtimeGameData.currentPlayer === "user" &&
-        realtimeGameData.actionUser === "action"  ? (
+        realtimeGameData.actionUser === "action" ? (
           <UserAction
             onClickButton={(action) => handleClickAction(action)}
             start={userStart}
@@ -394,7 +395,7 @@ const User = ({ data }) => {
         )}
         {receiveAdFromHacker ? <UserAd subject={receiveAdFromHacker} /> : ""}
         {realtimeGameData.currentPlayer === "user" &&
-        realtimeGameData.actionUser === "random"  ? (
+        realtimeGameData.actionUser === "random" ? (
           <UserRandom
             randomCard={randomOption}
             onClickButton={(value) => handleClickRandom(value)}
@@ -403,7 +404,7 @@ const User = ({ data }) => {
           ""
         )}
       </GameLayout>
-    </>
+    </div>
   );
 };
 

@@ -133,9 +133,9 @@ const Lobby = () => {
                 </Link>
               </div>
             )}
-            <div className={buttonStyles.backButton}>
+            <div className={styles.backButton}>
               <Link href={`/`}>
-                <a>Terug</a>
+                <a className={styles.backButtonLink}>Terug</a>
               </Link>
             </div>
             <div className={styles.rulesButton}>

@@ -26,6 +26,19 @@
   margin: 3rem;
 }
 
+.backButton {
+  composes: backButton from "./ButtonStyles.module.css";
+  align-self: flex-start;
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  justify-self: flex-start;
+  margin: 10rem 0rem 0;
+}
+
+.backButtonLink {
+  padding: 10rem 3rem 0;
+}
+
 .players {
   align-items: center;
   display: flex;

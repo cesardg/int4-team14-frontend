@@ -99,7 +99,7 @@ const Home = () => {
                 onClick={() => {
                   setScreen("new");
                 }}
-                className={buttonStyles.button}
+                className={buttonStyles.buttonRed}
               >
                 Nieuw spel starten
               </button>
@@ -133,7 +133,7 @@ const Home = () => {
                 <input
                   type="submit"
                   value="Deelnemen aan het spel"
-                  className={buttonStyles.button}
+                  className={buttonStyles.buttonRed}
                 />
               </form>
             </div>
@@ -239,7 +239,7 @@ const Home = () => {
                 </label>
               </div>
               <Link href={`/lobby?gamecode=${gamecode}&player=${playerOne}`}>
-                <a onClick={handeClickStartGame} className={buttonStyles.button}>
+                <a onClick={handeClickStartGame} className={buttonStyles.buttonRed}>
                   Medespeler uitnodigen
                 </a>
               </Link>

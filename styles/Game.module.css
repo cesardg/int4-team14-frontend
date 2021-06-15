@@ -1,24 +1,6 @@
-.players {
-  display: flex;
-  justify-content: space-between;
-  margin: 5rem auto;
-}
-
-.player {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  width: 45%;
-}
-
-.gamecode {
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center;
-}
-
-.text {
-  font-size: 1.3rem;
-  font-weight: bold;
-  text-align: center;
+.grid {
+  background-color: green;
+  /* display: grid;
+  grid-template-columns: repeat(10, 6rem);
+  grid-template-columns: repeat(10, 6rem); */
 }

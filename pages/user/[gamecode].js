@@ -382,10 +382,12 @@ const User = ({ data }) => {
       {/* acties */}
       {realtimeGameData.currentPlayer === "user" &&
       realtimeGameData.actionUser === "action" ? (
-        <UserAction
-          onClickButton={(action) => handleClickAction(action)}
-          start={userStart}
-        />
+        <div className={styles.action}>
+          <UserAction
+            onClickButton={(action) => handleClickAction(action)}
+            start={userStart}
+          />
+        </div>
       ) : (
         ""
       )}

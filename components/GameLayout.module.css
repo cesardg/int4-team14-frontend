@@ -50,7 +50,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, 5.5rem);
   grid-template-rows: repeat(15, 5.5rem);
-  margin: -1rem -.5rem;
+  margin: -1rem -0.5rem;
   width: 100%;
 }
 
@@ -72,41 +72,49 @@
 
 .warnings {
   grid-column: 5 / span 7;
-  grid-row: 19/ span 5;
+  grid-row: 19 / span 5;
   margin: 2rem;
+}
+
+.action {
+  left: 15%;
+  position: absolute;
+  top: 15%;
+  width: 70vw;
+  z-index: 2;
 }
 
 .time {
   font-family: "pixel";
   font-size: 2rem;
-  margin-left: .7rem;
+  margin-left: 0.7rem;
 }
 
-.headerRight{
+.headerRight {
   display: flex;
   align-items: center;
 }
 
-.headerIcon{
+.headerIcon {
   margin: 0 1rem;
   position: relative;
   display: inline-block;
   cursor: pointer;
-  transition: .2s all ease;
+  transition: 0.2s all ease;
 }
 
- .popup {
-  transition: .2s all ease;
+.popup {
+  transition: 0.2s all ease;
   width: 15rem;
   background-color: var(--green);
-  border: .1rem solid;
+  border: 0.1rem solid;
   text-align: center;
   padding: 1rem;
   position: absolute;
   z-index: 1;
   font-size: 1.6rem;
   bottom: -7rem;
-  left: -6.4rem
+  left: -6.4rem;
 }
 
 .headerIcon .popup::after {
@@ -117,5 +125,18 @@
   margin-left: -1rem;
   border-width: 1rem;
   border-style: solid;
-  border-color: transparent  transparent var(--black) transparent;
+  border-color: transparent transparent var(--black) transparent;
+}
+
+@media only screen and (max-width: 1250px) {
+  .strongness {
+  grid-column: 10 / span 9;
+  grid-row: 1 / span 5;
+}
+
+.notes {
+  grid-column: 12 / span 7;
+  grid-row-start: 7;
+  margin: 2rem;
+}
 }

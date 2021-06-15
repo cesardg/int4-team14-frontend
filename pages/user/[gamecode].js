@@ -394,11 +394,22 @@ const User = ({ data }) => {
       ) : (
         ""
       )}
-      <div className={styles.cookies}>
-        <UserDeleteCookies />
-      </div>
-      {windowComponent === "cookies" ? <UserDeleteCookies /> : ""}
-      {windowComponent === "warning" ? <UserWarningMail /> : ""}
+
+      {windowComponent === "cookies" ? (
+        <div className={styles.cookies}>
+          <UserDeleteCookies />
+        </div>
+      ) : (
+        ""
+      )}
+
+      {windowComponent === "warning" ? (
+        <div className={styles.cookies}>
+          <UserWarningMail />
+        </div>
+      ) : (
+        ""
+      )}
       {windowComponent === "password" ? (
         <div className={styles.password}>
           <UserAdjustPassword

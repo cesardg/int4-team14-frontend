@@ -1,36 +1,214 @@
-.intro {
+.backButton {
+  composes: backButton from "./ButtonStyles.module.css";
+  align-self: flex-start;
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  justify-self: flex-start;
+  margin: 10rem 3rem 0;
+}
+
+.rulesButton {
+  composes: buttonPurple from "./ButtonStyles.module.css";
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  justify-self: flex-end;
+  margin: 3rem
+}
+
+/* start */
+.introContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 50vh auto;
-  column-gap: 10rem;
-}
-
-.center {
-  text-align: center;
-}
-
-.left {
-  composes: center;
-  grid-column-start: 1;
-}
-
-.right {
-  composes: center;
-  grid-column-start: 2;
+  column-gap: 7rem;
+  margin: 5rem auto;
+  max-width: 150rem;
+  row-gap: 5rem;
 }
 
 .bottom {
-  composes: center;
   grid-column: 1 / span 2;
   grid-row-start: 2;
+  justify-self: center;
+  width: 60%;
+}
+
+.inside {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-family: sohne-breit-fett;
+  font-size: 2.5rem;
+  padding: 3rem 0 2rem;
+}
+
+.text {
+  font-size: 2.1rem;
+}
+
+.bold {
+  font-family: sohne-semifett;
+  font-size: 2.1rem;
+  padding: 2rem;
+  text-align: center;
+  width: 50%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.gamecode {
+  background-color: var(--yellow);
+  font-family: pixel;
+  font-size: 3rem;
+  padding: 1rem 2rem;
+}
+
+/* new */
+.playersContainer {
+  margin: 1rem auto;
+  width: 90%;
+}
+
+.playersInside {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+}
+
+.playersTitle {
+  font-family: sohne-breit-fett;
+  font-size: 3.1rem;
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+  padding: 3rem 0 0;
+  text-align: center;
+}
+
+.playersText {
+  font-size: 2.4rem;
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 1;
+  text-align: center;
 }
 
 .players {
   display: flex;
+  grid-column: 1 / span 1;
+  grid-row: 3 / span 1;
   justify-content: space-between;
+  margin: 2rem auto;
+  width: 95%;
+}
+
+.playerImg {
+  grid-column: 1 / span 2;
+  grid-row: 2 / span 1;
+  justify-self: center;
+}
+
+.playerTitle {
+  grid-column: 1 / span 2;
+  grid-row: 1 / span 1;
+  font-family: sohne-breit-semifett;
+  font-size: 3rem;
+  justify-self: center;
+  padding: 2rem 0;
 }
 
 .player {
-  composes: center;
+  background-color: var(--yellow);
+  border: solid 0.1rem var(--black);
+  box-shadow: 0.1rem 0.1rem 0 0 var(--black), 0.2rem 0.2rem 0 0 var(--black),
+    0.3rem 0.3rem 0 0 var(--black), 0.4rem 0.4rem 0 0 var(--black),
+    0.5rem 0.5rem 0 0 var(--black), 0.6rem 0.6rem 0 0 var(--black),
+    0.7rem 0.7rem #d3cfc5, 0.8rem 0.8rem #d3cfc5, 0.9rem 0.9rem #d3cfc5,
+    1rem 1rem #d3cfc5;
+  display: grid;
+  column-gap: 5rem;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  font-size: 1.8rem;
+  margin: 0 auto;
+  width: 85%;
+}
+
+.input {
+  opacity: 0;
+}
+
+.input:checked + .player {
+  background-color: var(--green);
+  box-shadow: none;
+  transform: translate(0.6rem, 0.6rem);
+}
+
+.player:hover {
+  cursor: pointer;
+  transform: translate(0.6rem, 0.6rem);
+  box-shadow: 0.1rem 0.1rem 0 0 var(--black), 0.2rem 0.2rem 0 0 var(--black);
+}
+
+.playerList {
+  display: flex;
+  grid-column: 1 / span 2;
+  justify-content: space-between;
+}
+
+.playerListItem {
+  margin: 10rem auto 4rem;
+  max-width: 35rem;
+  position: relative;
+  text-align: center;
   width: 45%;
+}
+
+.playerListItem::before {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  bottom: 9rem;
+  content: "";
+  display: block;
+  height: 5rem;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.playerListItem1 {
+  composes: playerListItem;
+}
+
+.playerListItem2 {
+  composes: playerListItem;
+}
+
+.playerListItem3 {
+  composes: playerListItem;
+}
+
+.playerListItem4 {
+  composes: playerListItem;
+}
+
+.playerListItem1::before {
+  background-image: url(../public/assets/img/hackerpics/lobby-icon-1.svg);
+}
+
+.playerListItem2::before {
+  background-image: url(../public/assets/img/hackerpics/lobby-icon-2.svg);
+}
+
+.playerListItem3::before {
+  background-image: url(../public/assets/img/userpics/lobby-icon-1.svg);
+}
+
+.playerListItem4::before {
+  background-image: url(../public/assets/img/userpics/lobby-icon-2.svg);
 }

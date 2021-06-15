@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from 'next/image';
 
 const Layout = ({ children, style }) => {
-  console.log(style)
   return (
     <div className={style === "user" ? styles.userContainer :  styles.hackerContainer}>
       <Head>

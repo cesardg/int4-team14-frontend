@@ -1,27 +1,35 @@
 import styles from "./UserInfo.module.css";
-import Image from 'next/image';
+import Image from "next/image";
 
 const UserInfo = ({ userinfo }) => {
-
-  const interArr = (userinfo.interests.split('-'));
+  const interArr = userinfo.interests.split("-");
   interArr.shift();
 
   return (
     <article className={styles.article}>
-      <h2>User info</h2>
-      <Image
-        src={`/assets/img/${userinfo.picture}.png`}
-        alt="Picture of the user"
-        width={30}
-        height={30}
-      />
-      <p>{userinfo.username}</p>
-      interesses:
-      <ul>
-        {interArr.map((item, index) => <li key={index}>{item}</li>) }
+      <h2 className="hidden">User info</h2>
+      <div className={styles.img}>
+        <Image
+          src={`/assets/img/userpics/${userinfo.picture}.svg`}
+          alt="Picture of the user"
+          width={360}
+          height={231}
+        />
+      </div>
+
+      <p className={styles.username}>{userinfo.username}</p>
+      <p className={styles.title}>e-mail</p>
+      <p className={styles.text}>{userinfo.email}</p>
+      <p className={styles.title}>interesses</p>
+      <ul className={styles.interests}>
+        {interArr.map((item, index) => (
+          <li key={index} className={styles.interest}>
+            {item}
+          </li>
+        ))}
       </ul>
-      wachtwoord op dit moment:
-      <p>{userinfo.password}</p>
+      <p className={styles.title}>Wachtwoord op dit moment</p>
+      <p className={styles.text}>{userinfo.password}</p>
     </article>
   );
 };

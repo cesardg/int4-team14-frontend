@@ -363,17 +363,21 @@ const User = ({ data }) => {
   return (
     <GameLayout style="user">
       <h1>Us3r</h1>
-      <GameBoard boardInfo={realtimeGameData} />
+      {/* <GameBoard boardInfo={realtimeGameData} /> */}
       <div className={styles.info}>
         <UserInfo userinfo={gameData.userinfo} />
       </div>
-      <Turn who={realtimeGameData.currentPlayer} />
-      <UserWarning />
-      <Notes gameData={gameData} player="user" />
+      {/* <Turn who={realtimeGameData.currentPlayer} /> */}
+      <div className={styles.warnings}>
+        <UserWarning />
+      </div>
+      <div className={styles.notes}>
+        <Notes gameData={gameData} player="user" />
+      </div>
       <div className={styles.strongness}>
         <UserAccountStrongness value={accountStrongness} />
       </div>
-      <UserVpn />
+      {/* <UserVpn /> */}
       {/* acties */}
       {realtimeGameData.currentPlayer === "user" &&
       realtimeGameData.actionUser === "action" ? (

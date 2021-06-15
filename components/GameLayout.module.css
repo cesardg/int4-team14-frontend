@@ -1,31 +1,35 @@
-.userContainer{
+.userContainer {
   background-color: var(--brown);
   min-height: 100vh;
-  background-size: 6rem 6rem;
-  background-position: center; 
-  background-image:
-    linear-gradient(to right, var(--gridorange) .16rem, transparent .16rem),
-    linear-gradient(to bottom, var(--gridorange) .16rem, transparent .16rem);
+  background-size: 5.5rem 5.5rem;
+  background-position: 5rem 4rem;
+  background-image: linear-gradient(
+      to right,
+      var(--gridorange) 0.16rem,
+      transparent 0.16rem
+    ),
+    linear-gradient(to bottom, var(--gridorange) 0.16rem, transparent 0.16rem);
 }
 
-
-.hackerContainer{
+.hackerContainer {
   composes: userContainer;
   background-color: var(--black);
-  background-image:
-    linear-gradient(to right, var(--gridyellow) .16rem, transparent .16rem),
-    linear-gradient(to bottom, var(--gridyellow) .16rem, transparent .16rem);
+  background-image: linear-gradient(
+      to right,
+      var(--gridyellow) 0.16rem,
+      transparent 0.16rem
+    ),
+    linear-gradient(to bottom, var(--gridyellow) 0.16rem, transparent 0.16rem);
 }
-
 
 .userHeader {
   background-color: var(--red);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: .2rem solid var(--black);
-  border-bottom: .2rem solid var(--black);
-  box-shadow: 0rem .5rem var(--shadow) ;
+  border-top: 0.2rem solid var(--black);
+  border-bottom: 0.2rem solid var(--black);
+  box-shadow: 0rem 0.5rem var(--shadow);
   padding: 0 3rem;
 }
 
@@ -34,28 +38,44 @@
   background-color: var(--yellow);
 }
 
-.title{
+.title {
   display: none;
 }
 
-.logo{
-  margin: .5rem 0;
+.logo {
+  margin: 0.5rem 0;
 }
 
 .main {
   display: grid;
   grid-template-columns: repeat(auto-fill, 6rem);
   grid-template-rows: repeat(auto-fill, 6rem);
+  margin: -1rem;
   /* background-color: var(--gridorange) */
 }
 
 .info {
- grid-column: 2 / span 7;
- grid-row: 2 / span 9;
- border: 2px solid black;
+  grid-column: 2 / span 7;
+  grid-row: 2 / span 8;
 }
 
 .strongness {
-  grid-column: 15 / span 9;
-  grid-row: 1 / span 5;
+  grid-column: 20 / span 9;
+  grid-row: 1 / span 9;
+}
+
+.notes {
+  grid-column: 15 / span 7;
+  grid-row: 15 / span 5;
+  margin: 2rem;
+}
+
+.warnings {
+  grid-column: 5 / span 7;
+  grid-row: 19/ span 5;
+  margin: 2rem;
+}
+
+.time {
+  font-family: "pixel";
 }

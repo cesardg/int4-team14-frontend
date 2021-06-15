@@ -11,6 +11,8 @@ const Layout = ({ children, style }) => {
     let tempTime = today.getHours() + ':' + today.getMinutes();
     const [time, setTime] = useState(tempTime);
 
+    const [popupDice, setPopupDice] = useState("none");
+    const [popupVpn, setPopupVpn] = useState("none");
 
     useEffect(() => {
       const interval = setInterval(() => {
@@ -20,6 +22,24 @@ const Layout = ({ children, style }) => {
       }, 10000);
       return () => clearInterval(interval);
     }, []);
+
+    const handleClickPopup = (icon) => {
+      if (icon === "dice"){
+        if (popupDice === "none"){
+          setPopupDice("block")
+          setPopupVpn("none")
+        } else {
+          setPopupDice("none")
+        }
+      } else if (icon === "vpn") {
+        if (popupVpn === "none") {
+          setPopupVpn("block")
+          setPopupDice("none")
+        } else {
+          setPopupVpn("none")
+        }
+      }
+    }
   
   return (
     <div className={style === "user" ? styles.userContainer :  styles.hackerContainer}>
@@ -39,7 +59,25 @@ const Layout = ({ children, style }) => {
                 />
             </a>
           </Link>
-          <div>
+          <div className={styles.headerRight}>
+            <div className={styles.headerIcon} onClick={() => handleClickPopup("dice")}>
+              <Image
+                src={`/assets/img/vpnicon.svg`}
+                alt="Picture of the dice"
+                width={22}
+                height={22}
+                />
+              <span className={styles.popup} style={{display : popupDice}} >Je vpn staat aan/uit</span>
+              </div>
+            <div  className={styles.headerIcon} onClick={() => handleClickPopup("vpn")}>
+              <Image
+                src={`/assets/img/diceicon.svg`}
+                alt="Picture of the dice"
+                width={22}
+                height={22}
+                />
+                <span className={styles.popup} style={{display : popupVpn}} >Het is nu jouw beurt</span>
+              </div>
             <p className={styles.time}>{time}</p>
           </div>
       </header>

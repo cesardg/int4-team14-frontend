@@ -44,5 +44,44 @@
 
 .time{
   font-family: "pixel";
-  font-size: 1.8rem;
+  font-size: 2rem;
+  margin-left: .7rem;
+}
+
+.headerRight{
+  display: flex;
+  align-items: center;
+}
+
+.headerIcon{
+  margin: 0 1rem;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  transition: .2s all ease;
+}
+
+ .popup {
+  transition: .2s all ease;
+  width: 15rem;
+  background-color: var(--green);
+  border: .1rem solid;
+  text-align: center;
+  padding: 1rem;
+  position: absolute;
+  z-index: 1;
+  font-size: 1.6rem;
+  bottom: -7rem;
+  left: -6.4rem
+}
+
+.headerIcon .popup::after {
+  content: "";
+  position: absolute;
+  top: -2rem;
+  left: 50%;
+  margin-left: -1rem;
+  border-width: 1rem;
+  border-style: solid;
+  border-color: transparent  transparent var(--black) transparent;
 }

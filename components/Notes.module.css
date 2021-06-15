@@ -66,8 +66,8 @@
 .button {
   background-color: transparent;
   border: none;
-  bottom: 9rem;
-  position: absolute;
-  right: 6rem;
+  bottom: 1rem;
+  position: relative;
+  right: -28rem;
   transform: scaleX(-1);
 }

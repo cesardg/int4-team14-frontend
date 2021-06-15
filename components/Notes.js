@@ -51,7 +51,7 @@ const Notes = ({ gameData, player }) => {
       <div className={styles.container}>
         <p className={styles.title}>Notities</p>
         <p className={styles.text}>
-          Houd hier je notities bij en blijf je {player} altijd een stapje voor
+          Houd hier je notities bij en blijf je { player === "user" ? "hacker" : "gebruiker" } altijd een stapje voor
         </p>
         {notes.length > 0 ? (
           <ul className={styles.notesList}>

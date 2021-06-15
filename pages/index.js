@@ -115,10 +115,7 @@ const Home = () => {
             <div className={styles.inside}>
               <p className={styles.title}>Neem deel aan een spel</p>
               <p className={styles.text}>
-                Heeft je tegenstander al een game code gemaakt?
-              </p>
-              <p className={styles.bold}>
-                Vul hem dan hier in en neem deel aan het spel!
+                Heeft je tegenstander al een game code gemaakt? Vul hem dan hier in en neem deel aan het spel!
               </p>
               <form
                 onSubmit={(e) => handleSubmitGamecode(e)}

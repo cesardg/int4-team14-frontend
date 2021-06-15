@@ -1,6 +1,73 @@
-.article {
-  border: .1rem solid black;
-  width: fit-content;
-  margin: 1rem;
+.container {
+  height: 35rem;
+  overflow-y: scroll;
+  padding: 2rem;
+}
+
+.title {
+  font-family: sohne-breit-fett;
+  font-size: 1.8rem;
+  padding-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.text {
+  border-bottom: 1.5px solid var(--black);
+  padding-bottom: 2rem;
+}
+
+.empty {
+  padding: 2rem 1rem;
+}
+
+.notesList {
+  display: flex;
+  flex-direction: column;
   padding: 1rem;
+}
+
+.notesListItem {
+  font-size: 1.6rem;
+  overflow-wrap: break-word;
+  padding: 1rem 1rem 1rem 3rem;
+  position: relative;
+}
+
+.notesListItem::before {
+  background-image: url(../public/assets/img/bol.svg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  content: "";
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0.5rem;
+  width: 1rem;
+}
+
+.textarea {
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--black);
+  font-family: sohne;
+  font-size: 1.7rem;
+  padding: 2rem;
+  width: 100%;
+}
+
+.textarea:focus {
+  border: none;
+  border-top: 1px solid var(--black);
+  outline: none;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  bottom: 9rem;
+  position: absolute;
+  right: 6rem;
+  transform: scaleX(-1);
 }

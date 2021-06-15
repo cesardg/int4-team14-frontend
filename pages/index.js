@@ -1,7 +1,7 @@
 import Layout from "../components/Layout";
 import WindowLayout from "../components/WindowLayout";
 import styles from "./../styles/Home.module.css";
-import buttonStyles from "./../styles/buttonStyles.module.css";
+import buttonStyles from "./../styles/ButtonStyles.module.css";
 import { useState } from "react";
 import Link from "next/link";
 import Router from "next/router";
@@ -124,7 +124,7 @@ const Home = () => {
                 className={styles.form}
               >
                 <input
-                  type="text"
+                  type="nummer"
                   name="gamecode"
                   id="gamecode"
                   required

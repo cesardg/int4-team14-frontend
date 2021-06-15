@@ -70,9 +70,17 @@
 
 .gamecode {
   background-color: var(--yellow);
-  font-family: pixel;
+  font-family: "pixel";
   font-size: 3rem;
   padding: 1rem 2rem;
+  border: .1rem solid black;
+  text-align: center;
+  letter-spacing: .4rem;
+}
+
+.gamecode:focus {
+  outline: none;
+  border: .2rem solid black;
 }
 
 /* new */

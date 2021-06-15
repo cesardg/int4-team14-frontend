@@ -2,22 +2,25 @@ import styles from "./GameLayout.module.css";
 import Head from "next/head";
 import Link from "next/link";
 import Image from 'next/image';
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
+
 
 const Layout = ({ children, style }) => {
-  
-    let date = new Date().toLocaleString()
-    const [time, setTime] = useState(date);
+
+    let today = new Date()
+    let tempTime = today.getHours() + ':' + today.getMinutes();
+    const [time, setTime] = useState(tempTime);
 
 
     useEffect(() => {
       const interval = setInterval(() => {
-      console.log('This will run every minute!');
-      settime(tempTime)
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [time]);
-
+        today = new Date()
+        tempTime = today.getHours() + ':' + today.getMinutes();
+        setTime(tempTime);
+      }, 10000);
+      return () => clearInterval(interval);
+    }, []);
+  
   return (
     <div className={style === "user" ? styles.userContainer :  styles.hackerContainer}>
       <Head>

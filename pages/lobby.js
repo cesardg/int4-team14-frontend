@@ -1,7 +1,7 @@
 import Layout from "../components/Layout";
 import WindowLayout from "../components/WindowLayout";
 import styles from "./../styles/Lobby.module.css";
-import buttonStyles from "./../styles/buttonStyles.module.css";
+import buttonStyles from "./../styles/ButtonStyles.module.css";
 import { useChannel } from "../components/ChatReactEffect";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";

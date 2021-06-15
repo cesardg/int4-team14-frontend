@@ -1,7 +1,7 @@
 .userContainer{
   background-color: var(--brown);
   min-height: 100vh;
-  background-size: 6rem 6rem;
+  background-size: 5.5rem 5.5rem;
   background-position: 5rem 4rem; 
   background-image:
     linear-gradient(to right, var(--gridorange) .16rem, transparent .16rem),
@@ -44,4 +44,5 @@
 
 .time{
   font-family: "pixel";
+  font-size: 1.8rem;
 }

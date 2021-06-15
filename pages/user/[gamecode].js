@@ -1,3 +1,4 @@
+// components
 import GameLayout from "../../components/GameLayout";
 import Turn from "../../components/Turn";
 import Notes from "../../components/Notes";
@@ -11,11 +12,13 @@ import UserDeleteCookies from "../../components/User/UserDeleteCookies";
 import UserWarningMail from "../../components/User/UserWarningMail";
 import UserAdjustPassword from "../../components/User/UserAdjustPassword";
 import UserAd from "../../components/User/UserAd";
-import styles from "./../../components/GameLayout.module.css";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 import { useChannel } from "../../components/ChatReactEffect";
 import UserRandom from "../../components/User/UserRandom";
+// styling
+import styles from "./../../components/GameLayout.module.css";
+// imports
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 const User = ({ data }) => {
   // game
@@ -362,8 +365,9 @@ const User = ({ data }) => {
 
   return (
     <GameLayout style="user">
-      <h1>Us3r</h1>
-      {/* <GameBoard boardInfo={realtimeGameData} /> */}
+      <div className={styles.gameboard}>
+        <GameBoard boardInfo={realtimeGameData} />
+      </div>
       <div className={styles.info}>
         <UserInfo userinfo={gameData.userinfo} />
       </div>
@@ -393,16 +397,19 @@ const User = ({ data }) => {
       )}
       {windowComponent === "cookies" ? <UserDeleteCookies /> : ""}
       {windowComponent === "warning" ? <UserWarningMail /> : ""}
-      {windowComponent === "password" ? (
+      {/* {windowComponent === "password" ? ( */}
+      <div className={styles.password}>
         <UserAdjustPassword
           gameData={gameData}
-          // action={"change1capital"}
-          action={userPasswordAction}
+          action={"add1capital"}
+          // action={userPasswordAction}
           handleUpdatedPassword={(score) => handleUpdatedPassword(score)}
         />
-      ) : (
+      </div>
+
+      {/* ) : (
         ""
-      )}
+      )} */}
       {receiveAdFromHacker ? <UserAd subject={receiveAdFromHacker} /> : ""}
       {realtimeGameData.currentPlayer === "user" &&
       realtimeGameData.actionUser === "random" ? (

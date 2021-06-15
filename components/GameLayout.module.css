@@ -1,3 +1,10 @@
+.gameboard {
+  height: fit-content;
+  width: fit-content;
+  z-index: 5;
+  background-color: white;
+}
+
 .userContainer {
   background-color: var(--brown);
   min-height: 100vh;
@@ -84,6 +91,15 @@
   z-index: 2;
 }
 
+.password {
+  left: 20vw;
+  position: absolute;
+  top: 10%;
+  width: 60vw;
+  z-index: 2;
+}
+
+/* header */
 .time {
   font-family: "pixel";
   font-size: 2rem;
@@ -130,13 +146,13 @@
 
 @media only screen and (max-width: 1250px) {
   .strongness {
-  grid-column: 10 / span 9;
-  grid-row: 1 / span 5;
-}
+    grid-column: 10 / span 9;
+    grid-row: 1 / span 5;
+  }
 
-.notes {
-  grid-column: 12 / span 7;
-  grid-row-start: 7;
-  margin: 2rem;
-}
+  .notes {
+    grid-column: 12 / span 7;
+    grid-row-start: 7;
+    margin: 2rem;
+  }
 }

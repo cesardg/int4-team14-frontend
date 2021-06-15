@@ -15,7 +15,7 @@ const UserAction = ({ onClickButton, start }) => {
           >
             <div className={styles.actionImg}>
               <Image
-                src={`/assets/img/useractions/add-characters.svg`}
+                src={`/assets/img/useractions/add2letters.svg`}
                 alt="Picture of the user"
                 width={100}
                 height={80}
@@ -50,7 +50,7 @@ const UserAction = ({ onClickButton, start }) => {
             {" "}
             <div className={styles.actionImg}>
               <Image
-                src={`/assets/img/useractions/add-capital.svg`}
+                src={`/assets/img/useractions/add1capital.svg`}
                 alt="Picture of the user"
                 width={100}
                 height={80}
@@ -82,7 +82,7 @@ const UserAction = ({ onClickButton, start }) => {
           >
             <div className={styles.actionImg}>
               <Image
-                src={`/assets/img/useractions/add-number.svg`}
+                src={`/assets/img/useractions/add1number.svg`}
                 alt="Picture of the user"
                 width={100}
                 height={80}

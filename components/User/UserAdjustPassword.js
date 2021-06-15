@@ -1,5 +1,11 @@
+// styling
 import styles from "./UserAdjustPassword.module.css";
+import buttonStyles from "./../../styles/ButtonStyles.module.css";
+// components
+import GameWindowLayout from "../GameWindowLayout";
+// imports
 import { useState } from "react";
+import Image from "next/image";
 
 const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
   const [error, setError] = useState("");
@@ -41,7 +47,7 @@ const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
     if (e.target.value !== "" && e.target.value !== password[index]) {
       char = e.target.value;
       console.log("char", char);
-      
+
       if (action === "change1letter") {
         if (/[a-z]/.test(char)) {
           setError("");
@@ -127,86 +133,124 @@ const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
     }
     e.target.reset();
   };
+  console.log(action);
 
   return (
-    <article className={styles.article}>
-      <h2>spelbord</h2>
-      <p>Versterk je wachtwoord</p>
-      <p>{action}</p>
-
-      <p>Jouw huidige wachtwoord</p>
-      <p className={styles.password}>
-        {password.map((character, index) => (
-          <span key={index} className={styles.character}>
-            {character}
-          </span>
-        ))}
-      </p>
-      <p>Jouw nieuw wachtwoord</p>
-      {action.includes("add") ? (
-        <form className={styles.password} onSubmit={(e) => handleSubmit(e)}>
-          {password.map((character, index) => (
-            <p key={index} className={styles.character}>
-              {character}
-            </p>
-          ))}
-          <input
-            className={styles.input}
-            type={action === "add1number" ? "number" : "text"}
-            name="char1"
-            maxLength="1"
-            onChange={(e) => validateNewCharacter(e.target.value)}
-            required
+    <GameWindowLayout title="spelbord" bg="var(--yellow)" border="var(--green)">
+      <div className={styles.container}>
+        <p className={styles.title}>Versterk je wachtwoord</p>
+        {action === "add2letters" ? (
+          <p className={styles.action}>Voeg 2 kleine letters toe</p>
+        ) : (
+          ""
+        )}
+        {action === "add1capital" ? (
+          <p className={styles.action}>Voeg 1 hoofdletter toe</p>
+        ) : (
+          ""
+        )}
+        {action === "add1number" ? (
+          <p className={styles.action}>Voeg 1 cijfer toe</p>
+        ) : (
+          ""
+        )}
+        {action === "change1number" ? (
+          <p className={styles.action}>
+            Verander 1 kleine letter in een cijfer
+          </p>
+        ) : (
+          ""
+        )}
+        {action === "change1capital" ? (
+          <p className={styles.action}>
+            Verander 1 kleine letter in een hoofdletter
+          </p>
+        ) : (
+          ""
+        )}
+        <div className={styles.img}>
+          <Image
+            src={`/assets/img/useractions/${action}.svg`}
+            alt="Picture of the user"
+            width={150}
+            height={150}
           />
-          {action === "add2letters" ? (
-            <input
-              className={styles.input}
-              type="text"
-              name="char2"
-              maxLength="1"
-              required
-              onChange={(e) => validateNewCharacter(e.target.value)}
-            />
-          ) : (
-            ""
-          )}
-          <span className={styles.error}>{error}</span>
-          <input
-            className={styles.button}
-            type="submit"
-            value="Wachtwoord aanpassen"
-            disabled={error.length > 0 ? true : false}
-          />
-        </form>
-      ) : (
-        <form className={styles.password} onSubmit={(e) => handleSubmit(e)}>
-          {password.map((character, index) =>
-            /[a-z]/.test(character) ? (
+        </div>
+        <p className={styles.textFirst}>Jouw huidig wachtwoord</p>
+        <p className={styles.passwordText}>{password}</p>
+        <p className={styles.text}>Jouw nieuw wachtwoord</p>
+        {action.includes("add") ? (
+          <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
+            <div className={styles.password}>
+              {password.map((character, index) => (
+                <p key={index} className={styles.character}>
+                  {character}
+                </p>
+              ))}
               <input
-                key={index}
                 className={styles.input}
-                type={action === "add1capital" ? "number" : "text"}
-                name={"char" + (index + 1)}
+                type={action === "add1number" ? "number" : "text"}
+                name="char1"
                 maxLength="1"
-                placeholder={character}
-                onChange={(e) => handleChangeCharacter(e, index)}
+                onChange={(e) => validateNewCharacter(e.target.value)}
+                required
               />
-            ) : (
-              <p key={index} className={styles.character}>
-                {character}
-              </p>
-            )
-          )}
-          <span className={styles.error}>{error}</span>
-          <input
-            className={styles.button}
-            type="submit"
-            value="Wachtwoord aanpassen"
-            disabled={error.length > 0 ? true : false}
-          />
-        </form>
-      )}
-    </article>
+              {action === "add2letters" ? (
+                <input
+                  className={styles.input}
+                  type="text"
+                  name="char2"
+                  maxLength="1"
+                  required
+                  onChange={(e) => validateNewCharacter(e.target.value)}
+                />
+              ) : (
+                ""
+              )}
+            </div>
+            <span className={styles.error}>{error}</span>
+            <input
+              className={styles.button}
+              type="submit"
+              value="Wachtwoord aanpassen"
+              disabled={error.length > 0 ? true : false}
+              className={buttonStyles.buttonGreen}
+            />
+          </form>
+        ) : (
+          <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
+            <div className={styles.password}>
+              {password.map((character, index) =>
+                /[a-z]/.test(character) ? (
+                  <input
+                    key={index}
+                    className={styles.input}
+                    type={action === "add1capital" ? "number" : "text"}
+                    name={"char" + (index + 1)}
+                    maxLength="1"
+                    placeholder={character}
+                    onChange={(e) => handleChangeCharacter(e, index)}
+                  />
+                ) : (
+                  <p key={index} className={styles.character}>
+                    {character}
+                  </p>
+                )
+              )}
+            </div>
+
+            <span className={styles.error}>{error}</span>
+            <input
+              className={styles.button}
+              type="submit"
+              value="Wachtwoord aanpassen"
+              disabled={error.length > 0 ? true : false}
+              className={buttonStyles.buttonGreen}
+            />
+          </form>
+        )}
+      </div>
+    </GameWindowLayout>
   );
 };
 

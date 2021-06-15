@@ -198,10 +198,74 @@
     text-transform: capitalize;
 }
 
+@media only screen and (max-width: 1350px) {
+
+  .startShortWrapper{
+   margin-left: 2rem;
+  }
+
+  .startLayoutWrapper{
+      margin-right: 20rem;
+  }
+
+    .gameLayoutWrapper{
+     min-width: 30rem;
+     margin-left: 2rem;
+     padding-right: 2rem;
+  }
+
+  .shortLayoutWrapper{
+      margin-right: 3rem;
+  }
+
+  .article{
+      padding-right: 0;
+  }
+
+}
+
+
 @media only screen and (max-width: 1100px) {
 
   .container{
     width: 70rem;
     margin: 0 auto;
   }
+
+  .img1{
+      display: none;
+  }
+
+  .startLayoutWrapper{
+      margin: 2rem;
+
+  }
+
+  .container{
+      padding: 1rem;
+      width: 100%;
+  }
+
 }
+
+@media only screen and (max-width: 900px) {
+
+    .gameImage{
+        display: none;
+    }
+
+    .shortLayoutWrapper{
+        padding-right: 1rem;
+    }
+
+    .startLayoutWrapper{
+        padding: 2rem;
+    }
+
+    .gameImageWrapper{
+        margin-top: -3rem;
+    }
+
+}
+
+

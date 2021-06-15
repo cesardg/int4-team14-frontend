@@ -268,7 +268,7 @@ margin-bottom: 3.1rem;
   box-shadow: none;
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1150px) {
 
   .container{
     width: 70rem;
@@ -276,11 +276,42 @@ margin-bottom: 3.1rem;
   }
 
   .intro{
-  padding: 1rem
+  padding: 2rem 0
   }
 
 .info{
   padding: 2rem 5rem;
+  }
+
+  .formContainer{
+    flex-direction: column-reverse;
+  }
+
+  .img{
+    display: none;
+  }
+
+  .legend{
+    padding: 0;
+    margin: 2rem 0rem;
+  }
+
+  .form{
+    margin-bottom: 3rem;
+    width: 100%;
+  }
+
+  .secButton{
+    margin-top: -2rem;
+    margin-bottom: 2rem;
+  }
+
+  .primButton{
+    width: 40rem;
+  }
+
+  .section{
+    padding-bottom: 4rem;
   }
 
 }

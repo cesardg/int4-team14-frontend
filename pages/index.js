@@ -2,7 +2,7 @@ import Layout from "../components/Layout";
 import WindowLayout from "../components/WindowLayout";
 import styles from "./../styles/Home.module.css";
 import buttonStyles from "./../styles/ButtonStyles.module.css";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Link from "next/link";
 import Router from "next/router";
 import Image from "next/image";
@@ -29,6 +29,9 @@ const Home = () => {
   const [playerTwo, setPlayerTwo] = useState("user");
   const [gamecode, setGamecode] = useState(getStartingGamecode(6));
   const [error, setError] = useState();
+  const [showButton, setShowButton] = useState(false);
+  const [profilePass, setProfilePass] = useState(["","", "", "", "", ""]);
+  const [passField, setPassField] = useState();
 
   const fetchDataGames = async (code) => {
     const req = await fetch(
@@ -40,17 +43,17 @@ const Home = () => {
 
   const handleSubmitGamecode = async (e) => {
     e.preventDefault();
-    console.log(e.target.gamecode.value);
+    const tempcode = profilePass.join("");
     // controleert of de game code wel bestaat
-    const data = await fetchDataGames(e.target.gamecode.value);
+    const data = await fetchDataGames(tempcode);
     if (data.length != "0") {
       console.log("game bestaat");
-      setGamecode(e.target.gamecode.value);
+      setGamecode(tempcode);
       Router.push(
-        `/lobby?gamecode=${e.target.gamecode.value}&player=${data[0].playertwo}`
+        `/lobby?gamecode=${tempcode}&player=${data[0].playertwo}`
       );
     } else {
-      setError("deze gamecode bestaat niet")
+      setError("Deze gamecode bestaat niet")
     }
   };
 
@@ -80,7 +83,25 @@ const Home = () => {
     }
   };
 
-  console.log(playerOne);
+    const handelChangePas = (value, index) => {
+    const copyArr = [...profilePass];
+    copyArr[index] = value.target.value;
+    setProfilePass(copyArr);
+    const newIndex = Number(index) + 1;
+    if(index == 5){
+      setShowButton(true)
+    }
+    if (value.target.value){
+      setPassField(newIndex)
+      }
+    }
+
+  const callbackRef = useCallback( (field) => inputElement  => {
+    if (field == passField && inputElement) {
+     inputElement.focus();
+    }
+  }, [passField]);
+
   return (
     <Layout style="user">
       {screen == "start" ? (
@@ -115,27 +136,96 @@ const Home = () => {
             <div className={styles.inside}>
               <p className={styles.title}>Neem deel aan een spel</p>
               <p className={styles.text}>
-                Heeft je tegenstander al een game code gemaakt? Vul hem dan hier in en neem deel aan het spel!
+                Heeft je tegenstander al een game code gemaakt? <br></br> Vul hem dan hier in en neem deel aan het spel!
               </p>
               <form
                 onSubmit={(e) => handleSubmitGamecode(e)}
                 className={styles.form}
               >
+             <label className={styles.codeLabel}>
+        
+              <div className={styles.passwordWrapper}>
                 <input
+                  className={styles.smallInput}
                   type="number"
-                  name="gamecode"
-                  id="gamecode"
+                  maxLength="1"
+                  placeholder="1"
+                  name="code"
+                  ref={callbackRef(0)}
+                  value={profilePass[0]}
+                  onChange={(value) => handelChangePas(value, "0")}
                   required
-                  placeholder="123456"
-                  className={styles.gamecode}
                 />
+               
+                 <input
+                  className={styles.smallInput}
+                  type="number"
+                  name="code"
+                  placeholder="2"
+                  maxLength="1"
+                  ref={callbackRef(1)}
+                  value={profilePass[1]}
+                  onChange={(value) => handelChangePas(value, "1")}
+                  required
+                />
+                   
+                 <input
+                  className={styles.smallInput}
+                  type="number"
+                  name="code"
+                  placeholder="3"
+                  maxLength="1"
+                  ref={callbackRef(2)}
+                  value={profilePass[2]}
+                  onChange={(value) => handelChangePas(value, "2")}
+                  required
+                />
+                   
+                 <input
+                  className={styles.smallInput}
+                  type="number"
+                  name="code"
+                  placeholder="4"
+                  maxLength="1"
+                  ref={callbackRef(3)}
+                  value={profilePass[3]}
+                  onChange={(value) => handelChangePas(value, "3")}
+                  required
+                />
+                   
+                 <input
+                  className={styles.smallInput}
+                  type="number"
+                  name="code"
+                  placeholder="5"
+                  maxLength="1"
+                  ref={callbackRef(4)}
+                  value={profilePass[4]}
+                  onChange={(value) => handelChangePas(value, "4")}
+                  required
+                />
+                    
+                 <input
+                  className={styles.smallInput}
+                  type="number"
+                  name="code"
+                  placeholder="6"
+                  maxLength="1"
+                  ref={callbackRef(5)}
+                  value={profilePass[5]}
+                  onChange={(value) => handelChangePas(value, "5")}
+                  required
+                />
+                </div>
+              </label>
                 {error? <span  className={styles.error} >{error}</span> : ""}
-                
+                {showButton? 
                 <input
                   type="submit"
                   value="Deelnemen aan het spel"
                   className={buttonStyles.buttonRed}
                 />
+                : ""}
               </form>
             </div>
           </WindowLayout>

@@ -86,12 +86,14 @@ const Rules = () => {
                 </div>
               </WindowLayout>
             </div>
+            <div className={styles.img1}>
             <Image
               src={`/assets/img/userpicstr/pf3.svg`}
               alt="logo"
               width={416}
               height={331}
             />
+            </div>
           </div>
           <div className={styles.startLayoutWrapper}>
             <WindowLayout
@@ -166,66 +168,7 @@ const Rules = () => {
             </WindowLayout>
           </div>
         </div>
-        <div className={styles.hackerUserWrapper}>
-          <div className={styles.userLayoutWrapper}>
-            <WindowLayout
-              title="de gebruiker"
-              bg="var(--brown)"
-              border="var(--red)"
-            >
-              <div className={styles.imageContainer}>
-                <Image
-                  src={`/assets/img/userpics/pf2.svg`}
-                  alt="picture of user"
-                  width={470}
-                  height={302}
-                />
-              </div>
-              <div className={styles.userContainer}>
-                <article className={styles.article}>
-                  <h3 className={styles.subTitle}>De gebruiker</h3>
-                  <h4 className={styles.smallTitle}>actie-vak</h4>
-                  <p>
-                    Wanneer u op een actievak terecht komt, springt op uw scherm
-                    een venster open waarin u de keuze krijgt uit 6
-                    verschillende acties. Deze acties kunt u gebruiken om uw
-                    account uit de klauwen van de hacker te houden. Deze 6
-                    acties luiden als volgt:
-                  </p>
-                </article>
-              </div>
-            </WindowLayout>
-          </div>
-          <div className={styles.hackerLayoutWrapper}>
-            <WindowLayout
-              title="de hacker"
-              bg="var(--black)"
-              border="var(--green)"
-            >
-              <div className={styles.imageContainer}>
-                <Image
-                  src={`/assets/img/hackerpics/pf1.svg`}
-                  alt="picture of user"
-                  width={471}
-                  height={302}
-                />
-              </div>
-              <div className={styles.hackerContainer}>
-                <article className={styles.article}>
-                  <h3 className={styles.subTitle}>De hacker</h3>
-                  <h4 className={styles.smallTitle}>actie-vak</h4>
-                  <p>
-                    Wanneer u op een actievak terecht komt, springt op uw scherm
-                    een venster open waarin u de keuze krijgt uit 6
-                    verschillende acties om het account van de user binnen te
-                    dringen. Deze 6 acties luiden als volgt:
-                  </p>
-                </article>
-              </div>
-            </WindowLayout>
-          </div>
-        </div>
-      </section>
+     </section>
     </Layout>
   );
 };

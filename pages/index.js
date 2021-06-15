@@ -124,10 +124,11 @@ const Home = () => {
                 className={styles.form}
               >
                 <input
-                  type="nummer"
+                  type="number"
                   name="gamecode"
                   id="gamecode"
                   required
+                  placeholder="123456"
                   className={styles.gamecode}
                 />
                 <input

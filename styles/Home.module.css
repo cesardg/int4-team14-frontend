@@ -48,6 +48,7 @@
   font-family: sohne-breit-fett;
   font-size: 2.5rem;
   padding: 3rem 0 2rem;
+  text-transform: uppercase;
 }
 
 .text {
@@ -76,6 +77,8 @@
   border: .1rem solid black;
   text-align: center;
   letter-spacing: .4rem;
+  width: 24rem;
+  margin: auto
 }
 
 .gamecode:focus {

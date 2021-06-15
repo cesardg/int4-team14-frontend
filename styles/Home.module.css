@@ -45,7 +45,8 @@
 }
 
 .title {
-  font-family: "sohne-breit-fett";
+  font-family: "sohne-breit-fett", Helvetica, sans-serif;
+  font-weight: 700;
   font-size: 2.5rem;
   padding: 2rem 1rem;
   text-transform: uppercase;

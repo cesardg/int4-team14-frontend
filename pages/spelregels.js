@@ -1,10 +1,73 @@
 import Layout from "../components/Layout";
-import styles from "./../styles/Rules.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import WindowLayout from "../components/WindowLayout";
+import styles from "./../styles/Rules.module.css";
+import {useState} from 'react';
 
 const Rules = () => {
+
+  const fields =[
+    {
+      type: "start", 
+      user: "Elke keer wanneer je voorbij de start passeert, ontgrendel je de mogelijkheid om je VPN in te schakelen.",
+      hacker: "Elke keer wanneer je voorbij de start passeert, ontgrendel je de mogelijkheid om het wachtwoord van de user te raden. ",
+      userWarning: "Opgepast! Wanneer je weer langs de start passeert zonder je VPN te gebruiken komt er geen tweede VPN beurt bij.",
+      hackerWarning: "Opgepast! Wanneer je weer langs de start passeert zonder je gok te gebruiken komt er geen tweede gok bij."
+    },
+    {
+      type: "actie", 
+      user: "Wanneer u terecht komt op een actievak springt een venster open op uw scherm waarin u de keuze krijgt uit 6 verschillende acties om uw account uit de klauwen van de hacker te houden. Deze 6 acties luiden als volgt: ",
+      hacker: "Wanneer u terecht komt op een actievak springt een venster open op uw scherm waarin u de keuze krijgt uit 6 verschillende acties om het account van de user binnen te dringen. Deze 6 acties luiden als volgt: ",
+      userWarning: "",
+      hackerWarning: ""
+    },
+    {
+      type: "Random", 
+      user: "Wanneer je op dit vakje terecht komt verschijnt er een willekeurig gegenereerd venster op uw scherm. Op dit venster staat een van de volgende opdrachten:",
+      hacker: "Wanneer je op dit vakje terecht komt verschijnt er een willekeurig gegenereerd venster op uw scherm. Op dit venster staat een van de volgende opdrachten:",
+      userWarning: "",
+      hackerWarning: ""
+    },
+    {
+      type: "mail", 
+      user: "Je ontvangt een mail in je inbox. Het is aan jouw om hier correct op te reageren.",
+      hacker: "Je ontvangt een mail in je inbox. Het is aan jouw om hier correct op te reageren.",
+      userWarning: "",
+      hackerWarning: ""
+    },
+    {
+      type: "WIFI-vak/pikante foto", 
+      user: "Je wifi is uitgevallen of je raakt afgeleid door een pikante pop-up , je bent een ronde uitgeschakeld.",
+      hacker: "Je wifi is uitgevallen of je raakt afgeleid door een pikante pop-up , je bent een ronde uitgeschakeld.",
+      userWarning: "",
+      hackerWarning: ""
+    },
+  ]
+
+  const [fieldIndex, setFieldIndex] = useState(0);
+
+  const adjustfieldIndex = (action) => {
+    let newIndex = fieldIndex;
+    if (action === "prev"){
+      if (newIndex == 0){
+      newIndex = 4
+      } else {
+       newIndex--
+      }
+    } else {
+     if (newIndex == 4){
+      newIndex = 0
+      } else {
+        newIndex++
+      }
+    }
+    setFieldIndex(newIndex);
+  }
+
+  console.log(fieldIndex)
+
+
   return (
     <Layout style="user">
       <section className={styles.section}>
@@ -149,7 +212,7 @@ const Rules = () => {
             <WindowLayout
               title="het spel"
               bg="var(--brown)"
-              border="var(--purple)"
+              border="var(--green)"
             >
               <div className={styles.gameContainer}>
                 <article className={styles.article}>
@@ -168,6 +231,79 @@ const Rules = () => {
             </WindowLayout>
           </div>
         </div>
+        <div className={styles.previewLayoutWrapper}>
+           <WindowLayout
+              title="spelbord voorbeeld"
+              bg="var(--brown)"
+              border="var(--purple)"
+            >
+              <div className={styles.bordView}>
+                        <Image
+              src={`/assets/img/rules/bord${fieldIndex}.jpg`}
+              alt="logo"
+              width={400}
+              height={400}
+            />
+              </div>
+            </WindowLayout>
+          </div>
+        <div className={styles.fieldsLayoutWrapper}>
+           <WindowLayout
+              title="verschillende spelbord vakken"
+              bg="var(--brown)"
+              border="var(--purple)"
+            >
+              <div className={styles.fieldsContainer}>
+                <div className={styles.purple}></div>
+                  <form className={styles.form}>
+                    {fields.map((item, index) => (
+                      <div key={item.type} className={styles.radiobutton}>
+                        <input id={item.type} onChange={() => setFieldIndex(index)}  checked={fieldIndex === index ? true : ""}  type="radio" name="tab "className={styles.input} value={item.type}></input>
+                        <label htmlFor={item.type} className={styles.label} > {item.type}  </label>
+                      </div>
+                         ))}
+                  </form>
+                  <article className={styles.fieldArticle}>
+                    <div className={styles.titleArrowWrapper} >
+                      <div onClick={() => adjustfieldIndex("prev")}>
+                        <Image
+                          src={`/assets/img/backbuttongreen.svg`}
+                          alt="arrow"
+                          width={40}
+                          height={40}
+                   
+                         />
+                        </div>
+                          <h3 className={styles.subFieldTitle}>{fields[fieldIndex].type}-vak</h3>
+                       <div className={styles.arrowFr} onClick={() => adjustfieldIndex("next")}>
+                        <Image
+                          src={`/assets/img/backbuttongreen.svg`}
+                          alt="arrow"
+                          width={40}
+                          height={40}
+                         />
+                         </div>
+                     </div>
+                     <div className={styles.hackerUserContainer}>
+                      <article className={styles.userContainer}>
+                          <div className={styles.subTitleBg}>
+                          <h4 className={styles.subTitle}>gebruiker</h4>
+                          </div>
+                          <p>{fields[fieldIndex].user}</p>
+                          <p>{fields[fieldIndex].userWarning}</p>
+                        </article>
+                        <article className={styles.hackerContainer}>
+                          <div className={styles.subTitleBgHacker}>
+                          <h4 className={styles.subTitle}>hacker</h4>
+                          </div>
+                          <p>{fields[fieldIndex].hacker}</p>
+                          <p>{fields[fieldIndex].hackerWarning}</p>
+                        </article>
+                      </div>
+                  </article>
+              </div>
+            </WindowLayout>
+          </div>
      </section>
     </Layout>
   );

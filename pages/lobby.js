@@ -13,8 +13,10 @@ const Lobby = () => {
   const router = useRouter();
   const gamecode = router.query.gamecode;
   const player = router.query.player;
+  console.log(gamecode)
 
   const [members, setMembers] = useState(1);
+  console.log(members)
 
   const [channel] = useChannel(gamecode, (message) => {
     if (message.data === "game-data=start-game") {
@@ -117,19 +119,22 @@ const Lobby = () => {
             )}
             {members === 1 ? (
               <div>
+                {gamecode ? 
                 <div className={styles.gamecode}>
-                  {gamecode.split("").map((char) => (
-                    <p className={styles.gamecodeChar}>{char}</p>
+                  {gamecode.split("").map((char, index) => (
+                    <p key={index} className={styles.gamecodeChar}>{char}</p>
                   ))}
                 </div>
+                 : "" }
                 <p className={styles.text}>
                   Deel de game code met je tegenspeler om het spel te starten
                 </p>
               </div>
+              
             ) : (
-              <div className={buttonStyles.button}>
+              <div className={buttonStyles.buttonRed}>
                 <Link href={`${player}setup/?gamecode=${gamecode}`}>
-                  <a onClick={handleCLickStart}>Profiel aanmaken</a>
+                  <a onClick={handleCLickStart}>Start spel en maak een profiel aan</a>
                 </Link>
               </div>
             )}
@@ -138,11 +143,13 @@ const Lobby = () => {
                 <a className={styles.backButtonLink}>Terug</a>
               </Link>
             </div>
+          {members === 1 ? 
             <div className={styles.rulesButton}>
               <Link href={`/spelregels`}>
                 <a>Bekijk de spelregels</a>
               </Link>
             </div>
+            : "" }
           </div>
         </WindowLayout>
       </section>

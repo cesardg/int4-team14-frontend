@@ -375,7 +375,8 @@ const User = ({ data }) => {
         <Notes gameData={gameData} player="user" />
       </div>
       <div className={styles.strongness}>
-        <UserAccountStrongness value={accountStrongness} />
+        {/* <UserAccountStrongness value={accountStrongness} /> */}
+        <UserAccountStrongness value={50} />
       </div>
       {/* <UserVpn /> */}
       {/* acties */}

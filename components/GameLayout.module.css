@@ -2,7 +2,7 @@
   background-color: var(--brown);
   min-height: 100vh;
   background-size: 6rem 6rem;
-  background-position: center; 
+  background-position: 5rem 4rem; 
   background-image:
     linear-gradient(to right, var(--gridorange) .16rem, transparent .16rem),
     linear-gradient(to bottom, var(--gridorange) .16rem, transparent .16rem);
@@ -40,4 +40,8 @@
 
 .logo{
   margin: .5rem 0;
+}
+
+.time{
+  font-family: "pixel";
 }

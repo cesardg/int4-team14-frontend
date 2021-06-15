@@ -28,6 +28,7 @@ const Home = () => {
   const [playerOne, setPlayerOne] = useState("hacker");
   const [playerTwo, setPlayerTwo] = useState("user");
   const [gamecode, setGamecode] = useState(getStartingGamecode(6));
+  const [error, setError] = useState();
 
   const fetchDataGames = async (code) => {
     const req = await fetch(
@@ -49,7 +50,7 @@ const Home = () => {
         `/lobby?gamecode=${e.target.gamecode.value}&player=${data[0].playertwo}`
       );
     } else {
-      console.log("game bestaat niet");
+      setError("deze gamecode bestaat niet")
     }
   };
 
@@ -131,6 +132,8 @@ const Home = () => {
                   placeholder="123456"
                   className={styles.gamecode}
                 />
+                {error? <span  className={styles.error} >{error}</span> : ""}
+                
                 <input
                   type="submit"
                   value="Deelnemen aan het spel"

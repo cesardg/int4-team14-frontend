@@ -1,0 +1,41 @@
+.outerWindow {
+  background-color: var(--green);
+  border: 0.1rem solid var(--black);
+  box-shadow: 0.5rem 0.5rem var(--shadow);
+  padding: 0.7rem;
+}
+
+.innerWindow {
+  background-color: var(--brown);
+  border: 0.1rem solid var(--black);
+}
+
+.header {
+  display: flex;
+}
+
+.title {
+  background-color: var(--green);
+  border-bottom: 0.1rem solid var(--black);
+  font-family: "pixel";
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  text-align: center;
+  padding-top: 0.7rem;
+  padding-bottom: 0.5rem;
+  order: 2;
+  line-height: 1;
+  width: calc(100% - 3rem);
+}
+
+.close {
+  background-color: var(--green);
+  background-image: url(../public/assets/img/close.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 60%;
+  border-bottom: 0.1rem solid var(--black);
+  border-right: 0.1rem solid var(--black);
+  order: 1;
+  width: 3rem;
+}

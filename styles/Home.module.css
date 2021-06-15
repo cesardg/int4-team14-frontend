@@ -37,7 +37,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 40rem;
+  min-height: 35rem;
 }
 
 .bottom .inside {
@@ -45,14 +45,17 @@
 }
 
 .title {
-  font-family: sohne-breit-fett;
+  font-family: "sohne-breit-fett";
   font-size: 2.5rem;
-  padding: 3rem 0 2rem;
+  padding: 2rem 1rem;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .text {
-  font-size: 2.1rem;
+  font-size: 2rem;
+  width: 90%;
+  text-align: center;
 }
 
 .bold {
@@ -237,3 +240,26 @@
 .playerListItem4::before {
   background-image: url(../public/assets/img/userpics/lobby-icon-2.svg);
 }
+
+
+@media only screen and (max-width: 1550px) {
+
+  .introContainer{
+    padding: 0 2rem;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  .introContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .bottom{
+    width: 100%;
+    margin-bottom: 5rem;
+  }
+
+}
+

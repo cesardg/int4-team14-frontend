@@ -11,7 +11,7 @@ import UserDeleteCookies from "../../components/User/UserDeleteCookies";
 import UserWarningMail from "../../components/User/UserWarningMail";
 import UserAdjustPassword from "../../components/User/UserAdjustPassword";
 import UserAd from "../../components/User/UserAd";
-import styles from "./../../styles/Game.module.css";
+import styles from "./../../components/GameLayout.module.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useChannel } from "../../components/ChatReactEffect";
@@ -361,48 +361,56 @@ const User = ({ data }) => {
   }, [realtimeGameData]);
 
   return (
-      <GameLayout style="user">
-        <h1 className="title">Us3r</h1>
-        <GameBoard boardInfo={realtimeGameData} />
+    <GameLayout style="user">
+      <h1>Us3r</h1>
+      {/* <GameBoard boardInfo={realtimeGameData} /> */}
+      <div className={styles.info}>
         <UserInfo userinfo={gameData.userinfo} />
-        <Turn who={realtimeGameData.currentPlayer} />
+      </div>
+      {/* <Turn who={realtimeGameData.currentPlayer} /> */}
+      <div className={styles.warnings}>
         <UserWarning />
+      </div>
+      <div className={styles.notes}>
         <Notes gameData={gameData} player="user" />
+      </div>
+      <div className={styles.strongness}>
         <UserAccountStrongness value={accountStrongness} />
-        <UserVpn />
-        {/* acties */}
-        {realtimeGameData.currentPlayer === "user" &&
-        realtimeGameData.actionUser === "action" ? (
-          <UserAction
-            onClickButton={(action) => handleClickAction(action)}
-            start={userStart}
-          />
-        ) : (
-          ""
-        )}
-        {windowComponent === "cookies" ? <UserDeleteCookies /> : ""}
-        {windowComponent === "warning" ? <UserWarningMail /> : ""}
-        {windowComponent === "password" ? (
-          <UserAdjustPassword
-            gameData={gameData}
-            // action={"change1capital"}
-            action={userPasswordAction}
-            handleUpdatedPassword={(score) => handleUpdatedPassword(score)}
-          />
-        ) : (
-          ""
-        )}
-        {receiveAdFromHacker ? <UserAd subject={receiveAdFromHacker} /> : ""}
-        {realtimeGameData.currentPlayer === "user" &&
-        realtimeGameData.actionUser === "random" ? (
-          <UserRandom
-            randomCard={randomOption}
-            onClickButton={(value) => handleClickRandom(value)}
-          />
-        ) : (
-          ""
-        )}
-      </GameLayout>
+      </div>
+      {/* <UserVpn /> */}
+      {/* acties */}
+      {realtimeGameData.currentPlayer === "user" &&
+      realtimeGameData.actionUser === "action" ? (
+        <UserAction
+          onClickButton={(action) => handleClickAction(action)}
+          start={userStart}
+        />
+      ) : (
+        ""
+      )}
+      {windowComponent === "cookies" ? <UserDeleteCookies /> : ""}
+      {windowComponent === "warning" ? <UserWarningMail /> : ""}
+      {windowComponent === "password" ? (
+        <UserAdjustPassword
+          gameData={gameData}
+          // action={"change1capital"}
+          action={userPasswordAction}
+          handleUpdatedPassword={(score) => handleUpdatedPassword(score)}
+        />
+      ) : (
+        ""
+      )}
+      {receiveAdFromHacker ? <UserAd subject={receiveAdFromHacker} /> : ""}
+      {realtimeGameData.currentPlayer === "user" &&
+      realtimeGameData.actionUser === "random" ? (
+        <UserRandom
+          randomCard={randomOption}
+          onClickButton={(value) => handleClickRandom(value)}
+        />
+      ) : (
+        ""
+      )}
+    </GameLayout>
   );
 };
 

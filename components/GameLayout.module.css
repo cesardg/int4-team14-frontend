@@ -1,0 +1,43 @@
+.userContainer{
+  background-color: var(--brown);
+  min-height: 100vh;
+  background-size: 6rem 6rem;
+  background-position: center; 
+  background-image:
+    linear-gradient(to right, var(--gridorange) .16rem, transparent .16rem),
+    linear-gradient(to bottom, var(--gridorange) .16rem, transparent .16rem);
+}
+
+
+.hackerContainer{
+  composes: userContainer;
+  background-color: var(--black);
+  background-image:
+    linear-gradient(to right, var(--gridyellow) .16rem, transparent .16rem),
+    linear-gradient(to bottom, var(--gridyellow) .16rem, transparent .16rem);
+}
+
+
+.userHeader {
+  background-color: var(--red);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: .2rem solid var(--black);
+  border-bottom: .2rem solid var(--black);
+  box-shadow: 0rem .5rem var(--shadow) ;
+  padding: 0 3rem;
+}
+
+.hackerHeader {
+  composes: userHeader;
+  background-color: var(--yellow);
+}
+
+.title{
+  display: none;
+}
+
+.logo{
+  margin: .5rem 0;
+}

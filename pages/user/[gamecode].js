@@ -360,8 +360,7 @@ const User = ({ data }) => {
   }, [realtimeGameData]);
 
   return (
-    <>
-      <GameLayout>
+      <GameLayout style="user">
         <h1 className="title">Us3r</h1>
         <GameBoard boardInfo={realtimeGameData} />
         <UserInfo userinfo={gameData.userinfo} />
@@ -403,7 +402,6 @@ const User = ({ data }) => {
           ""
         )}
       </GameLayout>
-    </>
   );
 };
 

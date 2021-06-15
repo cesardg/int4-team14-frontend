@@ -172,7 +172,7 @@ const Home = () => {
               <p className={styles.playersTitle}>Start een nieuw spel</p>
               <p className={styles.playersText}>Welke speler ben jij?</p>
               <div className={styles.players}>
-                <label>
+                <label className={styles.label}>
                   <input
                     type="radio"
                     name="player"
@@ -205,7 +205,7 @@ const Home = () => {
                   </div>
                 </label>
 
-                <label>
+                <label  className={styles.label}>
                   <input
                     type="radio"
                     name="player"

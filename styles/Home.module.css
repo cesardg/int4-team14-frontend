@@ -99,7 +99,7 @@
 
 /* new */
 .playersContainer {
-  margin: 1rem auto;
+  margin: 2rem auto;
   width: 90%;
 }
 
@@ -119,7 +119,7 @@
 }
 
 .playersText {
-  font-size: 2.4rem;
+  font-size: 2rem;
   grid-column: 1 / span 1;
   grid-row: 2 / span 1;
   text-align: center;
@@ -164,6 +164,7 @@
   font-size: 1.8rem;
   margin: 0 auto;
   width: 85%;
+  transition: .2s all ease;
 }
 
 .input {
@@ -200,7 +201,7 @@
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  bottom: 9rem;
+  bottom: 8rem;
   content: "";
   display: block;
   height: 5rem;
@@ -249,6 +250,60 @@
   }
 }
 
+
+@media only screen and (max-width: 1250px) {
+
+.rulesButton{
+    display: none;
+  }
+
+.playerList {
+    flex-direction: column;
+  }
+
+
+.label {
+  width: 100%;
+}
+
+.playerList {
+  justify-content: space-evenly;
+  display: block;
+  width: 100%;
+}
+
+.playerListItem {
+  width: 100%;
+}
+
+.playerListItem1::before {
+  background-image: url(../public/assets/img/hackerpics/lobby-icon-1.svg);
+  bottom: 3rem;
+}
+
+.playerListItem2::before {
+  background-image: url(../public/assets/img/hackerpics/lobby-icon-2.svg);
+  bottom: 5rem;
+}
+
+.playerListItem3::before {
+  background-image: url(../public/assets/img/userpics/lobby-icon-1.svg);
+  bottom: 4rem;
+}
+
+.playerListItem4::before {
+  background-image: url(../public/assets/img/userpics/lobby-icon-2.svg);
+  bottom: 6rem;
+}
+
+.playersContainer {
+    padding-bottom: 10rem;
+  }
+
+
+}
+
+
 @media only screen and (max-width: 950px) {
   .introContainer{
     display: flex;
@@ -259,6 +314,14 @@
   .bottom{
     width: 100%;
     margin-bottom: 5rem;
+  }
+
+  .players {
+    flex-direction: column;
+  }
+
+  .label {
+    margin: 2rem 0rem;
   }
 
 }

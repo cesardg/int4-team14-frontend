@@ -2,7 +2,7 @@
   background-color: var(--brown);
   min-height: 100vh;
   background-size: 6rem 6rem;
-  background-position: center; 
+  background-position: center top; 
   background-image:
     linear-gradient(to right, var(--gridorange) .16rem, transparent .16rem),
     linear-gradient(to bottom, var(--gridorange) .16rem, transparent .16rem);

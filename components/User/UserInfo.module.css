@@ -5,11 +5,12 @@
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: 1fr;
-  padding-bottom: 8.5rem;
+  padding-bottom: 3.4rem;
   width: fit-content;
 }
 
 .img {
+  border-bottom: 2px solid var(--gridorange);
   grid-column: 1 / span 2;
   grid-row: 1 / span 1;
 }
@@ -17,13 +18,13 @@
 .username {
   align-self: flex-end;
   background-color: var(--green);
-  border: 1px solid var(--gridorange);
+  border: 2px solid var(--gridorange);
   font-family: pixel;
   font-size: 1.6rem;
   grid-column: 1 / span 1;
   grid-row: 1 / span 1;
   height: fit-content;
-  padding: 1rem 2rem;
+  padding: 1rem 3rem;
   text-align: center;
   width: fit-content;
   z-index: 1;

@@ -12,8 +12,8 @@ const UserInfo = ({ userinfo }) => {
         <Image
           src={`/assets/img/userpics/${userinfo.picture}.svg`}
           alt="Picture of the user"
-          width={360}
-          height={231}
+          width={385}
+          height={246}
         />
       </div>
 

@@ -10,6 +10,8 @@
   padding: 1.7rem 5rem;
   transition: 0.2s all ease;
   width: fit-content;
+  text-transform: uppercase;
+  border: .1rem solid var(--black);
 }
 
 .button:hover {

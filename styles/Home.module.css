@@ -48,6 +48,7 @@
   font-family: sohne-breit-fett;
   font-size: 2.5rem;
   padding: 3rem 0 2rem;
+  text-transform: uppercase;
 }
 
 .text {
@@ -58,6 +59,7 @@
   font-family: sohne-semifett;
   font-size: 2.1rem;
   padding: 2rem;
+  padding-bottom: 0;
   text-align: center;
   width: 50%;
 }
@@ -70,9 +72,26 @@
 
 .gamecode {
   background-color: var(--yellow);
-  font-family: pixel;
+  font-family: "pixel";
   font-size: 3rem;
   padding: 1rem 2rem;
+  border: .1rem solid black;
+  text-align: center;
+  letter-spacing: .4rem;
+  width: 24rem;
+  margin: auto
+}
+
+.gamecode:focus {
+  outline: none;
+  border: .2rem solid black;
+}
+
+.error{
+  text-align: center;
+  font-size: 2rem;
+  color: var(--red);
+  margin-top: 1rem;
 }
 
 /* new */

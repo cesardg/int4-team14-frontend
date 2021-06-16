@@ -532,7 +532,7 @@ console.log(realtimeGameData)
       <div className={styles.gameboard}>
         <GameBoard boardInfo={realtimeGameData} />
       </div>
-      <div className={styles.info}>
+      <div className={styles.userInfo}>
         <UserInfo userinfo={gameData.userinfo} />
       </div>
     {realtimeGameData.currentPlayer === "user" &&  realtimeGameData.actionUser !== "action"  &&  realtimeGameData.actionUser !== "random" &&  realtimeGameData.actionUser !== "" &&  realtimeGameData.actionUser !== "wifi" &&  realtimeGameData.actionUser !== "spam" ?  
@@ -608,7 +608,7 @@ console.log(realtimeGameData)
       )}
 
       {receiveAdFromHacker ? (
-        <div className={styles.ad}>
+        <div className={styles.userAd}>
           <UserAd subject={receiveAdFromHacker} />
         </div>
       ) : (

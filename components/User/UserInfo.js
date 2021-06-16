@@ -7,7 +7,7 @@ const UserInfo = ({ userinfo }) => {
 
   return (
     <article className={styles.article}>
-      <h2 className="hidden">User info</h2>
+      <h2 className="hidden">Info gebruiker</h2>
       <div className={styles.img}>
         <Image
           src={`/assets/img/userpics/${userinfo.picture}.svg`}

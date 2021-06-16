@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="86.067" height="87.543" viewBox="0 0 86.067 87.543">
+  <g id="Group_13743" data-name="Group 13743" transform="translate(-280.088 -195.07)">
+    <path id="Path_71634" data-name="Path 71634" d="M302.6,238.087a22.718,22.718,0,0,0-2.432.131c-9.4,1.01-18.376,9.949-19.42,19.353a21.991,21.991,0,0,0,33.427,21.209,15.883,15.883,0,0,1,7.1-2.493q.915-.081,1.856-.08.893,0,1.771.063a15.9,15.9,0,0,1,7.2,2.516,21.991,21.991,0,0,0,33.4-21.224c-1.042-9.4-10.019-18.334-19.42-19.344a22.615,22.615,0,0,0-2.425-.13H302.6Z" fill="#00db96" stroke="#000" stroke-miterlimit="10" stroke-width="1"/>
+    <circle id="Ellipse_638" data-name="Ellipse 638" cx="4.398" cy="4.398" r="4.398" transform="translate(328.993 255.681)" fill="#ff0d5b" stroke="#000" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Path_71635" data-name="Path 71635" d="M299.67,249.816h5.864v7.331h7.331v5.864h-7.331v7.331H299.67v-7.331H292.34v-5.864h7.331Z" fill="#fdfb76" stroke="#000" stroke-miterlimit="10" stroke-width="1"/>
+    <g id="Group_13741" data-name="Group 13741">
+      <circle id="Ellipse_639" data-name="Ellipse 639" cx="4.398" cy="4.398" r="4.398" transform="translate(339.255 246.884)" fill="#ff0d5b" stroke="#000" stroke-miterlimit="10" stroke-width="1"/>
+      <circle id="Ellipse_640" data-name="Ellipse 640" cx="4.398" cy="4.398" r="4.398" transform="translate(339.255 264.478)" fill="#ff0d5b" stroke="#000" stroke-miterlimit="10" stroke-width="1"/>
+    </g>
+    <circle id="Ellipse_641" data-name="Ellipse 641" cx="4.398" cy="4.398" r="4.398" transform="translate(349.526 255.681)" fill="#ff0d5b" stroke="#000" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Path_71636" data-name="Path 71636" d="M320.2,238.087v-5.864h5.865v5.864" fill="#00db96" stroke="#000" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Path_71637" data-name="Path 71637" d="M365.5,257.562a19.874,19.874,0,0,0-2.635-7.684,18.133,18.133,0,0,1,.755,3.506,21.991,21.991,0,0,1-33.4,21.223,15.912,15.912,0,0,0-7.2-2.516q-.878-.063-1.771-.062-.94,0-1.856.08A15.878,15.878,0,0,0,312.3,274.6a21.993,21.993,0,0,1-30.585-7.628,21.991,21.991,0,0,0,32.464,11.806,15.883,15.883,0,0,1,7.1-2.493q.915-.081,1.856-.08.893,0,1.771.063a15.9,15.9,0,0,1,7.2,2.516,21.991,21.991,0,0,0,33.4-21.224Z" stroke="#000" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Path_71638" data-name="Path 71638" d="M335.768,256.387a4.384,4.384,0,0,1-6.127,5.963,4.39,4.39,0,1,0,6.127-5.963Z" stroke="#000" stroke-linejoin="round" stroke-width="1"/>
+    <g id="Group_13742" data-name="Group 13742">
+      <rect id="Rectangle_133236" data-name="Rectangle 133236" width="1.71" height="7.331" transform="translate(303.825 249.816)" stroke="#000" stroke-linejoin="round" stroke-width="1"/>
+      <path id="Path_71639" data-name="Path 71639" d="M311.156,257.147v4.237h-7.331v7.331H299.67v1.627h5.865v-7.331h7.331v-5.864Z" stroke="#000" stroke-linejoin="round" stroke-width="1"/>
+      <rect id="Rectangle_133237" data-name="Rectangle 133237" width="7.331" height="1.627" transform="translate(292.34 261.385)" stroke="#000" stroke-linejoin="round" stroke-width="1"/>
+    </g>
+    <path id="Path_71640" data-name="Path 71640" d="M346.03,247.59a4.383,4.383,0,0,1-6.126,5.963,4.389,4.389,0,1,0,6.126-5.963Z" stroke="#000" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Path_71641" data-name="Path 71641" d="M346.03,265.184a4.35,4.35,0,0,1,.649,2.27,4.388,4.388,0,0,1-6.775,3.693,4.389,4.389,0,1,0,6.126-5.963Z" stroke="#000" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Path_71642" data-name="Path 71642" d="M356.3,256.387a4.384,4.384,0,0,1-6.127,5.963,4.39,4.39,0,1,0,6.127-5.963Z" stroke="#000" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Path_71643" data-name="Path 71643" d="M324.521,232.223v4.95H320.2v.915h5.865v-5.865Z" stroke="#000" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Path_71644" data-name="Path 71644" d="M324.594,232.223h-2.932v-4.4a2.931,2.931,0,0,0-2.932-2.932H311.4a5.865,5.865,0,0,1,0-11.729h23.458a2.932,2.932,0,1,0,0-5.864h-7.331a5.865,5.865,0,0,1-5.864-5.865V195.57h2.932v5.864a2.932,2.932,0,0,0,2.932,2.933h7.331a5.864,5.864,0,1,1,0,11.729H311.4a2.932,2.932,0,0,0,0,5.864h7.331a5.864,5.864,0,0,1,5.864,5.864v4.4Z" fill="#8e0bfa" stroke="#000" stroke-miterlimit="10" stroke-width="1"/>
+  </g>
+</svg>

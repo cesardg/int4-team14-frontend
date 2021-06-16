@@ -1,3 +1,4 @@
+// components
 import GameLayout from "../../components/GameLayout";
 import Turn from "../../components/Turn";
 import Notes from "../../components/Notes";
@@ -11,10 +12,13 @@ import HackerInterests from "../../components/Hacker/HackerInterests";
 import HackerScreencapture from "../../components/Hacker/HackerScreencapture";
 import HackerVpn from "../../components/Hacker/HackerVpn";
 import HackerHack from "../../components/Hacker/HackerHack";
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
 import { useChannel } from "../../components/ChatReactEffect";
 import HackerRandom from "../../components/Hacker/HackerRandom";
+// styling
+import styles from "./../../components/GameLayout.module.css";
+// imports
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
 const Hacker = ({ data }) => {
   // game
@@ -220,13 +224,12 @@ const Hacker = ({ data }) => {
         }
       }
 
-
       // hacker komt op een actie vak
       if (
         realtimeGameData.currentPlayer === "hacker" &&
         newHackerAction === "action"
       ) {
-        console.log("de hacker staat op een actievak, dit moet er gebeuren:")
+        console.log("de hacker staat op een actievak, dit moet er gebeuren:");
       }
 
       // hacker komt op een random vak
@@ -234,20 +237,19 @@ const Hacker = ({ data }) => {
         realtimeGameData.currentPlayer === "hacker" &&
         newHackerAction === "random"
       ) {
-        console.log("de hacker staat op een random vak, dit moet er gebeuren")
+        console.log("de hacker staat op een random vak, dit moet er gebeuren");
         setRandomOption(
           randomOptions[Math.floor(Math.random() * randomOptions.length)]
         );
         // setWindowComponent("random");
       }
 
-
       // hacker komt op een wifi vak
       if (
         realtimeGameData.currentPlayer === "hacker" &&
         newHackerAction === "wifi"
       ) {
-        console.log("de hacker staat op een wifi vakje, dit moet er gebeuren:")
+        console.log("de hacker staat op een wifi vakje, dit moet er gebeuren:");
       }
 
       // hacker komt op het pikante foto
@@ -255,7 +257,9 @@ const Hacker = ({ data }) => {
         realtimeGameData.currentPlayer === "hacker" &&
         newHackerAction === "pikant"
       ) {
-        console.log("de hacker staat op het pikante vakje, dit moet er gebeuren:")
+        console.log(
+          "de hacker staat op het pikante vakje, dit moet er gebeuren:"
+        );
       }
 
       // hacker komt op het pikante foto
@@ -263,7 +267,7 @@ const Hacker = ({ data }) => {
         realtimeGameData.currentPlayer === "hacker" &&
         newHackerAction === "spam"
       ) {
-        console.log("de hacker staat op het spamvakje, dit moet er gebeuren:")
+        console.log("de hacker staat op het spamvakje, dit moet er gebeuren:");
       }
 
       // hacker komt een empty vak
@@ -271,7 +275,7 @@ const Hacker = ({ data }) => {
         realtimeGameData.currentPlayer === "hacker" &&
         newHackerAction === "empty"
       ) {
-        console.log("de hacker staat op een empty vak, dit moet er gebeuren")
+        console.log("de hacker staat op een empty vak, dit moet er gebeuren");
       }
 
       // if (
@@ -463,7 +467,7 @@ const Hacker = ({ data }) => {
   const handleFormSubmissionNotes = async (e) => {
     e.preventDefault();
     if (e.target.note.value !== "") {
-      const copyArr = [...notes, {note: e.target.note.value}];
+      const copyArr = [...notes, { note: e.target.note.value }];
       setNotes(copyArr);
       const data = {
         note: e.target.note.value,
@@ -542,59 +546,13 @@ const Hacker = ({ data }) => {
 
   return (
     <GameLayout>
-      <h1 className="title">Hacker</h1>
-      <GameBoard boardInfo={realtimeGameData} />
-      <HackerInfo />
-      <Turn who={realtimeGameData.currentPlayer} />
-      <Notes notes={notes} player="user" handleFormSubmission={(e) => handleFormSubmissionNotes (e)} />
-      <HackerDiscoveries gameData={gameData} />
-      <HackerInterests gameData={gameData} />
-      <HackerHack
-        handleSubmitForm={(value) => handleFormGuessPass(value)}
-        feedback={hackerGuessFeedback}
-        start={hackerStart}
-      />
-      {/* acties */}
-      {realtimeGameData.currentPlayer === "hacker" &&
-      realtimeGameData.actionHacker === "action" ? (
-        <HackerAction
-          onClickButton={(action) => handleClickAction(action)}
-          start={hackerStart}
-        />
-      ) : (
-        ""
-      )}
-      {windowComponent === "ad" ? (
-        <HackerAd
-          gameData={gameData}
-          onClickButton={(value) => handleClickAd(value)}
-          start={hackerStart}
-        />
-      ) : (
-        ""
-      )}
-      {windowComponent === "decryption" ? (
-        <HackerDecryption
-          gameData={gameData}
-          handleUpdatedDiscoveries={(gameData, discovery) =>
-            handleUpdatedDiscoveries(gameData, discovery)
-          }
-          action={hackerDecryptionAction}
-        />
-      ) : (
-        ""
-      )}
-      {windowComponent === "screencapture" ? <HackerScreencapture /> : ""}
-      {windowComponent === "vpn" ? <HackerVpn /> : ""}
-      {realtimeGameData.currentPlayer === "hacker" &&
-      realtimeGameData.actionHacker === "random" ? (
-        <HackerRandom
-          randomCard={randomOption}
-          onClickButton={(value) => handleClickRandom(value)}
-        />
-      ) : (
-        ""
-      )}
+      <div className={styles.gameboard}>
+        <GameBoard boardInfo={realtimeGameData} />
+      </div>
+      <div className={styles.hackerInfo}>
+        <HackerInfo hackerinfo={gameData.hackerinfo} />
+      </div>
+     
     </GameLayout>
   );
 };

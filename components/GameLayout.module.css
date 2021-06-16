@@ -99,6 +99,14 @@
   z-index: 2;
 }
 
+.cookies {
+  left: calc(55vw / 2);
+  position: absolute;
+  top: 12vh;
+  width: 45vw;
+  z-index: 2;
+}
+
 /* header */
 .time {
   font-family: "pixel";

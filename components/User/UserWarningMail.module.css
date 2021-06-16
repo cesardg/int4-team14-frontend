@@ -1,6 +1,56 @@
-.article {
-  border: .1rem solid black;
-  width: fit-content;
-  margin: 1rem;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5rem 10rem 2rem;
+}
+
+.title {
+  font-family: sohne-breit-fett;
+  font-size: 3.6rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.titleOpen {
+  composes: title;
+  margin-bottom: 2rem;
+}
+
+.text {
+  font-size: 1.7rem;
+  margin: 1rem 0;
+}
+
+.borderTop {
+  composes: text;
+  border-top: 2px solid var(--green);
+  padding-top: 2rem;
+}
+
+.img {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.label {
+  font-size: 1.5rem;
+  line-height: 1.4rem;
+  padding: 0 0;
+}
+
+.email {
+  font-size: 1.7rem;
+  padding-bottom: 2rem;
+}
+
+.password {
+  background-color: var(--green);
+  border: 1px solid var(--black);
+  font-family: pixel;
+  font-size: 2rem;
+  margin-bottom: 2rem;
   padding: 1rem;
+  text-align: center;
 }

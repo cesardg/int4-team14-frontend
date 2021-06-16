@@ -1,6 +1,28 @@
-.article {
-  border: .1rem solid black;
-  width: fit-content;
-  margin: 1rem;
-  padding: 1rem;
+.container {
+  align-items: center;
+  background-image: url(../../public/assets/img/useractions/cookies-bg.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20rem 7rem 10rem;
+}
+
+.title {
+  font-family: sohne-breit-fett;
+  font-size: 3.6rem;
+  text-align: center;
+  text-transform: uppercase;
+  /* width: 60%; */
+}
+
+.text {
+  align-self: flex-start;
+  font-size: 2rem;
+  margin: 2rem auto;
+  padding: 3rem 0 1rem;
+  text-align: center;
+  width: 55%;
 }

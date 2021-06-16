@@ -379,8 +379,7 @@ const User = ({ data }) => {
         <Notes gameData={gameData} player="user" />
       </div>
       <div className={styles.strongness}>
-        {/* <UserAccountStrongness value={accountStrongness} /> */}
-        <UserAccountStrongness value={50} />
+        <UserAccountStrongness value={accountStrongness} />
       </div>
       {/* <UserVpn /> */}
       {/* acties */}
@@ -395,21 +394,33 @@ const User = ({ data }) => {
       ) : (
         ""
       )}
-      {windowComponent === "cookies" ? <UserDeleteCookies /> : ""}
-      {windowComponent === "warning" ? <UserWarningMail /> : ""}
-      {/* {windowComponent === "password" ? ( */}
-      <div className={styles.password}>
-        <UserAdjustPassword
-          gameData={gameData}
-          action={"add1capital"}
-          // action={userPasswordAction}
-          handleUpdatedPassword={(score) => handleUpdatedPassword(score)}
-        />
-      </div>
 
-      {/* ) : (
+      {windowComponent === "cookies" ? (
+        <div className={styles.cookies}>
+          <UserDeleteCookies />
+        </div>
+      ) : (
         ""
-      )} */}
+      )}
+
+      {windowComponent === "warning" ? (
+        <div className={styles.cookies}>
+          <UserWarningMail />
+        </div>
+      ) : (
+        ""
+      )}
+      {windowComponent === "password" ? (
+        <div className={styles.password}>
+          <UserAdjustPassword
+            gameData={gameData}
+            action={userPasswordAction}
+            handleUpdatedPassword={(score) => handleUpdatedPassword(score)}
+          />
+        </div>
+      ) : (
+        ""
+      )}
       {receiveAdFromHacker ? <UserAd subject={receiveAdFromHacker} /> : ""}
       {realtimeGameData.currentPlayer === "user" &&
       realtimeGameData.actionUser === "random" ? (

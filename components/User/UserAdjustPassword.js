@@ -177,7 +177,13 @@ const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
           />
         </div>
         <p className={styles.textFirst}>Jouw huidig wachtwoord</p>
-        <p className={styles.passwordText}>{password}</p>
+        <p className={styles.password}>
+          {/* {password.map((character, index) => (
+            <span key={index} className={styles.character}>
+              {character}
+            </span>
+          ))} */}
+        </p>
         <p className={styles.text}>Jouw nieuw wachtwoord</p>
         {action.includes("add") ? (
           <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>

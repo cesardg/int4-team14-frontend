@@ -301,13 +301,15 @@ const User = ({ data }) => {
 
   // logic functions
   const handleClickRandom = (value) => {
+
     console.log("random is oke");
     console.log(value);
     channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
   };
 
+
   const handleClickAction = (action) => {
-    //refreshData()
+    getUpdatedGamedata();
     if (action === "vpn") {
       setUserStart(false);
       setUserDoubleTurn(2);
@@ -326,6 +328,8 @@ const User = ({ data }) => {
       actionUser: "",
     });
   };
+
+
 
   const handleUpdatedPassword = (score) => {
     setAccountStrongness(score);
@@ -348,6 +352,7 @@ const User = ({ data }) => {
   // general fetch functions
   const getUpdatedGamedata = async () => {
     const updatedGameData = await fetchData("games", gameData.id);
+  
     setGameData(updatedGameData);
   };
 
@@ -375,6 +380,8 @@ const User = ({ data }) => {
     }
   };
 
+
+
   useEffect(() => {
     window.addEventListener("keydown", downHandler);
     return () => {
@@ -397,7 +404,7 @@ const User = ({ data }) => {
         <Turn who={realtimeGameData.currentPlayer} />
       </div> */}
       <div className={styles.warnings}>
-        <UserWarning />
+        <UserWarning  />
       </div>
       <div className={styles.notes}>
         <Notes gameData={gameData} player="user" />

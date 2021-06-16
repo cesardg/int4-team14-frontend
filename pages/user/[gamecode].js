@@ -501,7 +501,7 @@ const User = ({ data }) => {
       </div> */}
 
       {windowComponent === "warnings" ? (
-        <div className={styles.warning}>
+        <div className={styles.warningmail}>
           <UserWarningMail
             gameData={gameData}
             onClickButtonMail={() => onClickButtonMail()}

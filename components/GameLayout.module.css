@@ -77,12 +77,6 @@
   margin: 2rem;
 }
 
-.warnings {
-  grid-column: 5 / span 7;
-  grid-row: 19 / span 5;
-  margin: 2rem;
-}
-
 .action {
   left: 15%;
   position: absolute;
@@ -112,6 +106,14 @@
   position: absolute;
   top: 20vh;
   width: 60vw;
+  z-index: 2;
+}
+
+.warningmail {
+  left: calc(55vw / 2);
+  position: absolute;
+  top: 15vh;
+  width: 45vw;
   z-index: 2;
 }
 

@@ -44,63 +44,87 @@ const User = ({ data }) => {
   const randomOptions = [
     {
       type: "good",
-      action: "2kleineletters",
-      text: "Je hebt je account op privé gezet. Voeg 2 extra letters toe aan je wachtwoord",
+      action: "add2letters",
+      text: "Je hebt je account op privé gezet.",
+      subtext: "Voeg 2 extra letters toe aan je wachtwoord",
+      button: "Voeg 2 letters toe",
     },
     {
       type: "good",
-      action: "veranderletter",
-      text: "Je gebruikt een veilige internetbrowser zoals DuckDuckGo in plaats van Google. Verander 1 kleine letter van je wachtwoord",
+      action: "change1number",
+      text: "Je gebruikt een veilige internetbrowser zoals DuckDuckGo in plaats van Google.",
+      subtext: "Verander 1 kleine letter in een cijfer",
+      button: "Verander een letter",
     },
     {
       type: "good",
-      action: "2kleineletters",
-      text: "Je hebt je locatie uitgezet, zo kunnen hackers je locatie niet volgen. Voeg 2 extra letters toe aan je wachtwoord",
+      action: "add2letters",
+      text: "Je hebt je locatie uitgezet, zo kunnen hackers je locatie niet volgen.",
+      subtext: "Voeg 2 extra letters toe aan je wachtwoord",
+      button: "Voeg 2 letters toe",
     },
     {
       type: "good",
-      action: "letternaarhoofdletter",
-      text: "Je hebt een antivirus-scanner gedownload om je computer extra te beveiligen. Verander 1 kleine letter in een hoofdletter",
+      action: "change1capital",
+      text: "Je hebt een antivirus-scanner gedownload om je computer extra te beveiligen.",
+      subtext: "Verander 1 kleine letter in een hoofdletter",
+      button: "Verander een letter",
     },
     {
       type: "good",
-      action: "letternaarcijfer",
-      text: "Je gebruikt de incognito-modus om te surfen. Verander 1 kleine letter in een cijfer",
+      action: "change1number",
+      text: "Je gebruikt de incognito-modus om te surfen.",
+      subtext: "Verander 1 kleine letter in een cijfer",
+      button: "Verander een letter",
     },
     {
       type: "good",
-      action: "letternaarcijfer",
-      text: "Je hebt een webcam-cover over je webcam geplaatst. Verander 1 kleine letter in een cijfer",
+      action: "change1capital",
+      text: "Je hebt een webcam-cover over je webcam geplaatst.",
+      subtext: "Verander 1 kleine letter in een hoofdletter",
+      button: "Verander een letter",
     },
     {
       type: "bad",
       action: "letterweghalen",
-      text: "Je hebt een webcam-cover over je webcam geplaatst. Verander 1 kleine letter in een cijfer",
+      text: "Je hebt een webcam-cover over je webcam geplaatst.",
+      subtext: "Verander 1 kleine letter in een cijfer",
+      button: "Verander een letter",
     },
     {
       type: "bad",
       action: "beurtoverlsaan",
-      text: "Je raakt afgeleid door een complot-theorie op het internet. Sla een beurt over",
+      text: "Je raakt afgeleid door een complot-theorie op het internet.",
+      subtext: "Sla een beurt over",
+      button: "Oke",
     },
     {
       type: "bad",
       action: "beurtoverlsaan",
-      text: "Je bent verdwaald tussen alle vreemde YouTube-filmpjes waardoor je nu alleen nog teenkaas-filmpjes te zien krijgt. Sla een beurt over",
+      text: "Je bent verdwaald tussen alle vreemde YouTube-filmpjes waardoor je nu alleen nog teenkaas-filmpjes te zien krijgt.",
+      subtext: "Sla een beurt over",
+      button: "Oke",
     },
     {
       type: "bad",
       action: "beurtoverlsaan",
-      text: "De hacker ontdekt je oude Roblox-account en gebruikt dit om extra info over jou te ontdekken. Sla een beurt over",
+      text: "De hacker ontdekt je oude Roblox-account en gebruikt dit om extra info over jou te ontdekken.",
+      subtext: "Sla een beurt over",
+      button: "Oke",
     },
     {
       type: "bad",
       action: "letterweghalen",
-      text: "Je probeert Minecraft te downloaden op een verdachte website, hierdoor heb je een virus. Haal 1 letter of cijfer uit je wachtwoord",
+      text: "Je probeert Minecraft te downloaden op een verdachte website, hierdoor heb je een virus.",
+      subtext: "Haal 1 letter of cijfer uit je wachtwoord",
+      button: "Oke",
     },
     {
       type: "bad",
       action: "beurtoverlsaan",
-      text: "Je probeert gratis muziek te downloaden op een verdachte website, hierdoor loopt je computer vast. Sla een beurt over",
+      text: "Je probeert gratis muziek te downloaden op een verdachte website, hierdoor loopt je computer vast.",
+      subtext: "Sla een beurt over",
+      button: "Oke",
     },
   ];
   const fields = [
@@ -372,9 +396,9 @@ const User = ({ data }) => {
       <div className={styles.info}>
         <UserInfo userinfo={gameData.userinfo} />
       </div>
-      <div className={styles.yourturn}>
+      {/* <div className={styles.yourturn}>
         <YourTurn />
-      </div>
+      </div> */}
       {/* <div className={styles.turn}>
         <Turn who={realtimeGameData.currentPlayer} />
       </div> */}
@@ -409,8 +433,8 @@ const User = ({ data }) => {
         ""
       )}
 
-      {windowComponent === "warning" ? (
-        <div className={styles.cookies}>
+      {windowComponent === "warnings" ? (
+        <div className={styles.warning}>
           <UserWarningMail />
         </div>
       ) : (
@@ -437,10 +461,12 @@ const User = ({ data }) => {
       )}
       {realtimeGameData.currentPlayer === "user" &&
       realtimeGameData.actionUser === "random" ? (
-        <UserRandom
-          randomCard={randomOption}
-          onClickButton={(value) => handleClickRandom(value)}
-        />
+        <div className={styles.random}>
+          <UserRandom
+            randomCard={randomOption}
+            onClickButton={(value) => handleClickRandom(value)}
+          />
+        </div>
       ) : (
         ""
       )}

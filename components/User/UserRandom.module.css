@@ -1,6 +1,52 @@
-.article {
-  border: .1rem solid black;
-  width: fit-content;
-  margin: 1rem;
-  padding: 1rem;
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  grid-template-columns: 1fr;
+  padding: 4rem 3rem 2rem;
+}
+
+.title {
+  font-family: sohne-breit-fett;
+  font-size: 3.6rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  /* font */
+}
+.img {
+  align-items: center;
+  background-image: url(../../public/assets/img/useractions/random.svg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  height: 45rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.action {
+  font-family: sohne-breit;
+  font-size: 1.8rem;
+  padding: 1rem 0;
+}
+
+.text {
+  font-family: pixel;
+  font-size: 2rem;
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 1;
+  padding: 0 0 2rem;
+  max-width: 65%;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.subtext {
+  max-width: 70%;
+  text-align: center;
 }

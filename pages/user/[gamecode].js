@@ -137,7 +137,7 @@ const User = ({ data }) => {
     { nummer: 6, command: "6", action: "empty" },
     { nummer: 7, command: "7", action: "action" },
     { nummer: 8, command: "8", action: "empty" },
-    { nummer: 9, command: "9", action: "nog beslist worden" },
+    { nummer: 9, command: "9", action: "pikant" },
     { nummer: 10, command: "Q", action: "empty" },
     { nummer: 11, command: "B", action: "action" },
     { nummer: 12, command: "C", action: "empty" },
@@ -237,6 +237,38 @@ const User = ({ data }) => {
           randomOptions[Math.floor(Math.random() * randomOptions.length)]
         );
         // setWindowComponent("random");
+      }
+
+      // user komt op een wifi vak
+      if (
+        realtimeGameData.currentPlayer === "user" &&
+        realtimeGameData.actionUser === "wifi"
+      ) {
+        console.log("de user staat op een wifi vakje, dit moet er gebeuren:")
+      }
+
+      // user komt op het pikante foto
+      if (
+        realtimeGameData.currentPlayer === "user" &&
+        realtimeGameData.actionUser === "pikant"
+      ) {
+        console.log("de user staat op het pikante vakje, dit moet er gebeuren:")
+      }
+
+      // user komt op het spam vakje
+      if (
+        realtimeGameData.currentPlayer === "user" &&
+        realtimeGameData.actionUser === "spam"
+      ) {
+        console.log("de user staat op het spamvakje, dit moet er gebeuren:")
+      }
+
+      // user komt een empty vak
+      if (
+        realtimeGameData.currentPlayer === "user" &&
+        realtimeGameData.actionUser === "empty"
+      ) {
+        console.log("de user empty vak, dit moet er gebeuren")
       }
 
       // if (

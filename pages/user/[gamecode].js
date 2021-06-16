@@ -3,6 +3,7 @@ import GameLayout from "../../components/GameLayout";
 import Turn from "../../components/Turn";
 import YourTurn from "../../components/YourTurn";
 import Notes from "../../components/Notes";
+import SpamMail from "../../components/SpamMail";
 import GameBoard from "../../components/GameBoard";
 import UserInfo from "../../components/User/UserInfo";
 import UserWarning from "../../components/User/UserWarning";
@@ -433,6 +434,10 @@ const User = ({ data }) => {
         ""
       )}
 
+      {/* <div className={styles.spammail}>
+        <SpamMail />
+      </div> */}
+
       {windowComponent === "warnings" ? (
         <div className={styles.warning}>
           <UserWarningMail />
@@ -459,17 +464,17 @@ const User = ({ data }) => {
       ) : (
         ""
       )}
-      {realtimeGameData.currentPlayer === "user" &&
-      realtimeGameData.actionUser === "random" ? (
+      {/* {realtimeGameData.currentPlayer === "user" &&
+      realtimeGameData.actionUser === "random" ? ( */}
         <div className={styles.random}>
           <UserRandom
             randomCard={randomOption}
             onClickButton={(value) => handleClickRandom(value)}
           />
         </div>
-      ) : (
+      {/* ) : (
         ""
-      )}
+      )} */}
     </GameLayout>
   );
 };

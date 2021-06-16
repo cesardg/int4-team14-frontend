@@ -138,6 +138,14 @@
   width: 50vw;
   z-index: 2;
 }
+
+.spammail {
+  left: 25vw;
+  position: absolute;
+  top: 10vh;
+  width: 50vw;
+  z-index: 2;
+}
 /* header */
 .time {
   font-family: "pixel";

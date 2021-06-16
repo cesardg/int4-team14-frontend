@@ -250,6 +250,13 @@ const User = ({ data }) => {
       );
       setReceiveAdFromHacker(message.data.split("-")[2]);
     }
+
+    //updaten als de hacker is ingelogt
+    if (type === "updatedata") {
+      console.log("hacker in , hier moet data updaten", message.data);
+      getUpdatedGamedata();
+    }
+
   });
 
   // check board input

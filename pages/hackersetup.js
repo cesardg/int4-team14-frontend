@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import Layout from '../components/Layout';
 import WindowLayout from '../components/WindowLayout';
 import Router from 'next/router';
+import { useChannel } from "../components/ChatReactEffect";
 
 const Hackersetup = () => {
 
@@ -17,6 +18,11 @@ const Hackersetup = () => {
   const [currentField, setCurrentField] = useState("account");
   const [profileError, setProfileError] = useState({username: "", email:""});
   const [profileInput, setProfileInput] = useState({username: "",  email:""});
+
+  // channel
+  const [channel] = useChannel(gamecode, (message) => {
+    console.log("verstuur vanaf hacker setup", message)
+  });
 
   const fetchGameId = async (code) => {
     const req = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/games/?gamecode=${code}`);
@@ -49,7 +55,8 @@ const Hackersetup = () => {
       }
     );
     if (response.ok) {
-      console.log("joepie")
+      console.log("joepie, stuur ook door naar ably")
+      channel.publish({ name: gamecode, data: `updatedata-hacker-user` });
       router.push(`/hacker/${gamecode}`)
     }
   };

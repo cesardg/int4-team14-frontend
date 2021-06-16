@@ -213,6 +213,8 @@ const Hacker = ({ data }) => {
       //   setWindowComponent("action");
       // }
 
+    
+
       setRealtimeGameData({
         ...realtimeGameData,
         fieldUser: newUserField,
@@ -223,6 +225,12 @@ const Hacker = ({ data }) => {
       });
 
       console.log("hacker realtime", realtimeGameData.actionHacker);
+    }
+
+    //updaten als de user is ingelogt
+    if (type === "updatedata") {
+      console.log("user logt in , hier moet data updaten", message.data);
+      getUpdatedGamedata();
     }
 
     if (type === "playerchange") {

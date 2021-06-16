@@ -7,6 +7,7 @@ import WindowLayout from '../components/WindowLayout';
 import Layout from '../components/Layout';
 import { useRouter } from 'next/router';
 import Router from 'next/router';
+import { useChannel } from "../components/ChatReactEffect";
 
 const Usersetup = () => {
 
@@ -33,6 +34,11 @@ const Usersetup = () => {
       }
  
   }
+
+    // channel
+  const [channel] = useChannel(gamecode, (message) => {
+    console.log("verstuur vanaf user setup", message)
+  });
 
   const fetchGameId = async (code) => {
     const req = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/games/?gamecode=${code}`);
@@ -74,7 +80,8 @@ const Usersetup = () => {
       }
     );
     if (response.ok) {
-      console.log("joepie")
+      console.log("joepie, stuur ook door naar ably")
+      channel.publish({ name: gamecode, data: `updatedata-user-hacker` });
       router.push(`/user/${gamecode}`)
     }
   };

@@ -105,7 +105,7 @@ const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
   };
 
   const handleSubmit = async (e) => {
-    const newScore = gameData.userinfo.score + 10;
+    const newScore = gameData.userinfo.score + 3;
     e.preventDefault();
     if (action.includes("add")) {
       if (e.target.char2) {

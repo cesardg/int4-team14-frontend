@@ -1,12 +1,19 @@
-import styles from "./UserWarningMail.module.css";
+// styling
+import styles from "./UserAd.module.css";
+// components
+import GameWindowLayout from "../GameWindowLayout";
 
-const UserAd = ({subject}) => {
+const UserAd = ({ subject }) => {
   return (
-    <article className={styles.article}>
-      <h2>Gepersonaliseerde advertentie</h2>
-      <p>De hacker heeft jouw cookies gebruikt om je een persoonlijke advertentie te sturen over {subject}. Je moet 2 beurten overslaan</p>
-      
-    </article>
+    <GameWindowLayout title="spelbord" bg="var(--yellow)" border="var(--green)">
+      <div className={styles.container}>
+        {/* <p className={styles.title}>Gepersonaliseerde advertentie</p>
+        <p className={styles.text}>
+          De hacker heeft jouw cookies gebruikt om je een persoonlijke
+          advertentie te sturen over {subject}. Je moet 2 beurten overslaan
+        </p> */}
+      </div>
+    </GameWindowLayout>
   );
 };
 

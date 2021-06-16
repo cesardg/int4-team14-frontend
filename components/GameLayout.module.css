@@ -107,6 +107,30 @@
   z-index: 2;
 }
 
+.ad {
+  left: 20vw;
+  position: absolute;
+  top: 20vh;
+  width: 60vw;
+  z-index: 2;
+}
+
+.turn {
+  left: 30vw;
+  position: absolute;
+  top: 20vh;
+  width: 40vw;
+  z-index: 2;
+}
+
+.yourturn {
+  left: 30vw;
+  position: absolute;
+  top: 20vh;
+  width: 40vw;
+  z-index: 2;
+}
+
 /* header */
 .time {
   font-family: "pixel";

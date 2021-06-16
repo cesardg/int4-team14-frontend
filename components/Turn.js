@@ -1,14 +1,27 @@
+// styling
 import styles from "./Turn.module.css";
-import Image from 'next/image';
+// components
+import GameWindowLayout from "./GameWindowLayout";
+// imports
+import Image from "next/image";
 
-const UserInfo = ( {who} ) => {
+const Turn = ({ who }) => {
   return (
-    <article className={styles.article}>
-      <h2>spelbord</h2>
-      <p>Wie zijn beurt?</p>
-      <p>{who}</p>
-    </article>
+    <GameWindowLayout title="spelbord" bg="var(--brown)" border="var(--green)">
+      <div className={styles.container}>
+        <div className={styles.img}>
+          <Image
+            src={`/assets/img/${who}pics/pf1.svg`}
+            alt="Picture of the user"
+            width={700}
+            height={450}
+          />
+        </div>
+        <p className={styles.title}>{who}</p>
+        <p className={styles.subtitle}>is nu aan de beurt</p>
+      </div>
+    </GameWindowLayout>
   );
 };
 
-export default UserInfo;
+export default Turn;

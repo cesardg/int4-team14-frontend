@@ -29,9 +29,9 @@ const User = ({ data }) => {
   const [gameData, setGameData] = useState(data[0]);
   const [realtimeGameData, setRealtimeGameData] = useState({
     currentPlayer: data[0].startingPlayer,
-    fieldUser: 1,
+    fieldUser: data[0].userinfo.previousfield,
     actionUser: "start",
-    fieldHacker: 1,
+    fieldHacker: data[0].hackerinfo.previousfield,
     actionHacker: "start",
   });
 
@@ -42,6 +42,7 @@ const User = ({ data }) => {
   const [userStart, setUserStart] = useState(false);
   const [userDoubleTurn, setUserDoubleTurn] = useState(0);
   const [hackerDoubleTurn, setHackerDoubleTurn] = useState(0);
+  const [notes, setNotes] = useState(data[0].usernotes);
   const randomOptions = [
     {
       type: "good",
@@ -403,13 +404,64 @@ const User = ({ data }) => {
     setWindowComponent("");
   };
 
-  const onClickButtonMail = () => {
+  const onClickButtonMail = (note) => {
     console.log("dit moet er gebeuren als je op oke mail");
+    sendNoteToDb(`waarschuwing: ${note}`)
     channel.publish({
       name: gamecode,
       data: `playerchange-user-hacker`,
     });
-    setWindowComponent("your");
+    setWindowComponent("");
+  };
+
+  const sendNoteToDb = async (note) => {
+      const copyArr = [...notes, {note: note}];
+      setNotes(copyArr);
+      const data = {
+        note: note,
+        game: gameData.id,
+      };
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/usernotes`,
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        console.log("joepie, notes na mail");
+      }
+    
+  }
+
+  const handleFormSubmissionNotes = async (e) => {
+    e.preventDefault();
+    if (e.target.note.value !== "") {
+      const copyArr = [...notes, {note: e.target.note.value}];
+      setNotes(copyArr);
+      const data = {
+        note: e.target.note.value,
+        game: gameData.id,
+      };
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/usernotes`,
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        console.log("joepie");
+      }
+      e.target.reset();
+    }
   };
 
   // general fetch functions
@@ -465,7 +517,7 @@ const User = ({ data }) => {
         <Turn who={realtimeGameData.currentPlayer} />
       </div> */}
       <div className={styles.notes}>
-        <Notes gameData={gameData} player="user" />
+        <Notes notes={notes} player="user" handleFormSubmission={(e) => handleFormSubmissionNotes (e)} />
       </div>
       <div className={styles.strongness}>
         <UserAccountStrongness value={accountStrongness} />
@@ -504,7 +556,7 @@ const User = ({ data }) => {
         <div className={styles.warningmail}>
           <UserWarningMail
             gameData={gameData}
-            onClickButtonMail={() => onClickButtonMail()}
+            onClickButtonMail={(note) => onClickButtonMail(note)}
           />
         </div>
       ) : (

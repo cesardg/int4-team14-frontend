@@ -40,6 +40,7 @@ const Hacker = ({ data }) => {
   const [hackerStart, setHackerStart] = useState(false);
   const [hackerDoubleTurn, setHackerDoubleTurn] = useState(0);
   const [userDoubleTurn, setUserDoubleTurn] = useState(0);
+  const [notes, setNotes] = useState(data[0].usernotes);
   const randomOptions = [
     {
       type: "good",
@@ -463,6 +464,33 @@ const Hacker = ({ data }) => {
     channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
   };
 
+  const handleFormSubmissionNotes = async (e) => {
+    e.preventDefault();
+    if (e.target.note.value !== "") {
+      const copyArr = [...notes, { note: e.target.note.value }];
+      setNotes(copyArr);
+      const data = {
+        note: e.target.note.value,
+        game: gameData.id,
+      };
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/hackernotes`,
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        console.log("joepie");
+      }
+      e.target.reset();
+    }
+  };
+
   // general functions to fetch data
   const fetchData = async (collection, id) => {
     const req = await fetch(
@@ -521,70 +549,10 @@ const Hacker = ({ data }) => {
       <div className={styles.gameboard}>
         <GameBoard boardInfo={realtimeGameData} />
       </div>
-      <div className={styles.info}>
-        <HackerInfo />
+      <div className={styles.hackerInfo}>
+        <HackerInfo hackerinfo={gameData.hackerinfo} />
       </div>
-      {/* <div className={styles.yourturn}>
-        <YourTurn />
-      </div>
-      <div className={styles.turn}>
-        <Turn who={realtimeGameData.currentPlayer} />
-      </div> */}
-      <div className={styles.notes}>
-        <Notes gameData={gameData} player="hacker" />
-      </div>
-      {/* <HackerDiscoveries gameData={gameData} /> */}
-      <HackerInterests gameData={gameData} />
-      <HackerHack
-        handleSubmitForm={(value) => handleFormGuessPass(value)}
-        feedback={hackerGuessFeedback}
-        start={hackerStart}
-      />
-      {/* acties */}
-      {/* {realtimeGameData.currentPlayer === "hacker" &&
-      realtimeGameData.actionHacker === "action" ? ( */}
-        <div className={styles.action}>
-          <HackerAction
-            onClickButton={(action) => handleClickAction(action)}
-            start={hackerStart}
-          />
-        </div>
-      {/* ) : (
-        ""
-      )} */}
-      {windowComponent === "ad" ? (
-        <HackerAd
-          gameData={gameData}
-          onClickButton={(value) => handleClickAd(value)}
-          start={hackerStart}
-        />
-      ) : (
-        ""
-      )}
-      {windowComponent === "decryption" ? (
-        <HackerDecryption
-          gameData={gameData}
-          handleUpdatedDiscoveries={(gameData, discovery) =>
-            handleUpdatedDiscoveries(gameData, discovery)
-          }
-          action={hackerDecryptionAction}
-        />
-      ) : (
-        ""
-      )}
-      {windowComponent === "screencapture" ? <HackerScreencapture /> : ""}
-      {windowComponent === "vpn" ? <HackerVpn /> : ""}
-      {realtimeGameData.currentPlayer === "hacker" &&
-      realtimeGameData.actionHacker === "random" ? (
-        <div className={styles.random}>
-          <HackerRandom
-            randomCard={randomOption}
-            onClickButton={(value) => handleClickRandom(value)}
-          />
-        </div>
-      ) : (
-        ""
-      )}
+     
     </GameLayout>
   );
 };

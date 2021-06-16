@@ -41,8 +41,7 @@ const HackerAction = ({ onClickButton, start }) => {
             </div>
             <p className={styles.actionTitle}>Ontdek interesses</p>
             <p className={styles.actionSubtitle}>
-              Ontdek de interesses van de gebruiker om een reclame te
-              sturen
+              Ontdek de interesses van de gebruiker om een reclame te sturen
             </p>
           </button>
           <button
@@ -94,7 +93,9 @@ const HackerAction = ({ onClickButton, start }) => {
             <p className={styles.actionSubtitle}>Ontdek 1 cijfer</p>
           </button>
           <button
-            className={styles.actionButton}
+            className={
+              start ? styles.actionButtonVpn : styles.actionButtonDisabled
+            }
             onClick={() => onClickButton("send ad")}
             disabled={start ? false : true}
           >
@@ -112,15 +113,18 @@ const HackerAction = ({ onClickButton, start }) => {
               </p>
             ) : (
               <p className={styles.actionExtra}>
-                Deze optie wordt geactiveerd wanneer je start passeert
+                Wordt geactiveerd wanneer je start passeert
               </p>
             )}
-            <p className={styles.actionTitle}>Stuur een gepersonaliseerde reclame</p>
+            <p className={styles.actionTitle}>Stuur een persoonlijke reclame</p>
             <p className={styles.actionSubtitle}>
               De gebruiker moet 2 beurten overslaan
             </p>
           </button>
         </div>
+        <p className={styles.actionBottomText}>
+          Hoe ga jij je de gebruiker zijn wachtwoord ontdekken?
+        </p>
       </div>
     </GameWindowLayout>
   );

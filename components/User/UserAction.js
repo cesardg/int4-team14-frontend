@@ -95,7 +95,9 @@ const UserAction = ({ onClickButton, start }) => {
           </button>
 
           <button
-            className={start ? styles.actionButtonVpn : styles.actionButtonDisabled}
+            className={
+              start ? styles.actionButtonVpn : styles.actionButtonDisabled
+            }
             onClick={() => onClickButton("vpn")}
             disabled={start ? false : true}
           >
@@ -122,7 +124,9 @@ const UserAction = ({ onClickButton, start }) => {
             </p>
           </button>
         </div>
-        <p className={styles.actionBottomText}>Hoe ga jij je beschermen tegen de hacker?</p>
+        <p className={styles.actionBottomText}>
+          Hoe ga jij je beschermen tegen de hacker?
+        </p>
       </div>
     </GameWindowLayout>
   );

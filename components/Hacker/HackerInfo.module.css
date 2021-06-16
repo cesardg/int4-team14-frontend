@@ -1,6 +1,66 @@
 .article {
-  border: .1rem solid black;
+  background-color: var(--black);
+  border: 2px solid var(--yellow);
+  border-right: none;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: 1fr;
+  padding-bottom: 3.4rem;
   width: fit-content;
-  margin: 1rem;
-  padding: 1rem;
+}
+
+.img {
+  border-bottom: 2px solid var(--yellow);
+  grid-column: 1 / span 2;
+  grid-row: 1 / span 1;
+}
+
+.username {
+  align-self: flex-end;
+  background-color: var(--yellow);
+  border: 2px solid var(--black);
+  font-family: pixel;
+  font-size: 1.6rem;
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+  height: fit-content;
+  padding: 1rem 3rem;
+  text-align: center;
+  width: fit-content;
+  z-index: 1;
+}
+
+.title {
+  color: var(--white);
+  font-family: sohne-breit-fett;
+  font-size: 1.4rem;
+  grid-column: 1 / span 2;
+  padding: 3rem 2rem 0;
+  text-transform: uppercase;
+}
+
+.text {
+  color: var(--white);
+  grid-column: 1 / span 2;
+  padding: .5rem 2rem;
+}
+
+.textOnline {
+  composes: text;
+  padding-left: 4rem;
+  position: relative;
+}
+
+.textOnline::before {
+  background-image: url(../../public/assets/img/hackeractions/online.svg);
+    background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 100%;
+  left: 2rem;
+  position: absolute;
+  width: 1rem;
 }

@@ -1,14 +1,14 @@
 .article {
   align-items: center;
   background-color: var(--brown);
-  border-left: 2px solid var(--gridorange);
-  border-top: 2px solid var(--gridorange);
+  border-left: .2rem solid var(--gridorange);
   display: flex;
   flex-direction: column;
   height: -webkit-fill-available;
   justify-content: center;
   margin: 1rem 0 0;
   width: fit-content;
+  box-shadow: inset  0rem .5rem 0 0 var(--shadow);
 }
 
 .title {

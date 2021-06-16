@@ -1,50 +1,9 @@
 import styles from "./Notes.module.css";
 import GameWindowLayout from "./GameWindowLayout";
-import { useState } from "react";
 import Image from "next/image";
 
-const Notes = ({ gameData, player }) => {
-  const tempArr = [];
+const Notes = ({ notes, player, handleFormSubmission }) => {
 
-  if (player === "user") {
-    gameData.usernotes.map((noteObj) => {
-      tempArr.push(noteObj.note);
-    });
-  } else if (player === "hacker") {
-    gameData.hackernotes.map((noteObj) => {
-      tempArr.push(noteObj.note);
-    });
-  }
-
-  const [notes, setNotes] = useState(tempArr);
-
-  const handleFormSubmission = async (e) => {
-    e.preventDefault();
-    if (e.target.note.value !== "") {
-      const copyArr = [...notes, e.target.note.value];
-      setNotes(copyArr);
-      const data = {
-        note: e.target.note.value,
-        game: gameData.id,
-      };
-
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_STRAPI_URL}/${player}notes`,
-        {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      if (response.ok) {
-        console.log("joepie");
-      }
-
-      e.target.reset();
-    }
-  };
 
   return (
     <GameWindowLayout title="Notities" bg="var(--brown)" border="var(--green)">
@@ -57,7 +16,7 @@ const Notes = ({ gameData, player }) => {
           <ul className={styles.notesList}>
             {notes.map((note, index) => (
               <li key={index} className={styles.notesListItem}>
-                {note}
+                {note.note}
               </li>
             ))}
           </ul>

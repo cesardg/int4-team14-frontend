@@ -36,6 +36,7 @@ const Hacker = ({ data }) => {
   const [hackerStart, setHackerStart] = useState(false);
   const [hackerDoubleTurn, setHackerDoubleTurn] = useState(0);
   const [userDoubleTurn, setUserDoubleTurn] = useState(0);
+  const [notes, setNotes] = useState(data[0].usernotes);
   const randomOptions = [
     {
       type: "good",
@@ -459,6 +460,33 @@ const Hacker = ({ data }) => {
     channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
   };
 
+  const handleFormSubmissionNotes = async (e) => {
+    e.preventDefault();
+    if (e.target.note.value !== "") {
+      const copyArr = [...notes, {note: e.target.note.value}];
+      setNotes(copyArr);
+      const data = {
+        note: e.target.note.value,
+        game: gameData.id,
+      };
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/hackernotes`,
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        console.log("joepie");
+      }
+      e.target.reset();
+    }
+  };
+
   // general functions to fetch data
   const fetchData = async (collection, id) => {
     const req = await fetch(
@@ -518,7 +546,7 @@ const Hacker = ({ data }) => {
       <GameBoard boardInfo={realtimeGameData} />
       <HackerInfo />
       <Turn who={realtimeGameData.currentPlayer} />
-      <Notes gameData={gameData} player="hacker"  />
+      <Notes notes={notes} player="user" handleFormSubmission={(e) => handleFormSubmissionNotes (e)} />
       <HackerDiscoveries gameData={gameData} />
       <HackerInterests gameData={gameData} />
       <HackerHack

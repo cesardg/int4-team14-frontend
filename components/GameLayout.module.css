@@ -150,12 +150,13 @@
 }
 
 .wifi {
-  left: 25vw;
+  left: 30vw;
   position: absolute;
-  top: 10vh;
-  width: 50vw;
+  top: 20vh;
+  width: 40vw;
   z-index: 2;
 }
+
 /* header */
 .time {
   font-family: "pixel";

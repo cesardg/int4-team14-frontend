@@ -5,7 +5,6 @@ import buttonStyles from "./../../styles/ButtonStyles.module.css";
 import GameWindowLayout from "../GameWindowLayout";
 
 const UserRandom = ({ randomCard, onClickButton }) => {
-  console.log(randomCard);
   return (
     <GameWindowLayout title="spelbord" bg="var(--yellow)" border="var(--green)">
       <div className={styles.container}>

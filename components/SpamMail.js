@@ -10,11 +10,11 @@ import { useState } from "react";
 const SpamMail = () => {
   const [window, setWindow] = useState("mail-closed");
 
-  const [opened, setOpened] = useState("");
+  const [mail, setMail] = useState("start");
 
   return (
     <>
-      {opened === "" ? (
+      {mail === "start" ? (
         <GameWindowLayout
           title="spelbord"
           bg="var(--brown)"
@@ -56,7 +56,7 @@ const SpamMail = () => {
             <button
               className={buttonStyles.buttonGreen}
               onClick={() => {
-                setOpened(true);
+                setMail("opened");
               }}
             >
               Beantwoorden met je gegevens
@@ -64,7 +64,7 @@ const SpamMail = () => {
             <button
               className={buttonStyles.buttonGreen}
               onClick={() => {
-                setOpened(false);
+                setMail("closed");
               }}
             >
               Verwijderen
@@ -74,54 +74,41 @@ const SpamMail = () => {
       ) : (
         ""
       )}
-      {opened ? (
+      {mail === "opened" ? (
         <GameWindowLayout
           title="spelbord"
           bg="var(--yellow)"
           border="var(--green)"
         >
-          <div className={styles.container}>
+          <div className={styles.containerOpened}>
             <p className={styles.title}>Je bent in de val getrapt</p>
             <p className={styles.subtitle}>
-              dit was een nep e-mail van de hacker met de bedoeling om jouw data
+              Dit was een nep e-mail van de hacker met de bedoeling om jouw data
               te stelen. Hierdoor weet hij nu 2 letters van je wachtwoord
             </p>
-
-            <button
-              className={buttonStyles.buttonGreen}
-              onClick={() => {
-                setOpened(true);
-              }}
-            >
-              Verder spelen
-            </button>
+            <button className={buttonStyles.buttonGreen}>Verder spelen</button>
           </div>
         </GameWindowLayout>
-      ) : ""}
-      {!opened ? (
+      ) : (
+        ""
+      )}
+      {mail === "closed" ? (
         <GameWindowLayout
           title="spelbord"
           bg="var(--yellow)"
           border="var(--green)"
         >
-          <div className={styles.container}>
-            <p className={styles.title}>Je bent in de val getrapt</p>
-            <p className={styles.subtitle}>
-              dit was een nep e-mail van de hacker met de bedoeling om jouw data
-              te stelen. Hierdoor weet hij nu 2 letters van je wachtwoord
+          <div className={styles.containerClosed}>
+            <p className={styles.title}>Goed gedaan!</p>
+            <p className={styles.subtitleClosed}>
+              Je hebt de nep e-mail herkend en bent geen data kwijtgeraakt!
             </p>
-
-            <button
-              className={buttonStyles.buttonGreen}
-              onClick={() => {
-                setOpened(true);
-              }}
-            >
-              Verder spelen
-            </button>
+            <button className={buttonStyles.buttonGreen}>Verder spelen</button>
           </div>
         </GameWindowLayout>
-      ) : ""}
+      ) : (
+        ""
+      )}
     </>
   );
 };

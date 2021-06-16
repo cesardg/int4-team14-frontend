@@ -5,6 +5,11 @@
   margin-top: 4rem;
 }
 
+.text{
+    font-size: 1.8rem;
+    line-height: 1.7;
+}
+
 .section{
     display: flex;
     flex-direction: column;
@@ -125,6 +130,7 @@
 }
 
 .para{
+    composes: text;
     margin-bottom: 3rem;
     margin-top: 1rem;
 }
@@ -190,6 +196,10 @@
     box-shadow: inset  .4rem 0rem 0 0 var(--shadow);
 }
 
+.label:hover{
+    cursor: pointer;
+}
+
 .form{
     background-color: var(--purple);
     padding-top: 3rem;
@@ -253,12 +263,38 @@
 .userContainer{
     width: 45rem;
     font-size: 1.8rem;
-    line-height: 1.7;
+    line-height: 1.5;
 }
 
 .hackerContainer{
     composes: userContainer;
     margin-left: 3rem;
+}
+
+.red {
+    color: var(--red);
+    margin-top: 3rem;
+}
+
+.warning {
+    font-family: "pixel";
+    text-transform: uppercase;
+}
+
+.list {
+  list-style-image: url(../public/assets/img/rules/list.svg);
+  list-style-position: outside;
+  margin-top: 3rem;
+  margin-left: 2.4rem;
+}
+
+.listItem {
+    margin-top: 2rem;
+}
+
+.listImportant{
+    font-family: "sohne-semifett";
+    font-size: 2rem;
 }
 
 @media only screen and (max-width: 1350px) {

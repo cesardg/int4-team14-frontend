@@ -255,7 +255,7 @@ const User = ({ data }) => {
         newUserAction === "wifi"
       ) {
         console.log("de user staat op een Wifi vakje, dit moet er gebeuren:");
-        handlePionOnWifi()
+        handlePionOnWifi();
       }
 
       // user komt op het pikante foto
@@ -398,7 +398,7 @@ const User = ({ data }) => {
 
   const handleUpdatedPassword = (score) => {
     setAccountStrongness(score);
-    getUpdatedGamedata()
+    getUpdatedGamedata();
     channel.publish({
       name: gamecode,
       data: `playerchange-user-hacker`,
@@ -408,7 +408,7 @@ const User = ({ data }) => {
 
   const onClickButtonMail = (note) => {
     console.log("dit moet er gebeuren als je op oke mail");
-    sendNoteToDb(`waarschuwing: ${note}`)
+    sendNoteToDb(`waarschuwing: ${note}`);
     channel.publish({
       name: gamecode,
       data: `playerchange-user-hacker`,
@@ -421,32 +421,31 @@ const User = ({ data }) => {
   };
 
   const sendNoteToDb = async (note) => {
-      const copyArr = [...notes, {note: note}];
-      setNotes(copyArr);
-      const data = {
-        note: note,
-        game: gameData.id,
-      };
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_STRAPI_URL}/usernotes`,
-        {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      if (response.ok) {
-        console.log("joepie, notes na mail");
+    const copyArr = [...notes, { note: note }];
+    setNotes(copyArr);
+    const data = {
+      note: note,
+      game: gameData.id,
+    };
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/usernotes`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    
-  }
+    );
+    if (response.ok) {
+      console.log("joepie, notes na mail");
+    }
+  };
 
   const handleFormSubmissionNotes = async (e) => {
     e.preventDefault();
     if (e.target.note.value !== "") {
-      const copyArr = [...notes, {note: e.target.note.value}];
+      const copyArr = [...notes, { note: e.target.note.value }];
       setNotes(copyArr);
       const data = {
         note: e.target.note.value,
@@ -471,21 +470,19 @@ const User = ({ data }) => {
   };
 
   const handlePionOnWifi = () => {
-
     timeout();
     setTimeout(() => {
-    setRealtimeGameData({
-      ...realtimeGameData,
-      actionUser: "done",
-    });
-      channel.publish({name: gamecode, data: `playerchange-user-hacker`,}); 
+      setRealtimeGameData({
+        ...realtimeGameData,
+        actionUser: "done",
+      });
+      channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
     }, 3000);
+  };
 
-  }
-
-  const timeout = (ms) => { 
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+  const timeout = (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
 
   // general fetch functions
   const getUpdatedGamedata = async () => {
@@ -525,7 +522,7 @@ const User = ({ data }) => {
     };
   }, [realtimeGameData]);
 
-console.log(realtimeGameData)
+  console.log(realtimeGameData);
 
   return (
     <GameLayout style="user">
@@ -535,18 +532,31 @@ console.log(realtimeGameData)
       <div className={styles.userInfo}>
         <UserInfo userinfo={gameData.userinfo} />
       </div>
-    {realtimeGameData.currentPlayer === "user" &&  realtimeGameData.actionUser !== "action"  &&  realtimeGameData.actionUser !== "random" &&  realtimeGameData.actionUser !== "" &&  realtimeGameData.actionUser !== "wifi" &&  realtimeGameData.actionUser !== "spam" ?  
-     <div className={styles.yourturn}>
-        <YourTurn />
-      </div>
-    :  "" }
-    {realtimeGameData.currentPlayer === "hacker" ?  
-      <div className={styles.turn}>
-        <Turn who={realtimeGameData.currentPlayer} />
-      </div> 
-       :  "" }
+      {realtimeGameData.currentPlayer === "user" &&
+      realtimeGameData.actionUser !== "action" &&
+      realtimeGameData.actionUser !== "random" &&
+      realtimeGameData.actionUser !== "" &&
+      realtimeGameData.actionUser !== "wifi" &&
+      realtimeGameData.actionUser !== "spam" ? (
+        <div className={styles.yourturn}>
+          <YourTurn />
+        </div>
+      ) : (
+        ""
+      )}
+      {realtimeGameData.currentPlayer === "hacker" ? (
+        <div className={styles.turn}>
+          <Turn who={realtimeGameData.currentPlayer} />
+        </div>
+      ) : (
+        ""
+      )}
       <div className={styles.notes}>
-        <Notes notes={notes} player="user" handleFormSubmission={(e) => handleFormSubmissionNotes (e)} />
+        <Notes
+          notes={notes}
+          player="user"
+          handleFormSubmission={(e) => handleFormSubmissionNotes(e)}
+        />
       </div>
       <div className={styles.strongness}>
         <UserAccountStrongness value={accountStrongness} />
@@ -573,17 +583,23 @@ console.log(realtimeGameData)
         ""
       )}
 
-    {realtimeGameData.currentPlayer === "user" && realtimeGameData.actionUser === "spam" ?
-      <div className={styles.spammail}>
-        <SpamMail />
-      </div>
-      : "" }
+      {realtimeGameData.currentPlayer === "user" &&
+      realtimeGameData.actionUser === "spam" ? (
+        <div className={styles.spammail}>
+          <SpamMail />
+        </div>
+      ) : (
+        ""
+      )}
 
-    {realtimeGameData.currentPlayer === "user" && realtimeGameData.actionUser === "wifi" ?
-    <div className={styles.wifi}>
-        <Wifi />
-      </div> 
-    : "" }
+      {realtimeGameData.currentPlayer === "user" &&
+      realtimeGameData.actionUser === "wifi" ? (
+        <div className={styles.wifi}>
+          <Wifi />
+        </div>
+      ) : (
+        ""
+      )}
 
       {windowComponent === "warnings" ? (
         <div className={styles.warningmail}>

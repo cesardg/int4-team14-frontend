@@ -1,5 +1,8 @@
-import styles from "./Notes.module.css";
+// components
 import GameWindowLayout from "./GameWindowLayout";
+// styling
+import styles from "./Notes.module.css";
+// imports
 import Image from "next/image";
 
 const Notes = ({ notes, player, handleFormSubmission }) => {
@@ -16,11 +19,7 @@ const Notes = ({ notes, player, handleFormSubmission }) => {
         }
       >
         <p className={styles.title}>Notities</p>
-        <p
-          className={
-            player === "user" ? styles.text : styles.textHacker
-          }
-        >
+        <p className={player === "user" ? styles.text : styles.textHacker}>
           Houd hier je notities bij en blijf je{" "}
           {player === "user" ? "hacker" : "gebruiker"} altijd een stapje voor
         </p>

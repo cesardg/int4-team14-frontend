@@ -329,7 +329,7 @@ const User = ({ data }) => {
     });
   };
 
-
+  console.log(gameData);
 
   const handleUpdatedPassword = (score) => {
     setAccountStrongness(score);

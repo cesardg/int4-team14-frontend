@@ -162,9 +162,7 @@ const User = ({ data }) => {
     { nummer: 31, command: "Y", action: "action" },
     { nummer: 32, command: "W", action: "empty" },
   ];
-  const [randomOption, setRandomOption] = useState(
-    randomOptions[Math.floor(Math.random() * randomOptions.length)]
-  );
+  const [randomOption, setRandomOption] = useState(randomOptions[0]);
 
   // specific logic
   const [userPasswordAction, setUserPasswordAction] = useState("");
@@ -281,7 +279,6 @@ const User = ({ data }) => {
       console.log("hacker in , hier moet data updaten", message.data);
       getUpdatedGamedata();
     }
-
   });
 
   // check board input
@@ -343,8 +340,8 @@ const User = ({ data }) => {
     ) {
       setUserPasswordAction(action);
       setWindowComponent("password");
-    } else if (action === "waarschuwingsmail"){
-      setWindowComponent("warning")
+    } else if (action === "waarschuwingsmail") {
+      setWindowComponent("warning");
     }
     setRealtimeGameData({
       ...realtimeGameData,
@@ -362,13 +359,13 @@ const User = ({ data }) => {
   };
 
   const onClickButtonMail = () => {
-    console.log("dit moet er gebeuren als je op oke mail")
+    console.log("dit moet er gebeuren als je op oke mail");
     channel.publish({
       name: gamecode,
       data: `playerchange-user-hacker`,
     });
-    setWindowComponent("your")
-  }
+    setWindowComponent("your");
+  };
 
   // general fetch functions
   const getUpdatedGamedata = async () => {
@@ -482,17 +479,17 @@ const User = ({ data }) => {
       ) : (
         ""
       )}
-      {/* {realtimeGameData.currentPlayer === "user" &&
-      realtimeGameData.actionUser === "random" ? ( */}
+      {realtimeGameData.currentPlayer === "user" &&
+      realtimeGameData.actionUser === "random" ? (
         <div className={styles.random}>
           <UserRandom
             randomCard={randomOption}
             onClickButton={(value) => handleClickRandom(value)}
           />
         </div>
-      {/* ) : (
+      ) : (
         ""
-      )} */}
+      )}
     </GameLayout>
   );
 };

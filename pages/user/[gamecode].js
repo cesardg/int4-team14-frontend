@@ -4,6 +4,7 @@ import Turn from "../../components/Turn";
 import YourTurn from "../../components/YourTurn";
 import Notes from "../../components/Notes";
 import SpamMail from "../../components/SpamMail";
+import Wifi from "../../components/Wifi";
 import GameBoard from "../../components/GameBoard";
 import UserInfo from "../../components/User/UserInfo";
 import UserAccountStrongness from "../../components/User/UserAccountStrongness";
@@ -164,7 +165,6 @@ const User = ({ data }) => {
 
   const [randomOption, setRandomOption] = useState(randomOptions[0]);
 
-
   // specific logic
   const [userPasswordAction, setUserPasswordAction] = useState("");
   const [receiveAdFromHacker, setReceiveAdFromHacker] = useState(false);
@@ -175,7 +175,7 @@ const User = ({ data }) => {
   // channel
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split("-")[0];
-    console.log("ably?")
+    console.log("ably?");
 
     if (type === "boardchange") {
       const newHackerField = message.data.split("-")[2];
@@ -233,7 +233,7 @@ const User = ({ data }) => {
         realtimeGameData.currentPlayer === "user" &&
         newUserAction === "action"
       ) {
-        console.log("de user staat op een actie, dit moet er gebeuren:")
+        console.log("de user staat op een actie, dit moet er gebeuren:");
       }
 
       // user komt op een random vak
@@ -241,7 +241,7 @@ const User = ({ data }) => {
         realtimeGameData.currentPlayer === "user" &&
         newUserAction === "random"
       ) {
-        console.log("de user staat op een random vak")
+        console.log("de user staat op een random vak");
         setRandomOption(
           randomOptions[Math.floor(Math.random() * randomOptions.length)]
         );
@@ -261,7 +261,9 @@ const User = ({ data }) => {
         realtimeGameData.currentPlayer === "user" &&
         newUserAction === "pikant"
       ) {
-        console.log("de user staat op het pikante vakje, dit moet er gebeuren:")
+        console.log(
+          "de user staat op het pikante vakje, dit moet er gebeuren:"
+        );
       }
 
       // user komt op het spam vakje
@@ -269,7 +271,7 @@ const User = ({ data }) => {
         realtimeGameData.currentPlayer === "user" &&
         newUserAction === "spam"
       ) {
-        console.log("de user staat op het spamvakje, dit moet er gebeuren:")
+        console.log("de user staat op het spamvakje, dit moet er gebeuren:");
       }
 
       // user komt een empty vak
@@ -277,7 +279,7 @@ const User = ({ data }) => {
         realtimeGameData.currentPlayer === "user" &&
         newUserAction === "empty"
       ) {
-        console.log("de user staat op een empty vak, dit moet er gebeuren")
+        console.log("de user staat op een empty vak, dit moet er gebeuren");
       }
 
       // if (
@@ -371,7 +373,6 @@ const User = ({ data }) => {
     channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
   };
 
-
   const handleClickAction = (action) => {
     getUpdatedGamedata();
     if (action === "vpn") {
@@ -414,7 +415,7 @@ const User = ({ data }) => {
   // general fetch functions
   const getUpdatedGamedata = async () => {
     const updatedGameData = await fetchData("games", gameData.id);
-  
+
     setGameData(updatedGameData);
   };
 
@@ -442,8 +443,6 @@ const User = ({ data }) => {
     }
   };
 
-
-
   useEffect(() => {
     window.addEventListener("keydown", downHandler);
     return () => {
@@ -461,8 +460,8 @@ const User = ({ data }) => {
       </div>
       {/* <div className={styles.yourturn}>
         <YourTurn />
-      </div> */}
-      {/* <div className={styles.turn}>
+      </div>
+      <div className={styles.turn}>
         <Turn who={realtimeGameData.currentPlayer} />
       </div> */}
       <div className={styles.notes}>
@@ -495,11 +494,18 @@ const User = ({ data }) => {
 
       {/* <div className={styles.spammail}>
         <SpamMail />
+      </div>
+
+      <div className={styles.wifi}>
+        <Wifi />
       </div> */}
 
       {windowComponent === "warnings" ? (
         <div className={styles.warning}>
-          <UserWarningMail gameData={gameData} onClickButtonMail={() => onClickButtonMail()} />
+          <UserWarningMail
+            gameData={gameData}
+            onClickButtonMail={() => onClickButtonMail()}
+          />
         </div>
       ) : (
         ""

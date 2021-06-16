@@ -1,5 +1,4 @@
 // styling
-import buttonStyles from "./../styles/ButtonStyles.module.css";
 import styles from "./Wifi.module.css";
 // components
 import GameWindowLayout from "./GameWindowLayout";
@@ -15,9 +14,9 @@ const Wifi = () => {
         <div className={styles.img}>
           <Image
             src={`/assets/img/wifi.svg`}
-            alt="Picture of the user"
-            width={150}
-            height={150}
+            alt="broken wifi"
+            width={300}
+            height={300}
           />
         </div>
         <p className={styles.subtitle}>Je moet een beurt overslaan</p>

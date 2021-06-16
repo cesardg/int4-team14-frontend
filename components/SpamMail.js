@@ -84,6 +84,14 @@ const SpamMail = () => {
               Dit was een nep e-mail van de hacker met de bedoeling om jouw data
               te stelen. Hierdoor weet hij nu 2 letters van je wachtwoord
             </p>
+            <div className={styles.img}>
+              <Image
+                src={`/assets/img/spam.svg`}
+                alt="Picture of the user"
+                width={150}
+                height={150}
+              />
+            </div>
             <button className={buttonStyles.buttonGreen}>Verder spelen</button>
           </div>
         </GameWindowLayout>

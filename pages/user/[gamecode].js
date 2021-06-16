@@ -253,7 +253,7 @@ const User = ({ data }) => {
         realtimeGameData.currentPlayer === "user" &&
         newUserAction === "wifi"
       ) {
-        console.log("de user staat op een Wifi vakje, dit moet er gebeuren:")
+        console.log("de user staat op een Wifi vakje, dit moet er gebeuren:");
       }
 
       // user komt op het pikante foto
@@ -516,14 +516,14 @@ const User = ({ data }) => {
 
       {/* <div className={styles.spammail}>
         <SpamMail />
-      </div>
+      </div> */}
 
-      <div className={styles.wifi}>
+      {/* <div className={styles.wifi}>
         <Wifi />
       </div> */}
 
       {windowComponent === "warnings" ? (
-        <div className={styles.warning}>
+        <div className={styles.warningmail}>
           <UserWarningMail
             gameData={gameData}
             onClickButtonMail={(note) => onClickButtonMail(note)}

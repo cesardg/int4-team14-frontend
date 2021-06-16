@@ -1,9 +1,5 @@
  <Turn who={realtimeGameData.currentPlayer} />
-      <Notes
-        notes={notes}
-        player="user"
-        handleFormSubmission={(e) => handleFormSubmissionNotes(e)}
-      />
+      
       <HackerDiscoveries gameData={gameData} />
       <HackerInterests gameData={gameData} />
       <HackerHack

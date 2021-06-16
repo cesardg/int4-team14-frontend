@@ -3,14 +3,26 @@ import GameWindowLayout from "./GameWindowLayout";
 import Image from "next/image";
 
 const Notes = ({ notes, player, handleFormSubmission }) => {
-
-
+  console.log(player);
   return (
-    <GameWindowLayout title="Notities" bg="var(--brown)" border="var(--green)">
-      <div className={styles.container}>
+    <GameWindowLayout
+      title="Notities"
+      bg={player === "user" ? "var(--brown)" : "var(--black)"}
+      border="var(--green)"
+    >
+      <div
+        className={
+          player === "user" ? styles.container : styles.containerHacker
+        }
+      >
         <p className={styles.title}>Notities</p>
-        <p className={styles.text}>
-          Houd hier je notities bij en blijf je { player === "user" ? "hacker" : "gebruiker" } altijd een stapje voor
+        <p
+          className={
+            player === "user" ? styles.text : styles.textHacker
+          }
+        >
+          Houd hier je notities bij en blijf je{" "}
+          {player === "user" ? "hacker" : "gebruiker"} altijd een stapje voor
         </p>
         {notes.length > 0 ? (
           <ul className={styles.notesList}>
@@ -31,7 +43,9 @@ const Notes = ({ notes, player, handleFormSubmission }) => {
       <form onSubmit={handleFormSubmission} className={styles.form}>
         <textarea
           placeholder="Maak een notitie..."
-          className={styles.textarea}
+          className={
+            player === "user" ? styles.textarea : styles.textareaHacker
+          }
           name="note"
         ></textarea>
         <button type="submit" className={styles.button}>

@@ -561,7 +561,13 @@ const Hacker = ({ data }) => {
       <div className={styles.hackerInfo}>
         <HackerInfo hackerinfo={gameData.hackerinfo} />
       </div>
-     
+      <div className={styles.notes}>
+        <Notes
+          notes={notes}
+          player="hacker"
+          handleFormSubmission={(e) => handleFormSubmissionNotes(e)}
+        />
+      </div>
     </GameLayout>
   );
 };

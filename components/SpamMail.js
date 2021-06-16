@@ -8,8 +8,6 @@ import Image from "next/image";
 import { useState } from "react";
 
 const SpamMail = () => {
-  const [window, setWindow] = useState("mail-closed");
-
   const [mail, setMail] = useState("start");
 
   return (

@@ -7,7 +7,7 @@ import GameWindowLayout from "./GameWindowLayout";
 import Image from "next/image";
 import { useState } from "react";
 
-const SpamMail = () => {
+const SpamMail = ({handleClickSpamMail}) => {
   const [mail, setMail] = useState("start");
 
   return (
@@ -92,7 +92,7 @@ const SpamMail = () => {
                 height={150}
               />
             </div>
-            <button className={buttonStyles.buttonGreen}>Verder spelen</button>
+            <button className={buttonStyles.buttonGreen} onClick={()=> handleClickSpamMail ("bad") }>Verder spelen</button>
           </div>
         </GameWindowLayout>
       ) : (
@@ -109,7 +109,7 @@ const SpamMail = () => {
             <p className={styles.subtitleClosed}>
               Je hebt de nep e-mail herkend en bent geen data kwijtgeraakt!
             </p>
-            <button className={buttonStyles.buttonGreen}>Verder spelen</button>
+            <button className={buttonStyles.buttonGreen} onClick={()=> handleClickSpamMail ("good")}>Verder spelen</button>
           </div>
         </GameWindowLayout>
       ) : (

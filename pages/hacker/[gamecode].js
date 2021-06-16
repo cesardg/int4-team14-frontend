@@ -303,6 +303,15 @@ const Hacker = ({ data }) => {
       getUpdatedGamedata();
     }
 
+    //user delete cookies, dus moet hier ook aangepast worden
+    if (type === "deletecookies") {
+      setRealtimeGameData({
+        ...realtimeGameData,
+        currentPlayer: message.data.split("-")[2],
+      });
+      getUpdatedGamedata();
+    }
+
     if (type === "playerchange") {
       console.log("from hacker:", message.data);
       setRealtimeGameData({

@@ -326,6 +326,14 @@ const User = ({ data }) => {
       console.log("hacker in , hier moet data updaten", message.data);
       getUpdatedGamedata();
     }
+
+    if (type === "deletecookies") {
+      setRealtimeGameData({
+        ...realtimeGameData,
+        currentPlayer: message.data.split("-")[2],
+      });
+      getUpdatedGamedata();
+    }
   });
 
   // check board input
@@ -389,10 +397,12 @@ const User = ({ data }) => {
       setWindowComponent("password");
     } else if (action === "waarschuwingsmail") {
       setWindowComponent("warnings");
+    } else if (action === "deletescookies"){
+      setWindowComponent("cookies");
     }
     setRealtimeGameData({
       ...realtimeGameData,
-      actionUser: "done",
+      actionUser: "",
     });
   };
 
@@ -478,7 +488,7 @@ const User = ({ data }) => {
       ...realtimeGameData,
       actionUser: "done",
     });
-      channel.publish({name: gamecode, data: `playerchange-user-hacker`,}); 
+      channel.publish({name: gamecode, data: `playerchange-user-hacker`}); 
     }, 3000);
 
   }
@@ -486,6 +496,48 @@ const User = ({ data }) => {
   const timeout = (ms) => { 
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
+  const handleClickSpamMail = (reaction) =>{
+      console.log(reaction)
+      if (reaction === "good"){
+        channel.publish({name: gamecode, data: `playerchange-user-hacker`}); 
+      } else if (reaction === "bad"){
+        channel.publish({name: gamecode, data: `playerchange-user-hacker`}); 
+        console.log("we moeten dit nog doen, iets doorsturen naar hacker")
+      }
+      setRealtimeGameData({
+      ...realtimeGameData,
+      actionUser: "done",
+    });
+  }
+
+  const handleClickUserDeleteCookies = () => {
+    const data = { obtainedInterests: "" };
+    sendDataToHacker(data);
+  }
+
+  const sendDataToHacker = async (data) => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/hackerinfos/${gameData.hackerinfo.id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.ok) {
+      console.log("inter put");
+      channel.publish({ name: gamecode, data: `deletecookies-user-hacker` });
+      setWindowComponent("")
+      setRealtimeGameData({
+      ...realtimeGameData,
+      actionUser: "done",
+    });
+    }
+  };
+
 
   // general fetch functions
   const getUpdatedGamedata = async () => {
@@ -567,7 +619,7 @@ console.log(realtimeGameData)
 
       {windowComponent === "cookies" ? (
         <div className={styles.cookies}>
-          <UserDeleteCookies />
+          <UserDeleteCookies handleClickUserDeleteCookies={handleClickUserDeleteCookies} />
         </div>
       ) : (
         ""
@@ -575,7 +627,7 @@ console.log(realtimeGameData)
 
     {realtimeGameData.currentPlayer === "user" && realtimeGameData.actionUser === "spam" ?
       <div className={styles.spammail}>
-        <SpamMail />
+        <SpamMail handleClickSpamMail={(reaction)=> handleClickSpamMail(reaction)} />
       </div>
       : "" }
 

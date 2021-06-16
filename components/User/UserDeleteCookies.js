@@ -4,7 +4,7 @@ import styles from "./UserDeleteCookies.module.css";
 // components
 import GameWindowLayout from "../GameWindowLayout";
 
-const UserDeleteCookies = () => {
+const UserDeleteCookies = ({handleClickUserDeleteCookies}) => {
   return (
     <GameWindowLayout title="spelbord" bg="var(--yellow)" border="var(--green)">
       <div className={styles.container}>
@@ -14,7 +14,7 @@ const UserDeleteCookies = () => {
           meer en kan hij ze dus niet gebruiken om een gepersonaliseerde ad te
           sturen, goed gedaan!
         </p>
-        <button className={buttonStyles.buttonGreen}>Verder Spelen</button>
+        <button className={buttonStyles.buttonGreen} onClick={handleClickUserDeleteCookies}>Verder Spelen</button>
       </div>
     </GameWindowLayout>
   );

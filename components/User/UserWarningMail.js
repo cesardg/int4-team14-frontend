@@ -14,7 +14,7 @@ const UserWarningMail = ({gameData, onClickButtonMail}) => {
   if (lastDiscovery.length == 0){
     lastDiscovery = "er zijn nog geen ontdekkingen gedaan"
   } else {
-    lastDiscovery = gameData.hackerdiscoveries.pop();
+    lastDiscovery = gameData.hackerdiscoveries[gameData.hackerdiscoveries.length - 1];
   }
 
   return (

@@ -230,14 +230,45 @@ const Hacker = ({ data }) => {
         // setWindowComponent("random");
       }
 
+
+      // hacker komt op een wifi vak
+      if (
+        realtimeGameData.currentPlayer === "hacker" &&
+        realtimeGameData.actionUser === "wifi"
+      ) {
+        console.log("de hacker staat op een wifi vakje, dit moet er gebeuren:")
+      }
+
+      // hacker komt op het pikante foto
+      if (
+        realtimeGameData.currentPlayer === "hacker" &&
+        realtimeGameData.actionUser === "pikant"
+      ) {
+        console.log("de hacker staat op het pikante vakje, dit moet er gebeuren:")
+      }
+
+      // hacker komt op het pikante foto
+      if (
+        realtimeGameData.currentPlayer === "hacker" &&
+        realtimeGameData.actionUser === "spam"
+      ) {
+        console.log("de hacker staat op het spamvakje, dit moet er gebeuren:")
+      }
+
+      // hacker komt een empty vak
+      if (
+        realtimeGameData.currentPlayer === "hacker" &&
+        realtimeGameData.actionUser === "empty"
+      ) {
+        console.log("de hacker staat op een empty vak, dit moet er gebeuren")
+      }
+
       // if (
       //   realtimeGameData.currentPlayer === "hacker" &&
       //   realtimeGameData.actionHacker === "action"
       // ) {
       //   setWindowComponent("action");
       // }
-
-    
 
       setRealtimeGameData({
         ...realtimeGameData,

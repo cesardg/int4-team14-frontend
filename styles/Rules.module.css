@@ -321,6 +321,19 @@
       padding-right: 0;
   }
 
+  .previewLayoutWrapper{
+    align-self: center;
+    margin: 4rem 0;
+}
+
+.fieldsLayoutWrapper{
+    max-width: 110rem;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 30rem;
+    padding: 0 3rem;
+}
+
 }
 
 
@@ -337,6 +350,7 @@
 
   .startLayoutWrapper{
       margin: 2rem;
+      margin-right: 3rem;
 
   }
 
@@ -345,6 +359,10 @@
       width: 100%;
   }
 
+  .gameImageWrapper{
+        margin-right: 3rem;
+        margin-left: 3rem;
+    }
 }
 
 @media only screen and (max-width: 900px) {

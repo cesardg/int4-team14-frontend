@@ -453,7 +453,7 @@ const Hacker = ({ data }) => {
       <GameBoard boardInfo={realtimeGameData} />
       <HackerInfo />
       <Turn who={realtimeGameData.currentPlayer} />
-      <Notes gameData={gameData} player="hacker" />
+      <Notes gameData={gameData} player="hacker"  />
       <HackerDiscoveries gameData={gameData} />
       <HackerInterests gameData={gameData} />
       <HackerHack

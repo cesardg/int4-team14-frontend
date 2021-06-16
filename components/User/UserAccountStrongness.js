@@ -6,7 +6,6 @@ const UserAccountStrongness = ({ value }) => {
     for (let i = 0; i++; i < value) {
       progress[i] = "x"
     }
-  console.log(progress);
 
   }
 

@@ -275,6 +275,13 @@ const User = ({ data }) => {
       );
       setReceiveAdFromHacker(message.data.split("-")[2]);
     }
+
+    //updaten als de hacker is ingelogt
+    if (type === "updatedata") {
+      console.log("hacker in , hier moet data updaten", message.data);
+      getUpdatedGamedata();
+    }
+
   });
 
   // check board input
@@ -325,6 +332,7 @@ const User = ({ data }) => {
   };
 
   const handleClickAction = (action) => {
+    //refreshData()
     if (action === "vpn") {
       setUserStart(false);
       setUserDoubleTurn(2);
@@ -333,9 +341,10 @@ const User = ({ data }) => {
       action === "add1capital" ||
       action === "add1number"
     ) {
-      getUpdatedGamedata();
       setUserPasswordAction(action);
       setWindowComponent("password");
+    } else if (action === "waarschuwingsmail"){
+      setWindowComponent("warning")
     }
     setRealtimeGameData({
       ...realtimeGameData,
@@ -351,6 +360,15 @@ const User = ({ data }) => {
     });
     setWindowComponent("");
   };
+
+  const onClickButtonMail = () => {
+    console.log("dit moet er gebeuren als je op oke mail")
+    channel.publish({
+      name: gamecode,
+      data: `playerchange-user-hacker`,
+    });
+    setWindowComponent("your")
+  }
 
   // general fetch functions
   const getUpdatedGamedata = async () => {

@@ -7,8 +7,15 @@ import GameWindowLayout from "../GameWindowLayout";
 import Image from "next/image";
 import { useState } from "react";
 
-const UserWarningMail = () => {
+const UserWarningMail = ({gameData, onClickButtonMail}) => {
+  console.log(gameData.hackerdiscoveries)
   const [window, setWindow] = useState("mail-closed");
+  let lastDiscovery = gameData.hackerdiscoveries;
+  if (lastDiscovery.length == 0){
+    lastDiscovery = "er zijn nog geen ontdekkingen gedaan"
+  } else {
+    lastDiscovery = gameData.hackerdiscoveries.pop();
+  }
 
   return (
     <GameWindowLayout title="spelbord" bg="var(--yellow)" border="var(--green)">
@@ -42,7 +49,7 @@ const UserWarningMail = () => {
           <p className={styles.label}>van</p>
           <p className={styles.email}>beveiliging@hack-tic.be</p>
           <p className={styles.label}>naar</p>
-          <p className={styles.email}>emailadres</p>
+          <p className={styles.email}>{gameData.userinfo.email}</p>
           <p className={styles.borderTop}>
             Er probeerde zojuist iemand in te loggen op je account vanaf een
             nieuw apparaat. Je ontvangt deze e-mail omdat we zeker willen zijn
@@ -51,11 +58,11 @@ const UserWarningMail = () => {
           <p className={styles.text}>
             Het volgende wachtwoord werd hiervoor gebruikt:
           </p>
-          <p className={styles.password}>azerty123</p>
+          <p className={styles.password}>{lastDiscovery.discovery}</p>
           <p className={styles.borderTop}>
             Ben jij dit niet? Versterk dan zo snel mogelijk je wachtwoord
           </p>
-          <button className={buttonStyles.buttonGreen}>Verder Spelen</button>
+          <button className={buttonStyles.buttonGreen} onClick={() => onClickButtonMail()}>Verder Spelen</button>
         </div>
       ) : (
         ""

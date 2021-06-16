@@ -237,6 +237,8 @@ const Hacker = ({ data }) => {
       //   setWindowComponent("action");
       // }
 
+    
+
       setRealtimeGameData({
         ...realtimeGameData,
         fieldUser: newUserField,
@@ -247,6 +249,12 @@ const Hacker = ({ data }) => {
       });
 
       console.log("hacker realtime", realtimeGameData.actionHacker);
+    }
+
+    //updaten als de user is ingelogt
+    if (type === "updatedata") {
+      console.log("user logt in , hier moet data updaten", message.data);
+      getUpdatedGamedata();
     }
 
     if (type === "playerchange") {
@@ -469,7 +477,7 @@ const Hacker = ({ data }) => {
       <GameBoard boardInfo={realtimeGameData} />
       <HackerInfo />
       <Turn who={realtimeGameData.currentPlayer} />
-      <Notes gameData={gameData} player="hacker" />
+      <Notes gameData={gameData} player="hacker"  />
       <HackerDiscoveries gameData={gameData} />
       <HackerInterests gameData={gameData} />
       <HackerHack

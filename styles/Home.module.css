@@ -287,6 +287,10 @@
   .introContainer{
     padding: 0 2rem;
   }
+
+  .bottom{
+    margin-bottom: 4rem;
+  }
 }
 
 

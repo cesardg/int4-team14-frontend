@@ -1,6 +1,27 @@
-.article {
-  border: .1rem solid black;
-  width: fit-content;
-  margin: 1rem;
-  padding: 1rem;
+.container {
+  background-image: url(../../public/assets/img/useractions/ad-bg.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 20rem 7rem 10rem;
+}
+
+.title {
+  font-family: sohne-breit-fett;
+  font-size: 3.6rem;
+  left: 2rem;
+  position: relative;
+  top: 2rem;
+  text-transform: uppercase;
+  width: 50%;
+}
+
+.text {
+  align-self: flex-start;
+  font-size: 1.8rem;
+  line-height: 1.8rem;
+  left: 2rem;
+  position: relative;
+  top: 2rem;
+  width: 55%;
 }

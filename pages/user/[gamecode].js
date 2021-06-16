@@ -1,6 +1,7 @@
 // components
 import GameLayout from "../../components/GameLayout";
 import Turn from "../../components/Turn";
+import YourTurn from "../../components/YourTurn";
 import Notes from "../../components/Notes";
 import GameBoard from "../../components/GameBoard";
 import UserInfo from "../../components/User/UserInfo";
@@ -371,7 +372,12 @@ const User = ({ data }) => {
       <div className={styles.info}>
         <UserInfo userinfo={gameData.userinfo} />
       </div>
-      {/* <Turn who={realtimeGameData.currentPlayer} /> */}
+      <div className={styles.yourturn}>
+        <YourTurn />
+      </div>
+      {/* <div className={styles.turn}>
+        <Turn who={realtimeGameData.currentPlayer} />
+      </div> */}
       <div className={styles.warnings}>
         <UserWarning />
       </div>
@@ -421,7 +427,14 @@ const User = ({ data }) => {
       ) : (
         ""
       )}
-      {receiveAdFromHacker ? <UserAd subject={receiveAdFromHacker} /> : ""}
+
+      {receiveAdFromHacker ? (
+        <div className={styles.ad}>
+          <UserAd subject={receiveAdFromHacker} />
+        </div>
+      ) : (
+        ""
+      )}
       {realtimeGameData.currentPlayer === "user" &&
       realtimeGameData.actionUser === "random" ? (
         <UserRandom

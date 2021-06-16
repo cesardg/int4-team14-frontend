@@ -6,7 +6,6 @@ import Notes from "../../components/Notes";
 import SpamMail from "../../components/SpamMail";
 import GameBoard from "../../components/GameBoard";
 import UserInfo from "../../components/User/UserInfo";
-import UserWarning from "../../components/User/UserWarning";
 import UserAccountStrongness from "../../components/User/UserAccountStrongness";
 import UserVpn from "../../components/User/UserVpn";
 import UserAction from "../../components/User/UserAction";
@@ -367,7 +366,6 @@ const User = ({ data }) => {
 
   // logic functions
   const handleClickRandom = (value) => {
-
     console.log("random is oke");
     console.log(value);
     channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
@@ -387,7 +385,7 @@ const User = ({ data }) => {
       setUserPasswordAction(action);
       setWindowComponent("password");
     } else if (action === "waarschuwingsmail") {
-      setWindowComponent("warning");
+      setWindowComponent("warnings");
     }
     setRealtimeGameData({
       ...realtimeGameData,
@@ -467,9 +465,6 @@ const User = ({ data }) => {
       {/* <div className={styles.turn}>
         <Turn who={realtimeGameData.currentPlayer} />
       </div> */}
-      <div className={styles.warnings}>
-        <UserWarning  />
-      </div>
       <div className={styles.notes}>
         <Notes gameData={gameData} player="user" />
       </div>
@@ -504,7 +499,7 @@ const User = ({ data }) => {
 
       {windowComponent === "warnings" ? (
         <div className={styles.warning}>
-          <UserWarningMail />
+          <UserWarningMail gameData={gameData} onClickButtonMail={() => onClickButtonMail()} />
         </div>
       ) : (
         ""

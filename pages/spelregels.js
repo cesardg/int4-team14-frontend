@@ -7,44 +7,7 @@ import {useState} from 'react';
 
 const Rules = () => {
 
-  const fields =[
-    {
-      type: "start", 
-      user: "Elke keer wanneer je voorbij de start passeert, ontgrendel je de mogelijkheid om je VPN in te schakelen.",
-      hacker: "Elke keer wanneer je voorbij de start passeert, ontgrendel je de mogelijkheid om het wachtwoord van de user te raden. ",
-      userWarning: "Opgepast! Wanneer je weer langs de start passeert zonder je VPN te gebruiken komt er geen tweede VPN beurt bij.",
-      hackerWarning: "Opgepast! Wanneer je weer langs de start passeert zonder je gok te gebruiken komt er geen tweede gok bij."
-    },
-    {
-      type: "actie", 
-      user: "Wanneer u terecht komt op een actievak springt een venster open op uw scherm waarin u de keuze krijgt uit 6 verschillende acties om uw account uit de klauwen van de hacker te houden. Deze 6 acties luiden als volgt: ",
-      hacker: "Wanneer u terecht komt op een actievak springt een venster open op uw scherm waarin u de keuze krijgt uit 6 verschillende acties om het account van de user binnen te dringen. Deze 6 acties luiden als volgt: ",
-      userWarning: "",
-      hackerWarning: ""
-    },
-    {
-      type: "Random", 
-      user: "Wanneer je op dit vakje terecht komt verschijnt er een willekeurig gegenereerd venster op uw scherm. Op dit venster staat een van de volgende opdrachten:",
-      hacker: "Wanneer je op dit vakje terecht komt verschijnt er een willekeurig gegenereerd venster op uw scherm. Op dit venster staat een van de volgende opdrachten:",
-      userWarning: "",
-      hackerWarning: ""
-    },
-    {
-      type: "mail", 
-      user: "Je ontvangt een mail in je inbox. Het is aan jouw om hier correct op te reageren.",
-      hacker: "Je ontvangt een mail in je inbox. Het is aan jouw om hier correct op te reageren.",
-      userWarning: "",
-      hackerWarning: ""
-    },
-    {
-      type: "WIFI-vak/pikante foto", 
-      user: "Je wifi is uitgevallen of je raakt afgeleid door een pikante pop-up , je bent een ronde uitgeschakeld.",
-      hacker: "Je wifi is uitgevallen of je raakt afgeleid door een pikante pop-up , je bent een ronde uitgeschakeld.",
-      userWarning: "",
-      hackerWarning: ""
-    },
-  ]
-
+  const fields =["start", "actie", "random", "mail", "WIFI-vak/pikante foto"]
   const [fieldIndex, setFieldIndex] = useState(0);
 
   const adjustfieldIndex = (action) => {
@@ -118,7 +81,7 @@ const Rules = () => {
                 <div className={styles.shortContainer}>
                   <article className={styles.article}>
                     <h3 className={styles.subTitle}>Het spel in het kort</h3>
-                    <p>
+                    <p className={styles.text}>
                       Hack-Tic is een spel waarbij een hacker en een gebruikers
                       account het tegen elkaar opnemen in de strijd om de
                       gegevens van een account. De beide spelers beginnen bij
@@ -133,14 +96,14 @@ const Rules = () => {
                   <div className={styles.articlePurposeContainer}>
                     <article className={styles.articlePurpose}>
                       <h3 className={styles.subTitle}>Doel gebruiker</h3>
-                      <p>
+                      <p className={styles.text}>
                         Zijn account zo goed mogelijk beveiligen zodat het voor
                         de hacker “onkraakbaar” wordt.
                       </p>
                     </article>
                     <article className={styles.articlePurpose}>
                       <h3 className={styles.subTitle}>Doel hacker</h3>
-                      <p>
+                      <p className={styles.text}>
                         Alle tekens in het wachtwoord van de gebruiker te weten
                         komen.
                       </p>
@@ -217,7 +180,7 @@ const Rules = () => {
               <div className={styles.gameContainer}>
                 <article className={styles.article}>
                   <h3 className={styles.subTitle}>Het spel</h3>
-                  <p>
+                  <p className={styles.text}>
                     Als u aan de beurt bent gooit u de dobbelsteen en verplaatst
                     u uw pion het gegooide aantal vakjes. Zorg ervoor dat u
                     enkel stevig doorklikt op het laatste vakje waar de pion
@@ -257,9 +220,9 @@ const Rules = () => {
                 <div className={styles.purple}></div>
                   <form className={styles.form}>
                     {fields.map((item, index) => (
-                      <div key={item.type} className={styles.radiobutton}>
-                        <input id={item.type} onChange={() => setFieldIndex(index)}  checked={fieldIndex === index ? true : ""}  type="radio" name="tab "className={styles.input} value={item.type}></input>
-                        <label htmlFor={item.type} className={styles.label} > {item.type}  </label>
+                      <div key={item} className={styles.radiobutton}>
+                        <input id={item} onChange={() => setFieldIndex(index)}  checked={fieldIndex === index ? true : ""}  type="radio" name="tab "className={styles.input} value={item}></input>
+                        <label htmlFor={item} className={styles.label} > {item}  </label>
                       </div>
                          ))}
                   </form>
@@ -274,7 +237,7 @@ const Rules = () => {
                    
                          />
                         </div>
-                          <h3 className={styles.subFieldTitle}>{fields[fieldIndex].type}-vak</h3>
+                          <h3 className={styles.subFieldTitle}>{fields[fieldIndex]}-vak</h3>
                        <div className={styles.arrowFr} onClick={() => adjustfieldIndex("next")}>
                         <Image
                           src={`/assets/img/backbuttongreen.svg`}
@@ -289,15 +252,97 @@ const Rules = () => {
                           <div className={styles.subTitleBg}>
                           <h4 className={styles.subTitle}>gebruiker</h4>
                           </div>
-                          <p>{fields[fieldIndex].user}</p>
-                          <p>{fields[fieldIndex].userWarning}</p>
+                           {fields[fieldIndex] === "start" ? 
+                          <div>
+                            <p className={styles.text}>Elke keer wanneer je voorbij de start passeert, ontgrendel je de mogelijkheid om je VPN in te schakelen.</p>
+                            <p className={styles.red}><span className={styles.warning}>Opgepast! </span>Wanneer je weer langs de start passeert zonder je VPN te gebruiken komt er geen tweede VPN beurt bij.</p>
+                          </div>
+                         : "" }
+                          {fields[fieldIndex] === "actie" ? 
+                          <div>
+                            <p className={styles.text}>Wanneer u terecht komt op een actievak springt een venster open op uw scherm waarin u de keuze krijgt uit 6 verschillende acties om uw account uit de klauwen van de hacker te houden. Deze 6 acties luiden als volgt: </p>
+                             <ul className={styles.list}>
+                              <li className={styles.listItem}><span className={styles.listImportant}>+ 2 letters </span><br></br>Voeg 2 kleine letters toe aan je wachtwoord.</li>
+                              <li className={styles.listItem}><span className={styles.listImportant}>+ 1 hoofdletter </span><br></br>Versterk uw wachtwoord door een hoofdletter extra toe te voegen. .</li>
+                              <li className={styles.listItem}><span className={styles.listImportant}>+ 1 cijfer </span><br></br>Versterk uw wachtwoord door een cijfer extra toe te voegen.<br></br><span className={styles.red}><span className={styles.warning}>Opgepast! </span>een wachtwoord kan maximaal over 15 tekens beschikken.  Als je wachtwoord reeds 15 tekens lang is kan tekens uit je wachtwoord wijzigen </span> </li>
+                              <li className={styles.listItem}><span className={styles.listImportant}>Verwijder je cookies </span><br></br>De hacker kan jouw interesses achterhalen en die dan op zijn beurt in schakelen om jouw een gepersonaliseerde ad te versturen. Die ad kan jouw 2 rondes uitschakelen. Maar door je cookies te verwijderen wis je al je interesses uit het geheugen van de hacker. En zo kan je voorkomen dat je uitgeschakeld wordt door een gepersonaliseerde ad. </li>
+                              <li className={styles.listItem}><span className={styles.listImportant}>Ontvang een waarschuwingsmail</span><br></br>In een waarschuwingsmail krijg je de laatste zet van de hacker te zien. Zo kan je hem altijd een stapje voor blijven: Moet ik mijn cookies verwijderen? Moet ik een extra cijfer toevoegen aan mijn wachtwoord?…</li>
+                              <li className={styles.listItem}><span className={styles.listImportant}>Installer je VPN</span><br></br>Een VPN maak jouw onvindbaar voor de hacker. Hij wordt dus 2 rondes uitgeschakeld. <br></br><span className={styles.red}><span className={styles.warning}>Opgepast! </span>deze knop word enkel actief telkens wanneer je langs start passeert. Je kan je VPN dus maar 1 keer per ronde inschakelen.</span></li>
+                            </ul>
+                          </div>
+                             : "" }
+                          {fields[fieldIndex] === "random" ? 
+                          <div>
+                            <p className={styles.text}>Wanneer je op dit vakje terecht komt verschijnt er een willekeurig gegenereerd venster op uw scherm. Op dit venster staat een van de volgende opdrachten:</p>
+                            <ul className={styles.list}>
+                              <li className={styles.listItem}>Voeg 2 kleine letters toe aan je wachtwoord.</li>
+                              <li className={styles.listItem}>Voeg een hoofdletter toe aan je wachtwoord.</li>
+                              <li className={styles.listItem}>Voeg een cijfer toe aan je wachtwoord.</li>
+                              <li className={styles.listItem}>Er word een teken uit je wachtwoord verwijderd.</li>
+                              <li className={styles.listItem}>Je moet een beurt overslaan.</li>
+                            </ul>
+                          </div>
+                         : "" }
+                        {fields[fieldIndex] === "mail" ? 
+                          <div>
+                            <p className={styles.text}>Je ontvangt een mail in je inbox. Het is aan jouw om hier correct op te reageren.</p>
+                          </div>
+                         : "" }
+                        {fields[fieldIndex] === "WIFI-vak/pikante foto" ? 
+                          <div>
+                            <p className={styles.text}>Je wifi is uitgevallen of je raakt afgeleid door een pikante pop-up , je bent een ronde uitgeschakeld.</p>
+                          </div>
+                         : "" }
                         </article>
                         <article className={styles.hackerContainer}>
                           <div className={styles.subTitleBgHacker}>
                           <h4 className={styles.subTitle}>hacker</h4>
                           </div>
-                          <p>{fields[fieldIndex].hacker}</p>
-                          <p>{fields[fieldIndex].hackerWarning}</p>
+                          {fields[fieldIndex] === "start" ? 
+                          <div>
+                            <p className={styles.text}>Elke keer wanneer je voorbij de start passeert, ontgrendel je de mogelijkheid om het wachtwoord van de user te raden. </p>
+                            <p className={styles.red}><span className={styles.warning}>Opgepast! </span>Wanneer je weer langs de start passeert zonder je gok te gebruiken komt er geen tweede gok bij.</p>
+                          </div>
+                             : "" }
+                     
+                           {fields[fieldIndex] === "actie" ? 
+                          <div>
+                            <p className={styles.text}>Wanneer u terecht komt op een actievak springt een venster open op uw scherm waarin u de keuze krijgt uit 6 verschillende acties om het account van de user binnen te dringen. Deze 6 acties luiden als volgt: </p>
+                             <ul className={styles.list}>
+                              <li className={styles.listItem}><span className={styles.listImportant}>+ 2 letters </span><br></br>Ontdek 2 kleine letters uit het wachtwoord van de user.</li>
+                              <li className={styles.listItem}><span className={styles.listImportant}>+ 1 hoofdletter </span><br></br>Ontdek 1 hoofdletter uit het wachtwoord van de user.</li>
+                              <li className={styles.listItem}><span className={styles.listImportant}>+ 1 cijfer </span><br></br>Ontdek 1 cijfer uit het wachtwoord van de user.<br></br><span className={styles.red}><span className={styles.warning}>Opgepast! </span>een wachtwoord kan maximaal over 15 tekens beschikken.  Als je wachtwoord reeds 15 tekens lang is kan de user tekens uit zijn wachtwoord wijzigen. </span> </li>
+                              <li className={styles.listItem}><span className={styles.listImportant}>Ontdek interesse </span><br></br>De user moest bij het aanmaken van zijn account ook enkele interesses meegeven. Die interesses zijn van belang voor jouw. Omdat je eenmaal je een interesse te weten gekomen bent een gepersonaliseerde ad kan sturen naar de user.<br></br><span className={styles.red}><span className={styles.warning}>Opgepast! </span>: je kan deze interesses ook weer kwijt geraken wanneer de user zijn cookies verwijdert.  </span> </li>
+                              <li className={styles.listItem}><span className={styles.listImportant}>Schermovername</span><br></br>Neem het scherm van de user over om zo zijn laatste zet te zien. Zo kan je de user altijd een stapje voor blijven. Heeft de user net een hoofdletter toegevoegd aan zijn wachtwachtwoord? Of heeft hij net al zijn cookies verwijdert?</li>
+                              <li className={styles.listItem}><span className={styles.listImportant}>Verzend een
+gepersonaliseerde reclame</span><br></br>Verstuur een gepersonaliseerde ad naar de gebruiker<br></br><span className={styles.red}><span className={styles.warning}>Opgepast! </span>Opgepast! Je kan je personaliseerde ad enkel inzetten wanneer je over een interesse van de user beschikt.</span></li>
+                            </ul>
+                          </div>
+                             : "" }
+                          {fields[fieldIndex] === "random" ? 
+                          <div>
+                            <p className={styles.text}>Wanneer je op dit vakje terecht komt verschijnt er een willekeurig gegenereerd venster op uw scherm. Op dit venster staat een van de volgende opdrachten:</p>
+                              <ul className={styles.list}>
+                                <li className={styles.listItem}>Ontdek 2 kleine letters van het wachtwoord.</li>
+                                <li className={styles.listItem}>Ontdek een hoofdletter van het wachtwoord.</li>
+                                <li className={styles.listItem}>Ontdek een cijfer van het wachtwoord.</li>
+                                <li className={styles.listItem}>Je laatste ontdekking wordt gewist.</li>
+                                <li className={styles.listItem}>Je moet een beurt overslaan.</li>
+                            </ul>
+                          </div>
+                         : "" }
+                          {fields[fieldIndex] === "mail" ? 
+                          <div>
+                            <p className={styles.text}>Je ontvangt een mail in je inbox. Het is aan jouw om hier correct op te reageren.</p>
+                          </div>
+                         : "" }
+                          {fields[fieldIndex] === "WIFI-vak/pikante foto" ? 
+                          <div>
+                            <p className={styles.text}>Je wifi is uitgevallen of je raakt afgeleid door een pikante pop-up , je bent een ronde uitgeschakeld.</p>
+                          </div>
+                         : "" }
+
+                         
                         </article>
                       </div>
                   </article>

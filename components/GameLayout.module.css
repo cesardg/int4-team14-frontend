@@ -1,9 +1,11 @@
+/* gameboard gaat nog wegmogen */
 .gameboard {
   height: fit-content;
   width: fit-content;
   z-index: 5;
   background-color: white;
 }
+/* gameboard gaat nog wegmogen */
 
 .userContainer {
   background-color: var(--brown);
@@ -61,7 +63,8 @@
   width: 100%;
 }
 
-.info {
+/* user */
+.userInfo {
   grid-column: 2 / span 7;
   grid-row: 2 / span 10;
 }
@@ -71,19 +74,6 @@
   grid-row: 1 / span 5;
 }
 
-.notes {
-  grid-column: 24 / span 7;
-  grid-row-start: 7;
-  margin: 2rem;
-}
-
-.action {
-  left: 15%;
-  position: absolute;
-  top: 15%;
-  width: 70vw;
-  z-index: 2;
-}
 
 .password {
   left: 20vw;
@@ -101,7 +91,7 @@
   z-index: 2;
 }
 
-.ad {
+.userAd {
   left: 20vw;
   position: absolute;
   top: 20vh;
@@ -114,6 +104,28 @@
   position: absolute;
   top: 15vh;
   width: 45vw;
+  z-index: 2;
+}
+
+/* hacker */
+.hackerInfo {
+  
+}
+.hackerAd {
+
+}
+/* user and hacker */
+.notes {
+  grid-column: 24 / span 7;
+  grid-row-start: 7;
+  margin: 2rem;
+}
+
+.action {
+  left: 15%;
+  position: absolute;
+  top: 15%;
+  width: 70vw;
   z-index: 2;
 }
 

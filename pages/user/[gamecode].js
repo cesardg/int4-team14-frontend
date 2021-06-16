@@ -455,7 +455,7 @@ const User = ({ data }) => {
       <div className={styles.gameboard}>
         <GameBoard boardInfo={realtimeGameData} />
       </div>
-      <div className={styles.info}>
+      <div className={styles.userInfo}>
         <UserInfo userinfo={gameData.userinfo} />
       </div>
       {/* <div className={styles.yourturn}>
@@ -523,7 +523,7 @@ const User = ({ data }) => {
       )}
 
       {receiveAdFromHacker ? (
-        <div className={styles.ad}>
+        <div className={styles.userAd}>
           <UserAd subject={receiveAdFromHacker} />
         </div>
       ) : (

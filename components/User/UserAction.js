@@ -1,5 +1,8 @@
+// components
 import GameWindowLayout from "../GameWindowLayout";
+// styling
 import styles from "./UserAction.module.css";
+// imports
 import Image from "next/image";
 
 const UserAction = ({ onClickButton, start }) => {
@@ -15,7 +18,7 @@ const UserAction = ({ onClickButton, start }) => {
           >
             <div className={styles.actionImg}>
               <Image
-                src={`/assets/img/useractions/add2letters.svg`}
+                src={`/assets/img/add2letters.svg`}
                 alt="Picture of the user"
                 width={100}
                 height={80}
@@ -47,10 +50,9 @@ const UserAction = ({ onClickButton, start }) => {
             className={styles.actionButton}
             onClick={() => onClickButton("add1capital")}
           >
-            {" "}
             <div className={styles.actionImg}>
               <Image
-                src={`/assets/img/useractions/add1capital.svg`}
+                src={`/assets/img/add1capital.svg`}
                 alt="Picture of the user"
                 width={100}
                 height={80}
@@ -82,7 +84,7 @@ const UserAction = ({ onClickButton, start }) => {
           >
             <div className={styles.actionImg}>
               <Image
-                src={`/assets/img/useractions/add1number.svg`}
+                src={`/assets/img/add1number.svg`}
                 alt="Picture of the user"
                 width={100}
                 height={80}

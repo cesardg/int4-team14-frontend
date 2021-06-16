@@ -62,7 +62,7 @@ const UserWarningMail = ({gameData, onClickButtonMail}) => {
           <p className={styles.borderTop}>
             Ben jij dit niet? Versterk dan zo snel mogelijk je wachtwoord
           </p>
-          <button className={buttonStyles.buttonGreen} onClick={() => onClickButtonMail()}>Verder Spelen</button>
+          <button className={buttonStyles.buttonGreen} onClick={() => onClickButtonMail(lastDiscovery.discovery)}>Verder Spelen</button>
         </div>
       ) : (
         ""

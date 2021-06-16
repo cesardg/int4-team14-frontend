@@ -29,9 +29,9 @@ const User = ({ data }) => {
   const [gameData, setGameData] = useState(data[0]);
   const [realtimeGameData, setRealtimeGameData] = useState({
     currentPlayer: data[0].startingPlayer,
-    fieldUser: 1,
+    fieldUser: data[0].userinfo.previousfield,
     actionUser: "start",
-    fieldHacker: 1,
+    fieldHacker: data[0].hackerinfo.previousfield,
     actionHacker: "start",
   });
 
@@ -403,14 +403,36 @@ const User = ({ data }) => {
     setWindowComponent("");
   };
 
-  const onClickButtonMail = () => {
+  const onClickButtonMail = (note) => {
     console.log("dit moet er gebeuren als je op oke mail");
+    sendNoteToDb(`waarschuwing: ${note}`)
     channel.publish({
       name: gamecode,
       data: `playerchange-user-hacker`,
     });
-    setWindowComponent("your");
+    setWindowComponent("");
   };
+
+  const sendNoteToDb = async (note) => {
+      const data = {
+        note: note,
+        game: gameData.id,
+      };
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/usernotes`,
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        console.log("joepie, notes na mail");
+      }
+    
+  }
 
   // general fetch functions
   const getUpdatedGamedata = async () => {
@@ -504,7 +526,7 @@ const User = ({ data }) => {
         <div className={styles.warning}>
           <UserWarningMail
             gameData={gameData}
-            onClickButtonMail={() => onClickButtonMail()}
+            onClickButtonMail={(note) => onClickButtonMail(note)}
           />
         </div>
       ) : (

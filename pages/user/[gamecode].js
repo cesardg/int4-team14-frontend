@@ -163,7 +163,7 @@ const User = ({ data }) => {
     { nummer: 32, command: "W", action: "empty" },
   ];
   const [randomOption, setRandomOption] = useState(
-    randomOptions[Math.floor(Math.random() * randomOptions.length)]
+    randomOptions[0]
   );
 
   // specific logic
@@ -176,6 +176,7 @@ const User = ({ data }) => {
   // channel
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split("-")[0];
+    console.log("ably?")
 
     if (type === "boardchange") {
       const newHackerField = message.data.split("-")[2];
@@ -228,11 +229,20 @@ const User = ({ data }) => {
         }
       }
 
+      // user komt op een wifi vak
+      if (
+        realtimeGameData.currentPlayer === "user" &&
+        newUserAction === "action"
+      ) {
+        console.log("de user staat op een actie, dit moet er gebeuren:")
+      }
+
       // user komt op een random vak
       if (
         realtimeGameData.currentPlayer === "user" &&
-        realtimeGameData.actionUser === "random"
+        newUserAction === "random"
       ) {
+        console.log("de user staat op een random vak")
         setRandomOption(
           randomOptions[Math.floor(Math.random() * randomOptions.length)]
         );
@@ -242,7 +252,7 @@ const User = ({ data }) => {
       // user komt op een wifi vak
       if (
         realtimeGameData.currentPlayer === "user" &&
-        realtimeGameData.actionUser === "wifi"
+        newUserAction === "wifi"
       ) {
         console.log("de user staat op een wifi vakje, dit moet er gebeuren:")
       }
@@ -250,7 +260,7 @@ const User = ({ data }) => {
       // user komt op het pikante foto
       if (
         realtimeGameData.currentPlayer === "user" &&
-        realtimeGameData.actionUser === "pikant"
+        newUserAction === "pikant"
       ) {
         console.log("de user staat op het pikante vakje, dit moet er gebeuren:")
       }
@@ -258,7 +268,7 @@ const User = ({ data }) => {
       // user komt op het spam vakje
       if (
         realtimeGameData.currentPlayer === "user" &&
-        realtimeGameData.actionUser === "spam"
+        newUserAction === "spam"
       ) {
         console.log("de user staat op het spamvakje, dit moet er gebeuren:")
       }
@@ -266,9 +276,9 @@ const User = ({ data }) => {
       // user komt een empty vak
       if (
         realtimeGameData.currentPlayer === "user" &&
-        realtimeGameData.actionUser === "empty"
+        newUserAction === "empty"
       ) {
-        console.log("de user empty vak, dit moet er gebeuren")
+        console.log("de user staat op een empty vak, dit moet er gebeuren")
       }
 
       // if (
@@ -385,8 +395,6 @@ const User = ({ data }) => {
       actionUser: "",
     });
   };
-
-  console.log(gameData);
 
   const handleUpdatedPassword = (score) => {
     setAccountStrongness(score);

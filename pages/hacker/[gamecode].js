@@ -219,11 +219,21 @@ const Hacker = ({ data }) => {
         }
       }
 
+
+      // hacker komt op een actie vak
+      if (
+        realtimeGameData.currentPlayer === "hacker" &&
+        newHackerAction === "action"
+      ) {
+        console.log("de hacker staat op een actievak, dit moet er gebeuren:")
+      }
+
       // hacker komt op een random vak
       if (
         realtimeGameData.currentPlayer === "hacker" &&
-        realtimeGameData.actionHacker === "random"
+        newHackerAction === "random"
       ) {
+        console.log("de hacker staat op een random vak, dit moet er gebeuren")
         setRandomOption(
           randomOptions[Math.floor(Math.random() * randomOptions.length)]
         );
@@ -234,7 +244,7 @@ const Hacker = ({ data }) => {
       // hacker komt op een wifi vak
       if (
         realtimeGameData.currentPlayer === "hacker" &&
-        realtimeGameData.actionUser === "wifi"
+        newHackerAction === "wifi"
       ) {
         console.log("de hacker staat op een wifi vakje, dit moet er gebeuren:")
       }
@@ -242,7 +252,7 @@ const Hacker = ({ data }) => {
       // hacker komt op het pikante foto
       if (
         realtimeGameData.currentPlayer === "hacker" &&
-        realtimeGameData.actionUser === "pikant"
+        newHackerAction === "pikant"
       ) {
         console.log("de hacker staat op het pikante vakje, dit moet er gebeuren:")
       }
@@ -250,7 +260,7 @@ const Hacker = ({ data }) => {
       // hacker komt op het pikante foto
       if (
         realtimeGameData.currentPlayer === "hacker" &&
-        realtimeGameData.actionUser === "spam"
+        newHackerAction === "spam"
       ) {
         console.log("de hacker staat op het spamvakje, dit moet er gebeuren:")
       }
@@ -258,7 +268,7 @@ const Hacker = ({ data }) => {
       // hacker komt een empty vak
       if (
         realtimeGameData.currentPlayer === "hacker" &&
-        realtimeGameData.actionUser === "empty"
+        newHackerAction === "empty"
       ) {
         console.log("de hacker staat op een empty vak, dit moet er gebeuren")
       }

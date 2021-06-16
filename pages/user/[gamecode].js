@@ -7,7 +7,6 @@ import SpamMail from "../../components/SpamMail";
 import Wifi from "../../components/Wifi";
 import GameBoard from "../../components/GameBoard";
 import UserInfo from "../../components/User/UserInfo";
-import UserWarning from "../../components/User/UserWarning";
 import UserAccountStrongness from "../../components/User/UserAccountStrongness";
 import UserVpn from "../../components/User/UserVpn";
 import UserAction from "../../components/User/UserAction";
@@ -163,6 +162,7 @@ const User = ({ data }) => {
     { nummer: 31, command: "Y", action: "action" },
     { nummer: 32, command: "W", action: "empty" },
   ];
+
   const [randomOption, setRandomOption] = useState(randomOptions[0]);
 
   // specific logic
@@ -175,6 +175,7 @@ const User = ({ data }) => {
   // channel
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split("-")[0];
+    console.log("ably?");
 
     if (type === "boardchange") {
       const newHackerField = message.data.split("-")[2];
@@ -227,11 +228,20 @@ const User = ({ data }) => {
         }
       }
 
+      // user komt op een wifi vak
+      if (
+        realtimeGameData.currentPlayer === "user" &&
+        newUserAction === "action"
+      ) {
+        console.log("de user staat op een actie, dit moet er gebeuren:");
+      }
+
       // user komt op een random vak
       if (
         realtimeGameData.currentPlayer === "user" &&
-        realtimeGameData.actionUser === "random"
+        newUserAction === "random"
       ) {
+        console.log("de user staat op een random vak");
         setRandomOption(
           randomOptions[Math.floor(Math.random() * randomOptions.length)]
         );
@@ -241,7 +251,7 @@ const User = ({ data }) => {
       // user komt op een wifi vak
       if (
         realtimeGameData.currentPlayer === "user" &&
-        realtimeGameData.actionUser === "wifi"
+        newUserAction === "wifi"
       ) {
         console.log("de user staat op een wifi vakje, dit moet er gebeuren:");
       }
@@ -249,7 +259,7 @@ const User = ({ data }) => {
       // user komt op het pikante foto
       if (
         realtimeGameData.currentPlayer === "user" &&
-        realtimeGameData.actionUser === "pikant"
+        newUserAction === "pikant"
       ) {
         console.log(
           "de user staat op het pikante vakje, dit moet er gebeuren:"
@@ -259,7 +269,7 @@ const User = ({ data }) => {
       // user komt op het spam vakje
       if (
         realtimeGameData.currentPlayer === "user" &&
-        realtimeGameData.actionUser === "spam"
+        newUserAction === "spam"
       ) {
         console.log("de user staat op het spamvakje, dit moet er gebeuren:");
       }
@@ -267,9 +277,9 @@ const User = ({ data }) => {
       // user komt een empty vak
       if (
         realtimeGameData.currentPlayer === "user" &&
-        realtimeGameData.actionUser === "empty"
+        newUserAction === "empty"
       ) {
-        console.log("de user empty vak, dit moet er gebeuren");
+        console.log("de user staat op een empty vak, dit moet er gebeuren");
       }
 
       // if (
@@ -376,15 +386,13 @@ const User = ({ data }) => {
       setUserPasswordAction(action);
       setWindowComponent("password");
     } else if (action === "waarschuwingsmail") {
-      setWindowComponent("warning");
+      setWindowComponent("warnings");
     }
     setRealtimeGameData({
       ...realtimeGameData,
       actionUser: "",
     });
   };
-
-  console.log(gameData);
 
   const handleUpdatedPassword = (score) => {
     setAccountStrongness(score);
@@ -456,9 +464,6 @@ const User = ({ data }) => {
       <div className={styles.turn}>
         <Turn who={realtimeGameData.currentPlayer} />
       </div> */}
-      {/* <div className={styles.warnings}>
-        <UserWarning />
-      </div> */}
       <div className={styles.notes}>
         <Notes gameData={gameData} player="user" />
       </div>
@@ -494,16 +499,17 @@ const User = ({ data }) => {
       <div className={styles.wifi}>
         <Wifi />
       </div> */}
-      {/* {windowComponent === "warnings" ? ( */}
-      <div className={styles.warnings}>
-        <UserWarningMail
-          gameData={gameData}
-          onClickButtonMail={() => onClickButtonButtonMail()}
-        />
-      </div>
-      {/* ) : (
+
+      {windowComponent === "warnings" ? (
+        <div className={styles.warning}>
+          <UserWarningMail
+            gameData={gameData}
+            onClickButtonMail={() => onClickButtonMail()}
+          />
+        </div>
+      ) : (
         ""
-      )} */}
+      )}
       {windowComponent === "password" ? (
         <div className={styles.password}>
           <UserAdjustPassword

@@ -39,7 +39,7 @@ const Userend = ({ data }) => {
   );
 };
 
-export default Userrend;
+export default Userend;
 
 export const getServerSideProps = async (context) => {
   const { gamecode } = context.query;

@@ -1,23 +1,17 @@
+// components
+import GameWindowLayout from "../GameWindowLayout";
+// styling
+import buttonStyles from "./../../styles/ButtonStyles.module.css";
 import styles from "./HackerVpn.module.css";
-import Image from "next/image";
 
 const HackerVpn = () => {
-  
   return (
-    <article className={styles.article}>
-      <h2>VPN verbinding</h2>
-      <p>
-        De user zijn VPN zorgt voor een veilige verbinding tussen hem/haar en
-        het internet, dit houdt de je dus even op een afstand. Je moet 2 beurten
-        overslaan
-      </p>
-      <Image
-        src={`/assets/img/user.png`}
-        alt="vpn"
-        width={30}
-        height={30}
-      />{" "}
-    </article>
+    <GameWindowLayout title="spelbord" bg="var(--yellow)" border="var(--green)">
+      <div className={styles.container}>
+        <p className={styles.title}>de gebruiker heeft een vpn ingeschakeld</p>
+        <p className={styles.text}>Je moet 2 beurten overslaan</p>
+      </div>
+    </GameWindowLayout>
   );
 };
 

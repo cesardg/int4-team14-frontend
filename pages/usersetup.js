@@ -14,7 +14,7 @@ const Usersetup = () => {
   const router = useRouter()
   const gamecode = router.query.gamecode
   const profilePicturesOptions = ["pf1", "pf2", "pf3", "pf4" ];
-  const userInterestsOptions = ["knutselen", "sporten", "buiten spelen", "Roblox", "Minecraft", "Brawl Stars", "Youtube", "Slijm maken", "Tik Tok"];  
+  const userInterestsOptions = ["knutselen", "sporten", "buiten spelen", "Roblox", "Minecraft", "Brawl Stars", "Youtube", "Slijm maken", "TikTok"];  
   const [userInterests, setUserInterests] = useState([]);
   const [profilePicture, setProfilePicture] = useState("pf1");
   const [profilePass, setProfilePass] = useState(["","", "", "", "", ""]);

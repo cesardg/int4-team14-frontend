@@ -158,7 +158,13 @@
 }
 
 .hackerVpn {
+  left: 30vw;
+  position: absolute;
+  top: 20vh;
+  width: 40vw;
+  z-index: 2;
 }
+
 /* user and hacker */
 .notes {
   grid-column: 24 / span 7;

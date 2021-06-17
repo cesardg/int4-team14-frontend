@@ -8,30 +8,13 @@ import { useState } from "react";
 import Image from "next/image";
 
 const HackerAd = ({ gameData, onClickButton }) => {
-  const options = [
-    {
-      interest: "paardrijden",
-      content: "bent u fan van paardrijden? open deze mail/ad",
-    },
-    { interest: "koken", content: "bent u fan van koken? open deze mail/ad" },
-    {
-      interest: "Knutselen",
-      content: "bent u fan van knutsellen? open deze mail/ad",
-    },
-    { interest: "roblox", content: "bent u fan van roblox? open deze mail/ad" },
-  ];
-
   const [currentInterest, setCurrentInterest] = useState();
   let interests = gameData.hackerinfo.obtainedInterests;
   let defaulChecked;
-  let tempContent;
   if (interests) {
     interests = gameData.hackerinfo.obtainedInterests.split("-");
     interests.shift();
     defaulChecked = interests[0];
-    options.forEach((element) => {
-      if (element.interest === currentInterest) tempContent = element.content;
-    });
   }
   const onChangeButton = (value) => {
     setCurrentInterest(value);
@@ -65,7 +48,7 @@ const HackerAd = ({ gameData, onClickButton }) => {
               <label key={item} className={styles.interest}>
                 <div className={styles.interestImg}>
                   <Image
-                    src={`/assets/img/hackeractions/ads/${item}.svg`}
+                    src={`/assets/img/hackeractions/ad-icons/${item}.svg`}
                     alt="Picture of the user"
                     width={100}
                     height={80}
@@ -85,9 +68,11 @@ const HackerAd = ({ gameData, onClickButton }) => {
         ) : (
           ""
         )}
-        <p>{tempContent}</p>
-        <button onClick={() => onClickButton(currentInterest)}
-        className={buttonStyles.buttonGreen}>
+        <p>hier komt de ad voor {currentInterest}</p>
+        <button
+          onClick={() => onClickButton(currentInterest)}
+          className={buttonStyles.buttonGreen}
+        >
           Advertentie versturen
         </button>
       </div>

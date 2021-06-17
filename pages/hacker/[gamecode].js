@@ -396,6 +396,7 @@ const Hacker = ({ data }) => {
       "hackerinfos",
       gameData.hackerinfo.id
     );
+     
     const hackerInterestsArray = obtainedInterests.obtainedInterests.split("-");
     const userInterestsArray = gameData.userinfo.interests.split("-");
     userInterestsArray.shift();
@@ -565,18 +566,18 @@ const Hacker = ({ data }) => {
         <HackerInfo hackerinfo={gameData.hackerinfo} />
       </div>
       {realtimeGameData.currentPlayer === "hacker" &&
-      realtimeGameData.actionUser !== "action" &&
-      realtimeGameData.actionUser !== "random" &&
-      realtimeGameData.actionUser !== "" &&
-      realtimeGameData.actionUser !== "wifi" &&
-      realtimeGameData.actionUser !== "spam" ? (
+      realtimeGameData.actionHacker !== "action" &&
+      realtimeGameData.actionHacker !== "random" &&
+      realtimeGameData.actionHacker !== "" &&
+      realtimeGameData.actionHacker !== "wifi" &&
+      realtimeGameData.actionHacker !== "spam" ? (
         <div className={styles.yourturn}>
           <YourTurn />
         </div>
       ) : (
         ""
       )}
-      {realtimeGameData.currentPlayer === "hacker" ? (
+      {realtimeGameData.currentPlayer === "user" ? (
         <div className={styles.turn}>
           <Turn who={realtimeGameData.currentPlayer} />
         </div>

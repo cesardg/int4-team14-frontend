@@ -4,8 +4,10 @@ import styles from "./HackerInterests.module.css";
 import GameWindowLayout from "../GameWindowLayout";
 
 const HackerInterests = ({ gameData }) => {
+  console.log(gameData);
   let interests = gameData.hackerinfo.obtainedInterests;
-  if (interests) {
+  console.log(interests);
+  if (interests !== null) {
     interests = gameData.hackerinfo.obtainedInterests.split("-");
     interests.shift();
   }

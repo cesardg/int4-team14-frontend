@@ -5,11 +5,13 @@ import Image from 'next/image';
 import { useState, useEffect } from "react";
 
 
-const Layout = ({ children, style, vpnIcon }) => {
+const Layout = ({ children, style, vpnIcon, realtimeGameData }) => {
 
     let today = new Date()
     let tempTime = today.getHours() + ':' + today.getMinutes();
     const [time, setTime] = useState(tempTime);
+
+    console.log(realtimeGameData)
 
     const [popupDice, setPopupDice] = useState("none");
     const [popupVpn, setPopupVpn] = useState("none");
@@ -71,7 +73,7 @@ const Layout = ({ children, style, vpnIcon }) => {
             
                 />
                 </div>
-              <span className={styles.popup} style={{display : popupDice}} >Je vpn staat {vpnIcon ? "aan, nice" : "uit, niet goed"}</span>
+              <span className={styles.popup} style={{display : popupDice}} >Je vpn staat {vpnIcon ? "aan" : "uit"}</span>
               </div>
               : "" }
             <div  className={styles.headerIcon} onClick={() => handleClickPopup("vpn")}>
@@ -81,7 +83,15 @@ const Layout = ({ children, style, vpnIcon }) => {
                 width={22}
                 height={22}
                 />
-                <span className={styles.popup} style={{display : popupVpn}} >welke info komt er hier?</span>
+                <div className={styles.popupDice} style={{display : popupVpn}} > 
+                <p>Live spelbord info</p>
+                <p className={styles.popupText}>huidige speler: 
+                {realtimeGameData.currentPlayer === "user" ? "gebruiker" : "hacker"}
+                </p>
+
+                <p className={styles.popupText}>Spelvak hacker: {realtimeGameData.fieldHacker}  </p>
+                <p className={styles.popupText}>Spelvak gebruiker: {realtimeGameData.fieldUser} </p>
+                </div>
               </div>
             <p className={styles.time}>{time}</p>
           </div>

@@ -365,12 +365,12 @@ const User = ({ data }) => {
         if (realtimeGameData.currentPlayer == "user") {
           channel.publish({
             name: gamecode,
-            data: `boardchange-user-${realtimeGameData.fieldHacker}-${realtimeGameData.actionHacker}-${element.nummer}-${element.action}-${element.action}`,
+            data: `boardchange-user-${realtimeGameData.fieldHacker}-done-${element.nummer}-${element.action}-${element.action}`,
           });
         } else if (realtimeGameData.currentPlayer == "hacker") {
           channel.publish({
             name: gamecode,
-            data: `boardchange-hacker-${element.nummer}-${element.action}-${realtimeGameData.fieldUser}-${realtimeGameData.actionUser}-${element.action}`,
+            data: `boardchange-hacker-${element.nummer}-${element.action}-${realtimeGameData.fieldUser}-done-${element.action}`,
           });
         }
       }
@@ -437,7 +437,7 @@ const User = ({ data }) => {
   };
 
   const handleUpdatedPassword = (score) => {
-    if (score >= 20) {
+    if (score >= 100) {
       putData("games", gameData.id, { winner: "user" });
       channel.publish({
         name: gamecode,

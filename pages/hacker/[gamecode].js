@@ -254,7 +254,7 @@ const Hacker = ({ data }) => {
         realtimeGameData.currentPlayer === "hacker" &&
         newHackerAction === "wifi"
       ) {
-        console.log("de hacker staat op een wifi vakje, dit moet er gebeuren:");
+        handlePionOnWifi();
       }
 
       // hacker komt op het pikante foto
@@ -357,12 +357,12 @@ const Hacker = ({ data }) => {
         if (realtimeGameData.currentPlayer == "user") {
           channel.publish({
             name: gamecode,
-            data: `boardchange-user-${realtimeGameData.fieldHacker}-${realtimeGameData.actionHacker}-${element.nummer}-${element.action}-${element.action}`,
+            data: `boardchange-user-${realtimeGameData.fieldHacker}-done-${element.nummer}-${element.action}-${element.action}`,
           });
         } else if (realtimeGameData.currentPlayer == "hacker") {
           channel.publish({
             name: gamecode,
-            data: `boardchange-hacker-${element.nummer}-${element.action}-${realtimeGameData.fieldUser}-${realtimeGameData.actionUser}-${element.action}`,
+            data: `boardchange-hacker-${element.nummer}-${element.action}-${realtimeGameData.fieldUser}-done-${element.action}`,
           });
         }
       }
@@ -398,6 +398,21 @@ const Hacker = ({ data }) => {
     });
   };
 
+  const handlePionOnWifi = () => {
+    timeout();
+    setTimeout(() => {
+      setRealtimeGameData({
+        ...realtimeGameData,
+        actionHacker: "done",
+      });
+      channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
+    }, 3000);
+  };
+
+  const timeout = (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
+  
   const handleDeleteDiscovery = () => {};
 
   // logic functions
@@ -709,7 +724,7 @@ const Hacker = ({ data }) => {
         ""
       )}
       {realtimeGameData.currentPlayer === "hacker" &&
-      realtimeGameData.actionUser === "spam" ? (
+      realtimeGameData.actionHacker === "spam" ? (
         <div className={styles.spammail}>
           <SpamMail
             player="hacker"
@@ -720,7 +735,7 @@ const Hacker = ({ data }) => {
         ""
       )}
       {realtimeGameData.currentPlayer === "hacker" &&
-      realtimeGameData.actionUser === "wifi" ? (
+      realtimeGameData.actionHacker === "wifi" ? (
         <div className={styles.wifi}>
           <Wifi />
         </div>

@@ -12,6 +12,7 @@ const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
   const [password, setPassword] = useState(
     gameData.userinfo.password.split("")
   );
+  console.log(action)
 
   const [tempPassword, setTempPassword] = useState([...password]);
 
@@ -170,19 +171,19 @@ const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
         )}
         <div className={styles.img}>
           <Image
-            src={`/assets/img/useractions/${action}.svg`}
-            alt="Picture of the user"
+            src={`/assets/img/${action}.svg`}
+            alt="Picture of the action"
             width={150}
             height={150}
           />
         </div>
         <p className={styles.textFirst}>Jouw huidig wachtwoord</p>
         <p className={styles.password}>
-          {/* {password.map((character, index) => (
+          {password.map((character, index) => (
             <span key={index} className={styles.character}>
               {character}
             </span>
-          ))} */}
+          ))} 
         </p>
         <p className={styles.text}>Jouw nieuw wachtwoord</p>
         {action.includes("add") ? (

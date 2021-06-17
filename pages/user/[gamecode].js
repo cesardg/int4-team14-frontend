@@ -21,13 +21,13 @@ import styles from "./../../components/GameLayout.module.css";
 // imports
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Draggable from 'react-draggable';
 
 const User = ({ data }) => {
   // game
   const router = useRouter();
   const gamecode = router.query.gamecode;
   const [gameData, setGameData] = useState(data[0]);
-  console.log(data[0])
   const [realtimeGameData, setRealtimeGameData] = useState({
     currentPlayer: data[0].startingPlayer,
     fieldUser: data[0].userinfo.previousfield,
@@ -90,42 +90,42 @@ const User = ({ data }) => {
     },
     {
       type: "bad",
-      action: "letterweghalen",
+      action: "removechar",
       text: "Je hebt je niet uitgelogd op de computer van de bib.",
-      subtext: "Haal 1 letter of cijfer uit je wachtwoord",
-      button: "Verander een letter",
+      subtext: "Je verliest 1 karater uit je wachtwoord",
+      button: "Verder spelen",
     },
     {
       type: "bad",
-      action: "beurtoverlsaan",
+      action: "skipturn",
       text: "Je raakt afgeleid door een complot-theorie op het internet.",
       subtext: "Sla een beurt over",
       button: "Oke",
     },
     {
       type: "bad",
-      action: "beurtoverlsaan",
+      action: "skipturn",
       text: "Je bent verdwaald tussen alle vreemde YouTube-filmpjes waardoor je nu alleen nog teenkaas-filmpjes te zien krijgt.",
       subtext: "Sla een beurt over",
       button: "Oke",
     },
     {
       type: "bad",
-      action: "beurtoverlsaan",
+      action: "skipturn",
       text: "De hacker ontdekt je oude Roblox-account en gebruikt dit om extra info over jou te ontdekken.",
       subtext: "Sla een beurt over",
       button: "Oke",
     },
     {
       type: "bad",
-      action: "letterweghalen",
+      action: "removechar",
       text: "Je probeert Minecraft te downloaden op een verdachte website, hierdoor heb je een virus.",
       subtext: "Haal 1 letter of cijfer uit je wachtwoord",
       button: "Oke",
     },
     {
       type: "bad",
-      action: "beurtoverlsaan",
+      action: "skipturn",
       text: "Je probeert gratis muziek te downloaden op een verdachte website, hierdoor loopt je computer vast.",
       subtext: "Sla een beurt over",
       button: "Oke",
@@ -179,6 +179,7 @@ const User = ({ data }) => {
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split("-")[0];
     console.log("ably?");
+    getUpdatedGamedata()
 
     if (type === "boardchange") {
       const newHackerField = message.data.split("-")[2];
@@ -247,7 +248,8 @@ const User = ({ data }) => {
       ) {
         console.log("de user staat op een random vak");
         setRandomOption(
-          randomOptions[Math.floor(Math.random() * randomOptions.length)]
+          //randomOptions[Math.floor(Math.random() * randomOptions.length)]
+          randomOptions[0]
         );
         // setWindowComponent("random");
       }
@@ -382,12 +384,31 @@ const User = ({ data }) => {
   // logic functions
   const handleClickRandom = (value) => {
     console.log("random is oke");
-    // console.log(value);
-    //channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
+    if (value === "removechar"){
+      handleRemoveChar();
+      channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
+    } else if (value === "skipturn"){
+      console.log("beurt overslaan")
+    }else if ( value === "add2letters" || value === "add1capital" || value === "add1number") {
+      setUserPasswordAction(value);
+      setWindowComponent("password");
+      setRealtimeGameData({
+      ...realtimeGameData,
+      actionUser: "done",
+    });
+    }
   };
 
+  const handleRemoveChar = () => {
+    console.log(gameData)
+    const newPass = (gameData.userinfo.password).substring(0, gameData.userinfo.password.length - 1);
+    console.log(newPass);
+    data ={password: newPass}
+    putData("userinfos", gameData.userinfo.id, data);
+  }
+
   const handleClickAction = (action) => {
-    getUpdatedGamedata();
+
     if (action === "vpn") {
       setUserStart(false);
       setUserDoubleTurn(1);
@@ -550,6 +571,7 @@ const User = ({ data }) => {
 
   // general fetch functions
   const getUpdatedGamedata = async () => {
+    console.log("hopelijk kom ik niet te veel voor in de console (update)")
     const updatedGameData = await fetchData("games", gameData.id);
 
     setGameData(updatedGameData);
@@ -576,6 +598,7 @@ const User = ({ data }) => {
     );
     if (response.ok) {
       console.log("joepie");
+      getUpdatedGamedata()
     }
   };
 
@@ -586,7 +609,6 @@ const User = ({ data }) => {
     };
   }, [realtimeGameData]);
 
-  console.log(realtimeGameData);
 
   return (
     <GameLayout style="user" vpnIcon={vpnIcon}>
@@ -615,13 +637,17 @@ const User = ({ data }) => {
       ) : (
         ""
       )}
-      <div className={styles.notes}>
-        <Notes
-          notes={notes}
-          player="user"
-          handleFormSubmission={(e) => handleFormSubmissionNotes(e)}
-        />
-      </div>
+       <Draggable>
+        <div className={styles.notes}>
+        
+            <Notes
+              notes={notes}
+              player="user"
+              handleFormSubmission={(e) => handleFormSubmissionNotes(e)}
+            />
+      
+        </div>
+      </Draggable>
       <div className={styles.strongness}>
         <UserAccountStrongness value={accountStrongness} />
       </div>

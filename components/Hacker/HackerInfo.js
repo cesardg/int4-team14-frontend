@@ -2,7 +2,6 @@ import styles from "./HackerInfo.module.css";
 import Image from "next/image";
 
 const HackerInfo = ({ hackerinfo }) => {
-  console.log(hackerinfo);
   let interests = [];
   if (hackerinfo.obtainedInterests) {
     // console.log("er zijn");

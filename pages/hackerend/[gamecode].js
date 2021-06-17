@@ -19,8 +19,7 @@ const Hackerend = ({ data }) => {
         bg="var(--yellow)"
         border="var(--green)"
       >
-        {data[0].winner === "user" ? <p>je bent verloren</p> : "er is nog geen winner, cesar is de winner!!!!!"}
-        {data[0].winner === "hacker" ? <p>je bent gewonnen</p> : "er is nog geen winner, lieselot is de winner"}
+        <p>{data[0].winner === "user" ? "je bent verloren, de user is gewonnen" : "je bent gewonnen, hacker is gewonnen"}</p>
       </GameWindowLayout>
       {/* <div className={styles.hackerInfo}>
         <HackerInfo hackerinfo={gameData.hackerinfo} />

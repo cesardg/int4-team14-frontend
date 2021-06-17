@@ -11,8 +11,6 @@ const Layout = ({ children, style, vpnIcon, realtimeGameData }) => {
     let tempTime = today.getHours() + ':' + today.getMinutes();
     const [time, setTime] = useState(tempTime);
 
-    console.log(realtimeGameData)
-
     const [popupDice, setPopupDice] = useState("none");
     const [popupVpn, setPopupVpn] = useState("none");
 

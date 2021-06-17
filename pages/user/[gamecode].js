@@ -331,7 +331,11 @@ const User = ({ data }) => {
     if (realtimeGameData.currentPlayer === "user") {
       setReceiveAdFromHacker(false);
     }
-  });
+
+    if (type === "endgame") {
+      router.push(`/userend/${gamecode}`);
+    }
+  }); // channel einde
 
   // check board input
   const downHandler = ({ key }) => {
@@ -433,6 +437,13 @@ const User = ({ data }) => {
   };
 
   const handleUpdatedPassword = (score) => {
+    if (score >= 20) {
+      putData("games", gameData.id, { winner: "user" });
+      channel.publish({
+        name: gamecode,
+        data: `endgame-user-hacker`,
+      });
+    }
     setAccountStrongness(score);
     getUpdatedGamedata();
     channel.publish({
@@ -609,7 +620,11 @@ const User = ({ data }) => {
   }, [realtimeGameData]);
 
   return (
-    <GameLayout style="user" vpnIcon={vpnIcon} realtimeGameData={realtimeGameData}>
+    <GameLayout
+      style="user"
+      vpnIcon={vpnIcon}
+      realtimeGameData={realtimeGameData}
+    >
       <div className={styles.userInfo}>
         <UserInfo userinfo={gameData.userinfo} />
       </div>

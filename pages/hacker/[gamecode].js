@@ -324,7 +324,10 @@ const Hacker = ({ data }) => {
         currentPlayer: message.data.split("-")[2],
       });
     }
-  });
+    if (type === "endgame") {
+      router.push(`/hackerend/${gamecode}`);
+    }
+  }); // channel einde
 
   // check board input
   const downHandler = ({ key }) => {
@@ -423,14 +426,13 @@ const Hacker = ({ data }) => {
       data: `playerchange-hacker-user`,
     });
 
-  console.log("wordt dit gedaan?");
+    console.log("wordt dit gedaan?");
     setRealtimeGameData({
       ...realtimeGameData,
       actionHacker: "done",
     });
   };
 
-  console.log("realtime", realtimeGameData);
   const sendDataToHacker = async (data) => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/hackerinfos/${gameData.hackerinfo.id}`,
@@ -476,11 +478,19 @@ const Hacker = ({ data }) => {
 
   const handleFormGuessPass = (e) => {
     e.preventDefault();
+    console.log("gatt hij in de vun");
+    console.log("gamedata", gameData.userinfo.password);
+    console.log("e", e.target.hackpass.value);
     if (e.target.hackpass.value == gameData.userinfo.password) {
       setHackerGuessFeedback("het is juist, de hacker heeft gewonnen");
+      putData("games", gameData.id, { winner: "hacker"});
+      channel.publish({
+        name: gamecode,
+        data: `endgame-hacker-user`,
+      });
     } else {
-      setHackerGuessFeedback("het paswoord is niet juist!");
       setHackerStart(false);
+      setHackerGuessFeedback("het paswoord is niet juist!");
     }
   };
 
@@ -621,13 +631,17 @@ const Hacker = ({ data }) => {
       <div className={styles.discoveries}>
         <HackerDiscoveries gameData={gameData} />
       </div>
-      <div className={styles.hack}>
-        <HackerHack
-          handleSubmitForm={(value) => handleFormGuessPass(value)}
-          feedback={hackerGuessFeedback}
-          start={hackerStart}
-        />
-      </div>
+      {realtimeGameData.currentPlayer === "hacker" ? (
+        <div className={styles.hack}>
+          <HackerHack
+            handleSubmitForm={(value) => handleFormGuessPass(value)}
+            feedback={hackerGuessFeedback}
+            start={hackerStart}
+          />
+        </div>
+      ) : (
+        ""
+      )}
       {windowComponent === "screencapture" ? (
         <div className={styles.screencapture}>
           <HackerScreencapture

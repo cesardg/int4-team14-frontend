@@ -75,10 +75,10 @@
 }
 
 .password {
-  left: 20vw;
-  position: absolute;
-  top: 10%;
-  width: 60vw;
+  justify-self: center;
+  grid-column: 1 / span 32;
+  grid-row: 2;
+  width: fit-content;
   z-index: 2;
 }
 

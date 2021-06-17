@@ -43,7 +43,7 @@ const Hacker = ({ data }) => {
   const [hackerStart, setHackerStart] = useState(false);
   const [hackerDoubleTurn, setHackerDoubleTurn] = useState(0);
   const [userDoubleTurn, setUserDoubleTurn] = useState(0);
-  const [notes, setNotes] = useState(data[0].usernotes);
+  const [notes, setNotes] = useState(data[0].hackernotes);
   const randomOptions = [
     {
       type: "good",
@@ -110,9 +110,9 @@ const Hacker = ({ data }) => {
     },
     {
       type: "bad",
-      action: "notitiegewist",
-      text: "De Federal Computer Crime Unit zit je op de hielen, ze hebben je notities gezien.",
-      subtext: "Je laatste notitie wordt gewist",
+      action: "deletediscovery",
+      text: "De Federal Computer Crime Unit zit je op de hielen, ze hebben je ontdekkingen gezien.",
+      subtext: "Je laatste ontdekking wordt gewist",
       button: "Oke",
     },
     {
@@ -124,9 +124,9 @@ const Hacker = ({ data }) => {
     },
     {
       type: "bad",
-      action: "notitiegewist",
+      action: "deletediscovery",
       text: "De user heeft al zijn/haar oude Roblox- en Brawl Stars-accounts verwijderd.",
-      subtext: "Je laatste notitie wordt gewist",
+      subtext: "Je laatste ontdekking wordt gewist",
       button: "Oke",
     },
   ];
@@ -175,8 +175,8 @@ const Hacker = ({ data }) => {
   // channel
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split("-")[0];
-    console.log("ably")
-    getUpdatedGamedata()
+    console.log("ably");
+    getUpdatedGamedata();
 
     if (type === "boardchange") {
       const newHackerField = message.data.split("-")[2];
@@ -367,7 +367,10 @@ const Hacker = ({ data }) => {
   };
 
   const handleClickRandom = (value) => {
+    if (value === "deletediscovery") {
+      handleDeleteDiscovery();
     channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
+    }
   };
 
   const handleClickAction = (action) => {
@@ -388,16 +391,20 @@ const Hacker = ({ data }) => {
     }
     setRealtimeGameData({
       ...realtimeGameData,
-      actionHacker: "",
+      actionHacker: "done",
     });
   };
 
+  const handleDeleteDiscovery = () => {
+
+  };
   // logic functions
   const hackerGetInterest = async () => {
     const obtainedInterests = await fetchData(
       "hackerinfos",
       gameData.hackerinfo.id
     );
+
     const hackerInterestsArray = obtainedInterests.obtainedInterests.split("-");
     const userInterestsArray = gameData.userinfo.interests.split("-");
     userInterestsArray.shift();
@@ -464,6 +471,11 @@ const Hacker = ({ data }) => {
       setHackerGuessFeedback("het paswoord is niet juist!");
       setHackerStart(false);
     }
+  };
+
+  const handleClickScreencatpure = () => {
+    setWindowComponent("");
+    channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
   };
 
   const handleUpdatedDiscoveries = async (gameData, discovery) => {
@@ -564,18 +576,18 @@ const Hacker = ({ data }) => {
         <HackerInfo hackerinfo={gameData.hackerinfo} />
       </div>
       {realtimeGameData.currentPlayer === "hacker" &&
-      realtimeGameData.actionUser !== "action" &&
-      realtimeGameData.actionUser !== "random" &&
-      realtimeGameData.actionUser !== "" &&
-      realtimeGameData.actionUser !== "wifi" &&
-      realtimeGameData.actionUser !== "spam" ? (
+      realtimeGameData.actionHacker !== "action" &&
+      realtimeGameData.actionHacker !== "random" &&
+      realtimeGameData.actionHacker !== "" &&
+      realtimeGameData.actionHacker !== "wifi" &&
+      realtimeGameData.actionHacker !== "spam" ? (
         <div className={styles.yourturn}>
           <YourTurn />
         </div>
       ) : (
         ""
       )}
-      {realtimeGameData.currentPlayer === "hacker" ? (
+      {realtimeGameData.currentPlayer === "user" ? (
         <div className={styles.turn}>
           <Turn who={realtimeGameData.currentPlayer} />
         </div>
@@ -604,7 +616,10 @@ const Hacker = ({ data }) => {
       </div>
       {windowComponent === "screencapture" ? (
         <div className={styles.screencapture}>
-          <HackerScreencapture />{" "}
+          <HackerScreencapture
+            gameData={gameData}
+            handleClickScreencatpure={handleClickScreencatpure}
+          />
         </div>
       ) : (
         ""

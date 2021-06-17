@@ -112,8 +112,52 @@
   grid-row: 2 / span 10;
 }
 
-.hackerAd {
+.discoveries {
+  grid-column: 5 / span 7;
+  grid-row-start: 8;
+  margin: 2rem;
+  z-index: 2;
+}
 
+.interests {
+  grid-column: 2 / span 7;
+  grid-row-start: 10;
+  margin: 2rem;
+  z-index: 2;
+}
+
+.hack {
+  grid-column: 21 / span 7;
+  grid-row-start: 2;
+  margin: 2rem;
+  z-index: 2;
+}
+
+.decryption {
+  left: 25vw;
+  position: absolute;
+  top: 15%;
+  width: 50vw;
+  z-index: 2;
+}
+
+.screencapture {
+  left: calc(55vw / 2);
+  position: absolute;
+  top: 12vh;
+  width: 45vw;
+  z-index: 2;
+}
+
+.hackerAd {
+  left: calc(55vw / 2);
+  position: absolute;
+  top: 12vh;
+  width: 45vw;
+  z-index: 2;
+}
+
+.hackerVpn {
 }
 /* user and hacker */
 .notes {

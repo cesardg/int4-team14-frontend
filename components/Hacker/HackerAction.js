@@ -14,7 +14,7 @@ const HackerAction = ({ onClickButton, start }) => {
         <div className={styles.actionsContainer}>
           <button
             className={styles.actionButton}
-            onClick={() => onClickButton("get2characters")}
+            onClick={() => onClickButton("get2letters")}
           >
             <div className={styles.actionImg}>
               <Image

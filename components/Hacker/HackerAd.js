@@ -1,8 +1,12 @@
+// components
+import GameWindowLayout from "../GameWindowLayout";
+// styling
+import buttonStyles from "./../../styles/ButtonStyles.module.css";
 import styles from "./HackerAd.module.css";
+// imports
 import { useState } from "react";
 
 const HackerAd = ({ gameData, onClickButton }) => {
-
   const options = [
     {
       interest: "paardrijden",
@@ -37,8 +41,13 @@ const HackerAd = ({ gameData, onClickButton }) => {
   };
 
   return (
-    <article className={styles.article}>
-      <h2>Stuur een gepersonaliseerde advertentie</h2>
+    <GameWindowLayout
+      title="spelbord"
+      bg="var(--yellow)"
+      border="var(--green)"
+    >
+      <div className={styles.container}>
+        <p className={styles.title}>actievak</p>
       {interests ? (
         <form>
           {interests.map((item) => (
@@ -57,10 +66,11 @@ const HackerAd = ({ gameData, onClickButton }) => {
         ""
       )}
       <p>{tempContent}</p>
-      <button onClick={() => onClickButton(currentInterest)}>
+      <button onClick={() => onClickButton(currentInterest)} className={buttonStyles.buttonGreen}>
         Persoonlijke advertentie versturen
       </button>
-    </article>
+    </div>
+    </GameWindowLayout>
   );
 };
 

@@ -1,6 +1,37 @@
-.article {
-  border: .1rem solid black;
-  width: fit-content;
-  margin: 1rem;
-  padding: 1rem;
+.container {
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 3rem 2rem;
+}
+
+.title {
+  font-family: sohne-breit-fett;
+  font-size: 2.1rem;
+  padding-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.text {
+  padding-bottom: 2rem;
+}
+
+.subtext {
+  color: var(--yellow);
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.input {
+  background-color: inherit;
+  border: 1px solid var(--yellow);
+  color: var(--white);
+   font-family: sohne;
+  font-size: 1.7rem;padding: 1rem 2rem;
+  width: 100%;
+}
+
+.input:focus {
+  border: 1px solid var(--yellow);
+outline: none;
 }

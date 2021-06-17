@@ -1,18 +1,23 @@
+// styling
+import buttonStyles from "./../../styles/ButtonStyles.module.css";
 import styles from "./HackerScreencapture.module.css";
-import Image from "next/image";
+// components
+import GameWindowLayout from "../GameWindowLayout";
 
 const HackerScreencapture = () => {
-  
   return (
-    <article className={styles.article}>
-      <h2>Schermovername</h2>
-      <p>
-        Je neemt de user zijn scherm over en ontdekt de laatste aanpassing aan
-        zijn/haar scherm
-      </p>
-      <p>Laatste aanpassing</p>
-      <p>2 kleine letters toegevoegd</p>
-    </article>
+    <GameWindowLayout title="spelbord" bg="var(--yellow)" border="var(--green)">
+      <div className={styles.container}>
+        <p className={styles.title}>Schermovername</p>
+        <p className={styles.text}>
+          Je neemt de user zijn scherm over en ontdekt de laatste aanpassing aan
+          zijn/haar scherm
+        </p>
+        <p className={styles.user}>Laatste aanpassing</p>
+        <p className={styles.action}>2 kleine letters toegevoegd</p>
+        <button className={buttonStyles.buttonGreen}>Verder Spelen</button>
+      </div>
+    </GameWindowLayout>
   );
 };
 

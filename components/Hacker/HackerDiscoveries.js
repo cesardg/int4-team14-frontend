@@ -1,30 +1,44 @@
+// components
+import GameWindowLayout from "../GameWindowLayout";
+// styling
 import styles from "./HackerDiscoveries.module.css";
+// imports
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
 const HackerDiscoveries = ({ gameData }) => {
-  let discoveries = [];
-  gameData.hackerdiscoveries.map((discovery) => {
-    discoveries.push(discovery.discovery);
-  });
+  // let discoveries = [];
+  // gameData.hackerdiscoveries.map((discovery) => {
+  //   discoveries.push(discovery.discovery);
+  // });
 
   return (
-    <article className={styles.article}>
-      <h2>Ontdekkingen</h2>
-      <p>Ontdekkingen houden bij welke letters en cijfers je al ontdekt hebt</p>
-      {discoveries.length > 0 ? (
-        <ul>
-          {discoveries.map((discovery, index) => (
-            <li key={index}>{discovery}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>
-          Je hebt nog geen ontdekkingen. Gebruik je acties om een deel van het
-          wachtwoord te ontdekken
+    <GameWindowLayout
+      title="ontdekkingen"
+      bg="var(--black)"
+      border="var(--green)"
+    >
+      <div className={styles.container}>
+        <p className={styles.title}>Ontdekkingen</p>
+        <p className={styles.text}>
+          Ontdekkingen houden bij welke letters en cijfers je al ontdekt hebt
         </p>
-      )}
-    </article>
+        {gameData.hackerdiscoveries ? (
+          <ul className={styles.list}>
+            {gameData.hackerdiscoveries.map((discovery, index) => (
+              <li key={index} className={styles.listItem}>
+                {discovery.discovery}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className={styles.empty}>
+            Je hebt nog geen ontdekkingen. Gebruik je acties om een deel van het
+            wachtwoord te ontdekken
+          </p>
+        )}
+      </div>
+    </GameWindowLayout>
   );
 };
 

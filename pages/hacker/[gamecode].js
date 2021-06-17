@@ -1,6 +1,7 @@
 // components
 import GameLayout from "../../components/GameLayout";
 import Turn from "../../components/Turn";
+import YourTurn from "../../components/YourTurn";
 import Notes from "../../components/Notes";
 import GameBoard from "../../components/GameBoard";
 import HackerAction from "../../components/Hacker/HackerAction";
@@ -371,7 +372,7 @@ const Hacker = ({ data }) => {
     } else if (action === "send ad") {
       hackerSendAd();
     } else if (
-      action === "get2characters" ||
+      action === "get2letters" ||
       action === "get1capital" ||
       action === "get1number"
     ) {
@@ -561,6 +562,25 @@ const Hacker = ({ data }) => {
       <div className={styles.hackerInfo}>
         <HackerInfo hackerinfo={gameData.hackerinfo} />
       </div>
+      {realtimeGameData.currentPlayer === "hacker" &&
+      realtimeGameData.actionUser !== "action" &&
+      realtimeGameData.actionUser !== "random" &&
+      realtimeGameData.actionUser !== "" &&
+      realtimeGameData.actionUser !== "wifi" &&
+      realtimeGameData.actionUser !== "spam" ? (
+        <div className={styles.yourturn}>
+          <YourTurn />
+        </div>
+      ) : (
+        ""
+      )}
+      {realtimeGameData.currentPlayer === "hacker" ? (
+        <div className={styles.turn}>
+          <Turn who={realtimeGameData.currentPlayer} />
+        </div>
+      ) : (
+        ""
+      )}{" "}
       <div className={styles.notes}>
         <Notes
           notes={notes}
@@ -568,6 +588,81 @@ const Hacker = ({ data }) => {
           handleFormSubmission={(e) => handleFormSubmissionNotes(e)}
         />
       </div>
+      <div className={styles.discoveries}>
+        <HackerDiscoveries gameData={gameData} />
+      </div>
+      <div className={styles.interests}>
+        <HackerInterests gameData={gameData} />
+      </div>
+      <div className={styles.hack}>
+        <HackerHack
+          handleSubmitForm={(value) => handleFormGuessPass(value)}
+          feedback={hackerGuessFeedback}
+          start={hackerStart}
+        />
+      </div>
+      {windowComponent === "screencapture" ? (
+        <div className={styles.screencapture}>
+          <HackerScreencapture />{" "}
+        </div>
+      ) : (
+        ""
+      )}
+      {/* acties */}
+      {realtimeGameData.currentPlayer === "hacker" &&
+      realtimeGameData.actionHacker === "action" ? (
+        <div className={styles.action}>
+          <HackerAction
+            onClickButton={(action) => handleClickAction(action)}
+            start={hackerStart}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+      {realtimeGameData.currentPlayer === "hacker" &&
+      realtimeGameData.actionHacker === "random" ? (
+        <div className={styles.random}>
+          <HackerRandom
+            randomCard={randomOption}
+            onClickButton={(value) => handleClickRandom(value)}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+      {/* {windowComponent === "ad" ? ( */}
+        <div className={styles.hackerAd}>
+          <HackerAd
+            gameData={gameData}
+            onClickButton={(value) => handleClickAd(value)}
+            start={hackerStart}
+          />
+        </div>
+      {/* ) : (
+        ""
+      )} */}
+      {windowComponent === "vpn" ? (
+        <div className={styles.hackerVpn}>
+          <HackerVpn />{" "}
+        </div>
+      ) : (
+        ""
+      )}
+      {windowComponent === "decryption" ? (
+        <div className={styles.decryption}>
+          <HackerDecryption
+            gameData={gameData}
+            handleUpdatedDiscoveries={(gameData, discovery) =>
+              handleUpdatedDiscoveries(gameData, discovery)
+            }
+            $
+            action={hackerDecryptionAction}
+          />
+        </div>
+      ) : (
+        ""
+      )}
     </GameLayout>
   );
 };

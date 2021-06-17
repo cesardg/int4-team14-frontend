@@ -21,7 +21,7 @@ import styles from "./../../components/GameLayout.module.css";
 // imports
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import Draggable from 'react-draggable';
+import Draggable from "react-draggable";
 
 const User = ({ data }) => {
   // game
@@ -32,7 +32,7 @@ const User = ({ data }) => {
     currentPlayer: data[0].startingPlayer,
     fieldUser: data[0].userinfo.previousfield,
     actionUser: "start",
-    fieldHacker: (data[0].hackerinfo? data[0].hackerinfo.previousfield : 1),
+    fieldHacker: data[0].hackerinfo ? data[0].hackerinfo.previousfield : 1,
     actionHacker: "start",
   });
 
@@ -179,7 +179,7 @@ const User = ({ data }) => {
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split("-")[0];
     console.log("ably?");
-    getUpdatedGamedata()
+    getUpdatedGamedata();
 
     if (type === "boardchange") {
       const newHackerField = message.data.split("-")[2];
@@ -228,7 +228,7 @@ const User = ({ data }) => {
           channel.publish({ name: gamecode, data: `playerchange-user-user` });
           setUserDoubleTurn(turns);
         } else {
-          setVpnIcon(false)
+          setVpnIcon(false);
           newPlayer = "hacker";
         }
       }
@@ -248,8 +248,7 @@ const User = ({ data }) => {
       ) {
         console.log("de user staat op een random vak");
         setRandomOption(
-          //randomOptions[Math.floor(Math.random() * randomOptions.length)]
-          randomOptions[0]
+          randomOptions[Math.floor(Math.random() * randomOptions.length)]
         );
         // setWindowComponent("random");
       }
@@ -288,17 +287,6 @@ const User = ({ data }) => {
       ) {
         console.log("de user staat op een empty vak, dit moet er gebeuren");
       }
-
-      // if (
-      //   realtimeGameData.currentPlayer === "user" &&
-      //   realtimeGameData.actionUser === "action"
-      // ) {
-      //   console.log(realtimeGameData.actionUser);
-      //   console.log("action");
-      //   setWindowComponent("action");
-      // }
-
-      // console.log("User realtime", realtimeGameData.actionUser);
 
       setRealtimeGameData({
         ...realtimeGameData,
@@ -384,36 +372,44 @@ const User = ({ data }) => {
   // logic functions
   const handleClickRandom = (value) => {
     console.log("random is oke");
-    if (value === "removechar"){
+    if (value === "removechar") {
       handleRemoveChar();
       channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
-    } else if (value === "skipturn"){
-      console.log("beurt overslaan")
-    }else if ( value === "add2letters" || value === "add1capital" || value === "add1number") {
+    } else if (value === "skipturn") {
+      console.log("beurt overslaan");
+    } else if (
+      value === "add2letters" ||
+      value === "add1capital" ||
+      value === "add1number" ||
+      value === "change1number" ||
+      value === "change1capital"
+    ) {
       setUserPasswordAction(value);
       setWindowComponent("password");
       setRealtimeGameData({
-      ...realtimeGameData,
-      actionUser: "done",
-    });
+        ...realtimeGameData,
+        actionUser: "done",
+      });
     }
   };
 
   const handleRemoveChar = () => {
-    console.log(gameData)
-    const newPass = (gameData.userinfo.password).substring(0, gameData.userinfo.password.length - 1);
+    console.log(gameData);
+    const newPass = gameData.userinfo.password.substring(
+      0,
+      gameData.userinfo.password.length - 1
+    );
     console.log(newPass);
-    data ={password: newPass}
+    data = { password: newPass };
     putData("userinfos", gameData.userinfo.id, data);
-  }
+  };
 
   const handleClickAction = (action) => {
-
     if (action === "vpn") {
       setUserStart(false);
       setUserDoubleTurn(1);
       setWindowComponent("vpn");
-      setVpnIcon(true)
+      setVpnIcon(true);
     } else if (
       action === "add2letters" ||
       action === "add1capital" ||
@@ -444,7 +440,7 @@ const User = ({ data }) => {
 
   const onClickButtonMail = (note) => {
     console.log("dit moet er gebeuren als je op oke mail");
-    sendNoteToDb(`waarschuwings mail: ${note}`);
+    sendNoteToDb(`waarschuwingsmail: ${note}`);
     channel.publish({
       name: gamecode,
       data: `playerchange-user-hacker`,
@@ -562,16 +558,16 @@ const User = ({ data }) => {
   };
 
   const handleClickInstallsVpn = () => {
-    setWindowComponent("")
+    setWindowComponent("");
     setRealtimeGameData({
       ...realtimeGameData,
       actionUser: "done",
     });
-  }
+  };
 
   // general fetch functions
   const getUpdatedGamedata = async () => {
-    console.log("hopelijk kom ik niet te veel voor in de console (update)")
+    console.log("hopelijk kom ik niet te veel voor in de console (update)");
     const updatedGameData = await fetchData("games", gameData.id);
 
     setGameData(updatedGameData);
@@ -598,7 +594,7 @@ const User = ({ data }) => {
     );
     if (response.ok) {
       console.log("joepie");
-      getUpdatedGamedata()
+      getUpdatedGamedata();
     }
   };
 
@@ -608,7 +604,6 @@ const User = ({ data }) => {
       window.removeEventListener("keydown", downHandler);
     };
   }, [realtimeGameData]);
-
 
   return (
     <GameLayout style="user" vpnIcon={vpnIcon}>
@@ -637,15 +632,13 @@ const User = ({ data }) => {
       ) : (
         ""
       )}
-       <Draggable>
+      <Draggable>
         <div className={styles.notes}>
-        
-            <Notes
-              notes={notes}
-              player="user"
-              handleFormSubmission={(e) => handleFormSubmissionNotes(e)}
-            />
-      
+          <Notes
+            notes={notes}
+            player="user"
+            handleFormSubmission={(e) => handleFormSubmissionNotes(e)}
+          />
         </div>
       </Draggable>
       <div className={styles.strongness}>

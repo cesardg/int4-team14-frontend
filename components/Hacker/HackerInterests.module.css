@@ -1,11 +1,11 @@
 .container {
-  color: var(--white);
   display: flex;
   flex-direction: column;
   padding: 2rem 3rem 2rem;
 }
 
 .title {
+  color: var(--white);
   font-family: sohne-breit-fett;
   font-size: 2.1rem;
   padding-bottom: 1rem;
@@ -20,7 +20,7 @@
   display: flex;
   flex-wrap: wrap;
   grid-column: 1 / span 2;
-  padding: .5rem 2rem;
+  padding: 0.5rem 0;
   width: 100%;
 }
 

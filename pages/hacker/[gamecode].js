@@ -631,7 +631,7 @@ const Hacker = ({ data }) => {
       ) : (
         ""
       )}
-      {/* {windowComponent === "ad" ? ( */}
+      {windowComponent === "ad" ? (
         <div className={styles.hackerAd}>
           <HackerAd
             gameData={gameData}
@@ -639,9 +639,9 @@ const Hacker = ({ data }) => {
             start={hackerStart}
           />
         </div>
-      {/* ) : (
+     ) : (
         ""
-      )} */}
+      )} 
       {windowComponent === "vpn" ? (
         <div className={styles.hackerVpn}>
           <HackerVpn />{" "}

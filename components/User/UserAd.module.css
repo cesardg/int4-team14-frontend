@@ -2,8 +2,8 @@
   background-image: url(../../public/assets/img/useractions/ad-bg.svg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
-  padding: 20rem 7rem 10rem;
+  background-size: cover;
+  height: 48rem;
 }
 
 .title {
@@ -24,4 +24,8 @@
   position: relative;
   top: 2rem;
   width: 55%;
+}
+
+.img {
+  transform: translate(26rem, 18.7rem);
 }

@@ -5,11 +5,13 @@ import Image from 'next/image';
 import { useState, useEffect } from "react";
 
 
-const Layout = ({ children, style }) => {
+const Layout = ({ children, style, vpnIcon, realtimeGameData }) => {
 
     let today = new Date()
     let tempTime = today.getHours() + ':' + today.getMinutes();
     const [time, setTime] = useState(tempTime);
+
+    console.log(realtimeGameData)
 
     const [popupDice, setPopupDice] = useState("none");
     const [popupVpn, setPopupVpn] = useState("none");
@@ -60,23 +62,36 @@ const Layout = ({ children, style }) => {
             </a>
           </Link>
           <div className={styles.headerRight}>
-            <div className={styles.headerIcon} onClick={() => handleClickPopup("dice")}>
+            {style === "user" ? 
+            <div className={styles.headerIcon}  onClick={() => handleClickPopup("dice")}>
+              <div style={vpnIcon? {filter : "opacity(1)"} : {filter : "opacity(.4)"}}>
               <Image
                 src={`/assets/img/vpnicon.svg`}
                 alt="Picture of the dice"
                 width={22}
                 height={22}
+            
                 />
-              <span className={styles.popup} style={{display : popupDice}} >Je vpn staat aan/uit</span>
+                </div>
+              <span className={styles.popup} style={{display : popupDice}} >Je VPN staat {vpnIcon ? "aan" : "uit"}</span>
               </div>
+              : "" }
             <div  className={styles.headerIcon} onClick={() => handleClickPopup("vpn")}>
               <Image
-                src={`/assets/img/diceicon.svg`}
+                src={`/assets/img/pionicon.svg`}
                 alt="Picture of the dice"
                 width={22}
                 height={22}
                 />
-                <span className={styles.popup} style={{display : popupVpn}} >Het is nu jouw beurt</span>
+                <div className={styles.popupDice} style={{display : popupVpn}} > 
+                <p className={styles.popupTitle}>Live spelbord info</p>
+                <p className={styles.popupText}>huidige speler:  
+                {realtimeGameData.currentPlayer === "user" ? " gebruiker" : " hacker"}
+                </p>
+
+                <p className={styles.popupText}>Spelvak hacker: {realtimeGameData.fieldHacker}  </p>
+                <p className={styles.popupText}>Spelvak gebruiker: {realtimeGameData.fieldUser} </p>
+                </div>
               </div>
             <p className={styles.time}>{time}</p>
           </div>

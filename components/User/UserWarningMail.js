@@ -11,8 +11,9 @@ const UserWarningMail = ({gameData, onClickButtonMail}) => {
   console.log(gameData.hackerdiscoveries)
   const [window, setWindow] = useState("mail-closed");
   let lastDiscovery = gameData.hackerdiscoveries;
+  console.log(lastDiscovery)
   if (lastDiscovery.length == 0){
-    lastDiscovery = "er zijn nog geen ontdekkingen gedaan"
+    lastDiscovery.discovery = "er zijn nog geen ontdekkingen gedaan"
   } else {
     lastDiscovery = gameData.hackerdiscoveries[gameData.hackerdiscoveries.length - 1];
   }

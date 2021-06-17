@@ -17,7 +17,7 @@ const Turn = ({ who }) => {
             height={450}
           />
         </div>
-        <p className={styles.title}>{who}</p>
+        <p className={styles.title}>{who === "user" ? "Gebruiker" : "Hacker"}</p>
         <p className={styles.subtitle}>is nu aan de beurt</p>
       </div>
     </GameWindowLayout>

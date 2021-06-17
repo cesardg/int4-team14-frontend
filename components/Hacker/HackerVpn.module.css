@@ -1,6 +1,25 @@
-.article {
-  border: .1rem solid black;
-  width: fit-content;
-  margin: 1rem;
-  padding: 1rem;
+.container {
+  align-items: center;
+  background-image: url(../../public/assets/img/hackeractions/hackervpn.svg);
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  font-family: sohne-breit-fett;
+  font-size: 3rem;
+  padding-top: 4rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.text {
+  font-size: 2.5rem;
+  padding: 2rem 0 40rem;
+  max-width: 50%;
+  text-align: center;
 }

@@ -7,7 +7,7 @@ import GameWindowLayout from "./GameWindowLayout";
 import Image from "next/image";
 import { useState } from "react";
 
-const SpamMail = ({handleClickSpamMail}) => {
+const SpamMail = ({ handleClickSpamMail, player }) => {
   const [mail, setMail] = useState("start");
 
   return (
@@ -15,10 +15,14 @@ const SpamMail = ({handleClickSpamMail}) => {
       {mail === "start" ? (
         <GameWindowLayout
           title="spelbord"
-          bg="var(--brown)"
+          bg={player === "user" ? "var(--brown)" : "var(--black)"}
           border="var(--green)"
         >
-          <div className={styles.container}>
+          <div
+            className={
+              player === "user" ? styles.container : styles.containerHacker
+            }
+          >
             <p className={styles.title}>E-mail</p>
             <p className={styles.label}>van</p>
             <p className={styles.email}>Albert, Baron Frère</p>
@@ -92,7 +96,12 @@ const SpamMail = ({handleClickSpamMail}) => {
                 height={150}
               />
             </div>
-            <button className={buttonStyles.buttonGreen} onClick={()=> handleClickSpamMail ("bad") }>Verder spelen</button>
+            <button
+              className={buttonStyles.buttonGreen}
+              onClick={() => handleClickSpamMail("bad")}
+            >
+              Verder spelen
+            </button>
           </div>
         </GameWindowLayout>
       ) : (
@@ -109,7 +118,12 @@ const SpamMail = ({handleClickSpamMail}) => {
             <p className={styles.subtitleClosed}>
               Je hebt de nep e-mail herkend en bent geen data kwijtgeraakt!
             </p>
-            <button className={buttonStyles.buttonGreen} onClick={()=> handleClickSpamMail ("good")}>Verder spelen</button>
+            <button
+              className={buttonStyles.buttonGreen}
+              onClick={() => handleClickSpamMail("good")}
+            >
+              Verder spelen
+            </button>
           </div>
         </GameWindowLayout>
       ) : (

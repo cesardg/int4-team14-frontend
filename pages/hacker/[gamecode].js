@@ -1,14 +1,16 @@
 // components
 import GameLayout from "../../components/GameLayout";
 import Turn from "../../components/Turn";
+import YourTurn from "../../components/YourTurn";
 import Notes from "../../components/Notes";
+import SpamMail from "../../components/SpamMail";
+import Wifi from "../../components/Wifi";
 import GameBoard from "../../components/GameBoard";
 import HackerAction from "../../components/Hacker/HackerAction";
 import HackerInfo from "../../components/Hacker/HackerInfo";
 import HackerDiscoveries from "../../components/Hacker/HackerDiscoveries";
 import HackerAd from "../../components/Hacker/HackerAd";
 import HackerDecryption from "../../components/Hacker/HackerDecryption";
-import HackerInterests from "../../components/Hacker/HackerInterests";
 import HackerScreencapture from "../../components/Hacker/HackerScreencapture";
 import HackerVpn from "../../components/Hacker/HackerVpn";
 import HackerHack from "../../components/Hacker/HackerHack";
@@ -19,6 +21,7 @@ import styles from "./../../components/GameLayout.module.css";
 // imports
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import Draggable from "react-draggable";
 
 const Hacker = ({ data }) => {
   // game
@@ -27,9 +30,9 @@ const Hacker = ({ data }) => {
   const [gameData, setGameData] = useState(data[0]);
   const [realtimeGameData, setRealtimeGameData] = useState({
     currentPlayer: data[0].startingPlayer,
-    fieldUser: 1,
+    fieldUser: data[0].userinfo ? data[0].userinfo.previousfield : 1,
     actionUser: "start",
-    fieldHacker: 1,
+    fieldHacker: data[0].hackerinfo.previousfield,
     actionHacker: "start",
   });
 
@@ -40,7 +43,7 @@ const Hacker = ({ data }) => {
   const [hackerStart, setHackerStart] = useState(false);
   const [hackerDoubleTurn, setHackerDoubleTurn] = useState(0);
   const [userDoubleTurn, setUserDoubleTurn] = useState(0);
-  const [notes, setNotes] = useState(data[0].usernotes);
+  const [notes, setNotes] = useState(data[0].hackernotes);
   const randomOptions = [
     {
       type: "good",
@@ -107,9 +110,9 @@ const Hacker = ({ data }) => {
     },
     {
       type: "bad",
-      action: "notitiegewist",
-      text: "De Federal Computer Crime Unit zit je op de hielen, ze hebben je notities gezien.",
-      subtext: "Je laatste notitie wordt gewist",
+      action: "deletediscovery",
+      text: "De Federal Computer Crime Unit zit je op de hielen, ze hebben je ontdekkingen gezien.",
+      subtext: "Je laatste ontdekking wordt gewist",
       button: "Oke",
     },
     {
@@ -121,9 +124,9 @@ const Hacker = ({ data }) => {
     },
     {
       type: "bad",
-      action: "notitiegewist",
+      action: "deletediscovery",
       text: "De user heeft al zijn/haar oude Roblox- en Brawl Stars-accounts verwijderd.",
-      subtext: "Je laatste notitie wordt gewist",
+      subtext: "Je laatste ontdekking wordt gewist",
       button: "Oke",
     },
   ];
@@ -172,6 +175,8 @@ const Hacker = ({ data }) => {
   // channel
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split("-")[0];
+    console.log("ably");
+    getUpdatedGamedata();
 
     if (type === "boardchange") {
       const newHackerField = message.data.split("-")[2];
@@ -362,7 +367,10 @@ const Hacker = ({ data }) => {
   };
 
   const handleClickRandom = (value) => {
-    channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
+    if (value === "deletediscovery") {
+      handleDeleteDiscovery();
+      channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
+    }
   };
 
   const handleClickAction = (action) => {
@@ -371,7 +379,7 @@ const Hacker = ({ data }) => {
     } else if (action === "send ad") {
       hackerSendAd();
     } else if (
-      action === "get2characters" ||
+      action === "get2letters" ||
       action === "get1capital" ||
       action === "get1number"
     ) {
@@ -383,17 +391,20 @@ const Hacker = ({ data }) => {
     }
     setRealtimeGameData({
       ...realtimeGameData,
-      actionHacker: "",
+      actionHacker: "done",
     });
   };
 
+  const handleDeleteDiscovery = () => {};
+
   // logic functions
   const hackerGetInterest = async () => {
-    const obtainedInterests = await fetchData(
-      "hackerinfos",
-      gameData.hackerinfo.id
-    );
-    const hackerInterestsArray = obtainedInterests.obtainedInterests.split("-");
+    const hackerinfo = await fetchData("hackerinfos", gameData.hackerinfo.id);
+    let hackerInterestsArray = [];
+    if (hackerinfo.obtainedInterests) {
+      hackerInterestsArray = hackerinfo.obtainedInterests.split("-");
+    }
+
     const userInterestsArray = gameData.userinfo.interests.split("-");
     userInterestsArray.shift();
     let newInterest = [];
@@ -437,7 +448,12 @@ const Hacker = ({ data }) => {
   const handleClickAd = (ad) => {
     channel.publish({ name: gamecode, data: `sendad-hacker-${ad}` });
     deleteInterestAdByHacker(ad);
-    setHackerDoubleTurn(2);
+    setHackerDoubleTurn(1);
+    setWindowComponent("");
+    setRealtimeGameData({
+      ...realtimeGameData,
+      actionUser: "done",
+    });
   };
 
   const deleteInterestAdByHacker = (ad) => {
@@ -459,6 +475,11 @@ const Hacker = ({ data }) => {
       setHackerGuessFeedback("het paswoord is niet juist!");
       setHackerStart(false);
     }
+  };
+
+  const handleClickScreencatpure = () => {
+    setWindowComponent("");
+    channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
   };
 
   const handleUpdatedDiscoveries = async (gameData, discovery) => {
@@ -554,13 +575,30 @@ const Hacker = ({ data }) => {
   }, [realtimeGameData]);
 
   return (
-    <GameLayout>
-      <div className={styles.gameboard}>
-        <GameBoard boardInfo={realtimeGameData} />
-      </div>
+    <GameLayout style="hacker" vpnIcon={"nvt"} realtimeGameData={realtimeGameData}>
       <div className={styles.hackerInfo}>
         <HackerInfo hackerinfo={gameData.hackerinfo} />
       </div>
+      {realtimeGameData.currentPlayer === "hacker" &&
+      realtimeGameData.actionHacker !== "action" &&
+      realtimeGameData.actionHacker !== "random" &&
+      realtimeGameData.actionHacker !== "" &&
+      realtimeGameData.actionHacker !== "wifi" &&
+      realtimeGameData.actionHacker !== "spam" ? (
+        <div className={styles.yourturn}>
+          <YourTurn />
+        </div>
+      ) : (
+        ""
+      )}
+      {realtimeGameData.currentPlayer === "user" ? (
+        <div className={styles.turn}>
+          <Turn who={realtimeGameData.currentPlayer} />
+        </div>
+      ) : (
+        ""
+      )}{" "}
+      <Draggable>
       <div className={styles.notes}>
         <Notes
           notes={notes}
@@ -568,6 +606,102 @@ const Hacker = ({ data }) => {
           handleFormSubmission={(e) => handleFormSubmissionNotes(e)}
         />
       </div>
+      </Draggable>
+      <div className={styles.discoveries}>
+        <HackerDiscoveries gameData={gameData} />
+      </div>
+      <div className={styles.hack}>
+        <HackerHack
+          handleSubmitForm={(value) => handleFormGuessPass(value)}
+          feedback={hackerGuessFeedback}
+          start={hackerStart}
+        />
+      </div>
+      {windowComponent === "screencapture" ? (
+        <div className={styles.screencapture}>
+          <HackerScreencapture
+            gameData={gameData}
+            handleClickScreencatpure={handleClickScreencatpure}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+      {/* acties */}
+      {realtimeGameData.currentPlayer === "hacker" &&
+      realtimeGameData.actionHacker === "action" ? (
+        <div className={styles.action}>
+          <HackerAction
+            onClickButton={(action) => handleClickAction(action)}
+            start={hackerStart}
+            ads={gameData.hackerinfo.obtainedInterests !== null ? true : false}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+      {realtimeGameData.currentPlayer === "hacker" &&
+      realtimeGameData.actionHacker === "random" ? (
+        <div className={styles.random}>
+          <HackerRandom
+            randomCard={randomOption}
+            onClickButton={(value) => handleClickRandom(value)}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+      {windowComponent === "ad" ? (
+        <div className={styles.hackerAd}>
+          <HackerAd
+            gameData={gameData}
+            onClickButton={(value) => handleClickAd(value)}
+            start={hackerStart}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+      {windowComponent === "vpn" ? (
+        <div className={styles.hackerVpn}>
+          <HackerVpn />{" "}
+        </div>
+      ) : (
+        ""
+      )}
+      {windowComponent === "decryption" ? (
+        <div className={styles.decryption}>
+          <HackerDecryption
+            gameData={gameData}
+            handleUpdatedDiscoveries={(gameData, discovery) =>
+              handleUpdatedDiscoveries(gameData, discovery)
+            }
+            $
+            action={hackerDecryptionAction}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+      {realtimeGameData.currentPlayer === "hacker" &&
+      realtimeGameData.actionUser === "spam" ? (
+        <div className={styles.spammail}>
+          <SpamMail
+            player="hacker"
+            handleClickSpamMail={(reaction) => handleClickSpamMail(reaction)}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+      {realtimeGameData.currentPlayer === "hacker" &&
+      realtimeGameData.actionUser === "wifi" ? (
+        <div className={styles.wifi}>
+          <Wifi />
+        </div>
+      ) : (
+        ""
+      )}
     </GameLayout>
   );
 };

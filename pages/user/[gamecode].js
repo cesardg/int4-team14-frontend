@@ -8,7 +8,7 @@ import Wifi from "../../components/Wifi";
 import GameBoard from "../../components/GameBoard";
 import UserInfo from "../../components/User/UserInfo";
 import UserAccountStrongness from "../../components/User/UserAccountStrongness";
-import UserVpn from "../../components/User/UserVpn";
+import UserInstallsVpn from "../../components/User/UserInstallsVpn";
 import UserAction from "../../components/User/UserAction";
 import UserDeleteCookies from "../../components/User/UserDeleteCookies";
 import UserWarningMail from "../../components/User/UserWarningMail";
@@ -21,6 +21,7 @@ import styles from "./../../components/GameLayout.module.css";
 // imports
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Draggable from "react-draggable";
 
 const User = ({ data }) => {
   // game
@@ -31,7 +32,7 @@ const User = ({ data }) => {
     currentPlayer: data[0].startingPlayer,
     fieldUser: data[0].userinfo.previousfield,
     actionUser: "start",
-    fieldHacker: data[0].hackerinfo.previousfield,
+    fieldHacker: data[0].hackerinfo ? data[0].hackerinfo.previousfield : 1,
     actionHacker: "start",
   });
 
@@ -43,6 +44,7 @@ const User = ({ data }) => {
   const [userDoubleTurn, setUserDoubleTurn] = useState(0);
   const [hackerDoubleTurn, setHackerDoubleTurn] = useState(0);
   const [notes, setNotes] = useState(data[0].usernotes);
+  const [vpnIcon, setVpnIcon] = useState(false);
   const randomOptions = [
     {
       type: "good",
@@ -88,42 +90,42 @@ const User = ({ data }) => {
     },
     {
       type: "bad",
-      action: "letterweghalen",
-      text: "Je hebt een webcam-cover over je webcam geplaatst.",
-      subtext: "Verander 1 kleine letter in een cijfer",
-      button: "Verander een letter",
+      action: "removechar",
+      text: "Je hebt je niet uitgelogd op de computer van de bib.",
+      subtext: "Je verliest 1 karater uit je wachtwoord",
+      button: "Verder spelen",
     },
     {
       type: "bad",
-      action: "beurtoverlsaan",
+      action: "skipturn",
       text: "Je raakt afgeleid door een complot-theorie op het internet.",
       subtext: "Sla een beurt over",
       button: "Oke",
     },
     {
       type: "bad",
-      action: "beurtoverlsaan",
+      action: "skipturn",
       text: "Je bent verdwaald tussen alle vreemde YouTube-filmpjes waardoor je nu alleen nog teenkaas-filmpjes te zien krijgt.",
       subtext: "Sla een beurt over",
       button: "Oke",
     },
     {
       type: "bad",
-      action: "beurtoverlsaan",
+      action: "skipturn",
       text: "De hacker ontdekt je oude Roblox-account en gebruikt dit om extra info over jou te ontdekken.",
       subtext: "Sla een beurt over",
       button: "Oke",
     },
     {
       type: "bad",
-      action: "letterweghalen",
+      action: "removechar",
       text: "Je probeert Minecraft te downloaden op een verdachte website, hierdoor heb je een virus.",
       subtext: "Haal 1 letter of cijfer uit je wachtwoord",
       button: "Oke",
     },
     {
       type: "bad",
-      action: "beurtoverlsaan",
+      action: "skipturn",
       text: "Je probeert gratis muziek te downloaden op een verdachte website, hierdoor loopt je computer vast.",
       subtext: "Sla een beurt over",
       button: "Oke",
@@ -177,6 +179,7 @@ const User = ({ data }) => {
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split("-")[0];
     console.log("ably?");
+    getUpdatedGamedata();
 
     if (type === "boardchange") {
       const newHackerField = message.data.split("-")[2];
@@ -225,6 +228,7 @@ const User = ({ data }) => {
           channel.publish({ name: gamecode, data: `playerchange-user-user` });
           setUserDoubleTurn(turns);
         } else {
+          setVpnIcon(false);
           newPlayer = "hacker";
         }
       }
@@ -255,7 +259,7 @@ const User = ({ data }) => {
         newUserAction === "wifi"
       ) {
         console.log("de user staat op een Wifi vakje, dit moet er gebeuren:");
-        handlePionOnWifi()
+        handlePionOnWifi();
       }
 
       // user komt op het pikante foto
@@ -283,17 +287,6 @@ const User = ({ data }) => {
       ) {
         console.log("de user staat op een empty vak, dit moet er gebeuren");
       }
-
-      // if (
-      //   realtimeGameData.currentPlayer === "user" &&
-      //   realtimeGameData.actionUser === "action"
-      // ) {
-      //   console.log(realtimeGameData.actionUser);
-      //   console.log("action");
-      //   setWindowComponent("action");
-      // }
-
-      // console.log("User realtime", realtimeGameData.actionUser);
 
       setRealtimeGameData({
         ...realtimeGameData,
@@ -333,6 +326,10 @@ const User = ({ data }) => {
         currentPlayer: message.data.split("-")[2],
       });
       getUpdatedGamedata();
+    }
+
+    if (realtimeGameData.currentPlayer === "user") {
+      setReceiveAdFromHacker(false);
     }
   });
 
@@ -379,15 +376,44 @@ const User = ({ data }) => {
   // logic functions
   const handleClickRandom = (value) => {
     console.log("random is oke");
-    console.log(value);
-    channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
+    if (value === "removechar") {
+      handleRemoveChar();
+      channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
+    } else if (value === "skipturn") {
+      console.log("beurt overslaan");
+    } else if (
+      value === "add2letters" ||
+      value === "add1capital" ||
+      value === "add1number" ||
+      value === "change1number" ||
+      value === "change1capital"
+    ) {
+      setUserPasswordAction(value);
+      setWindowComponent("password");
+      setRealtimeGameData({
+        ...realtimeGameData,
+        actionUser: "done",
+      });
+    }
+  };
+
+  const handleRemoveChar = () => {
+    console.log(gameData);
+    const newPass = gameData.userinfo.password.substring(
+      0,
+      gameData.userinfo.password.length - 1
+    );
+    console.log(newPass);
+    data = { password: newPass };
+    putData("userinfos", gameData.userinfo.id, data);
   };
 
   const handleClickAction = (action) => {
-    getUpdatedGamedata();
     if (action === "vpn") {
       setUserStart(false);
-      setUserDoubleTurn(2);
+      setUserDoubleTurn(1);
+      setWindowComponent("vpn");
+      setVpnIcon(true);
     } else if (
       action === "add2letters" ||
       action === "add1capital" ||
@@ -397,7 +423,7 @@ const User = ({ data }) => {
       setWindowComponent("password");
     } else if (action === "waarschuwingsmail") {
       setWindowComponent("warnings");
-    } else if (action === "deletescookies"){
+    } else if (action === "deletescookies") {
       setWindowComponent("cookies");
     }
     setRealtimeGameData({
@@ -408,7 +434,7 @@ const User = ({ data }) => {
 
   const handleUpdatedPassword = (score) => {
     setAccountStrongness(score);
-    getUpdatedGamedata()
+    getUpdatedGamedata();
     channel.publish({
       name: gamecode,
       data: `playerchange-user-hacker`,
@@ -417,8 +443,7 @@ const User = ({ data }) => {
   };
 
   const onClickButtonMail = (note) => {
-    console.log("dit moet er gebeuren als je op oke mail");
-    sendNoteToDb(`waarschuwing: ${note}`)
+    sendNoteToDb(`laatste ontdekking hacker: ${note}`);
     channel.publish({
       name: gamecode,
       data: `playerchange-user-hacker`,
@@ -431,32 +456,31 @@ const User = ({ data }) => {
   };
 
   const sendNoteToDb = async (note) => {
-      const copyArr = [...notes, {note: note}];
-      setNotes(copyArr);
-      const data = {
-        note: note,
-        game: gameData.id,
-      };
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_STRAPI_URL}/usernotes`,
-        {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      if (response.ok) {
-        console.log("joepie, notes na mail");
+    const copyArr = [...notes, { note: note }];
+    setNotes(copyArr);
+    const data = {
+      note: note,
+      game: gameData.id,
+    };
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/usernotes`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    
-  }
+    );
+    if (response.ok) {
+      console.log("joepie, notes na mail");
+    }
+  };
 
   const handleFormSubmissionNotes = async (e) => {
     e.preventDefault();
     if (e.target.note.value !== "") {
-      const copyArr = [...notes, {note: e.target.note.value}];
+      const copyArr = [...notes, { note: e.target.note.value }];
       setNotes(copyArr);
       const data = {
         note: e.target.note.value,
@@ -481,40 +505,38 @@ const User = ({ data }) => {
   };
 
   const handlePionOnWifi = () => {
-
     timeout();
     setTimeout(() => {
+      setRealtimeGameData({
+        ...realtimeGameData,
+        actionUser: "done",
+      });
+      channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
+    }, 3000);
+  };
+
+  const timeout = (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
+
+  const handleClickSpamMail = (reaction) => {
+    console.log(reaction);
+    if (reaction === "good") {
+      channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
+    } else if (reaction === "bad") {
+      channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
+      console.log("we moeten dit nog doen, iets doorsturen naar hacker");
+    }
     setRealtimeGameData({
       ...realtimeGameData,
       actionUser: "done",
     });
-      channel.publish({name: gamecode, data: `playerchange-user-hacker`}); 
-    }, 3000);
-
-  }
-
-  const timeout = (ms) => { 
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-  const handleClickSpamMail = (reaction) =>{
-      console.log(reaction)
-      if (reaction === "good"){
-        channel.publish({name: gamecode, data: `playerchange-user-hacker`}); 
-      } else if (reaction === "bad"){
-        channel.publish({name: gamecode, data: `playerchange-user-hacker`}); 
-        console.log("we moeten dit nog doen, iets doorsturen naar hacker")
-      }
-      setRealtimeGameData({
-      ...realtimeGameData,
-      actionUser: "done",
-    });
-  }
+  };
 
   const handleClickUserDeleteCookies = () => {
     const data = { obtainedInterests: "" };
     sendDataToHacker(data);
-  }
+  };
 
   const sendDataToHacker = async (data) => {
     const response = await fetch(
@@ -530,17 +552,25 @@ const User = ({ data }) => {
     if (response.ok) {
       console.log("inter put");
       channel.publish({ name: gamecode, data: `deletecookies-user-hacker` });
-      setWindowComponent("")
+      setWindowComponent("");
       setRealtimeGameData({
-      ...realtimeGameData,
-      actionUser: "done",
-    });
+        ...realtimeGameData,
+        actionUser: "done",
+      });
     }
   };
 
+  const handleClickInstallsVpn = () => {
+    setWindowComponent("");
+    setRealtimeGameData({
+      ...realtimeGameData,
+      actionUser: "done",
+    });
+  };
 
   // general fetch functions
   const getUpdatedGamedata = async () => {
+    console.log("hopelijk kom ik niet te veel voor in de console (update)");
     const updatedGameData = await fetchData("games", gameData.id);
 
     setGameData(updatedGameData);
@@ -567,6 +597,7 @@ const User = ({ data }) => {
     );
     if (response.ok) {
       console.log("joepie");
+      getUpdatedGamedata();
     }
   };
 
@@ -577,29 +608,39 @@ const User = ({ data }) => {
     };
   }, [realtimeGameData]);
 
-console.log(realtimeGameData)
-
   return (
-    <GameLayout style="user">
-      <div className={styles.gameboard}>
-        <GameBoard boardInfo={realtimeGameData} />
-      </div>
+    <GameLayout style="user" vpnIcon={vpnIcon} realtimeGameData={realtimeGameData}>
       <div className={styles.userInfo}>
         <UserInfo userinfo={gameData.userinfo} />
       </div>
-    {realtimeGameData.currentPlayer === "user" &&  realtimeGameData.actionUser !== "action"  &&  realtimeGameData.actionUser !== "random" &&  realtimeGameData.actionUser !== "" &&  realtimeGameData.actionUser !== "wifi" &&  realtimeGameData.actionUser !== "spam" ?  
-     <div className={styles.yourturn}>
-        <YourTurn />
-      </div>
-    :  "" }
-    {realtimeGameData.currentPlayer === "hacker" ?  
-      <div className={styles.turn}>
-        <Turn who={realtimeGameData.currentPlayer} />
-      </div> 
-       :  "" }
-      <div className={styles.notes}>
-        <Notes notes={notes} player="user" handleFormSubmission={(e) => handleFormSubmissionNotes (e)} />
-      </div>
+      {realtimeGameData.currentPlayer === "user" &&
+      realtimeGameData.actionUser !== "action" &&
+      realtimeGameData.actionUser !== "random" &&
+      realtimeGameData.actionUser !== "" &&
+      realtimeGameData.actionUser !== "wifi" &&
+      realtimeGameData.actionUser !== "spam" ? (
+        <div className={styles.yourturn}>
+          <YourTurn />
+        </div>
+      ) : (
+        ""
+      )}
+      {realtimeGameData.currentPlayer === "hacker" ? (
+        <div className={styles.turn}>
+          <Turn who={realtimeGameData.currentPlayer} />
+        </div>
+      ) : (
+        ""
+      )}
+      <Draggable>
+        <div className={styles.notes}>
+          <Notes
+            notes={notes}
+            player="user"
+            handleFormSubmission={(e) => handleFormSubmissionNotes(e)}
+          />
+        </div>
+      </Draggable>
       <div className={styles.strongness}>
         <UserAccountStrongness value={accountStrongness} />
       </div>
@@ -619,23 +660,42 @@ console.log(realtimeGameData)
 
       {windowComponent === "cookies" ? (
         <div className={styles.cookies}>
-          <UserDeleteCookies handleClickUserDeleteCookies={handleClickUserDeleteCookies} />
+          <UserDeleteCookies
+            handleClickUserDeleteCookies={handleClickUserDeleteCookies}
+          />
         </div>
       ) : (
         ""
       )}
 
-    {realtimeGameData.currentPlayer === "user" && realtimeGameData.actionUser === "spam" ?
-      <div className={styles.spammail}>
-        <SpamMail handleClickSpamMail={(reaction)=> handleClickSpamMail(reaction)} />
-      </div>
-      : "" }
+      {windowComponent === "vpn" ? (
+        <div className={styles.cookies}>
+          <UserInstallsVpn handleClickInstallsVpn={handleClickInstallsVpn} />
+        </div>
+      ) : (
+        ""
+      )}
 
-    {realtimeGameData.currentPlayer === "user" && realtimeGameData.actionUser === "wifi" ?
-    <div className={styles.wifi}>
-        <Wifi />
-      </div> 
-    : "" }
+      {realtimeGameData.currentPlayer === "user" &&
+      realtimeGameData.actionUser === "spam" ? (
+        <div className={styles.spammail}>
+          <SpamMail
+            player="user"
+            handleClickSpamMail={(reaction) => handleClickSpamMail(reaction)}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+
+      {realtimeGameData.currentPlayer === "user" &&
+      realtimeGameData.actionUser === "wifi" ? (
+        <div className={styles.wifi}>
+          <Wifi />
+        </div>
+      ) : (
+        ""
+      )}
 
       {windowComponent === "warnings" ? (
         <div className={styles.warningmail}>

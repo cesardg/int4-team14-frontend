@@ -559,10 +559,7 @@ const Hacker = ({ data }) => {
   }, [realtimeGameData]);
 
   return (
-    <GameLayout style="hacker" vpnIcon={"nvt"}>
-      <div className={styles.gameboard}>
-        <GameBoard boardInfo={realtimeGameData} />
-      </div>
+    <GameLayout style="hacker" vpnIcon={"nvt"} realtimeGameData={realtimeGameData}>
       <div className={styles.hackerInfo}>
         <HackerInfo hackerinfo={gameData.hackerinfo} />
       </div>

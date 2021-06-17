@@ -611,10 +611,7 @@ const User = ({ data }) => {
 
 
   return (
-    <GameLayout style="user" vpnIcon={vpnIcon}>
-      <div className={styles.gameboard}>
-        <GameBoard boardInfo={realtimeGameData} />
-      </div>
+    <GameLayout style="user" vpnIcon={vpnIcon} realtimeGameData={realtimeGameData}>
       <div className={styles.userInfo}>
         <UserInfo userinfo={gameData.userinfo} />
       </div>
@@ -639,13 +636,11 @@ const User = ({ data }) => {
       )}
        <Draggable>
         <div className={styles.notes}>
-        
             <Notes
               notes={notes}
               player="user"
               handleFormSubmission={(e) => handleFormSubmissionNotes(e)}
             />
-      
         </div>
       </Draggable>
       <div className={styles.strongness}>

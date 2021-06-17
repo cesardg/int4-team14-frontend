@@ -65,9 +65,11 @@ const Usersetup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let interests = userInterests.join("-");
+    let interests = "";
 
-
+    userInterests.forEach((userInterest) => {
+      interests = interests + "-" + userInterest;
+    });
     const data = {
       password: profileInput.password,
       username: profileInput.username,

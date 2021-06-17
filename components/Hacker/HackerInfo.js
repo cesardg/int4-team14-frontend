@@ -4,10 +4,12 @@ import Image from "next/image";
 const HackerInfo = ({ hackerinfo }) => {
   let interests = [];
   console.log(hackerinfo);
-  if (hackerinfo.obtainedInterests) {
+  if (hackerinfo.obtainedInterests != null) {
     // console.log("er zijn");
-    interests = hackerinfo.obtainedInterests.split("-");
-    interests.shift();
+    if (hackerinfo.obtainedInterests !== "-") {
+      interests = hackerinfo.obtainedInterests.split("-");
+      interests.shift();
+    }
   } else {
     // console.log("er  zijn er geen");
   }

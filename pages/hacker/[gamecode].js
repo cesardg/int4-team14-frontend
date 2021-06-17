@@ -409,12 +409,14 @@ const Hacker = ({ data }) => {
 
   // logic functions
   const hackerGetInterest = async () => {
-    const hackerinfo = await fetchData("hackerinfos", gameData.hackerinfo.id);
+    const obtainedInterests = await fetchData(
+      "hackerinfos",
+      gameData.hackerinfo.id
+    );
     let hackerInterestsArray = [];
-    if (hackerinfo.obtainedInterests) {
-      hackerInterestsArray = hackerinfo.obtainedInterests.split("-");
+    if (obtainedInterests.obtainedInterests != null) {
+      hackerInterestsArray = obtainedInterests.obtainedInterests.split("-");
     }
-
     const userInterestsArray = gameData.userinfo.interests.split("-");
     userInterestsArray.shift();
     let newInterest = [];
@@ -431,12 +433,6 @@ const Hacker = ({ data }) => {
     channel.publish({
       name: gamecode,
       data: `playerchange-hacker-user`,
-    });
-
-    console.log("wordt dit gedaan?");
-    setRealtimeGameData({
-      ...realtimeGameData,
-      actionHacker: "done",
     });
   };
 

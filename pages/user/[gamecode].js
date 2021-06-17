@@ -382,8 +382,8 @@ const User = ({ data }) => {
   // logic functions
   const handleClickRandom = (value) => {
     console.log("random is oke");
-    console.log(value);
-    channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
+    // console.log(value);
+    //channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
   };
 
   const handleClickAction = (action) => {

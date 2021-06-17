@@ -91,7 +91,7 @@ const User = ({ data }) => {
     {
       type: "bad",
       action: "letterweghalen",
-      text: "Je hebt een webcam-cover over je webcam geplaatst.",
+      text: "Je",
       subtext: "Verander 1 kleine letter in een cijfer",
       button: "Verander een letter",
     },
@@ -382,8 +382,8 @@ const User = ({ data }) => {
   // logic functions
   const handleClickRandom = (value) => {
     console.log("random is oke");
-    console.log(value);
-    channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
+    // console.log(value);
+    //channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
   };
 
   const handleClickAction = (action) => {

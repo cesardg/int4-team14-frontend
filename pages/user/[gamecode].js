@@ -428,7 +428,7 @@ const User = ({ data }) => {
     }
     setRealtimeGameData({
       ...realtimeGameData,
-      actionUser: "",
+      actionUser: "done",
     });
   };
 
@@ -620,6 +620,7 @@ const User = ({ data }) => {
       realtimeGameData.actionUser !== "wifi" &&
       realtimeGameData.actionUser !== "spam" ? (
         <div className={styles.yourturn}>
+          {console.log("dan is het goed", realtimeGameData)}
           <YourTurn />
         </div>
       ) : (

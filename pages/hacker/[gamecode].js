@@ -422,8 +422,15 @@ const Hacker = ({ data }) => {
       name: gamecode,
       data: `playerchange-hacker-user`,
     });
+
+  console.log("wordt dit gedaan?");
+    setRealtimeGameData({
+      ...realtimeGameData,
+      actionHacker: "done",
+    });
   };
 
+  console.log("realtime", realtimeGameData);
   const sendDataToHacker = async (data) => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/hackerinfos/${gameData.hackerinfo.id}`,
@@ -575,7 +582,11 @@ const Hacker = ({ data }) => {
   }, [realtimeGameData]);
 
   return (
-    <GameLayout style="hacker" vpnIcon={"nvt"} realtimeGameData={realtimeGameData}>
+    <GameLayout
+      style="hacker"
+      vpnIcon={"nvt"}
+      realtimeGameData={realtimeGameData}
+    >
       <div className={styles.hackerInfo}>
         <HackerInfo hackerinfo={gameData.hackerinfo} />
       </div>
@@ -599,13 +610,13 @@ const Hacker = ({ data }) => {
         ""
       )}{" "}
       <Draggable>
-      <div className={styles.notes}>
-        <Notes
-          notes={notes}
-          player="hacker"
-          handleFormSubmission={(e) => handleFormSubmissionNotes(e)}
-        />
-      </div>
+        <div className={styles.notes}>
+          <Notes
+            notes={notes}
+            player="hacker"
+            handleFormSubmission={(e) => handleFormSubmissionNotes(e)}
+          />
+        </div>
       </Draggable>
       <div className={styles.discoveries}>
         <HackerDiscoveries gameData={gameData} />

@@ -27,11 +27,12 @@ const User = ({ data }) => {
   const router = useRouter();
   const gamecode = router.query.gamecode;
   const [gameData, setGameData] = useState(data[0]);
+  console.log(data[0])
   const [realtimeGameData, setRealtimeGameData] = useState({
     currentPlayer: data[0].startingPlayer,
     fieldUser: data[0].userinfo.previousfield,
     actionUser: "start",
-    fieldHacker: data[0].hackerinfo.previousfield,
+    fieldHacker: (data[0].hackerinfo? data[0].hackerinfo.previousfield : 1),
     actionHacker: "start",
   });
 

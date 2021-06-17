@@ -28,9 +28,9 @@ const Hacker = ({ data }) => {
   const [gameData, setGameData] = useState(data[0]);
   const [realtimeGameData, setRealtimeGameData] = useState({
     currentPlayer: data[0].startingPlayer,
-    fieldUser: 1,
+    fieldUser: (data[0].userinfo? data[0].userinfo.previousfield : 1),
     actionUser: "start",
-    fieldHacker: 1,
+    fieldHacker: data[0].hackerinfo.previousfield,
     actionHacker: "start",
   });
 

@@ -6,7 +6,7 @@ import HackerDiscoveries from "../../components/Hacker/HackerDiscoveries";
 // styling
 import styles from "./../../components/GameLayout.module.css";
 
-const Hacker = ({ data }) => {
+const Userend = ({ data }) => {
   console.log(data);
 
   return (
@@ -17,12 +17,12 @@ const Hacker = ({ data }) => {
         bg="var(--yellow)"
         border="var(--green)"
       >
-        {data.winner === "user" ? (
+        {data[0].winner === "user" ? (
           <p>je bent verloren</p>
         ) : (
           "er is nog geen winner, cesar is de winner!!!!!"
         )}
-        {data.winner === "hacker" ? (
+        {data[0].winner === "hacker" ? (
           <p>je bent gewonnen</p>
         ) : (
           "er is nog geen winner, lieselot is de winner"
@@ -39,31 +39,13 @@ const Hacker = ({ data }) => {
   );
 };
 
-export default Hacker;
+export default Userrend;
 
-export const getStaticProps = async (ctx) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/games/?gamecode=${ctx.params.gamecode}`
+export const getServerSideProps = async (context) => {
+  const { gamecode } = context.query;
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/games/?gamecode=${gamecode}`
   );
-  const data = await response.json();
-
-  return {
-    props: {
-      data: data.length > 0 ? data.pop() : { error: true },
-    },
-  };
-};
-
-export const getStaticPaths = async () => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/games`);
-  const data = await response.json();
-
-  return {
-    paths: data.map((game) => ({
-      params: {
-        gamecode: game.gamecode,
-      },
-    })),
-    fallback: true,
-  };
+  const data = await res.json();
+  return { props: { data } };
 };

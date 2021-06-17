@@ -91,8 +91,8 @@ const User = ({ data }) => {
     {
       type: "bad",
       action: "letterweghalen",
-      text: "Je hebt een webcam-cover over je webcam geplaatst.",
-      subtext: "Verander 1 kleine letter in een cijfer",
+      text: "Je hebt je niet uitgelogd op de computer van de bib.",
+      subtext: "Haal 1 letter of cijfer uit je wachtwoord",
       button: "Verander een letter",
     },
     {

@@ -8,7 +8,7 @@ import Wifi from "../../components/Wifi";
 import GameBoard from "../../components/GameBoard";
 import UserInfo from "../../components/User/UserInfo";
 import UserAccountStrongness from "../../components/User/UserAccountStrongness";
-import UserVpn from "../../components/User/UserVpn";
+import UserInstallsVpn from "../../components/User/UserInstallsVpn";
 import UserAction from "../../components/User/UserAction";
 import UserDeleteCookies from "../../components/User/UserDeleteCookies";
 import UserWarningMail from "../../components/User/UserWarningMail";
@@ -389,6 +389,7 @@ const User = ({ data }) => {
     if (action === "vpn") {
       setUserStart(false);
       setUserDoubleTurn(2);
+      setWindowComponent("vpn")
     } else if (
       action === "add2letters" ||
       action === "add1capital" ||
@@ -419,7 +420,7 @@ const User = ({ data }) => {
 
   const onClickButtonMail = (note) => {
     console.log("dit moet er gebeuren als je op oke mail");
-    sendNoteToDb(`waarschuwing: ${note}`);
+    sendNoteToDb(`waarschuwings mail: ${note}`);
     channel.publish({
       name: gamecode,
       data: `playerchange-user-hacker`,
@@ -536,6 +537,14 @@ const User = ({ data }) => {
     }
   };
 
+  const handleClickInstallsVpn = () => {
+    setWindowComponent("")
+    setRealtimeGameData({
+      ...realtimeGameData,
+      actionUser: "done",
+    });
+  }
+
   // general fetch functions
   const getUpdatedGamedata = async () => {
     const updatedGameData = await fetchData("games", gameData.id);
@@ -631,6 +640,16 @@ const User = ({ data }) => {
         <div className={styles.cookies}>
           <UserDeleteCookies
             handleClickUserDeleteCookies={handleClickUserDeleteCookies}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+
+      {windowComponent === "vpn" ? (
+        <div className={styles.cookies}>
+          <UserInstallsVpn
+            handleClickInstallsVpn={handleClickInstallsVpn}
           />
         </div>
       ) : (

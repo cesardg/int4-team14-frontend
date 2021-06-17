@@ -175,6 +175,8 @@ const Hacker = ({ data }) => {
   // channel
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split("-")[0];
+    console.log("ably")
+    getUpdatedGamedata()
 
     if (type === "boardchange") {
       const newHackerField = message.data.split("-")[2];

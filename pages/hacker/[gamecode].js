@@ -555,7 +555,7 @@ const Hacker = ({ data }) => {
   }, [realtimeGameData]);
 
   return (
-    <GameLayout>
+    <GameLayout style="hacker" vpnIcon={"nvt"}>
       <div className={styles.gameboard}>
         <GameBoard boardInfo={realtimeGameData} />
       </div>

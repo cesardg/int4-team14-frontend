@@ -44,6 +44,7 @@ const User = ({ data }) => {
   const [userDoubleTurn, setUserDoubleTurn] = useState(0);
   const [hackerDoubleTurn, setHackerDoubleTurn] = useState(0);
   const [notes, setNotes] = useState(data[0].usernotes);
+  const [vpnIcon, setVpnIcon] = useState(false);
   const randomOptions = [
     {
       type: "good",
@@ -226,6 +227,7 @@ const User = ({ data }) => {
           channel.publish({ name: gamecode, data: `playerchange-user-user` });
           setUserDoubleTurn(turns);
         } else {
+          setVpnIcon(false)
           newPlayer = "hacker";
         }
       }
@@ -388,8 +390,9 @@ const User = ({ data }) => {
     getUpdatedGamedata();
     if (action === "vpn") {
       setUserStart(false);
-      setUserDoubleTurn(2);
-      setWindowComponent("vpn")
+      setUserDoubleTurn(1);
+      setWindowComponent("vpn");
+      setVpnIcon(true)
     } else if (
       action === "add2letters" ||
       action === "add1capital" ||
@@ -586,7 +589,7 @@ const User = ({ data }) => {
   console.log(realtimeGameData);
 
   return (
-    <GameLayout style="user">
+    <GameLayout style="user" vpnIcon={vpnIcon}>
       <div className={styles.gameboard}>
         <GameBoard boardInfo={realtimeGameData} />
       </div>

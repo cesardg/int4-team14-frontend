@@ -11,7 +11,6 @@ import HackerInfo from "../../components/Hacker/HackerInfo";
 import HackerDiscoveries from "../../components/Hacker/HackerDiscoveries";
 import HackerAd from "../../components/Hacker/HackerAd";
 import HackerDecryption from "../../components/Hacker/HackerDecryption";
-import HackerInterests from "../../components/Hacker/HackerInterests";
 import HackerScreencapture from "../../components/Hacker/HackerScreencapture";
 import HackerVpn from "../../components/Hacker/HackerVpn";
 import HackerHack from "../../components/Hacker/HackerHack";
@@ -369,7 +368,7 @@ const Hacker = ({ data }) => {
   const handleClickRandom = (value) => {
     if (value === "deletediscovery") {
       handleDeleteDiscovery();
-    channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
+      channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
     }
   };
 
@@ -395,17 +394,16 @@ const Hacker = ({ data }) => {
     });
   };
 
-  const handleDeleteDiscovery = () => {
+  const handleDeleteDiscovery = () => {};
 
-  };
   // logic functions
   const hackerGetInterest = async () => {
-    const obtainedInterests = await fetchData(
-      "hackerinfos",
-      gameData.hackerinfo.id
-    );
+    const hackerinfo = await fetchData("hackerinfos", gameData.hackerinfo.id);
+    let hackerInterestsArray = [];
+    if (hackerinfo.obtainedInterests) {
+      hackerInterestsArray = hackerinfo.obtainedInterests.split("-");
+    }
 
-    const hackerInterestsArray = obtainedInterests.obtainedInterests.split("-");
     const userInterestsArray = gameData.userinfo.interests.split("-");
     userInterestsArray.shift();
     let newInterest = [];
@@ -449,7 +447,12 @@ const Hacker = ({ data }) => {
   const handleClickAd = (ad) => {
     channel.publish({ name: gamecode, data: `sendad-hacker-${ad}` });
     deleteInterestAdByHacker(ad);
-    setHackerDoubleTurn(2);
+    setHackerDoubleTurn(1);
+    setWindowComponent("");
+    setRealtimeGameData({
+      ...realtimeGameData,
+      actionUser: "done",
+    });
   };
 
   const deleteInterestAdByHacker = (ad) => {
@@ -607,9 +610,6 @@ const Hacker = ({ data }) => {
       <div className={styles.discoveries}>
         <HackerDiscoveries gameData={gameData} />
       </div>
-      <div className={styles.interests}>
-        <HackerInterests gameData={gameData} />
-      </div>
       <div className={styles.hack}>
         <HackerHack
           handleSubmitForm={(value) => handleFormGuessPass(value)}
@@ -634,6 +634,7 @@ const Hacker = ({ data }) => {
           <HackerAction
             onClickButton={(action) => handleClickAction(action)}
             start={hackerStart}
+            ads={gameData.hackerinfo.obtainedInterests !== null ? true : false}
           />
         </div>
       ) : (

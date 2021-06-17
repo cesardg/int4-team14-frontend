@@ -7,11 +7,6 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 const HackerDiscoveries = ({ gameData }) => {
-  // let discoveries = [];
-  // gameData.hackerdiscoveries.map((discovery) => {
-  //   discoveries.push(discovery.discovery);
-  // });
-
   return (
     <GameWindowLayout
       title="ontdekkingen"
@@ -23,7 +18,7 @@ const HackerDiscoveries = ({ gameData }) => {
         <p className={styles.text}>
           Ontdekkingen houden bij welke letters en cijfers je al ontdekt hebt
         </p>
-        {gameData.hackerdiscoveries ? (
+        {gameData.hackerdiscoveries.length > 0 ? (
           <ul className={styles.list}>
             {gameData.hackerdiscoveries.map((discovery, index) => (
               <li key={index} className={styles.listItem}>

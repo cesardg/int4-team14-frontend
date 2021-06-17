@@ -91,10 +91,10 @@
 }
 
 .userAd {
-  left: 20vw;
+  left: calc((100% - 90rem) / 2);
   position: absolute;
   top: 20vh;
-  width: 60vw;
+  width: 90rem;
   z-index: 2;
 }
 
@@ -113,8 +113,8 @@
 }
 
 .discoveries {
-  grid-column: 5 / span 7;
-  grid-row-start: 8;
+  grid-column: 7 / span 7;
+  grid-row-start: 9;
   margin: 2rem;
   z-index: 2;
 }

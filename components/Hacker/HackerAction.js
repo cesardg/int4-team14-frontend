@@ -5,7 +5,7 @@ import styles from "./HackerAction.module.css";
 // imports
 import Image from "next/image";
 
-const HackerAction = ({ onClickButton, start }) => {
+const HackerAction = ({ onClickButton, start, ads }) => {
   return (
     <GameWindowLayout title="spelbord" bg="var(--yellow)" border="var(--green)">
       <div className={styles.container}>
@@ -94,7 +94,7 @@ const HackerAction = ({ onClickButton, start }) => {
           </button>
           <button
             className={
-              start ? styles.actionButtonVpn : styles.actionButtonDisabled
+              start && ads ? styles.actionButtonVpn : styles.actionButtonDisabled
             }
             onClick={() => onClickButton("send ad")}
             disabled={start ? false : true}

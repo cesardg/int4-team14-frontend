@@ -327,6 +327,10 @@ const User = ({ data }) => {
       });
       getUpdatedGamedata();
     }
+
+    if (realtimeGameData.currentPlayer === "user") {
+      setReceiveAdFromHacker(false);
+    }
   });
 
   // check board input

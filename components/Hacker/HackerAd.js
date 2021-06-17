@@ -9,14 +9,21 @@ import Image from "next/image";
 
 const HackerAd = ({ gameData, onClickButton }) => {
   const [currentInterest, setCurrentInterest] = useState();
+  const [adWindow, setAdWindow] = useState("info");
+
   let interests = gameData.hackerinfo.obtainedInterests;
   let defaulChecked;
   if (interests) {
+    // console.log("er zijn");
     interests = gameData.hackerinfo.obtainedInterests.split("-");
     interests.shift();
     defaulChecked = interests[0];
+  } else {
+    // console.log("er zijn er geen");
   }
+
   const onChangeButton = (value) => {
+    setAdWindow("ad");
     setCurrentInterest(value);
   };
 
@@ -25,23 +32,32 @@ const HackerAd = ({ gameData, onClickButton }) => {
       <div className={styles.container}>
         <p className={styles.subtitle}>je staat op een</p>
         <p className={styles.title}>actievak</p>
-        <div className={styles.actionButton}>
-          <div className={styles.actionImg}>
-            <Image
-              src={`/assets/img/hackeractions/ad.svg`}
-              alt="Picture of the user"
-              width={100}
-              height={80}
-            />
-          </div>
-          <p className={styles.actionTitle}>Stuur een persoonlijke reclame</p>
-          <p className={styles.actionSubtitle}>
-            De gebruiker moet 2 beurten overslaan
-          </p>
-        </div>
-        <p className={styles.text}>
-          Welke advertentie wil je {gameData.userinfo.username} sturen?
-        </p>
+        {adWindow === "info" ? (
+          <>
+            <div className={styles.actionButton}>
+              <div className={styles.actionImg}>
+                <Image
+                  src={`/assets/img/hackeractions/ad.svg`}
+                  alt="Picture of the user"
+                  width={100}
+                  height={80}
+                />
+              </div>
+              <p className={styles.actionTitle}>
+                Stuur een persoonlijke reclame
+              </p>
+              <p className={styles.actionSubtitle}>
+                De gebruiker moet 2 beurten overslaan
+              </p>
+            </div>
+            <p className={styles.text}>
+              Welke advertentie wil je {gameData.userinfo.username} sturen?
+            </p>
+          </>
+        ) : (
+          ""
+        )}
+
         {interests ? (
           <form className={styles.interests}>
             {interests.map((item) => (
@@ -68,7 +84,19 @@ const HackerAd = ({ gameData, onClickButton }) => {
         ) : (
           ""
         )}
-        <p>hier komt de ad voor {currentInterest}</p>
+        {adWindow === "ad" ? (
+          <div className={styles.adImg}>
+            <Image
+              src={`/assets/img/hackeractions/ads/${currentInterest.substring(0,3)}.png`}
+              // src={`/assets/img/hackeractions/ads/slijm maken.png`}
+              alt="Picture of the user"
+              width={450}
+              height={250}
+            />
+          </div>
+        ) : (
+          ""
+        )}
         <button
           onClick={() => onClickButton(currentInterest)}
           className={buttonStyles.buttonGreen}

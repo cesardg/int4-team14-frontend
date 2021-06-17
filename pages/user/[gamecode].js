@@ -648,9 +648,7 @@ const User = ({ data }) => {
 
       {windowComponent === "vpn" ? (
         <div className={styles.cookies}>
-          <UserInstallsVpn
-            handleClickInstallsVpn={handleClickInstallsVpn}
-          />
+          <UserInstallsVpn handleClickInstallsVpn={handleClickInstallsVpn} />
         </div>
       ) : (
         ""
@@ -660,6 +658,7 @@ const User = ({ data }) => {
       realtimeGameData.actionUser === "spam" ? (
         <div className={styles.spammail}>
           <SpamMail
+            player="user"
             handleClickSpamMail={(reaction) => handleClickSpamMail(reaction)}
           />
         </div>

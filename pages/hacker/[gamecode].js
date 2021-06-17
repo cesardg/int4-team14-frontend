@@ -3,6 +3,8 @@ import GameLayout from "../../components/GameLayout";
 import Turn from "../../components/Turn";
 import YourTurn from "../../components/YourTurn";
 import Notes from "../../components/Notes";
+import SpamMail from "../../components/SpamMail";
+import Wifi from "../../components/Wifi";
 import GameBoard from "../../components/GameBoard";
 import HackerAction from "../../components/Hacker/HackerAction";
 import HackerInfo from "../../components/Hacker/HackerInfo";
@@ -28,7 +30,7 @@ const Hacker = ({ data }) => {
   const [gameData, setGameData] = useState(data[0]);
   const [realtimeGameData, setRealtimeGameData] = useState({
     currentPlayer: data[0].startingPlayer,
-    fieldUser: (data[0].userinfo? data[0].userinfo.previousfield : 1),
+    fieldUser: data[0].userinfo ? data[0].userinfo.previousfield : 1,
     actionUser: "start",
     fieldHacker: data[0].hackerinfo.previousfield,
     actionHacker: "start",
@@ -639,9 +641,9 @@ const Hacker = ({ data }) => {
             start={hackerStart}
           />
         </div>
-     ) : (
+      ) : (
         ""
-      )} 
+      )}
       {windowComponent === "vpn" ? (
         <div className={styles.hackerVpn}>
           <HackerVpn />{" "}
@@ -659,6 +661,25 @@ const Hacker = ({ data }) => {
             $
             action={hackerDecryptionAction}
           />
+        </div>
+      ) : (
+        ""
+      )}
+      {realtimeGameData.currentPlayer === "hacker" &&
+      realtimeGameData.actionUser === "spam" ? (
+        <div className={styles.spammail}>
+          <SpamMail
+            player="hacker"
+            handleClickSpamMail={(reaction) => handleClickSpamMail(reaction)}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+      {realtimeGameData.currentPlayer === "hacker" &&
+      realtimeGameData.actionUser === "wifi" ? (
+        <div className={styles.wifi}>
+          <Wifi />
         </div>
       ) : (
         ""

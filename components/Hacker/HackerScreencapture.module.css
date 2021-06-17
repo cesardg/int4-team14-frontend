@@ -1,13 +1,18 @@
 .container {
   align-items: center;
   background-image: url(../../public/assets/img/hackeractions/screencapture-bg.svg);
-  background-position: center;
+  background-position: center 5rem;
   background-repeat: no-repeat;
   background-size: 80%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20rem 7rem 10rem;
+  padding: 7rem 7rem 2rem;
+}
+
+.inside {
+  margin: 3rem auto 23rem;
+  width: 80%;
 }
 
 .title {
@@ -20,8 +25,24 @@
 .text {
   align-self: flex-start;
   font-size: 2rem;
-  margin: 2rem auto;
-  padding: 3rem 0 1rem;
+  margin: 0 auto;
+  padding: 1rem 0 1rem;
   text-align: center;
-  width: 55%;
+}
+
+.user {
+  align-self: flex-start;
+  font-family: pixel;
+  font-size: 2rem;
+  padding: 3rem 0 0;
+}
+
+.action {
+  align-self: flex-start;
+  background-color: var(--green);
+  border: 1px solid var(--black);
+
+  margin: 1rem 0;
+ padding: 1rem 2rem;
+ width: 100%;
 }

@@ -8,6 +8,7 @@ import Router from "next/router";
 import Image from "next/image";
 
 const Home = () => {
+  console.log("start");
   const getStartingGamecode = (length) => {
     const result = [];
     const characters = "0123456789";

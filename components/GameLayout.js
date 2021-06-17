@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useState, useEffect } from "react";
 
 
-const Layout = ({ children, style }) => {
+const Layout = ({ children, style, vpnIcon }) => {
 
     let today = new Date()
     let tempTime = today.getHours() + ':' + today.getMinutes();
@@ -60,15 +60,20 @@ const Layout = ({ children, style }) => {
             </a>
           </Link>
           <div className={styles.headerRight}>
-            <div className={styles.headerIcon} onClick={() => handleClickPopup("dice")}>
+            {style === "user" ? 
+            <div className={styles.headerIcon}  onClick={() => handleClickPopup("dice")}>
+              <div style={vpnIcon? {filter : "opacity(1)"} : {filter : "opacity(.4)"}}>
               <Image
                 src={`/assets/img/vpnicon.svg`}
                 alt="Picture of the dice"
                 width={22}
                 height={22}
+            
                 />
-              <span className={styles.popup} style={{display : popupDice}} >Je vpn staat aan/uit</span>
+                </div>
+              <span className={styles.popup} style={{display : popupDice}} >Je vpn staat {vpnIcon ? "aan, nice" : "uit, niet goed"}</span>
               </div>
+              : "" }
             <div  className={styles.headerIcon} onClick={() => handleClickPopup("vpn")}>
               <Image
                 src={`/assets/img/diceicon.svg`}
@@ -76,7 +81,7 @@ const Layout = ({ children, style }) => {
                 width={22}
                 height={22}
                 />
-                <span className={styles.popup} style={{display : popupVpn}} >Het is nu jouw beurt</span>
+                <span className={styles.popup} style={{display : popupVpn}} >welke info komt er hier?</span>
               </div>
             <p className={styles.time}>{time}</p>
           </div>

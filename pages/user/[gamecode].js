@@ -233,7 +233,7 @@ const User = ({ data }) => {
         }
       }
 
-      // user komt op een wifi vak
+      // user komt op een wifi vakk
       if (
         realtimeGameData.currentPlayer === "user" &&
         newUserAction === "action"

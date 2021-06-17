@@ -73,20 +73,20 @@ const Layout = ({ children, style, vpnIcon, realtimeGameData }) => {
             
                 />
                 </div>
-              <span className={styles.popup} style={{display : popupDice}} >Je vpn staat {vpnIcon ? "aan" : "uit"}</span>
+              <span className={styles.popup} style={{display : popupDice}} >Je VPN staat {vpnIcon ? "aan" : "uit"}</span>
               </div>
               : "" }
             <div  className={styles.headerIcon} onClick={() => handleClickPopup("vpn")}>
               <Image
-                src={`/assets/img/diceicon.svg`}
+                src={`/assets/img/pionicon.svg`}
                 alt="Picture of the dice"
                 width={22}
                 height={22}
                 />
                 <div className={styles.popupDice} style={{display : popupVpn}} > 
-                <p>Live spelbord info</p>
-                <p className={styles.popupText}>huidige speler: 
-                {realtimeGameData.currentPlayer === "user" ? "gebruiker" : "hacker"}
+                <p className={styles.popupTitle}>Live spelbord info</p>
+                <p className={styles.popupText}>huidige speler:  
+                {realtimeGameData.currentPlayer === "user" ? " gebruiker" : " hacker"}
                 </p>
 
                 <p className={styles.popupText}>Spelvak hacker: {realtimeGameData.fieldHacker}  </p>

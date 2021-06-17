@@ -22,6 +22,7 @@ import styles from "./../../components/GameLayout.module.css";
 // imports
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import Draggable from "react-draggable";
 
 const Hacker = ({ data }) => {
   // game
@@ -594,6 +595,7 @@ const Hacker = ({ data }) => {
       ) : (
         ""
       )}{" "}
+      <Draggable>
       <div className={styles.notes}>
         <Notes
           notes={notes}
@@ -601,6 +603,7 @@ const Hacker = ({ data }) => {
           handleFormSubmission={(e) => handleFormSubmissionNotes(e)}
         />
       </div>
+      </Draggable>
       <div className={styles.discoveries}>
         <HackerDiscoveries gameData={gameData} />
       </div>

@@ -5,6 +5,7 @@ import YourTurn from "../../components/YourTurn";
 import Notes from "../../components/Notes";
 import SpamMail from "../../components/SpamMail";
 import Wifi from "../../components/Wifi";
+import Spicy from "../../components/Spicy";
 import GameBoard from "../../components/GameBoard";
 import UserInfo from "../../components/User/UserInfo";
 import UserAccountStrongness from "../../components/User/UserAccountStrongness";
@@ -140,7 +141,7 @@ const User = ({ data }) => {
     { nummer: 6, command: "6", action: "empty" },
     { nummer: 7, command: "7", action: "action" },
     { nummer: 8, command: "8", action: "empty" },
-    { nummer: 9, command: "9", action: "pikant" },
+    { nummer: 9, command: "9", action: "spicy" },
     { nummer: 10, command: "Q", action: "empty" },
     { nummer: 11, command: "B", action: "action" },
     { nummer: 12, command: "C", action: "empty" },
@@ -259,17 +260,15 @@ const User = ({ data }) => {
         newUserAction === "wifi"
       ) {
         console.log("de user staat op een Wifi vakje, dit moet er gebeuren:");
-        handlePionOnWifi();
+        handlePionOnWifiOrSpicy();
       }
 
       // user komt op het pikante foto
       if (
         realtimeGameData.currentPlayer === "user" &&
-        newUserAction === "pikant"
+        newUserAction === "spicy"
       ) {
-        console.log(
-          "de user staat op het pikante vakje, dit moet er gebeuren:"
-        );
+        handlePionOnWifiOrSpicy();
       }
 
       // user komt op het spam vakje
@@ -515,7 +514,7 @@ const User = ({ data }) => {
     }
   };
 
-  const handlePionOnWifi = () => {
+  const handlePionOnWifiOrSpicy = () => {
     timeout();
     setTimeout(() => {
       setRealtimeGameData({
@@ -708,6 +707,15 @@ const User = ({ data }) => {
       realtimeGameData.actionUser === "wifi" ? (
         <div className={styles.wifi}>
           <Wifi />
+        </div>
+      ) : (
+        ""
+      )}
+
+      {realtimeGameData.currentPlayer === "user" &&
+      realtimeGameData.actionUser === "spicy" ? (
+        <div className={styles.spicy}>
+          <Spicy />
         </div>
       ) : (
         ""

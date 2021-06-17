@@ -220,6 +220,14 @@
   z-index: 2;
 }
 
+.spicy {
+  left: 30vw;
+  position: absolute;
+  top: 20vh;
+  width: 40vw;
+  z-index: 2;
+}
+
 /* header */
 .time {
   font-family: "pixel";
@@ -254,6 +262,7 @@
   left: -6.4rem;
   font-family: "pixel";
   box-shadow: .5rem .5rem var(--shadow);
+  z-index: 5;
 }
 
 .headerIcon .popup::after {

@@ -5,6 +5,7 @@ import YourTurn from "../../components/YourTurn";
 import Notes from "../../components/Notes";
 import SpamMail from "../../components/SpamMail";
 import Wifi from "../../components/Wifi";
+import Spicy from "../../components/Spicy";
 import GameBoard from "../../components/GameBoard";
 import HackerAction from "../../components/Hacker/HackerAction";
 import HackerInfo from "../../components/Hacker/HackerInfo";
@@ -139,7 +140,7 @@ const Hacker = ({ data }) => {
     { nummer: 6, command: "6", action: "empty" },
     { nummer: 7, command: "7", action: "action" },
     { nummer: 8, command: "8", action: "empty" },
-    { nummer: 9, command: "9", action: "nog beslist worden" },
+    { nummer: 9, command: "9", action: "spicy" },
     { nummer: 10, command: "Q", action: "empty" },
     { nummer: 11, command: "B", action: "action" },
     { nummer: 12, command: "C", action: "empty" },
@@ -254,17 +255,15 @@ const Hacker = ({ data }) => {
         realtimeGameData.currentPlayer === "hacker" &&
         newHackerAction === "wifi"
       ) {
-        handlePionOnWifi();
+        handlePionOnWifiOrSpicy();
       }
 
       // hacker komt op het pikante foto
       if (
         realtimeGameData.currentPlayer === "hacker" &&
-        newHackerAction === "pikant"
+        newHackerAction === "spicy"
       ) {
-        console.log(
-          "de hacker staat op het pikante vakje, dit moet er gebeuren:"
-        );
+        handlePionOnWifiOrSpicy();
       }
 
       // hacker komt op het pikante foto
@@ -282,13 +281,6 @@ const Hacker = ({ data }) => {
       ) {
         console.log("de hacker staat op een empty vak, dit moet er gebeuren");
       }
-
-      // if (
-      //   realtimeGameData.currentPlayer === "hacker" &&
-      //   realtimeGameData.actionHacker === "action"
-      // ) {
-      //   setWindowComponent("action");
-      // }
 
       setRealtimeGameData({
         ...realtimeGameData,
@@ -398,7 +390,7 @@ const Hacker = ({ data }) => {
     });
   };
 
-  const handlePionOnWifi = () => {
+  const handlePionOnWifiOrSpicy = () => {
     timeout();
     setTimeout(() => {
       setRealtimeGameData({
@@ -412,7 +404,7 @@ const Hacker = ({ data }) => {
   const timeout = (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
   };
-  
+
   const handleDeleteDiscovery = () => {};
 
   // logic functions
@@ -498,7 +490,7 @@ const Hacker = ({ data }) => {
     console.log("e", e.target.hackpass.value);
     if (e.target.hackpass.value == gameData.userinfo.password) {
       setHackerGuessFeedback("het is juist, de hacker heeft gewonnen");
-      putData("games", gameData.id, { winner: "hacker"});
+      putData("games", gameData.id, { winner: "hacker" });
       channel.publish({
         name: gamecode,
         data: `endgame-hacker-user`,
@@ -633,7 +625,8 @@ const Hacker = ({ data }) => {
         </div>
       ) : (
         ""
-      )}{" "}
+      )}
+
       <Draggable>
         <div className={styles.notes}>
           <Notes
@@ -643,9 +636,13 @@ const Hacker = ({ data }) => {
           />
         </div>
       </Draggable>
-      <div className={styles.discoveries}>
-        <HackerDiscoveries gameData={gameData} />
-      </div>
+
+      <Draggable>
+        <div className={styles.discoveries}>
+          <HackerDiscoveries gameData={gameData} />
+        </div>
+      </Draggable>
+
       {realtimeGameData.currentPlayer === "hacker" ? (
         <div className={styles.hack}>
           <HackerHack
@@ -738,6 +735,14 @@ const Hacker = ({ data }) => {
       realtimeGameData.actionHacker === "wifi" ? (
         <div className={styles.wifi}>
           <Wifi />
+        </div>
+      ) : (
+        ""
+      )}
+      {realtimeGameData.currentPlayer === "hacker" &&
+      realtimeGameData.actionHacker === "spicy" ? (
+        <div className={styles.spicy}>
+          <Spicy />
         </div>
       ) : (
         ""

@@ -5,7 +5,7 @@ const GameWindowLayout = ({ children, title, bg, border }) => {
     <div className={styles.outerWindow} style={{ backgroundColor: border }}>
       <article className={styles.innerWindow} style={{ backgroundColor: bg }}>
         <div className={styles.header}>
-          <h2 className={title == "Notities" ? styles.moveTitle : styles.title} style={{ backgroundColor: border }}>
+          <h2 className={title == "Notities" || title === "ontdekkingen" ? styles.moveTitle : styles.title} style={{ backgroundColor: border }}>
             {title}
           </h2>
           <span className={styles.close}></span>

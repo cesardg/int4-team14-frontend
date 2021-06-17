@@ -3,6 +3,7 @@ import Image from "next/image";
 
 const HackerInfo = ({ hackerinfo }) => {
   let interests = [];
+  console.log(hackerinfo);
   if (hackerinfo.obtainedInterests) {
     // console.log("er zijn");
     interests = hackerinfo.obtainedInterests.split("-");

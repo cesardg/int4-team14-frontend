@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 80vh;
+  overflow-y: scroll;
+  padding: 10rem 10rem 2rem;
+}
+
+.title {
+  font-family: sohne-breit-fett;
+  font-size: 3.6rem;
+  padding-top: 5rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  padding-bottom: 5rem;
+  text-align: center;
+}
+
+.img {
+  display: flex;
+  justify-content: center;
+  margin: 3rem auto;
+}

@@ -67,6 +67,7 @@ const Usersetup = () => {
     e.preventDefault();
     let interests = userInterests.join("-");
 
+
     const data = {
       password: profileInput.password,
       username: profileInput.username,

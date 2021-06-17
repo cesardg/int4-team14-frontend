@@ -439,8 +439,7 @@ const User = ({ data }) => {
   };
 
   const onClickButtonMail = (note) => {
-    console.log("dit moet er gebeuren als je op oke mail");
-    sendNoteToDb(`waarschuwingsmail: ${note}`);
+    sendNoteToDb(`laatste ontdekking hacker: ${note}`);
     channel.publish({
       name: gamecode,
       data: `playerchange-user-hacker`,

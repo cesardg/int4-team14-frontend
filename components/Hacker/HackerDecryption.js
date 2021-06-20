@@ -5,6 +5,7 @@ import buttonStyles from "./../../styles/ButtonStyles.module.css";
 import styles from "./HackerDecryption.module.css";
 // imports
 import Image from "next/image";
+import { useState } from "react";
 
 const HackerDecryption = ({ gameData, handleUpdatedDiscoveries, action }) => {
   let discoveryArr = [];
@@ -60,7 +61,6 @@ const HackerDecryption = ({ gameData, handleUpdatedDiscoveries, action }) => {
         discoveryArr[index] = "*";
       }
     });
-
     discovery = discoveryArr.join("");
   };
 
@@ -70,11 +70,7 @@ const HackerDecryption = ({ gameData, handleUpdatedDiscoveries, action }) => {
 
   console.log(discovery);
   return (
-    <GameWindowLayout
-      title="spelbord"
-      bg="var(--black)"
-      border="var(--green)"
-    >
+    <GameWindowLayout title="spelbord" bg="var(--black)" border="var(--green)">
       <div className={styles.container}>
         <p className={styles.title}>Wachtwoord ontsleutelaar</p>
         {action === "get2letters" ? (
@@ -104,6 +100,7 @@ const HackerDecryption = ({ gameData, handleUpdatedDiscoveries, action }) => {
             height={150}
           />
         </div>
+        {}
         <p className={styles.password}>
           {discoveryArr.map((character, index) => (
             <span

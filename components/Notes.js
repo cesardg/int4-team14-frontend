@@ -40,13 +40,13 @@ const Notes = ({ notes, player, handleFormSubmission }) => {
       </div>
 
       <form onSubmit={handleFormSubmission} className={styles.form}>
-        <textarea
+        <input
           placeholder="Maak een notitie..."
           className={
             player === "user" ? styles.textarea : styles.textareaHacker
           }
           name="note"
-        ></textarea>
+        />
         <button type="submit" className={styles.button}>
           <Image
             src={`/assets/img/backbutton.svg`}

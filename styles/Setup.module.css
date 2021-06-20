@@ -234,7 +234,7 @@ margin-bottom: 3.1rem;
   border: .2rem solid var(--brown);
 }
 
-.hackerPasswordInfo{
+.hackerEmailInfo{
   composes:  passwordInfo;
   color: var(--brown)
 }

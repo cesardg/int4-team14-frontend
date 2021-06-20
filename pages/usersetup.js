@@ -334,9 +334,12 @@ const Usersetup = () => {
                         />
                       </label>
                       <label className={styles.label}>
-                        Email adres
+                        Emailadres
                         <span className={styles.error}>
                           {profileError.email}
+                        </span>
+                        <span className={styles.passwordInfo}>
+                          Dit e-mailadres mag volledig zelf verzonnen zijn.
                         </span>
                         <input
                           className={styles.input}
@@ -368,6 +371,8 @@ const Usersetup = () => {
                             value={profilePass[0]}
                             onChange={(value) => handelChangePas(value, "0")}
                             required
+                            autoCorrect="off"
+                            autoCapitalize="none"
                           />
                           <span className={styles.smallInputStripe}>-</span>
                           <input

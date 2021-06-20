@@ -131,12 +131,22 @@ const HackerDecryption = ({ gameData, handleUpdatedDiscoveries, action }) => {
             </span>
           ))}
         </p>
-        <button
-          onClick={() => handleUpdatedDiscoveries(gameData, discovery)}
-          className={buttonStyles.buttonRedYellow}
-        >
-          Voeg dit toe aan je ontdekkingen
-        </button>
+        {console.log(info)}
+        {info !== "" ? (
+          <button
+            onClick={() => handleUpdatedDiscoveries(gameData, null)}
+            className={buttonStyles.buttonRedYellow}
+          >
+            Verder spelen
+          </button>
+        ) : (
+          <button
+            onClick={() => handleUpdatedDiscoveries(gameData, discovery)}
+            className={buttonStyles.buttonRedYellow}
+          >
+            Voeg dit toe aan je ontdekkingen
+          </button>
+        )}
       </div>
     </GameWindowLayout>
   );

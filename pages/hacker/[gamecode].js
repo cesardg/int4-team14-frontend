@@ -503,11 +503,14 @@ const Hacker = ({ data }) => {
   };
 
   const handleUpdatedDiscoveries = async (gameData, discovery) => {
-    const data = {
-      discovery: discovery,
-      game: gameData,
-    };
-    await postData("hackerdiscoveries", data);
+    console.log(discovery);
+    if (discovery) {
+      const data = {
+        discovery: discovery,
+        game: gameData,
+      };
+      await postData("hackerdiscoveries", data);
+    }
     setHackerDecryptionAction("");
     setWindowComponent("");
     getUpdatedGamedata();

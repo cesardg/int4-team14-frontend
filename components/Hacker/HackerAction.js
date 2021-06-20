@@ -5,7 +5,7 @@ import styles from "./HackerAction.module.css";
 // imports
 import Image from "next/image";
 
-const HackerAction = ({ onClickButton, start, ads }) => {
+const HackerAction = ({ onClickButton, ads }) => {
   return (
     <GameWindowLayout title="spelbord" bg="var(--yellow)" border="var(--green)">
       <div className={styles.container}>

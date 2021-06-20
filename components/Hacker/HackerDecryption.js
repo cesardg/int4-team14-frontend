@@ -5,10 +5,10 @@ import buttonStyles from "./../../styles/ButtonStyles.module.css";
 import styles from "./HackerDecryption.module.css";
 // imports
 import Image from "next/image";
-import { useState } from "react";
 
 const HackerDecryption = ({ gameData, handleUpdatedDiscoveries, action }) => {
   let discoveryArr = [];
+  let info = "";
 
   if (gameData.hackerdiscoveries.length > 0) {
     discoveryArr =
@@ -64,11 +64,27 @@ const HackerDecryption = ({ gameData, handleUpdatedDiscoveries, action }) => {
     discovery = discoveryArr.join("");
   };
 
+  const checkDiscoveredCharacters = () => {
+    if (
+      discoveryArr.every((value) => value === discoveryArr[0] && value === "*")
+    ) {
+      if (action === "get1capital") {
+        info = "Oeps, er zijn op dit moment geen hoofdletters om te ontdekken";
+      } else if (action === "get1number") {
+        info = "Oeps, er zijn op dit moment geen cijfers om te ontdekken";
+      } else if (action === "get2letters") {
+        info = "Oeps, er zijn op dit moment geen nieuwe letters te ontdekken";
+      }
+    } else {
+      info = "";
+    }
+  };
+
   if (action !== "") {
     getDiscoveredCharacters();
+    checkDiscoveredCharacters();
   }
 
-  console.log(discovery);
   return (
     <GameWindowLayout title="spelbord" bg="var(--black)" border="var(--green)">
       <div className={styles.container}>
@@ -100,7 +116,7 @@ const HackerDecryption = ({ gameData, handleUpdatedDiscoveries, action }) => {
             height={150}
           />
         </div>
-        {}
+        {info !== "" ? <p className={styles.info}>{info}</p> : ""}
         <p className={styles.password}>
           {discoveryArr.map((character, index) => (
             <span

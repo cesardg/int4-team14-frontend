@@ -8,10 +8,8 @@ import Image from "next/image";
 import { useState } from "react";
 
 const UserWarningMail = ({gameData, onClickButtonMail}) => {
-  console.log(gameData.hackerdiscoveries)
   const [window, setWindow] = useState("mail-closed");
   let lastDiscovery = gameData.hackerdiscoveries;
-  console.log(lastDiscovery)
   if (lastDiscovery.length == 0){
     lastDiscovery.discovery = "er zijn nog geen ontdekkingen gedaan"
   } else {

@@ -164,7 +164,6 @@ const Usersetup = () => {
   const checkForNumbersAndCapitals = (password) => {
     let error = false;
     password.forEach((element) => {
-      console.log(element);
       if (element == element.toUpperCase()) {
         error = true;
       }

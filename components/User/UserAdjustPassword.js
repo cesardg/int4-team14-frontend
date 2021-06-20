@@ -12,12 +12,9 @@ const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
   const [password, setPassword] = useState(
     gameData.userinfo.password.split("")
   );
-  console.log(action)
-
   const [tempPassword, setTempPassword] = useState([...password]);
 
   const validateNewCharacter = (char) => {
-    console.log("vlaidate", char);
     if (action === "add2letters") {
       if (/[a-z]/.test(char)) {
         setError("");
@@ -47,7 +44,6 @@ const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
 
     if (e.target.value !== "" && e.target.value !== password[index]) {
       char = e.target.value;
-      console.log("char", char);
 
       if (action === "change1letter") {
         if (/[a-z]/.test(char)) {
@@ -82,25 +78,18 @@ const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
     if (checkChar === true) {
       copyTemp[index] = char;
       setTempPassword(copyTemp);
-      console.log("-------");
-      console.log("temp", tempPassword);
-      console.log("copy", copyTemp);
 
       copyTemp.map((char, index) => {
         if (char != password[index]) {
           changes++;
         }
       });
-      console.log("changes", changes);
       if (changes > 1) {
-        console.log("veel aanpassing");
         setError("Je mag maar 1 letter aanpassen");
       } else if (changes === 0) {
         setError("je moet 1 letter aanpassen");
-        console.log("geen aanpassing");
       } else if (changes === 1) {
         setError("");
-        console.log("juist 1 aanpassing");
       }
     }
   };
@@ -134,7 +123,6 @@ const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
     }
     e.target.reset();
   };
-  console.log(action);
 
   return (
     <GameWindowLayout title="spelbord" bg="var(--yellow)" border="var(--green)">

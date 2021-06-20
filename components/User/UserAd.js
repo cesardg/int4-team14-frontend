@@ -5,7 +5,6 @@ import GameWindowLayout from "../GameWindowLayout";
 import Image from "next/image";
 
 const UserAd = ({ subject }) => {
-  console.log(subject);
   return (
     <GameWindowLayout title="spelbord" bg="var(--yellow)" border="var(--green)">
       <div className={styles.container}>

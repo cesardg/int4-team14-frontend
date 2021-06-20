@@ -5,8 +5,6 @@ import styles from "./HackerScreencapture.module.css";
 import GameWindowLayout from "../GameWindowLayout";
 
 const HackerScreencapture = ({ gameData, handleClickScreencatpure }) => {
-  console.log(gameData.userinfo.lastaction);
-
   return (
     <GameWindowLayout title="spelbord" bg="var(--yellow)" border="var(--green)">
       <div className={styles.container}>

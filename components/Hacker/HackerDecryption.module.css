@@ -36,7 +36,7 @@
 
 .password {
   display: flex;
-  margin: 5rem;
+  margin: 2rem auto 5rem;
 }
 
 .character {
@@ -59,10 +59,10 @@
   background-color: var(--yellow);
   color: var(--black);
 }
+
 .input {
   background-color: var(--green);
   composes: character;
-  /* height: 3rem; */
   padding: 0;
   text-align: center;
   width: 3.5rem;
@@ -75,4 +75,8 @@
 .error {
   color: var(--red);
   font-size: 1.6rem;
+}
+
+.info {
+ margin: 3rem auto 0;
 }

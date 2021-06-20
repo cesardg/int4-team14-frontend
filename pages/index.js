@@ -28,7 +28,7 @@ const Home = () => {
     playerOptions[Math.floor(Math.random() * playerOptions.length)];
   const [screen, setScreen] = useState("start");
   const [playerOne, setPlayerOne] = useState();
-  const [playerTwo, setPlayerTwo] = useState("user");
+  const [playerTwo, setPlayerTwo] = useState();
   const [gamecode, setGamecode] = useState(getStartingGamecode(6));
   const [error, setError] = useState();
   const [showButton, setShowButton] = useState(false);
@@ -264,7 +264,7 @@ const Home = () => {
             bg="var(--brown)"
             border="var(--green)"
           >
-            <div className={styles.playersInside}>
+            <div className={playerOne ? styles.playersInside : styles.playersInsideEmpty} >
               <p className={styles.playersTitle}>Start een nieuw spel</p>
               <p className={styles.playersText}>Welke speler ben jij?</p>
               <div className={styles.players}>
@@ -335,14 +335,19 @@ const Home = () => {
                   </div>
                 </label>
               </div>
-              <Link href={`/lobby?gamecode=${gamecode}&player=${playerOne}`}>
-                <a
-                  onClick={handeClickStartGame}
-                  className={buttonStyles.buttonRed}
-                >
-                  Medespeler uitnodigen
-                </a>
-              </Link>
+              {playerOne ? (
+                <Link href={`/lobby?gamecode=${gamecode}&player=${playerOne}`}>
+                  <a
+                    onClick={handeClickStartGame}
+                    className={buttonStyles.buttonRed}
+                  >
+                    Medespeler uitnodigen
+                  </a>
+                </Link>
+              ) : (
+                ""
+              )}
+
               <button
                 onClick={() => {
                   setScreen("start");

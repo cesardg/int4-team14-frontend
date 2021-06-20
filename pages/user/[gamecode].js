@@ -249,7 +249,8 @@ const User = ({ data }) => {
       ) {
         console.log("de user staat op een random vak");
         setRandomOption(
-          randomOptions[Math.floor(Math.random() * randomOptions.length)]
+          randomOptions[7]
+          // randomOptions[Math.floor(Math.random() * randomOptions.length)]
         );
         // setWindowComponent("random");
       }
@@ -334,6 +335,10 @@ const User = ({ data }) => {
     if (type === "endgame") {
       router.push(`/userend/${gamecode}`);
     }
+
+    if (type === "doubleturn" && realtimeGameData.currentPlayer === "hacker") {
+      // todooooo
+    }
   }); // channel einde
 
   // check board input
@@ -384,6 +389,10 @@ const User = ({ data }) => {
       channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
     } else if (value === "skipturn") {
       console.log("beurt overslaan");
+      channel.publish({
+        name: gamecode,
+        data: `doubleturn-user-hacker`,
+      });
     } else if (
       value === "add2letters" ||
       value === "add1capital" ||
@@ -395,7 +404,7 @@ const User = ({ data }) => {
       setWindowComponent("password");
       setRealtimeGameData({
         ...realtimeGameData,
-        actionUser: "done",
+        actionUser: "",
       });
     }
   };
@@ -618,6 +627,7 @@ const User = ({ data }) => {
     };
   }, [realtimeGameData]);
 
+  console.log("action", realtimeGameData.actionUser);
   return (
     <GameLayout
       style="user"

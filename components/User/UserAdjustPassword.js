@@ -36,6 +36,7 @@ const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
     }
   };
 
+  console.log(action);
   const handleChangeCharacter = (e, index) => {
     let copyTemp = [...tempPassword];
     let changes = 0;
@@ -171,7 +172,7 @@ const UserAdjustPassword = ({ gameData, action, handleUpdatedPassword }) => {
             <span key={index} className={styles.character}>
               {character}
             </span>
-          ))} 
+          ))}
         </p>
         <p className={styles.text}>Jouw nieuw wachtwoord</p>
         {action.includes("add") ? (

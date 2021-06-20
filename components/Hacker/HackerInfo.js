@@ -30,7 +30,7 @@ const HackerInfo = ({ hackerinfo }) => {
       <p className={styles.textOnline}>online</p>
       <p className={styles.title}>e-mail</p>
       <p className={styles.text}>{hackerinfo.email}</p>
-      <p className={styles.title}>Ontdekte interesses</p>
+      <p className={styles.title}>Gehackte interesses</p>
       {interests.length > 0 ? (
         <ul className={styles.interests}>
           {interests.map((interest, index) => (

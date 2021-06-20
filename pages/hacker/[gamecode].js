@@ -503,7 +503,6 @@ const Hacker = ({ data }) => {
   };
 
   const handleUpdatedDiscoveries = async (gameData, discovery) => {
-    console.log(discovery);
     if (discovery) {
       const data = {
         discovery: discovery,

@@ -1,17 +1,18 @@
 // components
-import Layout from "../../components/Layout";
+import EndGameLayout from "../../components/EndGameLayout";
 import GameWindowLayout from "../../components/GameWindowLayout";
-import HackerInfo from "../../components/Hacker/HackerInfo";
-import HackerDiscoveries from "../../components/Hacker/HackerDiscoveries";
+import UserInfoEnd from "../../components/User/UserInfoEnd";
 // styling
-import styles from "./../../components/GameLayout.module.css";
+import styles from "./../../components/EndGameLayout.module.css";
 
 const Userend = ({ data }) => {
   console.log(data);
 
   return (
-    <Layout style={"user"}>
-      <p>halooooo</p>
+    < EndGameLayout style={"user"}>
+      <div className={styles.userInfo}>
+        <UserInfoEnd userinfo={data[0].userinfo} />
+      </div>
       <GameWindowLayout
         title="spelbord"
         bg="var(--yellow)"
@@ -23,14 +24,8 @@ const Userend = ({ data }) => {
             : "je bent verloren, hacker is gewonnen"}
         </p>
       </GameWindowLayout>
-      {/* <div className={styles.hackerInfo}>
-        <HackerInfo hackerinfo={gameData.hackerinfo} />
-      </div>
-      <div className={styles.discoveries}>
-        <HackerDiscoveries gameData={gameData} />
-      </div>{" "} */}
-      */
-    </Layout>
+
+    </EndGameLayout>
   );
 };
 

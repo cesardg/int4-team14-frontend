@@ -17,7 +17,7 @@ const HackerScreencapture = ({ gameData, handleClickScreencatpure }) => {
           <p className={styles.user}>Laatste aanpassing</p>
           {gameData.userinfo.lastaction === "add2letters" ? (
             <p className={styles.action}>
-              De gebruiker heeft 2 letters toegevoegd
+              De gebruiker heeft 2 kleine letters toegevoegd
             </p>
           ) : (
             ""

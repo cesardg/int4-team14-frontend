@@ -6,6 +6,7 @@ import styles from "./Notes.module.css";
 import Image from "next/image";
 
 const Notes = ({ notes, player, handleFormSubmission }) => {
+  notes.reverse();
 
   return (
     <GameWindowLayout

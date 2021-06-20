@@ -54,7 +54,7 @@ const Lobby = () => {
             {player === "user" ? (
               <div className={styles.players}>
                 <article className={styles.player}>
-                  <p className={styles.playerTitle}>Internet gebruiker</p>
+                  <p className={styles.playerTitle}>Internetgebruiker</p>
                   <div className={styles.playerImg}>
                     <Image
                       src="/assets/img/userpics/pf2.svg"
@@ -68,12 +68,12 @@ const Lobby = () => {
                 <p className={styles.vs}>vs</p>
                 <article className={styles.player}>
                   <p className={styles.playerTitle}>Hacker</p>
-                  <div className={styles.playerImg}>
+                  <div className={styles.loadingImg}>
                     <Image
-                      src="/assets/img/hackerpics/pf1.svg"
+                      src="/assets/img/loading.gif"
                       alt="Picture of the hacker"
-                      height={200}
-                      width={300}
+                      height={130}
+                      width={130}
                     />
                   </div>
                   <p className={styles.playerName}>
@@ -100,13 +100,13 @@ const Lobby = () => {
                 </article>
                 <p className={styles.vs}>vs</p>
                 <article className={styles.player}>
-                  <p className={styles.playerTitle}>Internet gebruiker</p>
-                  <div className={styles.playerImg}>
+                  <p className={styles.playerTitle}>Internetgebruiker</p>
+                  <div className={styles.loadingImg}>
                     <Image
-                      src="/assets/img/userpics/pf2.svg"
+                      src="/assets/img/loading.gif"
                       alt="Picture of the user"
-                      height={200}
-                      width={300}
+                      height={130}
+                      width={130}
                     />
                   </div>
                   <p className={styles.playerName}>
@@ -119,22 +119,27 @@ const Lobby = () => {
             )}
             {members === 1 ? (
               <div>
-                {gamecode ? 
-                <div className={styles.gamecode}>
-                  {gamecode.split("").map((char, index) => (
-                    <p key={index} className={styles.gamecodeChar}>{char}</p>
-                  ))}
-                </div>
-                 : "" }
+                {gamecode ? (
+                  <div className={styles.gamecode}>
+                    {gamecode.split("").map((char, index) => (
+                      <p key={index} className={styles.gamecodeChar}>
+                        {char}
+                      </p>
+                    ))}
+                  </div>
+                ) : (
+                  ""
+                )}
                 <p className={styles.text}>
                   Deel de game code met je tegenspeler om het spel te starten
                 </p>
               </div>
-              
             ) : (
               <div className={buttonStyles.buttonRed}>
                 <Link href={`${player}setup/?gamecode=${gamecode}`}>
-                  <a onClick={handleCLickStart}>Start spel en maak een profiel aan</a>
+                  <a onClick={handleCLickStart}>
+                    Start spel en maak een profiel aan
+                  </a>
                 </Link>
               </div>
             )}
@@ -143,13 +148,15 @@ const Lobby = () => {
                 <a className={styles.backButtonLink}>Terug</a>
               </Link>
             </div>
-          {members === 1 ? 
-            <div className={styles.rulesButton}>
-              <Link href={`/spelregels`}>
-                <a>Bekijk de spelregels</a>
-              </Link>
-            </div>
-            : "" }
+            {members === 1 ? (
+              <div className={styles.rulesButton}>
+                <Link href={`/spelregels`}>
+                  <a>Bekijk de spelregels</a>
+                </Link>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </WindowLayout>
       </section>

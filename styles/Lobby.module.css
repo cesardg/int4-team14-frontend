@@ -66,6 +66,10 @@
   margin: 3rem 0;
 }
 
+.loadingImg {
+  padding: 8rem 0 5rem;
+}
+
 .vs {
   font-family: pixel;
   font-size: 15rem;

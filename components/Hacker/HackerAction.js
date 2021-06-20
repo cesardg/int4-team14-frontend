@@ -94,10 +94,10 @@ const HackerAction = ({ onClickButton, start, ads }) => {
           </button>
           <button
             className={
-              start && ads ? styles.actionButtonVpn : styles.actionButtonDisabled
+              ads ? styles.actionButtonVpn : styles.actionButtonDisabled
             }
             onClick={() => onClickButton("send ad")}
-            disabled={start ? false : true}
+            disabled={ads ? false : true}
           >
             <div className={styles.actionImg}>
               <Image
@@ -107,13 +107,13 @@ const HackerAction = ({ onClickButton, start, ads }) => {
                 height={80}
               />
             </div>
-            {start ? (
+            {ads ? (
               <p className={styles.actionExtra}>
                 Je kan deze actie 1 keer per ronde gebruiken
               </p>
             ) : (
               <p className={styles.actionExtra}>
-                Wordt geactiveerd wanneer je start passeert
+                Wordt geactiveerd nadat je interesses ontdekt hebt
               </p>
             )}
             <p className={styles.actionTitle}>Stuur een persoonlijke reclame</p>

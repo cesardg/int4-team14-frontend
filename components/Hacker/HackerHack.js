@@ -8,7 +8,7 @@ import { useState } from "react";
 
 const HackerHack = ({ handleSubmitForm, feedback, start }) => {
   const [view, setView] = useState("button");
-console.log("feedback", feedback);
+// console.log("feedback", feedback);
   return (
     <GameWindowLayout title="hacking" bg="var(--black)" border="var(--green)">
       <div className={styles.container}>

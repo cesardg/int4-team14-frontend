@@ -544,7 +544,7 @@ const User = ({ data }) => {
   };
 
   const handleClickUserDeleteCookies = () => {
-    const data = { obtainedInterests: "" };
+    const data = { obtainedInterests: null };
     sendDataToHacker(data);
   };
 

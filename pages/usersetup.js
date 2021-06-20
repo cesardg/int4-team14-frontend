@@ -65,15 +65,10 @@ const Usersetup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let interests = "";
-
-    userInterests.forEach((userInterest) => {
-      interests = interests + "-" + userInterest;
-    });
     const data = {
       password: profileInput.password,
       username: profileInput.username,
-      interests: interests,
+      interests: userInterests.join("-"),
       picture: profilePicture,
       email: profileInput.email,
     };
@@ -180,8 +175,6 @@ const Usersetup = () => {
     tmp[channel] = e.target.value;
     setProfileInput(tmp);
   };
-
-  console.log(currentField);
 
   const handleClickBack = () => {
     if (currentField === "account") {

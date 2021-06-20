@@ -409,16 +409,12 @@ const Hacker = ({ data }) => {
 
   // logic functions
   const hackerGetInterest = async () => {
-    const obtainedInterests = await fetchData(
-      "hackerinfos",
-      gameData.hackerinfo.id
-    );
+    const hackerinfo = await fetchData("hackerinfos", gameData.hackerinfo.id);
     let hackerInterestsArray = [];
-    if (obtainedInterests.obtainedInterests != null) {
-      hackerInterestsArray = obtainedInterests.obtainedInterests.split("-");
+    if (hackerinfo.obtainedInterests != null) {
+      hackerInterestsArray = hackerinfo.obtainedInterests.split("-");
     }
     const userInterestsArray = gameData.userinfo.interests.split("-");
-    userInterestsArray.shift();
     let newInterest = [];
     userInterestsArray.forEach((element) => {
       if (!hackerInterestsArray.includes(element)) newInterest.push(element);
@@ -474,8 +470,12 @@ const Hacker = ({ data }) => {
     if (index > -1) {
       obtainedInterests.splice(index, 1);
     }
-    const string = obtainedInterests.join("-");
-    const data = { obtainedInterests: string };
+    let data = null;
+    if (obtainedInterests.length === 0) {
+      data = { obtainedInterests: null };
+    } else {
+      data = { obtainedInterests: obtainedInterests.join("-") };
+    }
     sendDataToHacker(data);
   };
 

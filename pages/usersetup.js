@@ -384,6 +384,8 @@ const Usersetup = () => {
                             value={profilePass[1]}
                             onChange={(value) => handelChangePas(value, "1")}
                             required
+                            autoCorrect="off"
+                            autoCapitalize="none"
                           />
                           <span className={styles.smallInputStripe}>-</span>
                           <input
@@ -406,6 +408,8 @@ const Usersetup = () => {
                             value={profilePass[3]}
                             onChange={(value) => handelChangePas(value, "3")}
                             required
+                            autoCorrect="off"
+                            autoCapitalize="none"
                           />
                           <span className={styles.smallInputStripe}>-</span>
                           <input
@@ -417,6 +421,8 @@ const Usersetup = () => {
                             value={profilePass[4]}
                             onChange={(value) => handelChangePas(value, "4")}
                             required
+                            autoCorrect="off"
+                            autoCapitalize="none"
                           />
                           <span className={styles.smallInputStripe}>-</span>
                           <input
@@ -428,6 +434,8 @@ const Usersetup = () => {
                             value={profilePass[5]}
                             onChange={(value) => handelChangePas(value, "5")}
                             required
+                            autoCorrect="off"
+                            autoCapitalize="none"
                           />
                         </div>
                       </label>

@@ -78,7 +78,7 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
               Zo kan de hacker jouw interesses niet gebruiken voor zijn aanval
             </p>
           </button>
-               <div className={styles.moreInfoImg} onClick={() => handleClickMoreInfo("coockies")}>
+               <div className={styles.moreInfoImg} onClick={() => handleClickMoreInfo("info cookies")}>
                  <Image
                 src={`/assets/img/moreinfo.png`}
                 alt="Picture of the user"

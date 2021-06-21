@@ -662,10 +662,8 @@ const User = ({ data }) => {
     if (subject === "close"){
       setWindowComponent("")
     } else {
-      setWindowComponent("popupinfo")
+      setWindowComponent(subject)
     }
-    
-    
   }
 
   useEffect(() => {
@@ -715,7 +713,7 @@ const User = ({ data }) => {
         </div>
       </Draggable>
       <div className={styles.strongness}>
-        <UserAccountStrongness value={accountStrongness} />
+        <UserAccountStrongness value={accountStrongness} handleClickMoreInfo={(subject) => handleClickMoreInfo(subject)} />
       </div>
 
       {/* acties */}
@@ -822,8 +820,8 @@ const User = ({ data }) => {
       ) : (
         ""
       )}
-      {windowComponent === "popupinfo" ?
-      <PopupInfo handleClickMoreInfo={(subject) => handleClickMoreInfo(subject)}/>   
+      {windowComponent === "info cookies" || windowComponent === "info strongness" ?
+      <PopupInfo subject={windowComponent} handleClickMoreInfo={(subject) => handleClickMoreInfo(subject)}/>   
      : ""}
  
     </GameLayout>

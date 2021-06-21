@@ -54,6 +54,7 @@ const HackerDecryption = ({ gameData, handleUpdatedDiscoveries, action }) => {
           }
         }
       }
+      console.log("werkt dit?");
     });
 
     discoveryArr.map((discovery, index) => {

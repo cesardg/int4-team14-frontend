@@ -319,8 +319,27 @@ const Hacker = ({ data }) => {
     if (type === "endgame") {
       router.push(`/hackerend/${gamecode}`);
     }
+
+    if (type === "doubleturn" && realtimeGameData.currentPlayer === "user") {
+      setRealtimeGameData({
+        ...realtimeGameData,
+        currentPlayer: message.data.split("-")[2],
+      });
+      setHackerDoubleTurn(1);
+    }
+
+    if (type === "doubleturn" && realtimeGameData.currentPlayer === "hacker") {
+      setRealtimeGameData({
+        ...realtimeGameData,
+        currentPlayer: message.data.split("-")[2],
+      });
+      setUserDoubleTurn(1);
+    }
   }); // channel einde
 
+  console.log("----------");
+  console.log("action", realtimeGameData.actionHacker);
+  console.log("user", realtimeGameData.currentPlayer);
   // check board input
   const downHandler = ({ key }) => {
     arr.push(key);
@@ -364,7 +383,19 @@ const Hacker = ({ data }) => {
   const handleClickRandom = (value) => {
     if (value === "deletediscovery") {
       handleDeleteDiscovery();
-      channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
+      
+    }
+
+    // double turn checken
+    if (hackerDoubleTurn > 0) {
+      const turns = hackerDoubleTurn - 1;
+      channel.publish({ name: gamecode, data: `playerchange-hacker-hacker` });
+      setHackerDoubleTurn(turns);
+    } else {
+      channel.publish({
+        name: gamecode,
+        data: `playerchange-hacker-user`,
+      });
     }
   };
 
@@ -388,6 +419,8 @@ const Hacker = ({ data }) => {
       ...realtimeGameData,
       actionHacker: "done",
     });
+
+    
   };
 
   const handlePionOnWifiOrSpicy = () => {
@@ -397,7 +430,18 @@ const Hacker = ({ data }) => {
         ...realtimeGameData,
         actionHacker: "done",
       });
-      channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
+
+      // double turn checken
+      if (hackerDoubleTurn > 0) {
+        const turns = hackerDoubleTurn - 1;
+        channel.publish({ name: gamecode, data: `playerchange-hacker-hacker` });
+        setHackerDoubleTurn(turns);
+      } else {
+        channel.publish({
+          name: gamecode,
+          data: `playerchange-hacker-user`,
+        });
+      }
     }, 3000);
   };
 
@@ -426,10 +470,18 @@ const Hacker = ({ data }) => {
     if (latest) {
       sendDataToHacker(data);
     }
-    channel.publish({
-      name: gamecode,
-      data: `playerchange-hacker-user`,
-    });
+
+    // double turn checken
+    if (hackerDoubleTurn > 0) {
+      const turns = hackerDoubleTurn - 1;
+      channel.publish({ name: gamecode, data: `playerchange-hacker-hacker` });
+      setHackerDoubleTurn(turns);
+    } else {
+      channel.publish({
+        name: gamecode,
+        data: `playerchange-hacker-user`,
+      });
+    }
   };
 
   const sendDataToHacker = async (data) => {
@@ -499,7 +551,17 @@ const Hacker = ({ data }) => {
 
   const handleClickScreencatpure = () => {
     setWindowComponent("");
-    channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
+    // double turn checken
+    if (hackerDoubleTurn > 0) {
+      const turns = hackerDoubleTurn - 1;
+      channel.publish({ name: gamecode, data: `playerchange-hacker-hacker` });
+      setHackerDoubleTurn(turns);
+    } else {
+      channel.publish({
+        name: gamecode,
+        data: `playerchange-hacker-user`,
+      });
+    }
   };
 
   const handleUpdatedDiscoveries = async (gameData, discovery) => {
@@ -513,9 +575,19 @@ const Hacker = ({ data }) => {
     setHackerDecryptionAction("");
     setWindowComponent("");
     getUpdatedGamedata();
-    channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
+    // double turn checken
+    if (hackerDoubleTurn > 0) {
+      const turns = hackerDoubleTurn - 1;
+      channel.publish({ name: gamecode, data: `playerchange-hacker-hacker` });
+      setHackerDoubleTurn(turns);
+    } else {
+      channel.publish({
+        name: gamecode,
+        data: `playerchange-hacker-user`,
+      });
+    }
   };
-
+console.log("hacker double", hackerDoubleTurn);
   const handleFormSubmissionNotes = async (e) => {
     e.preventDefault();
     if (e.target.note.value !== "") {

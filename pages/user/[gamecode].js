@@ -121,7 +121,7 @@ const User = ({ data }) => {
       type: "bad",
       action: "removechar",
       text: "Je probeert Minecraft te downloaden op een verdachte website, hierdoor heb je een virus.",
-      subtext: "Haal 1 letter of cijfer uit je wachtwoord",
+      subtext: "Je verliest 1 karater uit je wachtwoord",
       button: "Oke",
     },
     {
@@ -249,7 +249,7 @@ const User = ({ data }) => {
       ) {
         console.log("de user staat op een random vak");
         setRandomOption(
-          randomOptions[7]
+          randomOptions[11]
           // randomOptions[Math.floor(Math.random() * randomOptions.length)]
         );
         // setWindowComponent("random");
@@ -336,8 +336,20 @@ const User = ({ data }) => {
       router.push(`/userend/${gamecode}`);
     }
 
+    if (type === "doubleturn" && realtimeGameData.currentPlayer === "user") {
+      setRealtimeGameData({
+        ...realtimeGameData,
+        currentPlayer: message.data.split("-")[2],
+      });
+      setHackerDoubleTurn(1)
+    }
+
     if (type === "doubleturn" && realtimeGameData.currentPlayer === "hacker") {
-      // todooooo
+      setRealtimeGameData({
+        ...realtimeGameData,
+        currentPlayer: message.data.split("-")[2],
+      });
+      setUserDoubleTurn(1);
     }
   }); // channel einde
 

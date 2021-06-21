@@ -4,7 +4,7 @@ import GameWindowLayout from "../../components/GameWindowLayout";
 import PlayerInfo from "../../components/Endgame/PlayerInfo";
 import Carousel from "../../components/Endgame/Carousel";
 // styling
-import styles from "./../../components/EndGame/EndGameLayout.module.css";
+// import styles from "./../../components/EndGame/EndGameLayout.module.css";
 // imports
 import Image from "next/image";
 import { useState } from "react";

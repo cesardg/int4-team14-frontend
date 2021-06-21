@@ -111,10 +111,10 @@ const HackerDecryption = ({ gameData, handleUpdatedDiscoveries, action }) => {
         )}
         <div className={styles.img}>
           <Image
-            src={`/assets/img/hackeractions/eyes.svg`}
-            alt="Picture of the user"
-            width={300}
-            height={150}
+            src={`/assets/img/hackeractions/movingeyes.gif`}
+            alt="eyes"
+            width={440}
+            height={120}
           />
         </div>
         {info !== "" ? <p className={styles.info}>{info}</p> : ""}

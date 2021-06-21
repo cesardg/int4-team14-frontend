@@ -625,7 +625,7 @@ const User = ({ data }) => {
 
   // general fetch functions
   const getUpdatedGamedata = async () => {
-    console.log("hopelijk kom ik niet te veel voor in de console (update)");
+    console.log("update");
     const updatedGameData = await fetchData("games", gameData.id);
 
     setGameData(updatedGameData);

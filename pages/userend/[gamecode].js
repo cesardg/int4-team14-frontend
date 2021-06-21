@@ -16,7 +16,7 @@ const Userend = ({ data }) => {
   return (
     <EndGameLayout style={"user"}>
       <div className={styles.userInfo}>
-        <PlayerInfo info={data.userinfo} style={"user"} />
+        <PlayerInfo info={data.userinfo} style={"user"} winner={data.winner} />
       </div>
       <div className={styles.strongness}>
         <UserAccountStrongness value={data.userinfo.score} />

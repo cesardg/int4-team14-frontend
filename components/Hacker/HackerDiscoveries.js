@@ -2,9 +2,7 @@
 import GameWindowLayout from "../GameWindowLayout";
 // styling
 import styles from "./HackerDiscoveries.module.css";
-// imports
-import { useState, useEffect } from "react";
-import Image from "next/image";
+
 
 const HackerDiscoveries = ({ gameData }) => {
   return (

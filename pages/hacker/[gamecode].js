@@ -309,6 +309,16 @@ const Hacker = ({ data }) => {
       getUpdatedGamedata();
     }
 
+    if (type === "installvpn") {
+      setWindowComponent("vpn");
+      setRealtimeGameData({
+        ...realtimeGameData,
+        currentPlayer: message.data.split("-")[2],
+      });
+      setUserDoubleTurn(1);
+      handleHackerVpn();
+    }
+
     if (type === "playerchange") {
       console.log("from hacker:", message.data);
       setRealtimeGameData({
@@ -338,9 +348,6 @@ const Hacker = ({ data }) => {
     }
   }); // channel einde
 
-  console.log("----------");
-  console.log("action", realtimeGameData.actionHacker);
-  console.log("user", realtimeGameData.currentPlayer);
   // check board input
   const downHandler = ({ key }) => {
     arr.push(key);
@@ -442,23 +449,19 @@ const Hacker = ({ data }) => {
         ...realtimeGameData,
         actionHacker: "done",
       });
-
-      // double turn checken
-      if (hackerDoubleTurn > 0) {
-        const turns = hackerDoubleTurn - 1;
-        channel.publish({ name: gamecode, data: `playerchange-hacker-hacker` });
-        setHackerDoubleTurn(turns);
-      } else {
-        channel.publish({
-          name: gamecode,
-          data: `playerchange-hacker-user`,
-        });
-      }
+      channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
     }, 3000);
   };
 
   const timeout = (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
+  };
+
+  const handleHackerVpn = () => {
+    timeout();
+    setTimeout(() => {
+      setWindowComponent("");
+    }, 3000);
   };
 
   const handleDeleteDiscovery = async () => {
@@ -586,7 +589,7 @@ const Hacker = ({ data }) => {
       name: gamecode,
       data: `playerchange-hacker-user`,
     });
-  }
+  };
 
   const handleClickScreencatpure = () => {
     setWindowComponent("");
@@ -765,7 +768,7 @@ const Hacker = ({ data }) => {
       ) : (
         ""
       )}
-      
+
       {windowComponent === "screencapture" ? (
         <div className={styles.screencapture}>
           <HackerScreencapture
@@ -776,6 +779,7 @@ const Hacker = ({ data }) => {
       ) : (
         ""
       )}
+
       {/* acties */}
       {realtimeGameData.currentPlayer === "hacker" &&
       realtimeGameData.actionHacker === "action" ? (
@@ -789,6 +793,7 @@ const Hacker = ({ data }) => {
       ) : (
         ""
       )}
+
       {realtimeGameData.currentPlayer === "hacker" &&
       realtimeGameData.actionHacker === "random" ? (
         <div className={styles.random}>
@@ -811,6 +816,7 @@ const Hacker = ({ data }) => {
       ) : (
         ""
       )}
+
       {windowComponent === "vpn" ? (
         <div className={styles.hackerVpn}>
           <HackerVpn />{" "}
@@ -818,6 +824,7 @@ const Hacker = ({ data }) => {
       ) : (
         ""
       )}
+
       {windowComponent === "decryption" ? (
         <div className={styles.decryption}>
           <HackerDecryption

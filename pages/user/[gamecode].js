@@ -397,7 +397,17 @@ const User = ({ data }) => {
     console.log("random is oke");
     if (value === "removechar") {
       handleRemoveChar();
-      channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
+      // double turn checken
+      if (userDoubleTurn > 0) {
+        const turns = userDoubleTurn - 1;
+        channel.publish({ name: gamecode, data: `playerchange-user-user` });
+        setUserDoubleTurn(turns);
+      } else {
+        channel.publish({
+          name: gamecode,
+          data: `playerchange-user-hacker`,
+        });
+      }
     } else if (value === "skipturn") {
       console.log("beurt overslaan");
       channel.publish({
@@ -417,6 +427,7 @@ const User = ({ data }) => {
         ...realtimeGameData,
         actionUser: "",
       });
+
     }
   };
 
@@ -466,19 +477,33 @@ const User = ({ data }) => {
     }
     setAccountStrongness(score);
     getUpdatedGamedata();
-    channel.publish({
-      name: gamecode,
-      data: `playerchange-user-hacker`,
-    });
+    // double turn checken
+    if (userDoubleTurn > 0) {
+      const turns = userDoubleTurn - 1;
+      channel.publish({ name: gamecode, data: `playerchange-user-user` });
+      setUserDoubleTurn(turns);
+    } else {
+      channel.publish({
+        name: gamecode,
+        data: `playerchange-user-hacker`,
+      });
+    }
     setWindowComponent("");
   };
 
   const onClickButtonMail = (note) => {
     sendNoteToDb(`laatste ontdekking hacker: ${note}`);
-    channel.publish({
-      name: gamecode,
-      data: `playerchange-user-hacker`,
-    });
+    // double turn checken
+    if (userDoubleTurn > 0) {
+      const turns = userDoubleTurn - 1;
+      channel.publish({ name: gamecode, data: `playerchange-user-user` });
+      setUserDoubleTurn(turns);
+    } else {
+      channel.publish({
+        name: gamecode,
+        data: `playerchange-user-hacker`,
+      });
+    }
     setWindowComponent("done");
     setRealtimeGameData({
       ...realtimeGameData,
@@ -594,6 +619,8 @@ const User = ({ data }) => {
       ...realtimeGameData,
       actionUser: "done",
     });
+    setUserDoubleTurn(1);
+    channel.publish({ name: gamecode, data: `installvpn-user-user` });
   };
 
   // general fetch functions
@@ -678,7 +705,7 @@ const User = ({ data }) => {
       <div className={styles.strongness}>
         <UserAccountStrongness value={accountStrongness} />
       </div>
-      {/* <UserVpn /> */}
+
       {/* acties */}
       {realtimeGameData.currentPlayer === "user" &&
       realtimeGameData.actionUser === "action" ? (
@@ -704,7 +731,7 @@ const User = ({ data }) => {
       )}
 
       {windowComponent === "vpn" ? (
-        <div className={styles.cookies}>
+        <div className={styles.vpn}>
           <UserInstallsVpn handleClickInstallsVpn={handleClickInstallsVpn} />
         </div>
       ) : (

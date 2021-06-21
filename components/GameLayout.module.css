@@ -87,7 +87,12 @@
   position: absolute;
   top: 12vh;
   width: 45vw;
-  z-index: 2;
+  z-index: 5;
+}
+
+.vpn {
+  composes: cookies;
+  z-index: 5;
 }
 
 .userAd {
@@ -162,7 +167,7 @@
   position: absolute;
   top: 20vh;
   width: 40vw;
-  z-index: 2;
+  z-index: 5;
 }
 
 /* user and hacker */

@@ -1,7 +1,7 @@
 // components
 import GameWindowLayout from "../../components/GameWindowLayout";
 // styling
-import styles from "./../../components/EndGame/Winner.module.css";
+import styles from "./Winner.module.css";
 
 const Winner = ({ data, player }) => {
 

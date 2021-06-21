@@ -312,6 +312,7 @@ const User = ({ data }) => {
         message.data.split("-")[2]
       );
       setReceiveAdFromHacker(message.data.split("-")[2]);
+      deleteAd();
     }
 
     //updaten als de hacker is ingelogt
@@ -395,7 +396,7 @@ const User = ({ data }) => {
 
   // logic functions
   const handleClickRandom = (value) => {
-    setRandomOption([])
+    setRandomOption([]);
     if (value === "removechar") {
       handleRemoveChar();
       // double turn checken
@@ -428,7 +429,6 @@ const User = ({ data }) => {
         ...realtimeGameData,
         actionUser: "",
       });
-
     }
   };
 
@@ -614,6 +614,13 @@ const User = ({ data }) => {
     }
   };
 
+  const deleteAd = () => {
+    timeout();
+    setTimeout(() => {
+      setReceiveAdFromHacker(false)
+    }, 10000);
+  };
+
   const handleClickInstallsVpn = () => {
     setWindowComponent("");
     setRealtimeGameData({
@@ -658,13 +665,13 @@ const User = ({ data }) => {
   };
 
   const handleClickMoreInfo = (subject) => {
-    console.log(subject)
-    if (subject === "close"){
-      setWindowComponent("")
+    console.log(subject);
+    if (subject === "close") {
+      setWindowComponent("");
     } else {
-      setWindowComponent(subject)
+      setWindowComponent(subject);
     }
-  }
+  };
 
   useEffect(() => {
     window.addEventListener("keydown", downHandler);
@@ -672,7 +679,6 @@ const User = ({ data }) => {
       window.removeEventListener("keydown", downHandler);
     };
   }, [realtimeGameData]);
-
 
   return (
     <GameLayout
@@ -690,7 +696,6 @@ const User = ({ data }) => {
       realtimeGameData.actionUser !== "wifi" &&
       realtimeGameData.actionUser !== "spam" ? (
         <div className={styles.yourturn}>
-     
           <YourTurn />
         </div>
       ) : (
@@ -713,7 +718,10 @@ const User = ({ data }) => {
         </div>
       </Draggable>
       <div className={styles.strongness}>
-        <UserAccountStrongness value={accountStrongness} handleClickMoreInfo={(subject) => handleClickMoreInfo(subject)} />
+        <UserAccountStrongness
+          value={accountStrongness}
+          handleClickMoreInfo={(subject) => handleClickMoreInfo(subject)}
+        />
       </div>
 
       {/* acties */}
@@ -820,10 +828,16 @@ const User = ({ data }) => {
       ) : (
         ""
       )}
-      {windowComponent === "info cookies" || windowComponent === "info strongness" || windowComponent === "info toevoegen" ?
-      <PopupInfo subject={windowComponent} handleClickMoreInfo={(subject) => handleClickMoreInfo(subject)}/>   
-     : ""}
- 
+      {windowComponent === "info cookies" ||
+      windowComponent === "info strongness" ||
+      windowComponent === "info toevoegen" ? (
+        <PopupInfo
+          subject={windowComponent}
+          handleClickMoreInfo={(subject) => handleClickMoreInfo(subject)}
+        />
+      ) : (
+        ""
+      )}
     </GameLayout>
   );
 };

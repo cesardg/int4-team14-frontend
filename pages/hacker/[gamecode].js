@@ -743,7 +743,7 @@ const Hacker = ({ data }) => {
         ""
       )}
 
-      <Draggable>
+      {/* <Draggable> */}
         <div className={styles.notes}>
           <Notes
             notes={notes}
@@ -751,7 +751,7 @@ const Hacker = ({ data }) => {
             handleFormSubmission={(e) => handleFormSubmissionNotes(e)}
           />
         </div>
-      </Draggable>
+      {/* </Draggable> */}
 
       <Draggable>
         <div className={styles.discoveries}>

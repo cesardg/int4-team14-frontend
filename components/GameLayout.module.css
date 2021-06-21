@@ -156,10 +156,10 @@
 }
 
 .hackerAd {
-  left: calc(55vw / 2);
-  position: absolute;
-  top: 12vh;
-  width: 45vw;
+   justify-self: center;
+  grid-column: 1 / span 32;
+  grid-row: 2;
+  width: fit-content;
   z-index: 5;
 }
 

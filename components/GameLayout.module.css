@@ -118,9 +118,10 @@
 }
 
 .discoveries {
-  grid-column: 7 / span 7;
-  grid-row-start: 9;
-  margin: 2rem;
+  left: 17vw;
+  position: absolute;
+  top: 56vh;
+  width: 35rem;
   z-index: 2;
 }
 
@@ -139,10 +140,10 @@
 }
 
 .decryption {
-  left: 25vw;
-  position: absolute;
-  top: 15%;
-  width: 50vw;
+  justify-self: center;
+  grid-column: 1 / span 32;
+  grid-row: 2;
+  width: fit-content;
   z-index: 4;
 }
 
@@ -172,9 +173,10 @@
 
 /* user and hacker */
 .notes {
-  grid-column: 24 / span 7;
-  grid-row-start: 7;
-  margin: 2rem;
+  position: absolute;
+  right: 5vw;
+  top: 40vh;
+  width: 35rem;
 }
 
 .action {
@@ -266,7 +268,7 @@
   bottom: -5.3rem;
   left: -6.4rem;
   font-family: "pixel";
-  box-shadow: .5rem .5rem var(--shadow);
+  box-shadow: 0.5rem 0.5rem var(--shadow);
   z-index: 5;
 }
 
@@ -285,21 +287,53 @@
   left: 13rem;
 }
 
-.popupDice{
+.popupDice {
   composes: popup;
   bottom: -15rem;
   width: 22rem;
   left: -12rem;
 }
 
-.popupText{
-  border-top: .1rem dashed var(--black);
-  padding-top: .2rem;
-  margin: .3rem 0
+.popupText {
+  border-top: 0.1rem dashed var(--black);
+  padding-top: 0.2rem;
+  margin: 0.3rem 0;
 }
 
-.popupTitle{
-  text-transform: uppercase ;
+.popupTitle {
+  text-transform: uppercase;
+}
+
+@media only screen and (max-width: 1400px) {
+  .strongness {
+    grid-column: 16 / span 9;
+  }
+
+  .notes {
+    top: 43rem;
+    right: 3rem;
+  }
+
+  .turn,
+  .yourturn {
+    left: 30vw;
+    width: 40vw;
+  }
+
+  .hack {
+    grid-column: 18 / span 7;
+  }
+
+  .action {
+    left: 7.5vw;
+    top: 20%;
+    width: 85vw;
+    z-index: 4;
+  }
+
+  .decryption {
+    grid-row: 4;
+  }
 }
 
 @media only screen and (max-width: 1250px) {

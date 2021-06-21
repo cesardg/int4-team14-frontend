@@ -5,30 +5,62 @@ import styles from "./UserAction.module.css";
 // imports
 import Image from "next/image";
 
-const UserAction = ({ onClickButton, start }) => {
+const UserAction = ({ onClickButton, start, password }) => {
+  const passwordLength = password.length;
+
   return (
     <GameWindowLayout title="spelbord" bg="var(--yellow)" border="var(--green)">
       <div className={styles.container}>
         <p className={styles.subtitle}>je staat op een</p>
         <p className={styles.title}>actievak</p>
+        {passwordLength >= 15 ? (
+          <p className={styles.text}>
+            Je wachtwoord is al lang genoeg, vanaf nu kan je je wachtwoord nog
+            sterker maken door cijfers en hoofdletters toe te voegen
+          </p>
+        ) : (
+          ""
+        )}
         <div className={styles.actionsContainer}>
-          <button
-            className={styles.actionButton}
-            onClick={() => onClickButton("add2letters")}
-          >
-            <div className={styles.actionImg}>
-              <Image
-                src={`/assets/img/add2letters.svg`}
-                alt="Picture of the user"
-                width={100}
-                height={80}
-              />
-            </div>
-            <p className={styles.actionTitle}>Versterk je wachtwoord</p>
-            <p className={styles.actionSubtitle}>
-              Voeg twee kleine letters toe
-            </p>
-          </button>
+          {passwordLength <= 15 ? (
+            <button
+              className={styles.actionButton}
+              onClick={() => onClickButton("add2letters")}
+            >
+              <div className={styles.actionImg}>
+                <Image
+                  src={`/assets/img/add2letters.svg`}
+                  alt="Picture of the user"
+                  width={100}
+                  height={80}
+                />
+              </div>
+              <p className={styles.actionTitle}>Versterk je wachtwoord</p>
+              <p className={styles.actionSubtitle}>
+                Voeg twee kleine letters toe
+              </p>
+            </button>
+          ) : (
+            <button
+              className={styles.actionButton}
+              onClick={() => onClickButton("add2letters")}
+              disabled={true}
+            >
+              <div className={styles.actionImg}>
+                <Image
+                  src={`/assets/img/add2letters.svg`}
+                  alt="Picture of the user"
+                  width={100}
+                  height={80}
+                />
+              </div>
+              <p className={styles.actionTitle}>Versterk je wachtwoord</p>
+              <p className={styles.actionSubtitle}>
+                Voeg twee kleine letters toe
+              </p>
+            </button>
+          )}
+
           <button
             className={styles.actionButton}
             onClick={() => onClickButton("deletescookies")}
@@ -43,24 +75,44 @@ const UserAction = ({ onClickButton, start }) => {
             </div>
             <p className={styles.actionTitle}>Verwijder je cookies</p>
             <p className={styles.actionSubtitle}>
-              Zo kan de hacker jouw interesses niet gebruiken voor zijn aanval{" "}
+              Zo kan de hacker jouw interesses niet gebruiken voor zijn aanva
             </p>
           </button>
-          <button
-            className={styles.actionButton}
-            onClick={() => onClickButton("add1capital")}
-          >
-            <div className={styles.actionImg}>
-              <Image
-                src={`/assets/img/add1capital.svg`}
-                alt="Picture of the user"
-                width={100}
-                height={80}
-              />
-            </div>
-            <p className={styles.actionTitle}>Versterk je wachtwoord</p>
-            <p className={styles.actionSubtitle}>Voeg 1 hoofdletter toe</p>
-          </button>
+
+          {passwordLength <= 15 ? (
+            <button
+              className={styles.actionButton}
+              onClick={() => onClickButton("add1capital")}
+            >
+              <div className={styles.actionImg}>
+                <Image
+                  src={`/assets/img/add1capital.svg`}
+                  alt="Picture of the user"
+                  width={100}
+                  height={80}
+                />
+              </div>
+              <p className={styles.actionTitle}>Versterk je wachtwoord</p>
+              <p className={styles.actionSubtitle}>Voeg 1 hoofdletter toe</p>
+            </button>
+          ) : (
+            <button
+              className={styles.actionButton}
+              onClick={() => onClickButton("change1capital")}
+            >
+              <div className={styles.actionImg}>
+                <Image
+                  src={`/assets/img/add1capital.svg`}
+                  alt="Picture of the user"
+                  width={100}
+                  height={80}
+                />
+              </div>
+              <p className={styles.actionTitle}>Versterk je wachtwoord</p>
+              <p className={styles.actionSubtitle}>Verander 1 karakter in een hoofdletter</p>
+            </button>
+          )}
+
           <button
             className={styles.actionButton}
             onClick={() => onClickButton("waarschuwingsmail")}
@@ -78,21 +130,42 @@ const UserAction = ({ onClickButton, start }) => {
               Ontdek de laatste zet van de hacker
             </p>
           </button>
-          <button
-            className={styles.actionButton}
-            onClick={() => onClickButton("add1number")}
-          >
-            <div className={styles.actionImg}>
-              <Image
-                src={`/assets/img/add1number.svg`}
-                alt="Picture of the user"
-                width={100}
-                height={80}
-              />
-            </div>
-            <p className={styles.actionTitle}>Versterk je wachtwoord</p>
-            <p className={styles.actionSubtitle}>Voeg 1 cijfer toe</p>
-          </button>
+
+          {passwordLength <= 15 ? (
+            <button
+              className={styles.actionButton}
+              onClick={() => onClickButton("add1number")}
+            >
+              <div className={styles.actionImg}>
+                <Image
+                  src={`/assets/img/add1number.svg`}
+                  alt="Picture of the user"
+                  width={100}
+                  height={80}
+                />
+              </div>
+              <p className={styles.actionTitle}>Versterk je wachtwoord</p>
+              <p className={styles.actionSubtitle}>Voeg 1 cijfer toe</p>
+            </button>
+          ) : (
+            <button
+              className={styles.actionButton}
+              onClick={() => onClickButton("change1number")}
+            >
+              <div className={styles.actionImg}>
+                <Image
+                  src={`/assets/img/add1number.svg`}
+                  alt="Picture of the user"
+                  width={100}
+                  height={80}
+                />
+              </div>
+              <p className={styles.actionTitle}>Versterk je wachtwoord</p>
+              <p className={styles.actionSubtitle}>
+                Verander 1 karakter in een cijfer
+              </p>
+            </button>
+          )}
 
           <button
             className={

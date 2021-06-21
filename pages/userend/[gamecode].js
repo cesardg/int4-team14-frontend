@@ -3,19 +3,23 @@ import EndGameLayout from "../../components/Endgame/EndGameLayout";
 import GameWindowLayout from "../../components/GameWindowLayout";
 import PlayerInfo from "../../components/Endgame/PlayerInfo";
 import Carousel from "../../components/Endgame/Carousel";
+import UserAccountStrongness from "../../components/User/UserAccountStrongness";
 // styling
-// import styles from "./../../components/EndGame/EndGameLayout.module.css";
+import styles from "./../../components/EndGame/End.module.css";
 // imports
 import Image from "next/image";
 import { useState } from "react";
 
 const Userend = ({ data }) => {
-  // console.log(data);
+  console.log(data);
 
   return (
     <EndGameLayout style={"user"}>
       <div className={styles.userInfo}>
-        <PlayerInfo info={data[0].userinfo} style={"user"} />
+        <PlayerInfo info={data.userinfo} style={"user"} />
+      </div>
+      <div className={styles.strongness}>
+        <UserAccountStrongness value={data.userinfo.score} />
       </div>
       <div className={styles.winner}>
         <GameWindowLayout
@@ -23,7 +27,7 @@ const Userend = ({ data }) => {
           bg="var(--brown)"
           border="var(--green)"
         >
-          {data[0].winner === "user" ? (
+          {data.winner === "user" ? (
             <div className={styles.winnerContainer}>
               <p className={styles.winnerTitle}>Gewonnen!</p>
               <p className={styles.winnerSubtitle}>Je bent</p>
@@ -58,7 +62,7 @@ const Userend = ({ data }) => {
               Gebruik deze tips om jouw online accounts ook in het echte leven
               ondoordringbaar te maken
             </p>
-           <Carousel />
+            <Carousel />
           </div>
         </GameWindowLayout>
       </div>
@@ -73,6 +77,7 @@ export const getServerSideProps = async (context) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/games/?gamecode=${gamecode}`
   );
-  const data = await res.json();
+  let data = await res.json();
+  data = data[0];
   return { props: { data } };
 };

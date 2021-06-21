@@ -587,7 +587,7 @@ const Hacker = ({ data }) => {
       data: `playerchange-hacker-user`,
     });
   }
-  
+
   const handleClickScreencatpure = () => {
     setWindowComponent("");
     // double turn checken
@@ -753,16 +753,19 @@ const Hacker = ({ data }) => {
       </Draggable>
 
       {realtimeGameData.currentPlayer === "hacker" ? (
-        <div className={styles.hack}>
-          <HackerHack
-            handleSubmitForm={(value) => handleFormGuessPass(value)}
-            feedback={hackerGuessFeedback}
-            start={hackerStart}
-          />
-        </div>
+        <Draggable>
+          <div className={styles.hack}>
+            <HackerHack
+              handleSubmitForm={(value) => handleFormGuessPass(value)}
+              feedback={hackerGuessFeedback}
+              start={hackerStart}
+            />
+          </div>
+        </Draggable>
       ) : (
         ""
       )}
+      
       {windowComponent === "screencapture" ? (
         <div className={styles.screencapture}>
           <HackerScreencapture

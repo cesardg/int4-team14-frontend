@@ -130,7 +130,7 @@
   grid-column: 21 / span 7;
   grid-row-start: 2;
   margin: 2rem;
-  z-index: 2;
+  z-index: 4;
 }
 
 .decryption {
@@ -177,7 +177,7 @@
   position: absolute;
   top: 15%;
   width: 70vw;
-  z-index: 2;
+  z-index: 3;
 }
 
 .turn {
@@ -185,7 +185,7 @@
   position: absolute;
   top: 20vh;
   width: 40vw;
-  z-index: 2;
+  z-index: 5;
 }
 
 .yourturn {
@@ -193,7 +193,7 @@
   position: absolute;
   top: 20vh;
   width: 40vw;
-  z-index: 2;
+  z-index: 4;
 }
 
 .random {

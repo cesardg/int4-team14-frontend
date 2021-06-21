@@ -87,7 +87,7 @@ const SpamMail = ({ handleClickSpamMail, player, playerinfo }) => {
             {player === "user" ? (
               <p className={styles.subtitle}>
                 Dit was een nep e-mail van de hacker met de bedoeling om jouw
-                data te stelen. Hierdoor weet hij nu 2 letters van je wachtwoord
+                data te stelen. Hierdoor verlies je 1 karakter van je wachtwoord
               </p>
             ) : (
               <p className={styles.subtitle}>

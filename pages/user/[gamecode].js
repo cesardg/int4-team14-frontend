@@ -421,7 +421,6 @@ const User = ({ data }) => {
   };
 
   const handleRemoveChar = () => {
-    console.log(gameData);
     const newPass = gameData.userinfo.password.substring(
       0,
       gameData.userinfo.password.length - 1
@@ -440,7 +439,9 @@ const User = ({ data }) => {
     } else if (
       action === "add2letters" ||
       action === "add1capital" ||
-      action === "add1number"
+      action === "add1number" ||
+      action === "change1number" ||
+      action === "change1capital"
     ) {
       setUserPasswordAction(action);
       setWindowComponent("password");
@@ -550,13 +551,10 @@ const User = ({ data }) => {
   };
 
   const handleClickSpamMail = (reaction) => {
-    console.log(reaction);
-    if (reaction === "good") {
-      channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
-    } else if (reaction === "bad") {
-      channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
-      console.log("we moeten dit nog doen, iets doorsturen naar hacker");
+    if (reaction === "bad") {
+      handleRemoveChar();
     }
+    channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
     setRealtimeGameData({
       ...realtimeGameData,
       actionUser: "done",
@@ -686,6 +684,7 @@ const User = ({ data }) => {
       realtimeGameData.actionUser === "action" ? (
         <div className={styles.action}>
           <UserAction
+            password={gameData.userinfo.password}
             onClickButton={(action) => handleClickAction(action)}
             start={userStart}
           />
@@ -717,6 +716,7 @@ const User = ({ data }) => {
         <div className={styles.spammail}>
           <SpamMail
             player="user"
+            playerinfo={gameData.userinfo}
             handleClickSpamMail={(reaction) => handleClickSpamMail(reaction)}
           />
         </div>

@@ -18,6 +18,13 @@
   text-transform: uppercase;
 }
 
+.text {
+  font-family: sohne-breit;
+  padding: 1rem 0 0;
+  text-align: center;
+  width: 50%;
+}
+
 .actionsContainer {
   display: flex;
   flex-wrap: wrap;

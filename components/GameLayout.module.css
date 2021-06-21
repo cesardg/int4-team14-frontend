@@ -79,7 +79,7 @@
   grid-column: 1 / span 32;
   grid-row: 2;
   width: fit-content;
-  z-index: 4;
+  z-index: 5;
 }
 
 .cookies {
@@ -100,7 +100,7 @@
   position: absolute;
   top: 20vh;
   width: 90rem;
-  z-index: 2;
+  z-index: 5;
 }
 
 .warningmail {
@@ -108,7 +108,7 @@
   position: absolute;
   top: 15vh;
   width: 45vw;
-  z-index: 2;
+  z-index: 5;
 }
 
 /* hacker */
@@ -144,7 +144,7 @@
   grid-column: 1 / span 32;
   grid-row: 2;
   width: fit-content;
-  z-index: 4;
+  z-index: 5;
 }
 
 .screencapture {
@@ -152,7 +152,7 @@
   position: absolute;
   top: 12vh;
   width: 45vw;
-  z-index: 2;
+  z-index: 5;
 }
 
 .hackerAd {
@@ -160,7 +160,7 @@
   position: absolute;
   top: 12vh;
   width: 45vw;
-  z-index: 2;
+  z-index: 5;
 }
 
 .hackerVpn {
@@ -184,7 +184,7 @@
   position: absolute;
   top: 15%;
   width: 70vw;
-  z-index: 3;
+  z-index: 5;
 }
 
 .turn {
@@ -192,7 +192,7 @@
   position: absolute;
   top: 20vh;
   width: 40vw;
-  z-index: 5;
+  z-index: 4;
 }
 
 .yourturn {
@@ -208,7 +208,7 @@
   position: absolute;
   top: 10vh;
   width: 50vw;
-  z-index: 4;
+  z-index: 5;
 }
 
 .spammail {
@@ -216,7 +216,7 @@
   position: absolute;
   top: 10vh;
   width: 50vw;
-  z-index: 2;
+  z-index: 5;
 }
 
 .wifi {
@@ -224,7 +224,7 @@
   position: absolute;
   top: 20vh;
   width: 40vw;
-  z-index: 2;
+  z-index: 5;
 }
 
 .spicy {
@@ -232,7 +232,7 @@
   position: absolute;
   top: 20vh;
   width: 40vw;
-  z-index: 2;
+  z-index: 5;
 }
 
 /* header */
@@ -333,6 +333,16 @@
 
   .decryption {
     grid-row: 4;
+  }
+
+  .screencapture {
+    left: 20vw;
+    width: 60vw;
+  }
+
+  .cookies {
+    left: calc(45vw / 2);
+    width: 55vw;
   }
 }
 

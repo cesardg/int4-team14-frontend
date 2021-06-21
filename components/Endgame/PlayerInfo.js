@@ -2,7 +2,9 @@ import styles from "./PlayerInfo.module.css";
 import Image from "next/image";
 
 const PlayerInfo = ({ info, player, winner }) => {
+
 console.log(winner);
+console.log(player);
   return (
     <article
       className={player === "user" ? styles.article : styles.articleHacker}

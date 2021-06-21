@@ -52,3 +52,9 @@
   margin: -1rem -0.5rem;
   width: 100%;
 }
+
+@media only screen and (max-width: 1400px) {
+  .main {
+    grid-template-rows: repeat(22, 5.5rem);
+  }
+}

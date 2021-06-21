@@ -123,3 +123,13 @@
   font-family: sohne-breit;
   padding-bottom: 5rem;
 }
+
+
+.moreInfoImg{
+  margin-right: -2.5rem;
+  transform: translate(-5rem, 2.5rem);
+}
+
+.moreInfoImg:hover{
+cursor: pointer;
+}

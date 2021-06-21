@@ -3,7 +3,6 @@ import Image from "next/image";
 
 const UserInfo = ({ userinfo, option }) => {
   const interArr = userinfo.interests.split("-");
-  interArr.shift();
 
   console.log(option)
 

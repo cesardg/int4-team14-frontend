@@ -15,6 +15,7 @@ import UserDeleteCookies from "../../components/User/UserDeleteCookies";
 import UserWarningMail from "../../components/User/UserWarningMail";
 import UserAdjustPassword from "../../components/User/UserAdjustPassword";
 import UserAd from "../../components/User/UserAd";
+import PopupInfo from "../../components/PopupInfo";
 import { useChannel } from "../../components/ChatReactEffect";
 import UserRandom from "../../components/User/UserRandom";
 // styling
@@ -656,6 +657,17 @@ const User = ({ data }) => {
     }
   };
 
+  const handleClickMoreInfo = (subject) => {
+    console.log(subject)
+    if (subject === "close"){
+      setWindowComponent("")
+    } else {
+      setWindowComponent("popupinfo")
+    }
+    
+    
+  }
+
   useEffect(() => {
     window.addEventListener("keydown", downHandler);
     return () => {
@@ -714,6 +726,7 @@ const User = ({ data }) => {
             password={gameData.userinfo.password}
             onClickButton={(action) => handleClickAction(action)}
             start={userStart}
+            handleClickMoreInfo={(subject) => handleClickMoreInfo(subject)}
           />
         </div>
       ) : (
@@ -809,6 +822,10 @@ const User = ({ data }) => {
       ) : (
         ""
       )}
+      {windowComponent === "popupinfo" ?
+      <PopupInfo handleClickMoreInfo={(subject) => handleClickMoreInfo(subject)}/>   
+     : ""}
+ 
     </GameLayout>
   );
 };

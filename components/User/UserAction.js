@@ -5,7 +5,7 @@ import styles from "./UserAction.module.css";
 // imports
 import Image from "next/image";
 
-const UserAction = ({ onClickButton, start, password }) => {
+const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
   const passwordLength = password.length;
 
   return (
@@ -75,10 +75,17 @@ const UserAction = ({ onClickButton, start, password }) => {
             </div>
             <p className={styles.actionTitle}>Verwijder je cookies</p>
             <p className={styles.actionSubtitle}>
-              Zo kan de hacker jouw interesses niet gebruiken voor zijn aanva
+              Zo kan de hacker jouw interesses niet gebruiken voor zijn aanval
             </p>
           </button>
-
+               <div className={styles.moreInfoImg} onClick={() => handleClickMoreInfo("coockies")}>
+                 <Image
+                src={`/assets/img/moreinfo.png`}
+                alt="Picture of the user"
+                height={25}
+                width={25}
+              />
+              </div>
           {passwordLength <= 15 ? (
             <button
               className={styles.actionButton}

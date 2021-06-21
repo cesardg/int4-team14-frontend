@@ -6,7 +6,7 @@ import Winner from "../../components/Endgame/Winner";
 import Password from "../../components/Endgame/Password";
 import UserAccountStrongness from "../../components/User/UserAccountStrongness";
 // styling
-import styles from "./../../components/EndGame/End.module.css";
+import styles from "../../styles/End.module.css";
 
 const Userend = ({ data }) => {
   return (

@@ -5,7 +5,7 @@ import Tips from "../../components/Endgame/Tips";
 import Winner from "../../components/Endgame/Winner";
 import Discoveries from "../../components/Endgame/Discoveries";
 // styling
-import styles from "../../components/EndGame/End.module.css";
+import styles from "../../styles/End.module.css";
 
 const Hackerend = ({ data }) => {
   return (

@@ -206,7 +206,7 @@
   position: absolute;
   top: 10vh;
   width: 50vw;
-  z-index: 2;
+  z-index: 4;
 }
 
 .spammail {

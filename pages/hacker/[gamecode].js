@@ -566,9 +566,6 @@ const Hacker = ({ data }) => {
 
   const handleFormGuessPass = (e) => {
     e.preventDefault();
-    console.log("gatt hij in de vun");
-    console.log("gamedata", gameData.userinfo.password);
-    console.log("e", e.target.hackpass.value);
     if (e.target.hackpass.value == gameData.userinfo.password) {
       setHackerGuessFeedback("het is juist, de hacker heeft gewonnen");
       putData("games", gameData.id, { winner: "hacker" });
@@ -579,6 +576,9 @@ const Hacker = ({ data }) => {
     } else {
       setHackerStart(false);
       setHackerGuessFeedback("het paswoord is niet juist!");
+      putData("hackerinfos", gameData.hackerinfo.id, {
+        latestguess: e.target.hackpass.value,
+      });
     }
   };
   console.log(gameData.hackerdiscoveries)

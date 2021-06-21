@@ -1,0 +1,73 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  padding: 2rem 5rem;
+}
+
+.title {
+  font-family: sohne-breit-fett;
+  font-size: 2.2rem;
+  padding-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  width: 60%
+}
+
+.carousel {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.carouselItem {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  min-height: 37rem;
+  text-align: center;
+  width: 90%;
+}
+
+.carouselTitle {
+  font-family: pixel;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+}
+
+.carouselText {
+  padding: 1rem 2rem;
+}
+
+.carouselTip {
+  font-family: sohne-breit-fett;
+  padding-top: 2rem;
+}
+
+.img {
+  margin: 3rem 0 2rem;
+}
+
+.buttonNext {
+  background-color: inherit;
+  background-image: url(../../public/assets/img/end/button.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  display: block;
+  height: 3rem;
+  width: 3rem;
+}
+
+.buttonPrev {
+  composes: buttonNext;
+  transform: scaleX(-1);
+}
+
+.hidden {
+  display: none;
+}

@@ -68,14 +68,26 @@ const Lobby = () => {
                 <p className={styles.vs}>vs</p>
                 <article className={styles.player}>
                   <p className={styles.playerTitle}>Hacker</p>
-                  <div className={styles.loadingImg}>
+                                     {members === 1
+                      ? 
+                                <div className={styles.loadingImg}>
                     <Image
                       src="/assets/img/loading.gif"
-                      alt="Picture of the hacker"
+                      alt="Picture of the user"
                       height={130}
                       width={130}
                     />
                   </div>
+                      : 
+                  <div className={styles.playerImg}>
+                    <Image
+                      src="/assets/img/hackerpics/pf1.svg"
+                      alt="Picture of the hacker"
+                     height={200}
+                      width={300}
+                    />
+                  </div>
+                  }
                   <p className={styles.playerName}>
                     {members === 1
                       ? "Wachten op tegenspeler..."
@@ -101,7 +113,9 @@ const Lobby = () => {
                 <p className={styles.vs}>vs</p>
                 <article className={styles.player}>
                   <p className={styles.playerTitle}>Internetgebruiker</p>
-                  <div className={styles.loadingImg}>
+                          {members === 1
+                      ? 
+                                <div className={styles.loadingImg}>
                     <Image
                       src="/assets/img/loading.gif"
                       alt="Picture of the user"
@@ -109,6 +123,16 @@ const Lobby = () => {
                       width={130}
                     />
                   </div>
+                      : 
+                  <div className={styles.playerImg}>
+                    <Image
+                      src="/assets/img/userpics/pf2.svg"
+                      alt="Picture of the user"
+                      height={200}
+                      width={300}
+                    />
+                  </div>
+                  }
                   <p className={styles.playerName}>
                     {members === 1
                       ? "Wachten op tegenspeler..."

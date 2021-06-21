@@ -1,7 +1,8 @@
 import styles from "./PlayerInfo.module.css";
 import Image from "next/image";
 
-const PlayerInfo = ({ info, player }) => {
+const PlayerInfo = ({ info, player, winner }) => {
+console.log(winner);
   return (
     <article
       className={player === "user" ? styles.article : styles.articleHacker}
@@ -9,11 +10,7 @@ const PlayerInfo = ({ info, player }) => {
       <h2 className="hidden">Info gebruiker</h2>
       <div className={styles.img}>
         <Image
-          src={
-            player === "user"
-              ? `/assets/img/userpics/${info.picture}.svg`
-              : `/assets/img/hackerpics/${info.picture}.svg`
-          }
+          src={`/assets/img/endgifs/${player}${winner}.gif`}
           alt="Picture of the user"
           width={385}
           height={247}

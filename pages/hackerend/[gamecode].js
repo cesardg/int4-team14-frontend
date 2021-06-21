@@ -11,7 +11,7 @@ const Hackerend = ({ data }) => {
   return (
     <EndGameLayout style={"hacker"}>
       <div className={styles.userInfo}>
-        <PlayerInfo info={data.hackerinfo} player={"hacker"} />
+        <PlayerInfo info={data.hackerinfo} player={"hacker"} winner={styles.winner} />
       </div>
       <div className={styles.winner}>
         <Winner data={data} player={"hacker"} />

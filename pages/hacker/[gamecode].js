@@ -165,9 +165,7 @@ const Hacker = ({ data }) => {
     { nummer: 31, command: "Y", action: "action" },
     { nummer: 32, command: "W", action: "empty" },
   ];
-  const [randomOption, setRandomOption] = useState(
-    randomOptions[Math.floor(Math.random() * randomOptions.length)]
-  );
+  const [randomOption, setRandomOption] = useState([]);
 
   // specific logic
   const [hackerDecryptionAction, setHackerDecryptionAction] = useState("");
@@ -389,8 +387,11 @@ const Hacker = ({ data }) => {
   };
 
   const handleClickRandom = (value) => {
+    setRandomOption([]);
     if (value === "deletediscovery") {
+      if (gameData.hackerdiscoveries.length != 0){
       handleDeleteDiscovery();
+      }
     } else if (value === "skipturn") {
       console.log("beurt overslaan");
       channel.publish({
@@ -580,10 +581,13 @@ const Hacker = ({ data }) => {
       });
     }
   };
+  console.log(gameData.hackerdiscoveries)
 
   const handleClickSpamMail = (reaction) => {
     if (reaction === "bad") {
+          if (gameData.hackerdiscoveries.length != 0){
       handleDeleteDiscovery();
+      }
     }
     channel.publish({
       name: gamecode,
@@ -717,7 +721,7 @@ const Hacker = ({ data }) => {
       realtimeGameData={realtimeGameData}
     >
       <div className={styles.hackerInfo}>
-        <HackerInfo hackerinfo={gameData.hackerinfo} />
+        <HackerInfo hackerinfo={gameData.hackerinfo}  option={randomOption}/>
       </div>
       {realtimeGameData.currentPlayer === "hacker" &&
       realtimeGameData.actionHacker !== "action" &&

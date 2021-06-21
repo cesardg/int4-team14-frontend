@@ -1,7 +1,7 @@
 import styles from "./HackerInfo.module.css";
 import Image from "next/image";
 
-const HackerInfo = ({ hackerinfo }) => {
+const HackerInfo = ({ hackerinfo, option }) => {
   let interests = [];
   // console.log(hackerinfo);
   if (hackerinfo.obtainedInterests != null) {
@@ -18,12 +18,26 @@ const HackerInfo = ({ hackerinfo }) => {
     <article className={styles.article}>
       <h2 className="hidden">Info hacker</h2>
       <div className={styles.img}>
-        <Image
+         {option.type === "good" ?   <Image
+          src={`/assets/img/randomgifs/hackergood.gif`}
+          alt="Picture of the user"
+          width={385}
+          height={246}
+        /> : "" }
+        {option.type === "bad" ?   <Image
+          src={`/assets/img/endgifs/hackeruser.gif`}
+          alt="Picture of the user"
+          width={385}
+          height={246}
+        /> :     "" }
+
+        {option.length === 0 ?    <Image
           src={`/assets/img/hackerpics/${hackerinfo.picture}.svg`}
           alt="Picture of the user"
           width={385}
           height={246}
-        />
+        /> :    "" }
+       
       </div>
       <p className={styles.username}>{hackerinfo.username}</p>
       <p className={styles.title}>status</p>

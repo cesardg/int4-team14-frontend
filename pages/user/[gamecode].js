@@ -249,8 +249,7 @@ const User = ({ data }) => {
       ) {
         console.log("de user staat op een random vak");
         setRandomOption(
-          randomOptions[11]
-          // randomOptions[Math.floor(Math.random() * randomOptions.length)]
+          randomOptions[Math.floor(Math.random() * randomOptions.length)]
         );
         // setWindowComponent("random");
       }
@@ -341,7 +340,7 @@ const User = ({ data }) => {
         ...realtimeGameData,
         currentPlayer: message.data.split("-")[2],
       });
-      setHackerDoubleTurn(1)
+      setHackerDoubleTurn(1);
     }
 
     if (type === "doubleturn" && realtimeGameData.currentPlayer === "hacker") {

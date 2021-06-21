@@ -7,7 +7,7 @@ import GameWindowLayout from "./GameWindowLayout";
 import Image from "next/image";
 import { useState } from "react";
 
-const SpamMail = ({ handleClickSpamMail, player }) => {
+const SpamMail = ({ handleClickSpamMail, player, playerinfo }) => {
   const [mail, setMail] = useState("start");
 
   return (
@@ -27,7 +27,7 @@ const SpamMail = ({ handleClickSpamMail, player }) => {
             <p className={styles.label}>van</p>
             <p className={styles.email}>Albert, Baron Frère</p>
             <p className={styles.label}>naar</p>
-            <p className={styles.email}>emailadres</p>
+            <p className={styles.email}>{playerinfo.email}</p>
             <p className={styles.borderTop}>
               Deze boodschap komt van Albert, Baron Frère, een Belgische
               zakenman en de rijkste man van België
@@ -84,10 +84,18 @@ const SpamMail = ({ handleClickSpamMail, player }) => {
         >
           <div className={styles.containerOpened}>
             <p className={styles.title}>Je bent in de val getrapt</p>
-            <p className={styles.subtitle}>
-              Dit was een nep e-mail van de hacker met de bedoeling om jouw data
-              te stelen. Hierdoor weet hij nu 2 letters van je wachtwoord
-            </p>
+            {player === "user" ? (
+              <p className={styles.subtitle}>
+                Dit was een nep e-mail van de hacker met de bedoeling om jouw
+                data te stelen. Hierdoor weet hij nu 2 letters van je wachtwoord
+              </p>
+            ) : (
+              <p className={styles.subtitle}>
+                Dit was een nep e-mail van een andere hacker met de bedoeling om jouw
+                data te stelen. Hierdoor verlies je je laatste ontdekking
+              </p>
+            )}
+
             <div className={styles.img}>
               <Image
                 src={`/assets/img/spam.svg`}

@@ -48,63 +48,63 @@ const Hacker = ({ data }) => {
   const randomOptions = [
     {
       type: "good",
-      action: "1hoofdletter",
+      action: "get1capital",
       text: "Er is een data-lek bij Facebook.",
       subtext: "Je krijgt 1 hoofdletter uit het wachtwoord",
       button: "Ontvang 1 hoofdletter",
     },
     {
       type: "good",
-      action: "2kleineletters",
+      action: "get2letters",
       text: "Je ontvangt data van je hackergroep.",
       subtext: "Je krijgt 2 kleine letters uit het wachtwoord",
       button: "Ontvang 2 kleine letters",
     },
     {
       type: "good",
-      action: "2kleineletters",
+      action: "get2letters",
       text: "Je ontvangt data van je hackergroep.",
       subtext: "Je krijgt 2 kleine letters uit het wachtwoord",
       button: "Ontvang 2 kleine letters",
     },
     {
       type: "good",
-      action: "1cijfer",
+      action: "get1number",
       text: "Je leert een nieuw hack-commando.",
       subtext: "Je krijgt 1 cijfer uit het wachtwoord",
       button: "Ontvang 1 cijfer",
     },
     {
       type: "good",
-      action: "2kleineletters",
+      action: "get2letters",
       text: "Je vindt een oude foto van de user en chanteert hem/haar hiermee.",
       subtext: "Je krijgt 2 kleine letters van het wachtwoord",
       button: "Ontvang 2 kleine letters",
     },
     {
       type: "good",
-      action: "1hoofdletter",
+      action: "get1capital",
       text: "Je vindt het oude Roblox-account van de user en kan het wachtwoord hacken.",
       subtext: "Je krijgt 1 hoofdletter van het wachtwoord",
       button: "Ontvang 1 hoofdletter",
     },
     {
       type: "bad",
-      action: "beurtoverlsaan",
+      action: "deletediscovery",
       text: "Je botst op een firewall.",
-      subtext: "Sla een beurt over",
+      subtext: "Je laatste ontdekking wordt gewist",
       button: "Oke",
     },
     {
       type: "bad",
-      action: "notitiegewist",
+      action: "deletediscovery",
       text: "De user surft in incognito-modus en is dus onvindbaar.",
-      subtext: "Sla een beurt over",
+      subtext: "Je laatste ontdekking wordt gewist",
       button: "Oke",
     },
     {
       type: "bad",
-      action: "beurtoverlsaan",
+      action: "skipturn",
       text: "De user is slim genoeg om een slechte advertentie te ontwijken.",
       subtext: "Sla een beurt over",
       button: "Oke",
@@ -118,7 +118,7 @@ const Hacker = ({ data }) => {
     },
     {
       type: "bad",
-      action: "beurtoverlsaan",
+      action: "skipturn",
       text: "Je morst je energiedrankje over je toetsenbord en moet wachten op een nieuwe computer.",
       subtext: "Sla een beurt over",
       button: "Oke",
@@ -316,6 +316,7 @@ const Hacker = ({ data }) => {
         currentPlayer: message.data.split("-")[2],
       });
     }
+
     if (type === "endgame") {
       router.push(`/hackerend/${gamecode}`);
     }
@@ -383,7 +384,20 @@ const Hacker = ({ data }) => {
   const handleClickRandom = (value) => {
     if (value === "deletediscovery") {
       handleDeleteDiscovery();
-      
+    } else if (value === "skipturn") {
+      console.log("beurt overslaan");
+      channel.publish({
+        name: gamecode,
+        data: `doubleturn-hacker-user`,
+      });
+    } else if (
+      value === "get2letters" ||
+      value === "get1capital" ||
+      value === "get1number"
+    ) {
+      setHackerDecryptionAction(value);
+      setWindowComponent("decryption");
+      getUpdatedGamedata();
     }
 
     // double turn checken
@@ -419,8 +433,6 @@ const Hacker = ({ data }) => {
       ...realtimeGameData,
       actionHacker: "done",
     });
-
-    
   };
 
   const handlePionOnWifiOrSpicy = () => {
@@ -449,7 +461,24 @@ const Hacker = ({ data }) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
   };
 
-  const handleDeleteDiscovery = () => {};
+  const handleDeleteDiscovery = async () => {
+    const id =
+      gameData.hackerdiscoveries[gameData.hackerdiscoveries.length - 1].id;
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/hackerdiscoveries/${id}`,
+      {
+        method: "DELETE",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.ok) {
+      console.log("joepie");
+      getUpdatedGamedata();
+    }
+  };
 
   // logic functions
   const hackerGetInterest = async () => {
@@ -549,6 +578,16 @@ const Hacker = ({ data }) => {
     }
   };
 
+  const handleClickSpamMail = (reaction) => {
+    if (reaction === "bad") {
+      handleDeleteDiscovery();
+    }
+    channel.publish({
+      name: gamecode,
+      data: `playerchange-hacker-user`,
+    });
+  }
+  
   const handleClickScreencatpure = () => {
     setWindowComponent("");
     // double turn checken
@@ -587,7 +626,7 @@ const Hacker = ({ data }) => {
       });
     }
   };
-console.log("hacker double", hackerDoubleTurn);
+  console.log("hacker double", hackerDoubleTurn);
   const handleFormSubmissionNotes = async (e) => {
     e.preventDefault();
     if (e.target.note.value !== "") {
@@ -783,7 +822,6 @@ console.log("hacker double", hackerDoubleTurn);
             handleUpdatedDiscoveries={(gameData, discovery) =>
               handleUpdatedDiscoveries(gameData, discovery)
             }
-            $
             action={hackerDecryptionAction}
           />
         </div>
@@ -795,6 +833,7 @@ console.log("hacker double", hackerDoubleTurn);
         <div className={styles.spammail}>
           <SpamMail
             player="hacker"
+            playerinfo={gameData.hackerinfo}
             handleClickSpamMail={(reaction) => handleClickSpamMail(reaction)}
           />
         </div>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from 'next/image';
 
 
-const EndWindowLayout = ({ children, style }) => {
+const EndGameLayout = ({ children, style }) => {
 
   return (
     <div className={style === "user" ? styles.userContainer :  styles.hackerContainer}>
@@ -30,4 +30,4 @@ const EndWindowLayout = ({ children, style }) => {
   );
 };
 
-export default EndWindowLayout;
+export default EndGameLayout;

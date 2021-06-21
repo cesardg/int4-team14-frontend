@@ -48,3 +48,13 @@
   order: 1;
   width: 3rem;
 }
+
+.closePurple{
+  composes: close;
+  background-color: var(--purple);
+}
+
+.closePurple:hover{
+ cursor: pointer;
+}
+

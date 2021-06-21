@@ -820,7 +820,7 @@ const User = ({ data }) => {
       ) : (
         ""
       )}
-      {windowComponent === "info cookies" || windowComponent === "info strongness" ?
+      {windowComponent === "info cookies" || windowComponent === "info strongness" || windowComponent === "info toevoegen" ?
       <PopupInfo subject={windowComponent} handleClickMoreInfo={(subject) => handleClickMoreInfo(subject)}/>   
      : ""}
  

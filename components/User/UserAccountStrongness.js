@@ -17,7 +17,7 @@ const UserAccountStrongness = ({ value, handleClickMoreInfo }) => {
       <h2 className={styles.title}>Account sterkte</h2>
        <div className={styles.moreInfoImg} onClick={() => handleClickMoreInfo("info strongness")}>
                  <Image
-                src={`/assets/img/moreinfo.png`}
+                src={`/assets/img/moreinfo.svg`}
                 alt="Picture of the user"
                 height={25}
                 width={25}

@@ -1,0 +1,33 @@
+.container {
+  align-items: center;
+  background-image: url(../../public/assets/img/end/confetti.svg), url(../../public/assets/img/end/confetti.svg);
+  background-position: center left, center right;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 5rem;
+  text-align: center;
+}
+
+.containerHacker {
+  composes: container;
+  color: var(--white);
+}
+
+.title {
+  font-family: sohne-breit-fett;
+  font-size: 3rem;
+  padding-bottom: 2rem;
+  order: 2;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-size: 2.2rem;
+  order: 1;
+}
+
+.text {
+  order: 3;
+}

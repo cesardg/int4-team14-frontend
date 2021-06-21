@@ -1,23 +1,42 @@
-import styles from "./PlayerInfo.module.css";
-import Image from "next/image";
+// components
+import GameWindowLayout from "../../components/GameWindowLayout";
+// styling
+import styles from "./../../components/EndGame/Password.module.css";
 
-const Password = ({ password, interests }) => {
-console.log(info);
+const Password = ({ data }) => {
+  console.log(data);
   return (
-    <article className={styles.article}>
-      <h2 className="hidden">Wat wist de gebruiker?</h2>
-      <div className={styles.img}>
-        <Image
-          src={`/assets/img/userpics/${info.picture}.svg`}
-          alt="Picture of the user"
-          width={385}
-          height={246}
-        />
+    <GameWindowLayout
+      title="hackerinfo"
+      bg="var(--black)"
+      border="var(--green)"
+    >
+      <div className={styles.container}>
+        <p className={styles.title}>Wat wist de hacker?</p>
+        <p className={styles.label}>Wachtwoord</p>
+        <div className={styles.password}>
+          {data.hackerinfo.latestguess.split("").map((char, index) => (
+            <p className={styles.char} key={index}>{char}</p>
+          ))}
+        </div>
+        <p className={styles.label}>Gehackte interesses</p>
+        {data.hackerinfo.obtainedInterests != null ? (
+          <ul className={styles.interests}>
+            {data.hackerinfo.obtainedInterests
+              .split("-")
+              .map((interest, index) => (
+                <li key={index} className={styles.interest}>
+                  {interest}
+                </li>
+              ))}
+          </ul>
+        ) : (
+          <p className={styles.empty}>
+           De hacker had geen interesses meer van jou
+          </p>
+        )}
       </div>
-
-      <p className={styles.username}>{info.username}</p>
-
-    </article>
+    </GameWindowLayout>
   );
 };
 

@@ -1,16 +1,17 @@
 .article {
   background-color: var(--brown);
-  border: 2px solid var(--gridorange);
-  border-right: none;
+  border-left: 2px solid var(--gridorange);
+  border-top: 2px solid var(--gridorange);
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: 1fr;
+  margin-top: 2.4rem;
   width: fit-content;
-  border-bottom: none;
-  border-top: none;
-  margin-top: 2.6rem;
-  margin-left: -.2rem;
-  height: 10rem;
+}
+
+.articleHacker {
+  composes: article;
+  border-color: var(--gridyellow)
 }
 
 .img {
@@ -23,6 +24,7 @@
   align-self: flex-end;
   background-color: var(--green);
   border: 2px solid var(--gridorange);
+  border-left: none;
   font-family: pixel;
   font-size: 1.6rem;
   grid-column: 1 / span 1;
@@ -32,4 +34,11 @@
   text-align: center;
   width: fit-content;
   z-index: 1;
+}
+
+.usernameHacker {
+  composes: username;
+  background-color: var(--yellow);
+  border-color: var(--gridyellow);
+  color: var(--black);
 }

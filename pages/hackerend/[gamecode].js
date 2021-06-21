@@ -1,34 +1,28 @@
 // components
-import Layout from "../../components/Layout";
-import GameWindowLayout from "../../components/GameWindowLayout";
-import HackerInfo from "../../components/Hacker/HackerInfo";
-import HackerDiscoveries from "../../components/Hacker/HackerDiscoveries";
+import EndGameLayout from "../../components/Endgame/EndGameLayout";
+import PlayerInfo from "../../components/Endgame/PlayerInfo";
+import Tips from "../../components/Endgame/Tips";
+import Winner from "../../components/Endgame/Winner";
+import Discoveries from "../../components/Endgame/Discoveries";
 // styling
-import styles from "./../../components/GameLayout.module.css";
-
+import styles from "./../../components/EndGame/End.module.css";
 
 const Hackerend = ({ data }) => {
-  console.log(data);
-
-
   return (
-    <Layout style={"hacker"}>
-      <p>halooooo</p>
-      <GameWindowLayout
-        title="spelbord"
-        bg="var(--yellow)"
-        border="var(--green)"
-      >
-        <p>{data[0].winner === "user" ? "je bent verloren, de user is gewonnen" : "je bent gewonnen, hacker is gewonnen"}</p>
-      </GameWindowLayout>
-      {/* <div className={styles.hackerInfo}>
-        <HackerInfo hackerinfo={gameData.hackerinfo} />
+    <EndGameLayout style={"hacker"}>
+      <div className={styles.userInfo}>
+        <PlayerInfo info={data.hackerinfo} player={"hacker"} />
+      </div>
+      <div className={styles.winner}>
+        <Winner data={data} player={"hacker"} />
+      </div>
+      <div className={styles.tips}>
+        <Tips />
       </div>
       <div className={styles.discoveries}>
-        <HackerDiscoveries gameData={gameData} />
-      </div>{" "} */}
-      */
-    </Layout>
+        <Discoveries data={data} />
+      </div>
+    </EndGameLayout>
   );
 };
 
@@ -39,6 +33,7 @@ export const getServerSideProps = async (context) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/games/?gamecode=${gamecode}`
   );
-  const data = await res.json();
+  let data = await res.json();
+  data = data[0];
   return { props: { data } };
 };

@@ -23,6 +23,7 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
         )}
         <div className={styles.actionsContainer}>
           {passwordLength <= 15 ? (
+            <>
             <button
               className={styles.actionButton}
               onClick={() => onClickButton("add2letters")}
@@ -30,7 +31,7 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
               <div className={styles.actionImg}>
                 <Image
                   src={`/assets/img/add2letters.svg`}
-                  alt="Picture of the user"
+                  alt="icon"
                   width={100}
                   height={80}
                 />
@@ -40,6 +41,15 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
                 Voeg twee kleine letters toe
               </p>
             </button>
+            <div className={styles.moreInfoImg} onClick={() => handleClickMoreInfo("info toevoegen")}>
+                 <Image
+                src={`/assets/img/moreinfo.svg`}
+                alt="Picture of the user"
+                height={25}
+                width={25}
+              />
+              </div>
+              </>
           ) : (
             <button
               className={styles.actionButton}
@@ -49,7 +59,7 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
               <div className={styles.actionImg}>
                 <Image
                   src={`/assets/img/add2letters.svg`}
-                  alt="Picture of the user"
+                  alt="icon"
                   width={100}
                   height={80}
                 />
@@ -68,7 +78,7 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
             <div className={styles.actionImg}>
               <Image
                 src={`/assets/img/useractions/cookies.svg`}
-                alt="Picture of the user"
+                alt="icon"
                 height={90}
                 width={120}
               />
@@ -80,8 +90,8 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
           </button>
                <div className={styles.moreInfoImg} onClick={() => handleClickMoreInfo("info cookies")}>
                  <Image
-                src={`/assets/img/moreinfo.png`}
-                alt="Picture of the user"
+                src={`/assets/img/moreinfo.svg`}
+                alt="icon"
                 height={25}
                 width={25}
               />

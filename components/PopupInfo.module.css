@@ -50,3 +50,8 @@ margin-left: .5rem;
   display: flex;
   justify-content: center;
 }
+
+.strong{
+  font-family: sohne-semifett, Arial, Helvetica, sans-serif;
+  font-weight: 700rem;
+}

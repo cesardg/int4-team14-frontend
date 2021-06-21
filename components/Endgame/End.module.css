@@ -18,6 +18,10 @@
   z-index: 2;
 }
 
+.winnerHacker {
+  composes: winner;
+}
+
 .tips {
   left: 47vw;
   position: absolute;
@@ -27,17 +31,51 @@
 }
 
 .password {
-  grid-column: 5 / span 8;
-  grid-row: 8 / span 9;
-  margin-left: 4rem;
+  left: 15vw;
+  position: absolute;
+  top: 49vh;
+  width: 40rem;
   z-index: 3;
 }
 
 .discoveries {
-  grid-column: 5 / span 8;
-  grid-row: 8 / span 9;
-  margin-left: 4rem;
+  left: 15vw;
+  position: absolute;
+  top: 49vh;
+  width: 40rem;
   z-index: 3;
+}
+
+@media only screen and (max-width: 1400px) {
+  .winner {
+    left: 40vw;
+    position: absolute;
+    top: 12vh;
+    width: 40vw;
+    z-index: 2;
+  }
+
+  .strongness {
+    border-top: 2px solid var(--gridorange);
+    grid-column: 17 / span 9;
+  }
+
+  .winner {
+    top: 32vh;
+  }
+
+  .tips {
+    top: 61vh;
+  }
+
+  .password {
+    left: 8vw;
+    top: 55vh;
+  }
+
+  .winnerHacker {
+    top: 25vh;
+  }
 }
 
 @media only screen and (max-width: 1250px) {

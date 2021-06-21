@@ -167,7 +167,7 @@ const User = ({ data }) => {
     { nummer: 32, command: "W", action: "empty" },
   ];
 
-  const [randomOption, setRandomOption] = useState(randomOptions[0]);
+  const [randomOption, setRandomOption] = useState([]);
 
   // specific logic
   const [userPasswordAction, setUserPasswordAction] = useState("");
@@ -394,7 +394,7 @@ const User = ({ data }) => {
 
   // logic functions
   const handleClickRandom = (value) => {
-    console.log("random is oke");
+    setRandomOption([])
     if (value === "removechar") {
       handleRemoveChar();
       // double turn checken
@@ -663,7 +663,7 @@ const User = ({ data }) => {
     };
   }, [realtimeGameData]);
 
-  console.log("action", realtimeGameData.actionUser);
+
   return (
     <GameLayout
       style="user"
@@ -671,7 +671,7 @@ const User = ({ data }) => {
       realtimeGameData={realtimeGameData}
     >
       <div className={styles.userInfo}>
-        <UserInfo userinfo={gameData.userinfo} />
+        <UserInfo userinfo={gameData.userinfo} option={randomOption} />
       </div>
       {realtimeGameData.currentPlayer === "user" &&
       realtimeGameData.actionUser !== "action" &&
@@ -680,7 +680,7 @@ const User = ({ data }) => {
       realtimeGameData.actionUser !== "wifi" &&
       realtimeGameData.actionUser !== "spam" ? (
         <div className={styles.yourturn}>
-          {console.log("dan is het goed", realtimeGameData)}
+     
           <YourTurn />
         </div>
       ) : (

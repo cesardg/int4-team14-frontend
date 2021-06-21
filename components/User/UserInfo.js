@@ -1,20 +1,36 @@
 import styles from "./UserInfo.module.css";
 import Image from "next/image";
 
-const UserInfo = ({ userinfo }) => {
+const UserInfo = ({ userinfo, option }) => {
   const interArr = userinfo.interests.split("-");
   interArr.shift();
+
+  console.log(option)
 
   return (
     <article className={styles.article}>
       <h2 className="hidden">Info gebruiker</h2>
       <div className={styles.img}>
-        <Image
+        {option.type === "good" ?   <Image
+          src={`/assets/img/randomgifs/usergood.gif`}
+          alt="Picture of the user"
+          width={385}
+          height={246}
+        /> : "" }
+        {option.type === "bad" ?   <Image
+          src={`/assets/img/randomgifs/userbad.gif`}
+          alt="Picture of the user"
+          width={385}
+          height={246}
+        /> :     "" }
+
+        {option.length === 0 ?    <Image
           src={`/assets/img/userpics/${userinfo.picture}.svg`}
           alt="Picture of the user"
           width={385}
           height={246}
-        />
+        /> :    "" }
+      
       </div>
 
       <p className={styles.username}>{userinfo.username}</p>

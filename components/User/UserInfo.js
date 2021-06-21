@@ -3,9 +3,7 @@ import Image from "next/image";
 
 const UserInfo = ({ userinfo, option }) => {
   const interArr = userinfo.interests.split("-");
-
-  console.log(option)
-
+  
   return (
     <article className={styles.article}>
       <h2 className="hidden">Info gebruiker</h2>

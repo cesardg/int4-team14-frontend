@@ -46,3 +46,10 @@
   height: 2.8rem;
   transition: 0.5s all ease-in-out;
 }
+
+.moreInfoImg{
+  height: 0rem;
+  position: relative;
+  bottom: 4rem;
+  left: 13rem;
+}

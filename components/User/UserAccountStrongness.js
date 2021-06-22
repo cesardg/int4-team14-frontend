@@ -3,15 +3,7 @@ import styles from "./UserAccountStrongness.module.css";
 import Image from "next/image";
 
 const UserAccountStrongness = ({ value, handleClickMoreInfo }) => {
-  let progress = new Array(20);
-  const fillProgressbar = () => {
-    for (let i = 0; i++; i < value) {
-      progress[i] = "x"
-    }
 
-  }
-
-  fillProgressbar()
   return (
     <article className={styles.article}>
       <h2 className={styles.title}>Account sterkte</h2>

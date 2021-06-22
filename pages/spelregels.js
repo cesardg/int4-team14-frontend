@@ -4,11 +4,13 @@ import Image from "next/image";
 import WindowLayout from "../components/WindowLayout";
 import styles from "./../styles/Rules.module.css";
 import {useState} from 'react';
+import { useRouter } from "next/router"
 
 const Rules = () => {
 
   const fields =["start", "actie", "random", "mail", "WIFI-vak/pikante foto"]
   const [fieldIndex, setFieldIndex] = useState(0);
+ let router = useRouter()
 
   const adjustfieldIndex = (action) => {
     let newIndex = fieldIndex;
@@ -35,9 +37,7 @@ const Rules = () => {
     <Layout style="user">
       <section className={styles.section}>
         <div className={styles.intro}>
-          <div className={styles.backButton}>
-            <Link href={`/`}>
-              <a>
+          <div className={styles.backButton} onClick={() => router.back()}>
                 <Image
                   src={`/assets/img/backbutton.svg`}
                   alt="Back button"
@@ -45,8 +45,6 @@ const Rules = () => {
                   height={75}
                 />
                 <p className={styles.back}>Terug</p>
-              </a>
-            </Link>
           </div>
           <h1 className={styles.title}>De spelregels</h1>
           <div className={styles.layoutWrapper}>
@@ -348,6 +346,15 @@ gepersonaliseerde reclame</span><br></br>Verstuur een gepersonaliseerde ad naar 
                   </article>
               </div>
             </WindowLayout>
+          </div>
+          <div className={styles.backButtonBottom} onClick={() => router.back()}>
+                <Image
+                  src={`/assets/img/backbutton.svg`}
+                  alt="Back button"
+                  width={75}
+                  height={75}
+                />
+                <p className={styles.back}>Terug</p>
           </div>
      </section>
     </Layout>

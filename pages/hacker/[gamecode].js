@@ -23,6 +23,8 @@ import styles from "./../../components/GameLayout.module.css";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Draggable from "react-draggable";
+import Link from "next/link";
+import Image from "next/image";
 
 const Hacker = ({ data }) => {
   // game
@@ -870,6 +872,19 @@ const Hacker = ({ data }) => {
       ) : (
         ""
       )}
+      <div className={styles.rules} >
+       <Link href={`/spelregels`}>
+          <a>      
+            <Image
+              src={`/assets/img/rulesicon.svg`}
+              alt="Picture of the user"
+              width={120}
+              height={80}
+            />
+            <p className={styles.nav}>spelregels</p>
+         </a>
+        </Link>
+     </div>
     </GameLayout>
   );
 };

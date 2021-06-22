@@ -5,13 +5,13 @@ import GameWindowLayout from "./GameWindowLayout";
 // imports
 import Image from "next/image";
 
-const Turn = ({ who }) => {
+const Turn = ({ who, pic}) => {
   return (
     <GameWindowLayout title="spelbord" bg="var(--brown)" border="var(--green)">
       <div className={styles.container}>
         <div className={styles.img}>
           <Image
-            src={`/assets/img/${who}pics/pf1.svg`}
+            src={`/assets/img/${who}pics/${pic}.svg`}
             alt="Picture of the user"
             width={700}
             height={450}

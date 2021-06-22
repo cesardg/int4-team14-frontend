@@ -731,21 +731,25 @@ const Hacker = ({ data }) => {
       realtimeGameData.actionHacker !== "" &&
       realtimeGameData.actionHacker !== "wifi" &&
       realtimeGameData.actionHacker !== "spam" ? (
+      <Draggable handle="strong">
         <div className={styles.yourturn}>
           <YourTurn />
         </div>
+      </Draggable>
       ) : (
         ""
       )}
       {realtimeGameData.currentPlayer === "user" ? (
+      <Draggable handle="strong">
         <div className={styles.turn}>
-          <Turn who={realtimeGameData.currentPlayer} />
+          <Turn who={realtimeGameData.currentPlayer} pic={gameData.userinfo.picture}/>
         </div>
+      </Draggable>  
       ) : (
         ""
       )}
 
-      {/* <Draggable> */}
+      <Draggable handle="strong">
         <div className={styles.notes}>
           <Notes
             notes={notes}
@@ -753,16 +757,16 @@ const Hacker = ({ data }) => {
             handleFormSubmission={(e) => handleFormSubmissionNotes(e)}
           />
         </div>
-      {/* </Draggable> */}
+      </Draggable>
 
-      <Draggable>
+      <Draggable handle="strong">
         <div className={styles.discoveries}>
           <HackerDiscoveries gameData={gameData} />
         </div>
       </Draggable>
 
       {realtimeGameData.currentPlayer === "hacker" ? (
-        <Draggable>
+        <Draggable handle="strong">
           <div className={styles.hack}>
             <HackerHack
               handleSubmitForm={(value) => handleFormGuessPass(value)}

@@ -697,20 +697,24 @@ const User = ({ data }) => {
       realtimeGameData.actionUser !== "" &&
       realtimeGameData.actionUser !== "wifi" &&
       realtimeGameData.actionUser !== "spam" ? (
+        <Draggable handle="strong">
         <div className={styles.yourturn}>
           <YourTurn />
         </div>
+        </Draggable>
       ) : (
         ""
       )}
       {realtimeGameData.currentPlayer === "hacker" ? (
-        <div className={styles.turn}>
-          <Turn who={realtimeGameData.currentPlayer} />
-        </div>
+        <Draggable handle="strong">
+          <div className={styles.turn}>
+            <Turn who={realtimeGameData.currentPlayer} pic={gameData.userinfo.picture} />
+          </div>
+        </Draggable>
       ) : (
         ""
       )}
-      <Draggable>
+      <Draggable handle="strong">
         <div className={styles.notes}>
           <Notes
             notes={notes}

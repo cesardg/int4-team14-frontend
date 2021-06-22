@@ -7,29 +7,51 @@
   margin: 10rem 3rem 0;
 }
 
+.backButtonStart {
+  composes: backButton;
+  left: 2rem;
+  position: absolute;
+  top: 9rem;
+}
+
 .rulesButton {
   composes: buttonPurple from "./ButtonStyles.module.css";
   grid-column: 1;
   grid-row: 1 / span 3;
   justify-self: flex-end;
-  margin: 3rem
+  margin: 3rem;
 }
 
 /* start */
 .introContainer {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 7rem;
+  display: flex;
+  flex-direction: column;
   margin: 5rem auto;
-  max-width: 150rem;
-  row-gap: 5rem;
+  width: 90%;
 }
 
-.bottom {
-  grid-column: 1 / span 2;
-  grid-row-start: 2;
-  justify-self: center;
-  width: 60%;
+.introItemLeft {
+  align-self: flex-start;
+  width: 55%;
+}
+
+.introItemRight {
+  align-self: flex-end;
+  margin-top: -7rem;
+  width: 55%;
+}
+
+.startContainer {
+  align-items: center;
+  display: flex;
+  height: 75vh;
+  justify-content: space-evenly;
+  margin: 5rem auto;
+  max-width: 150rem;
+}
+
+.startItem {
+  width: 40%;
 }
 
 .inside {
@@ -80,19 +102,19 @@
   font-family: "pixel";
   font-size: 3rem;
   padding: 1rem 2rem;
-  border: .1rem solid black;
+  border: 0.1rem solid black;
   text-align: center;
-  letter-spacing: .4rem;
+  letter-spacing: 0.4rem;
   width: 24rem;
-  margin: auto
+  margin: auto;
 }
 
 .gamecode:focus {
   outline: none;
-  border: .2rem solid black;
+  border: 0.2rem solid black;
 }
 
-.error{
+.error {
   text-align: center;
   font-size: 2rem;
   color: var(--red);
@@ -171,7 +193,7 @@
   font-size: 1.8rem;
   margin: 0 auto;
   width: 85%;
-  transition: .2s all ease;
+  transition: 0.2s all ease;
 }
 
 .input {
@@ -250,33 +272,33 @@
   background-image: url(../public/assets/img/userpics/lobby-icon-2.svg);
 }
 
-.smallInput{
+.smallInput {
   width: 4rem;
   text-align: center;
-  border: .1rem solid var(--black);
+  border: 0.1rem solid var(--black);
   font-size: 2.2rem;
   font-family: "pixel";
   padding: 1.4rem 1rem;
   background-color: var(--yellow);
-  margin: 0 .3rem;
+  margin: 0 0.3rem;
 }
 
 .smallInput::-webkit-outer-spin-button,
 .smallInput::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-.smallInput[type=number] {
-    -moz-appearance:textfield;
+.smallInput[type="number"] {
+  -moz-appearance: textfield;
 }
 
-.smallInput:focus{
+.smallInput:focus {
   outline: none;
-  border: .2rem solid var(--black);
+  border: 0.2rem solid var(--black);
 }
 
-.passwordWrapper{
+.passwordWrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -287,80 +309,72 @@
   margin-bottom: 2rem;
 }
 
-
 @media only screen and (max-width: 1550px) {
-
-  .introContainer{
+  .introContainer {
     padding: 0 2rem;
   }
 
-  .bottom{
+  .bottom {
     margin-bottom: 4rem;
   }
 }
 
-
 @media only screen and (max-width: 1250px) {
-
-.rulesButton{
+  .rulesButton {
     display: none;
   }
 
-.playerList {
+  .playerList {
     flex-direction: column;
   }
 
-
-.label {
-  width: 100%;
-}
-
-.playerList {
-  justify-content: space-evenly;
-  display: block;
-  width: 100%;
-}
-
-.playerListItem {
-  width: 100%;
-}
-
-.playerListItem1::before {
-  background-image: url(../public/assets/img/hackerpics/lobby-icon-1.svg);
-  bottom: 3rem;
-}
-
-.playerListItem2::before {
-  background-image: url(../public/assets/img/hackerpics/lobby-icon-2.svg);
-  bottom: 5rem;
-}
-
-.playerListItem3::before {
-  background-image: url(../public/assets/img/userpics/lobby-icon-1.svg);
-  bottom: 4rem;
-}
-
-.playerListItem4::before {
-  background-image: url(../public/assets/img/userpics/lobby-icon-2.svg);
-  bottom: 6rem;
-}
-
-.playersContainer {
-    padding-bottom: 10rem;
+  .label {
+    width: 100%;
   }
 
+  .playerList {
+    justify-content: space-evenly;
+    display: block;
+    width: 100%;
+  }
 
+  .playerListItem {
+    width: 100%;
+  }
+
+  .playerListItem1::before {
+    background-image: url(../public/assets/img/hackerpics/lobby-icon-1.svg);
+    bottom: 3rem;
+  }
+
+  .playerListItem2::before {
+    background-image: url(../public/assets/img/hackerpics/lobby-icon-2.svg);
+    bottom: 5rem;
+  }
+
+  .playerListItem3::before {
+    background-image: url(../public/assets/img/userpics/lobby-icon-1.svg);
+    bottom: 4rem;
+  }
+
+  .playerListItem4::before {
+    background-image: url(../public/assets/img/userpics/lobby-icon-2.svg);
+    bottom: 6rem;
+  }
+
+  .playersContainer {
+    padding-bottom: 10rem;
+  }
 }
 
-
 @media only screen and (max-width: 950px) {
-  .introContainer{
+  .introContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
 
-  .bottom{
+  .bottom {
     width: 100%;
     margin-bottom: 5rem;
   }
@@ -372,6 +386,4 @@
   .label {
     margin: 2rem 0rem;
   }
-
 }
-

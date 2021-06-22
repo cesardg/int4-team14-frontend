@@ -10,7 +10,8 @@ const Rules = () => {
 
   const fields =["start", "actie", "random", "mail", "WIFI-vak/pikante foto"]
   const [fieldIndex, setFieldIndex] = useState(0);
- let router = useRouter()
+  const router = useRouter()
+  const tab = router.query.tab;
 
   const adjustfieldIndex = (action) => {
     let newIndex = fieldIndex;
@@ -37,15 +38,17 @@ const Rules = () => {
     <Layout style="user">
       <section className={styles.section}>
         <div className={styles.intro}>
-          <div className={styles.backButton} onClick={() => router.back()}>
-                <Image
-                  src={`/assets/img/backbutton.svg`}
-                  alt="Back button"
-                  width={75}
-                  height={75}
-                />
-                <p className={styles.back}>Terug</p>
+          {tab? "" : 
+           <div className={styles.backButton} onClick={() => router.back()}>
+            <Image
+              src={`/assets/img/backbutton.svg`}
+              alt="Back button"
+              width={75}
+              height={75}
+            />
+            <p className={styles.back}>Terug</p>
           </div>
+          }
           <h1 className={styles.title}>De spelregels</h1>
           <div className={styles.layoutWrapper}>
             <WindowLayout
@@ -66,7 +69,9 @@ const Rules = () => {
               </div>
             </WindowLayout>
           </div>
+          {tab ? "" : 
           <div className={styles.spacer}></div>
+          }
         </div>
         <div className={styles.startShortWrapper}>
           <div className={styles.shortImgWrapper}>
@@ -347,6 +352,7 @@ gepersonaliseerde reclame</span><br></br>Verstuur een gepersonaliseerde ad naar 
               </div>
             </WindowLayout>
           </div>
+             {tab ? "" : 
           <div className={styles.backButtonBottom} onClick={() => router.back()}>
                 <Image
                   src={`/assets/img/backbutton.svg`}
@@ -356,6 +362,7 @@ gepersonaliseerde reclame</span><br></br>Verstuur een gepersonaliseerde ad naar 
                 />
                 <p className={styles.back}>Terug</p>
           </div>
+              }
      </section>
     </Layout>
   );

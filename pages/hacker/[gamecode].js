@@ -852,8 +852,8 @@ const Hacker = ({ data }) => {
         ""
       )}
       <div className={styles.rules} >
-       <Link href={`/spelregels`}>
-          <a>      
+       <Link href={`/spelregels?tab=new`}>
+          <a target="_blank">      
             <Image
               src={`/assets/img/rulesicon.svg`}
               alt="Picture of the user"

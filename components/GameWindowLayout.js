@@ -1,7 +1,6 @@
 import styles from "./GameWindowLayout.module.css";
 
 const GameWindowLayout = ({ children, title, bg, border }) => {
-  console.log(title)
   return (
     <div className={styles.outerWindow} style={{ backgroundColor: border }}>
       <article className={styles.innerWindow} style={{ backgroundColor: bg }}>

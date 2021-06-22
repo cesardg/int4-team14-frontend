@@ -457,7 +457,7 @@ const Hacker = ({ data }) => {
       }
     );
     if (response.ok) {
-      console.log("joepie");
+      console.log("del oke");
       getUpdatedGamedata();
     }
   };
@@ -507,7 +507,7 @@ const Hacker = ({ data }) => {
       }
     );
     if (response.ok) {
-      console.log("joepie");
+      console.log("put oke");
       getUpdatedGamedata();
     }
   };
@@ -632,7 +632,7 @@ const Hacker = ({ data }) => {
         }
       );
       if (response.ok) {
-        console.log("joepie");
+        console.log("post oke");
       }
       e.target.reset();
     }
@@ -659,7 +659,7 @@ const Hacker = ({ data }) => {
       }
     );
     if (response.ok) {
-      console.log("joepie");
+      console.log("post oke");
     }
   };
 
@@ -675,7 +675,7 @@ const Hacker = ({ data }) => {
       }
     );
     if (response.ok) {
-      console.log("put data joepie");
+      console.log("put oke");
     }
   };
 

@@ -509,7 +509,7 @@ const User = ({ data }) => {
       }
     );
     if (response.ok) {
-      console.log("joepie, notes na mail");
+      console.log("post oke");
     }
   };
 
@@ -534,7 +534,7 @@ const User = ({ data }) => {
         }
       );
       if (response.ok) {
-        console.log("joepie");
+        console.log("post oke");
       }
       e.target.reset();
     }
@@ -637,7 +637,7 @@ const User = ({ data }) => {
       }
     );
     if (response.ok) {
-      console.log("joepie");
+      console.log("put oke");
       getUpdatedGamedata();
     }
   };

@@ -200,7 +200,7 @@ const Rules = () => {
             >
               <div className={styles.bordView}>
                         <Image
-              src={`/assets/img/rules/bord${fieldIndex}.jpg`}
+              src={`/assets/img/rules/bord${fieldIndex}.png`}
               alt="logo"
               width={400}
               height={400}

@@ -24,6 +24,8 @@ import styles from "./../../components/GameLayout.module.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Draggable from "react-draggable";
+import Image from "next/image";
+import Link from "next/link";
 
 const User = ({ data }) => {
   // game
@@ -569,7 +571,7 @@ const User = ({ data }) => {
         actionUser: "done",
       });
       channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
-    }, 3000);
+    }, 10000);
   };
 
   const timeout = (ms) => {
@@ -823,6 +825,19 @@ const User = ({ data }) => {
       {windowComponent === "info cookies" || windowComponent === "info strongness" || windowComponent === "info toevoegen" ?
       <PopupInfo subject={windowComponent} handleClickMoreInfo={(subject) => handleClickMoreInfo(subject)}/>   
      : ""}
+     <div className={styles.rules} >
+       <Link href={`/spelregels`}>
+          <a>      
+            <Image
+              src={`/assets/img/rulesicon.svg`}
+              alt="Picture of the user"
+              width={120}
+              height={80}
+            />
+            <p className={styles.nav}>spelregels</p>
+         </a>
+        </Link>
+     </div>
  
     </GameLayout>
   );

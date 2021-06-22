@@ -12,7 +12,7 @@ const Spicy = () => {
         <p className={styles.title}>Je komt een pikante foto tegen</p>
         <div className={styles.img}>
           <Image
-            src={`/assets/img/spicy.jpg`}
+            src={`/assets/img/spicy.svg`}
             alt="broken Spicy"
             width={300}
             height={300}

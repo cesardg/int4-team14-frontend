@@ -134,7 +134,7 @@ const Rules = () => {
                     Dit spel kan gespeeld worden met twee laptops of met een
                     laptop en een tablet. Voor je het spel kan beginnen, moet
                     het spelbord eerst correct aangesloten worden door de
-                    usb-tabel bij de laptop in te steken.
+                    usb-kabel bij de laptop in te steken.
                   </p>
                   <p className={styles.para}>
                     Eén speler start een nieuw spel, deze speler krijgt als
@@ -300,22 +300,22 @@ const Rules = () => {
                           </div>
                           {fields[fieldIndex] === "start" ? 
                           <div>
-                            <p className={styles.text}>Elke keer wanneer je voorbij de start passeert, ontgrendel je de mogelijkheid om het wachtwoord van de user te raden. </p>
+                            <p className={styles.text}>Elke keer wanneer je voorbij de start passeert, ontgrendel je de mogelijkheid om het wachtwoord van de gebruiker te raden. </p>
                             <p className={styles.red}><span className={styles.warning}>Opgepast! </span>Wanneer je weer langs de start passeert zonder je gok te gebruiken komt er geen tweede gok bij.</p>
                           </div>
                              : "" }
                      
                            {fields[fieldIndex] === "actie" ? 
                           <div>
-                            <p className={styles.text}>Wanneer u terecht komt op een actievak springt een venster open op uw scherm waarin u de keuze krijgt uit 6 verschillende acties om het account van de user binnen te dringen. Deze 6 acties luiden als volgt: </p>
+                            <p className={styles.text}>Wanneer u terecht komt op een actievak springt een venster open op uw scherm waarin u de keuze krijgt uit 6 verschillende acties om het account van de gebruiker binnen te dringen. Deze 6 acties luiden als volgt: </p>
                              <ul className={styles.list}>
-                              <li className={styles.listItem}><span className={styles.listImportant}>+ 2 letters </span><br></br>Ontdek 2 kleine letters uit het wachtwoord van de user.</li>
-                              <li className={styles.listItem}><span className={styles.listImportant}>+ 1 hoofdletter </span><br></br>Ontdek 1 hoofdletter uit het wachtwoord van de user.</li>
-                              <li className={styles.listItem}><span className={styles.listImportant}>+ 1 cijfer </span><br></br>Ontdek 1 cijfer uit het wachtwoord van de user.<br></br><span className={styles.red}><span className={styles.warning}>Opgepast! </span>een wachtwoord kan maximaal over 15 tekens beschikken.  Als je wachtwoord reeds 15 tekens lang is kan de user tekens uit zijn wachtwoord wijzigen. </span> </li>
-                              <li className={styles.listItem}><span className={styles.listImportant}>Ontdek interesse </span><br></br>De user moest bij het aanmaken van zijn account ook enkele interesses meegeven. Die interesses zijn van belang voor jouw. Omdat je eenmaal je een interesse te weten gekomen bent een gepersonaliseerde ad kan sturen naar de user.<br></br><span className={styles.red}><span className={styles.warning}>Opgepast! </span>: je kan deze interesses ook weer kwijt geraken wanneer de user zijn cookies verwijdert.  </span> </li>
-                              <li className={styles.listItem}><span className={styles.listImportant}>Schermovername</span><br></br>Neem het scherm van de user over om zo zijn laatste zet te zien. Zo kan je de user altijd een stapje voor blijven. Heeft de user net een hoofdletter toegevoegd aan zijn wachtwachtwoord? Of heeft hij net al zijn cookies verwijdert?</li>
+                              <li className={styles.listItem}><span className={styles.listImportant}>+ 2 letters </span><br></br>Ontdek 2 kleine letters uit het wachtwoord van de gebruiker.</li>
+                              <li className={styles.listItem}><span className={styles.listImportant}>+ 1 hoofdletter </span><br></br>Ontdek 1 hoofdletter uit het wachtwoord van de gebruiker.</li>
+                              <li className={styles.listItem}><span className={styles.listImportant}>+ 1 cijfer </span><br></br>Ontdek 1 cijfer uit het wachtwoord van de gebruiker.<br></br><span className={styles.red}><span className={styles.warning}>Opgepast! </span>een wachtwoord kan maximaal over 15 tekens beschikken.  Als je wachtwoord reeds 15 tekens lang is kan de gebruiker tekens uit zijn wachtwoord wijzigen. </span> </li>
+                              <li className={styles.listItem}><span className={styles.listImportant}>Ontdek interesse </span><br></br>De gebruiker moest bij het aanmaken van zijn account ook enkele interesses meegeven. Die interesses zijn van belang voor jouw. Omdat je eenmaal je een interesse te weten gekomen bent een gepersonaliseerde ad kan sturen naar de gebruiker.<br></br><span className={styles.red}><span className={styles.warning}>Opgepast! </span>: je kan deze interesses ook weer kwijt geraken wanneer de gebruiker zijn cookies verwijdert.  </span> </li>
+                              <li className={styles.listItem}><span className={styles.listImportant}>Schermovername</span><br></br>Neem het scherm van de gebruiker over om zo zijn laatste zet te zien. Zo kan je de gebruiker altijd een stapje voor blijven. Heeft de gebruiker net een hoofdletter toegevoegd aan zijn wachtwachtwoord? Of heeft hij net al zijn cookies verwijdert?</li>
                               <li className={styles.listItem}><span className={styles.listImportant}>Verzend een
-gepersonaliseerde reclame</span><br></br>Verstuur een gepersonaliseerde ad naar de gebruiker<br></br><span className={styles.red}><span className={styles.warning}>Opgepast! </span>Opgepast! Je kan je personaliseerde ad enkel inzetten wanneer je over een interesse van de user beschikt.</span></li>
+gepersonaliseerde reclame</span><br></br>Verstuur een gepersonaliseerde ad naar de gebruiker<br></br><span className={styles.red}><span className={styles.warning}>Opgepast! </span>Opgepast! Je kan je personaliseerde ad enkel inzetten wanneer je over een interesse van de gebruiker beschikt.</span></li>
                             </ul>
                           </div>
                              : "" }

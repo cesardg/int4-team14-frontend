@@ -11,7 +11,7 @@ const UserAd = ({ subject }) => {
         <div className={styles.img}>
           <Image
             // src={`/assets/img/hackeractions/ads/slijm maken.png`}
-            src={`/assets/img/hackeractions/ads/${subject.substring(0, 3)}.png`}
+            src={`/assets/img/hackeractions/ads/${subject.substring(0, 3)}.gif`}
             alt="Picture of the user"
             height={266}
             width={385}

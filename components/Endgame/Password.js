@@ -1,7 +1,7 @@
 // components
 import GameWindowLayout from "../../components/GameWindowLayout";
 // styling
-import styles from "./../../components/EndGame/Password.module.css";
+import styles from "./Password.module.css";
 
 const Password = ({ data }) => {
   console.log(data);

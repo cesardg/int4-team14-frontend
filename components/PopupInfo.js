@@ -80,6 +80,32 @@ const PopupInfo = ({subject, handleClickMoreInfo}) => {
       </div>
       : ""}
 
+          { subject === "info vpn" ? 
+       <div className={styles.containerOpened}>
+        <p className={styles.title}>Wat is een VPN?</p>
+        <div className={styles.img}>
+          <Image
+            src={`/assets/img/useractions/vpn.svg`}
+            alt="icon toevoegen"
+            width={230}
+            height={130}
+          />
+        </div>
+        <p className={styles.subtitle}> Een VPN zorgt voor een <span className={styles.strong}>beveiligde verbinding</span> tussen jou en het internet.
+De verbinding is veiliger dan wifi en <span className={styles.strong}>houdt veel hackers tegen</span>.</p>
+<p className={styles.subtitle}>Voer deze actie uit zodat de hacker een beurt moet overslaan</p>
+        
+        
+        <div className={styles.buttonContainer}>
+        <button
+          className={buttonStyles.buttonRed}
+        >
+          ik begrijp het!
+        </button>
+        </div>
+      </div>
+      : ""}
+
     </GameWindowLayout>
     </div>
     </div>

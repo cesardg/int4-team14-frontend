@@ -809,7 +809,7 @@ const User = ({ data }) => {
       ) : (
         ""
       )}
-      {windowComponent === "info cookies" || windowComponent === "info strongness" || windowComponent === "info toevoegen" ?
+      {windowComponent === "info cookies" || windowComponent === "info strongness" || windowComponent === "info toevoegen" || windowComponent === "info vpn" ?
       <PopupInfo subject={windowComponent} handleClickMoreInfo={(subject) => handleClickMoreInfo(subject)}/>   
      : ""}
      <div className={styles.rules} >

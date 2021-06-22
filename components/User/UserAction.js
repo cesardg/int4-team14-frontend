@@ -213,6 +213,14 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
               De hacker moet 2 beurten overslaan
             </p>
           </button>
+                    <div className={styles.moreInfoImg} onClick={() => handleClickMoreInfo("info vpn")}>
+                 <Image
+                src={`/assets/img/moreinfo.svg`}
+                alt="icon"
+                height={25}
+                width={25}
+              />
+              </div>
         </div>
         <p className={styles.actionBottomText}>
           Hoe ga jij je beschermen tegen de hacker?

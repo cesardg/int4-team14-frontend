@@ -26,7 +26,7 @@ const Home = () => {
   const playerOptions = ["user", "hacker"];
   const randomStarter =
     playerOptions[Math.floor(Math.random() * playerOptions.length)];
-  const [screen, setScreen] = useState("start");
+  const [screen, setScreen] = useState("intro");
   const [playerOne, setPlayerOne] = useState();
   const [playerTwo, setPlayerTwo] = useState();
   const [gamecode, setGamecode] = useState(getStartingGamecode(6));
@@ -106,135 +106,29 @@ const Home = () => {
 
   return (
     <Layout style="user">
-      {screen == "start" ? (
+      {screen == "intro" ? (
         <section className={styles.introContainer}>
-          <WindowLayout
-            title="Start een nieuw spel"
-            bg="var(--brown)"
-            border="var(--green)"
-            className={styles.left}
-          >
-            <div className={styles.inside}>
-              <p className={styles.title}>Start een nieuw spel</p>
-              <p className={styles.text}>
-                Start een nieuw spel en deel de game code met je tegenspeler
-              </p>
-              <button
-                onClick={() => {
-                  setScreen("new");
-                }}
-                className={buttonStyles.buttonRed}
-              >
-                Nieuw spel starten
-              </button>
-            </div>
-          </WindowLayout>
-          <WindowLayout
-            title="Neem deel aan een spel"
-            bg="var(--brown)"
-            border="var(--green)"
-            className={styles.right}
-          >
-            <div className={styles.inside}>
-              <p className={styles.title}>Neem deel aan een spel</p>
-              <p className={styles.text}>
-                Heeft je tegenstander al een game code gemaakt? <br></br> Vul
-                hem dan hier in en neem deel aan het spel!
-              </p>
-              <form
-                onSubmit={(e) => handleSubmitGamecode(e)}
-                className={styles.form}
-              >
-                <label className={styles.codeLabel}>
-                  <div className={styles.passwordWrapper}>
-                    <input
-                      className={styles.smallInput}
-                      type="number"
-                      maxLength="1"
-                      placeholder="1"
-                      name="code"
-                      ref={callbackRef(0)}
-                      value={profilePass[0]}
-                      onChange={(value) => handelChangePas(value, "0")}
-                      required
-                    />
-
-                    <input
-                      className={styles.smallInput}
-                      type="number"
-                      name="code"
-                      placeholder="2"
-                      maxLength="1"
-                      ref={callbackRef(1)}
-                      value={profilePass[1]}
-                      onChange={(value) => handelChangePas(value, "1")}
-                      required
-                    />
-
-                    <input
-                      className={styles.smallInput}
-                      type="number"
-                      name="code"
-                      placeholder="3"
-                      maxLength="1"
-                      ref={callbackRef(2)}
-                      value={profilePass[2]}
-                      onChange={(value) => handelChangePas(value, "2")}
-                      required
-                    />
-
-                    <input
-                      className={styles.smallInput}
-                      type="number"
-                      name="code"
-                      placeholder="4"
-                      maxLength="1"
-                      ref={callbackRef(3)}
-                      value={profilePass[3]}
-                      onChange={(value) => handelChangePas(value, "3")}
-                      required
-                    />
-
-                    <input
-                      className={styles.smallInput}
-                      type="number"
-                      name="code"
-                      placeholder="5"
-                      maxLength="1"
-                      ref={callbackRef(4)}
-                      value={profilePass[4]}
-                      onChange={(value) => handelChangePas(value, "4")}
-                      required
-                    />
-
-                    <input
-                      className={styles.smallInput}
-                      type="number"
-                      name="code"
-                      placeholder="6"
-                      maxLength="1"
-                      ref={callbackRef(5)}
-                      value={profilePass[5]}
-                      onChange={(value) => handelChangePas(value, "5")}
-                      required
-                    />
-                  </div>
-                </label>
-                {error ? <span className={styles.error}>{error}</span> : ""}
-                {showButton ? (
-                  <input
-                    type="submit"
-                    value="Deelnemen aan het spel"
-                    className={buttonStyles.buttonRed}
-                  />
-                ) : (
-                  ""
-                )}
-              </form>
-            </div>
-          </WindowLayout>
-
-          <div className={styles.bottom}>
+          <div className={styles.introItemLeft}>
+            <WindowLayout
+              title="Start een nieuw spel"
+              bg="var(--brown)"
+              border="var(--green)"
+              className={styles.left}
+            >
+              <div className={styles.inside}>
+                <p className={styles.title}>Klaar om het spel te spelen?</p>
+                <button
+                  onClick={() => {
+                    setScreen("start");
+                  }}
+                  className={buttonStyles.buttonRed}
+                >
+                  Spel starten
+                </button>
+              </div>
+            </WindowLayout>
+          </div>
+          <div className={styles.introItemRight}>
             <WindowLayout
               title={"spelregels"}
               bg="var(--brown)"
@@ -257,6 +151,153 @@ const Home = () => {
         ""
       )}
 
+      {screen == "start" ? (
+        <>
+          <section className={styles.startContainer}>
+            <div className={styles.startItem}>
+              <WindowLayout
+                title="Start een nieuw spel"
+                bg="var(--brown)"
+                border="var(--green)"
+                className={styles.left}
+              >
+                <div className={styles.inside}>
+                  <p className={styles.title}>Start een nieuw spel</p>
+                  <p className={styles.text}>
+                    Start een nieuw spel en deel de game code met je tegenspeler
+                  </p>
+                  <button
+                    onClick={() => {
+                      setScreen("new");
+                    }}
+                    className={buttonStyles.buttonRed}
+                  >
+                    Nieuw spel starten
+                  </button>
+                </div>
+              </WindowLayout>
+            </div>
+
+            <div className={styles.startItem}>
+              <WindowLayout
+                title="Neem deel aan een spel"
+                bg="var(--brown)"
+                border="var(--green)"
+                className={styles.right}
+              >
+                <div className={styles.inside}>
+                  <p className={styles.title}>Neem deel aan een spel</p>
+                  <p className={styles.text}>
+                    Heeft je tegenstander al een game code gemaakt? <br></br>{" "}
+                    Vul hem dan hier in en neem deel aan het spel!
+                  </p>
+                  <form
+                    onSubmit={(e) => handleSubmitGamecode(e)}
+                    className={styles.form}
+                  >
+                    <label className={styles.codeLabel}>
+                      <div className={styles.passwordWrapper}>
+                        <input
+                          className={styles.smallInput}
+                          type="number"
+                          maxLength="1"
+                          placeholder="1"
+                          name="code"
+                          ref={callbackRef(0)}
+                          value={profilePass[0]}
+                          onChange={(value) => handelChangePas(value, "0")}
+                          required
+                        />
+
+                        <input
+                          className={styles.smallInput}
+                          type="number"
+                          name="code"
+                          placeholder="2"
+                          maxLength="1"
+                          ref={callbackRef(1)}
+                          value={profilePass[1]}
+                          onChange={(value) => handelChangePas(value, "1")}
+                          required
+                        />
+
+                        <input
+                          className={styles.smallInput}
+                          type="number"
+                          name="code"
+                          placeholder="3"
+                          maxLength="1"
+                          ref={callbackRef(2)}
+                          value={profilePass[2]}
+                          onChange={(value) => handelChangePas(value, "2")}
+                          required
+                        />
+
+                        <input
+                          className={styles.smallInput}
+                          type="number"
+                          name="code"
+                          placeholder="4"
+                          maxLength="1"
+                          ref={callbackRef(3)}
+                          value={profilePass[3]}
+                          onChange={(value) => handelChangePas(value, "3")}
+                          required
+                        />
+
+                        <input
+                          className={styles.smallInput}
+                          type="number"
+                          name="code"
+                          placeholder="5"
+                          maxLength="1"
+                          ref={callbackRef(4)}
+                          value={profilePass[4]}
+                          onChange={(value) => handelChangePas(value, "4")}
+                          required
+                        />
+
+                        <input
+                          className={styles.smallInput}
+                          type="number"
+                          name="code"
+                          placeholder="6"
+                          maxLength="1"
+                          ref={callbackRef(5)}
+                          value={profilePass[5]}
+                          onChange={(value) => handelChangePas(value, "5")}
+                          required
+                        />
+                      </div>
+                    </label>
+                    {error ? <span className={styles.error}>{error}</span> : ""}
+                    {showButton ? (
+                      <input
+                        type="submit"
+                        value="Deelnemen aan het spel"
+                        className={buttonStyles.buttonRed}
+                      />
+                    ) : (
+                      ""
+                    )}
+                  </form>
+                </div>
+              </WindowLayout>
+            </div>
+          </section>
+          <button
+            onClick={() => {
+              setScreen("intro");
+            }}
+            className={styles.backButtonStart}
+          >
+            Terug
+          </button>
+        </>
+      ) : (
+        ""
+      )}
+
       {screen == "new" ? (
         <section className={styles.playersContainer}>
           <WindowLayout
@@ -264,7 +305,11 @@ const Home = () => {
             bg="var(--brown)"
             border="var(--green)"
           >
-            <div className={playerOne ? styles.playersInside : styles.playersInsideEmpty} >
+            <div
+              className={
+                playerOne ? styles.playersInside : styles.playersInsideEmpty
+              }
+            >
               <p className={styles.playersTitle}>Start een nieuw spel</p>
               <p className={styles.playersText}>Welke speler ben jij?</p>
               <div className={styles.players}>
@@ -356,11 +401,11 @@ const Home = () => {
               >
                 Terug
               </button>
-              <div className={styles.rulesButton}>
+              <button className={styles.rulesButton}>
                 <Link href={`/spelregels`}>
                   <a>Bekijk de spelregels</a>
                 </Link>
-              </div>
+              </button>
             </div>
           </WindowLayout>
         </section>

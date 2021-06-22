@@ -13,10 +13,8 @@ const Lobby = () => {
   const router = useRouter();
   const gamecode = router.query.gamecode;
   const player = router.query.player;
-  console.log(gamecode);
 
   const [members, setMembers] = useState(1);
-  console.log(members);
 
   const [channel] = useChannel(gamecode, (message) => {
     if (message.data === "game-data=start-game") {
@@ -157,13 +155,9 @@ const Lobby = () => {
                 </p>
               </div>
             ) : (
-              <div className={buttonStyles.buttonRed}>
-                <Link href={`${player}setup/?gamecode=${gamecode}`}>
-                  <a onClick={handleCLickStart}>
-                    Start spel en maak een profiel aan
-                  </a>
-                </Link>
-              </div>
+              <button className={buttonStyles.buttonRed} onClick={handleCLickStart}>
+                Start spel en maak een profiel aan
+              </button>
             )}
 
             <div className={styles.backButtonLink}>

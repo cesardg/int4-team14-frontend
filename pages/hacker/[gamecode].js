@@ -429,7 +429,7 @@ const Hacker = ({ data }) => {
         actionHacker: "done",
       });
       channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
-    }, 3000);
+    }, 7000);
   };
 
   const timeout = (ms) => {
@@ -717,7 +717,7 @@ const Hacker = ({ data }) => {
       {realtimeGameData.currentPlayer === "user" ? (
       <Draggable handle="strong">
         <div className={styles.turn}>
-          <Turn who={realtimeGameData.currentPlayer} pic={gameData.userinfo.picture}/>
+          <Turn who={realtimeGameData.currentPlayer} pic={gameData.userinfo ? gameData.userinfo.picture : "pf1" }/>
         </div>
       </Draggable>  
       ) : (

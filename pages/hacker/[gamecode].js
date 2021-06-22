@@ -201,7 +201,7 @@ const Hacker = ({ data }) => {
 
       // player veranderen bij empty
       if (
-        lastAction === "empty" &&
+        (lastAction === "empty" || lastAction === "start") &&
         realtimeGameData.currentPlayer === "hacker"
       ) {
         if (hackerDoubleTurn > 0) {
@@ -216,7 +216,7 @@ const Hacker = ({ data }) => {
           newPlayer = "user";
         }
       } else if (
-        lastAction === "empty" &&
+        (lastAction === "empty" || lastAction === "start") &&
         realtimeGameData.currentPlayer === "user"
       ) {
         if (userDoubleTurn > 0) {

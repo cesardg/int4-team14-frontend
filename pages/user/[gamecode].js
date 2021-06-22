@@ -236,14 +236,11 @@ const User = ({ data }) => {
         }
       }
 
- 
-
       // user komt op een random vak
       if (
         realtimeGameData.currentPlayer === "user" &&
         newUserAction === "random"
       ) {
-       
         setRandomOption(
           randomOptions[Math.floor(Math.random() * randomOptions.length)]
         );
@@ -255,7 +252,6 @@ const User = ({ data }) => {
         realtimeGameData.currentPlayer === "user" &&
         newUserAction === "wifi"
       ) {
-       
         handlePionOnWifiOrSpicy();
       }
 
@@ -266,10 +262,6 @@ const User = ({ data }) => {
       ) {
         handlePionOnWifiOrSpicy();
       }
-
-
-
-   
 
       setRealtimeGameData({
         ...realtimeGameData,
@@ -282,7 +274,6 @@ const User = ({ data }) => {
     }
 
     if (type === "playerchange") {
-      
       setRealtimeGameData({
         ...realtimeGameData,
         currentPlayer: message.data.split("-")[2],
@@ -290,7 +281,6 @@ const User = ({ data }) => {
     }
 
     if (type === "sendad") {
- 
       setReceiveAdFromHacker(message.data.split("-")[2]);
       deleteAd();
     }
@@ -390,7 +380,6 @@ const User = ({ data }) => {
         });
       }
     } else if (value === "skipturn") {
-     
       channel.publish({
         name: gamecode,
         data: `doubleturn-user-hacker`,
@@ -416,7 +405,7 @@ const User = ({ data }) => {
       0,
       gameData.userinfo.password.length - 1
     );
-  
+
     data = { password: newPass };
     putData("userinfos", gameData.userinfo.id, data);
   };
@@ -596,7 +585,7 @@ const User = ({ data }) => {
   const deleteAd = () => {
     timeout();
     setTimeout(() => {
-      setReceiveAdFromHacker(false)
+      setReceiveAdFromHacker(false);
     }, 10000);
   };
 
@@ -673,9 +662,9 @@ const User = ({ data }) => {
       realtimeGameData.actionUser !== "wifi" &&
       realtimeGameData.actionUser !== "spam" ? (
         <Draggable handle="strong">
-        <div className={styles.yourturn}>
-          <YourTurn />
-        </div>
+          <div className={styles.yourturn}>
+            <YourTurn />
+          </div>
         </Draggable>
       ) : (
         ""
@@ -683,7 +672,10 @@ const User = ({ data }) => {
       {realtimeGameData.currentPlayer === "hacker" ? (
         <Draggable handle="strong">
           <div className={styles.turn}>
-            <Turn who={realtimeGameData.currentPlayer} pic={gameData.hackerinfo? gameData.hackerinfo.picture : "pf1" } />
+            <Turn
+              who={realtimeGameData.currentPlayer}
+              pic={gameData.hackerinfo ? gameData.hackerinfo.picture : "pf1"}
+            />
           </div>
         </Draggable>
       ) : (
@@ -798,6 +790,7 @@ const User = ({ data }) => {
       ) : (
         ""
       )}
+
       {realtimeGameData.currentPlayer === "user" &&
       realtimeGameData.actionUser === "random" ? (
         <div className={styles.random}>
@@ -809,12 +802,20 @@ const User = ({ data }) => {
       ) : (
         ""
       )}
-      {windowComponent === "info cookies" || windowComponent === "info strongness" || windowComponent === "info toevoegen" || windowComponent === "info vpn" ?
-      <PopupInfo subject={windowComponent} handleClickMoreInfo={(subject) => handleClickMoreInfo(subject)}/>   
-     : ""}
-     <div className={styles.rules} >
-       <Link href={`/spelregels?tab=new`}>
-          <a target="_blank">      
+      {windowComponent === "info cookies" ||
+      windowComponent === "info strongness" ||
+      windowComponent === "info toevoegen" ||
+      windowComponent === "info vpn" ? (
+        <PopupInfo
+          subject={windowComponent}
+          handleClickMoreInfo={(subject) => handleClickMoreInfo(subject)}
+        />
+      ) : (
+        ""
+      )}
+      <div className={styles.rules}>
+        <Link href={`/spelregels?tab=new`}>
+          <a target="_blank">
             <Image
               src={`/assets/img/rulesicon.svg`}
               alt="Picture of the user"
@@ -822,10 +823,9 @@ const User = ({ data }) => {
               height={80}
             />
             <p className={styles.nav}>spelregels</p>
-         </a>
+          </a>
         </Link>
-     </div>
- 
+      </div>
     </GameLayout>
   );
 };

@@ -24,7 +24,7 @@
   grid-column: 1 / span 1;
   grid-row: 1 / span 1;
   height: fit-content;
-  padding: 1rem 3rem;
+  padding: .8rem 1.5rem;
   text-align: center;
   width: fit-content;
   z-index: 1;

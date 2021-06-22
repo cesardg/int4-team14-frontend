@@ -10,18 +10,12 @@ const UserAd = ({ subject }) => {
       <div className={styles.container}>
         <div className={styles.img}>
           <Image
-            // src={`/assets/img/hackeractions/ads/slijm maken.png`}
             src={`/assets/img/hackeractions/ads/sli.gif`}
             alt="Picture of the user"
             height={266}
-            width={385}
+            width={509}
           />
         </div>
-        {/* <p className={styles.title}>Gepersonaliseerde advertentie</p>
-        <p className={styles.text}>
-          De hacker heeft jouw cookies gebruikt om je een persoonlijke
-          advertentie te sturen over {subject}. Je moet 2 beurten overslaan
-        </p> */}
       </div>
     </GameWindowLayout>
   );

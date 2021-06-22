@@ -98,7 +98,7 @@ const SpamMail = ({ handleClickSpamMail, player, playerinfo }) => {
 
             <div className={styles.img}>
               <Image
-                src={`/assets/img/spam.svg`}
+                src={`/assets/img/ohno.svg`}
                 alt="Picture of the user"
                 width={150}
                 height={150}

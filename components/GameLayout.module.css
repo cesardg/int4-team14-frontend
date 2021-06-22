@@ -375,4 +375,11 @@
     grid-row-start: 7;
     margin: 2rem;
   }
+
+  .rules{
+    width: 11rem;
+    position:initial ;
+    grid-column: 1 / span 3;
+    grid-row: 15 / span 2;
+  }
 }

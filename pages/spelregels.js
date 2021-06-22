@@ -11,7 +11,8 @@ import Image from "next/image";
 const Rules = () => {
   const fields = ["start", "actie", "random", "mail", "WIFI-vak/pikante foto"];
   const [fieldIndex, setFieldIndex] = useState(0);
-  let router = useRouter();
+  const router = useRouter();
+  const tab = router.query.tab;
 
   const adjustfieldIndex = (action) => {
     let newIndex = fieldIndex;
@@ -37,15 +38,19 @@ const Rules = () => {
     <Layout style="user">
       <section className={styles.section}>
         <div className={styles.intro}>
-          <div className={styles.backButton} onClick={() => router.back()}>
-            <Image
-              src={`/assets/img/backbutton.svg`}
-              alt="Back button"
-              width={75}
-              height={75}
-            />
-            <p className={styles.back}>Terug</p>
-          </div>
+          {tab ? (
+            ""
+          ) : (
+            <div className={styles.backButton} onClick={() => router.back()}>
+              <Image
+                src={`/assets/img/backbutton.svg`}
+                alt="Back button"
+                width={75}
+                height={75}
+              />
+              <p className={styles.back}>Terug</p>
+            </div>
+          )}
           <h1 className={styles.title}>De spelregels</h1>
           <div className={styles.layoutWrapper}>
             <WindowLayout
@@ -66,7 +71,7 @@ const Rules = () => {
               </div>
             </WindowLayout>
           </div>
-          <div className={styles.spacer}></div>
+          {tab ? "" : <div className={styles.spacer}></div>}
         </div>
         <div className={styles.startShortWrapper}>
           <div className={styles.shortImgWrapper}>
@@ -200,7 +205,7 @@ const Rules = () => {
           >
             <div className={styles.bordView}>
               <Image
-                src={`/assets/img/rules/bord${fieldIndex}.jpg`}
+                src={`/assets/img/rules/bord${fieldIndex}.png`}
                 alt="logo"
                 width={400}
                 height={400}
@@ -565,15 +570,22 @@ const Rules = () => {
             </div>
           </WindowLayout>
         </div>
-        <div className={styles.backButtonBottom} onClick={() => router.back()}>
-          <Image
-            src={`/assets/img/backbutton.svg`}
-            alt="Back button"
-            width={75}
-            height={75}
-          />
-          <p className={styles.back}>Terug</p>
-        </div>
+        {tab ? (
+          ""
+        ) : (
+          <div
+            className={styles.backButtonBottom}
+            onClick={() => router.back()}
+          >
+            <Image
+              src={`/assets/img/backbutton.svg`}
+              alt="Back button"
+              width={75}
+              height={75}
+            />
+            <p className={styles.back}>Terug</p>
+          </div>
+        )}
       </section>
     </Layout>
   );

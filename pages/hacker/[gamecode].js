@@ -6,7 +6,6 @@ import Notes from "../../components/Notes";
 import SpamMail from "../../components/SpamMail";
 import Wifi from "../../components/Wifi";
 import Spicy from "../../components/Spicy";
-import GameBoard from "../../components/GameBoard";
 import HackerAction from "../../components/Hacker/HackerAction";
 import HackerInfo from "../../components/Hacker/HackerInfo";
 import HackerDiscoveries from "../../components/Hacker/HackerDiscoveries";
@@ -176,7 +175,7 @@ const Hacker = ({ data }) => {
   // channel
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split("-")[0];
-    console.log("ably");
+    console.log("wscall");
     getUpdatedGamedata();
 
     if (type === "boardchange") {
@@ -202,7 +201,7 @@ const Hacker = ({ data }) => {
 
       // player veranderen bij empty
       if (
-        lastAction === "empty" &&
+        (lastAction === "empty" || lastAction === "start") &&
         realtimeGameData.currentPlayer === "hacker"
       ) {
         if (hackerDoubleTurn > 0) {
@@ -217,7 +216,7 @@ const Hacker = ({ data }) => {
           newPlayer = "user";
         }
       } else if (
-        lastAction === "empty" &&
+        (lastAction === "empty" || lastAction === "start") &&
         realtimeGameData.currentPlayer === "user"
       ) {
         if (userDoubleTurn > 0) {
@@ -230,24 +229,18 @@ const Hacker = ({ data }) => {
         }
       }
 
-      // hacker komt op een actie vak
-      if (
-        realtimeGameData.currentPlayer === "hacker" &&
-        newHackerAction === "action"
-      ) {
-        console.log("de hacker staat op een actievak, dit moet er gebeuren:");
-      }
+
 
       // hacker komt op een random vak
       if (
         realtimeGameData.currentPlayer === "hacker" &&
         newHackerAction === "random"
       ) {
-        console.log("de hacker staat op een random vak, dit moet er gebeuren");
+       
         setRandomOption(
           randomOptions[Math.floor(Math.random() * randomOptions.length)]
         );
-        // setWindowComponent("random");
+     
       }
 
       // hacker komt op een wifi vak
@@ -266,21 +259,7 @@ const Hacker = ({ data }) => {
         handlePionOnWifiOrSpicy();
       }
 
-      // hacker komt op het pikante foto
-      if (
-        realtimeGameData.currentPlayer === "hacker" &&
-        newHackerAction === "spam"
-      ) {
-        console.log("de hacker staat op het spamvakje, dit moet er gebeuren:");
-      }
 
-      // hacker komt een empty vak
-      if (
-        realtimeGameData.currentPlayer === "hacker" &&
-        newHackerAction === "empty"
-      ) {
-        console.log("de hacker staat op een empty vak, dit moet er gebeuren");
-      }
 
       setRealtimeGameData({
         ...realtimeGameData,
@@ -291,7 +270,6 @@ const Hacker = ({ data }) => {
         currentPlayer: newPlayer,
       });
 
-      console.log("hacker realtime", realtimeGameData.actionHacker);
     }
 
     //updaten als de user is ingelogt
@@ -320,7 +298,6 @@ const Hacker = ({ data }) => {
     }
 
     if (type === "playerchange") {
-      console.log("from hacker:", message.data);
       setRealtimeGameData({
         ...realtimeGameData,
         currentPlayer: message.data.split("-")[2],
@@ -395,7 +372,6 @@ const Hacker = ({ data }) => {
       handleDeleteDiscovery();
       }
     } else if (value === "skipturn") {
-      console.log("beurt overslaan");
       channel.publish({
         name: gamecode,
         data: `doubleturn-hacker-user`,
@@ -453,7 +429,7 @@ const Hacker = ({ data }) => {
         actionHacker: "done",
       });
       channel.publish({ name: gamecode, data: `playerchange-hacker-user` });
-    }, 3000);
+    }, 7000);
   };
 
   const timeout = (ms) => {
@@ -481,7 +457,7 @@ const Hacker = ({ data }) => {
       }
     );
     if (response.ok) {
-      console.log("joepie");
+      console.log("del oke");
       getUpdatedGamedata();
     }
   };
@@ -531,7 +507,7 @@ const Hacker = ({ data }) => {
       }
     );
     if (response.ok) {
-      console.log("joepie");
+      console.log("put oke");
       getUpdatedGamedata();
     }
   };
@@ -583,7 +559,6 @@ const Hacker = ({ data }) => {
       });
     }
   };
-  console.log(gameData.hackerdiscoveries)
 
   const handleClickSpamMail = (reaction) => {
     if (reaction === "bad") {
@@ -635,7 +610,7 @@ const Hacker = ({ data }) => {
       });
     }
   };
-  console.log("hacker double", hackerDoubleTurn);
+
   const handleFormSubmissionNotes = async (e) => {
     e.preventDefault();
     if (e.target.note.value !== "") {
@@ -657,7 +632,7 @@ const Hacker = ({ data }) => {
         }
       );
       if (response.ok) {
-        console.log("joepie");
+        console.log("post oke");
       }
       e.target.reset();
     }
@@ -684,7 +659,7 @@ const Hacker = ({ data }) => {
       }
     );
     if (response.ok) {
-      console.log("joepie");
+      console.log("post oke");
     }
   };
 
@@ -700,7 +675,7 @@ const Hacker = ({ data }) => {
       }
     );
     if (response.ok) {
-      console.log("put data joepie");
+      console.log("put oke");
     }
   };
 
@@ -742,7 +717,7 @@ const Hacker = ({ data }) => {
       {realtimeGameData.currentPlayer === "user" ? (
       <Draggable handle="strong">
         <div className={styles.turn}>
-          <Turn who={realtimeGameData.currentPlayer} pic={gameData.userinfo.picture}/>
+          <Turn who={realtimeGameData.currentPlayer} pic={gameData.userinfo ? gameData.userinfo.picture : "pf1" }/>
         </div>
       </Draggable>  
       ) : (
@@ -877,8 +852,8 @@ const Hacker = ({ data }) => {
         ""
       )}
       <div className={styles.rules} >
-       <Link href={`/spelregels`}>
-          <a>      
+       <Link href={`/spelregels?tab=new`}>
+          <a target="_blank">      
             <Image
               src={`/assets/img/rulesicon.svg`}
               alt="Picture of the user"

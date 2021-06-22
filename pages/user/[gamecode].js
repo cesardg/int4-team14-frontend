@@ -6,7 +6,6 @@ import Notes from "../../components/Notes";
 import SpamMail from "../../components/SpamMail";
 import Wifi from "../../components/Wifi";
 import Spicy from "../../components/Spicy";
-import GameBoard from "../../components/GameBoard";
 import UserInfo from "../../components/User/UserInfo";
 import UserAccountStrongness from "../../components/User/UserAccountStrongness";
 import UserInstallsVpn from "../../components/User/UserInstallsVpn";
@@ -182,7 +181,7 @@ const User = ({ data }) => {
   // channel
   const [channel] = useChannel(gamecode, (message) => {
     const type = message.data.split("-")[0];
-    console.log("ably?");
+    console.log("wscall");
     getUpdatedGamedata();
 
     if (type === "boardchange") {
@@ -208,7 +207,7 @@ const User = ({ data }) => {
 
       // player veraderen bij empty
       if (
-        lastAction === "empty" &&
+        (lastAction === "empty" || lastAction === "start") &&
         realtimeGameData.currentPlayer === "hacker"
       ) {
         if (hackerDoubleTurn > 0) {
@@ -223,7 +222,7 @@ const User = ({ data }) => {
           newPlayer = "user";
         }
       } else if (
-        lastAction === "empty" &&
+        (lastAction === "empty" || lastAction === "start") &&
         realtimeGameData.currentPlayer === "user"
       ) {
         if (userDoubleTurn > 0) {
@@ -237,20 +236,14 @@ const User = ({ data }) => {
         }
       }
 
-      // user komt op een wifi vakk
-      if (
-        realtimeGameData.currentPlayer === "user" &&
-        newUserAction === "action"
-      ) {
-        console.log("de user staat op een actie, dit moet er gebeuren:");
-      }
+ 
 
       // user komt op een random vak
       if (
         realtimeGameData.currentPlayer === "user" &&
         newUserAction === "random"
       ) {
-        console.log("de user staat op een random vak");
+       
         setRandomOption(
           randomOptions[Math.floor(Math.random() * randomOptions.length)]
         );
@@ -262,7 +255,7 @@ const User = ({ data }) => {
         realtimeGameData.currentPlayer === "user" &&
         newUserAction === "wifi"
       ) {
-        console.log("de user staat op een Wifi vakje, dit moet er gebeuren:");
+       
         handlePionOnWifiOrSpicy();
       }
 
@@ -274,21 +267,9 @@ const User = ({ data }) => {
         handlePionOnWifiOrSpicy();
       }
 
-      // user komt op het spam vakje
-      if (
-        realtimeGameData.currentPlayer === "user" &&
-        newUserAction === "spam"
-      ) {
-        console.log("de user staat op het spamvakje, dit moet er gebeuren:");
-      }
 
-      // user komt een empty vak
-      if (
-        realtimeGameData.currentPlayer === "user" &&
-        newUserAction === "empty"
-      ) {
-        console.log("de user staat op een empty vak, dit moet er gebeuren");
-      }
+
+   
 
       setRealtimeGameData({
         ...realtimeGameData,
@@ -301,7 +282,7 @@ const User = ({ data }) => {
     }
 
     if (type === "playerchange") {
-      console.log("from user:", message.data);
+      
       setRealtimeGameData({
         ...realtimeGameData,
         currentPlayer: message.data.split("-")[2],
@@ -309,17 +290,13 @@ const User = ({ data }) => {
     }
 
     if (type === "sendad") {
-      console.log(
-        "de ad van de hacker is toegekomen bij de user, onderwerp:",
-        message.data.split("-")[2]
-      );
+ 
       setReceiveAdFromHacker(message.data.split("-")[2]);
       deleteAd();
     }
 
     //updaten als de hacker is ingelogt
     if (type === "updatedata") {
-      console.log("hacker in , hier moet data updaten", message.data);
       getUpdatedGamedata();
     }
 
@@ -413,7 +390,7 @@ const User = ({ data }) => {
         });
       }
     } else if (value === "skipturn") {
-      console.log("beurt overslaan");
+     
       channel.publish({
         name: gamecode,
         data: `doubleturn-user-hacker`,
@@ -439,7 +416,7 @@ const User = ({ data }) => {
       0,
       gameData.userinfo.password.length - 1
     );
-    console.log(newPass);
+  
     data = { password: newPass };
     putData("userinfos", gameData.userinfo.id, data);
   };
@@ -532,7 +509,7 @@ const User = ({ data }) => {
       }
     );
     if (response.ok) {
-      console.log("joepie, notes na mail");
+      console.log("post oke");
     }
   };
 
@@ -557,7 +534,7 @@ const User = ({ data }) => {
         }
       );
       if (response.ok) {
-        console.log("joepie");
+        console.log("post oke");
       }
       e.target.reset();
     }
@@ -571,7 +548,7 @@ const User = ({ data }) => {
         actionUser: "done",
       });
       channel.publish({ name: gamecode, data: `playerchange-user-hacker` });
-    }, 10000);
+    }, 7000);
   };
 
   const timeout = (ms) => {
@@ -635,7 +612,6 @@ const User = ({ data }) => {
 
   // general fetch functions
   const getUpdatedGamedata = async () => {
-    console.log("update");
     const updatedGameData = await fetchData("games", gameData.id);
 
     setGameData(updatedGameData);
@@ -661,13 +637,12 @@ const User = ({ data }) => {
       }
     );
     if (response.ok) {
-      console.log("joepie");
+      console.log("put oke");
       getUpdatedGamedata();
     }
   };
 
   const handleClickMoreInfo = (subject) => {
-    console.log(subject);
     if (subject === "close") {
       setWindowComponent("");
     } else {
@@ -708,7 +683,7 @@ const User = ({ data }) => {
       {realtimeGameData.currentPlayer === "hacker" ? (
         <Draggable handle="strong">
           <div className={styles.turn}>
-            <Turn who={realtimeGameData.currentPlayer} pic={gameData.userinfo.picture} />
+            <Turn who={realtimeGameData.currentPlayer} pic={gameData.hackerinfo? gameData.hackerinfo.picture : "pf1" } />
           </div>
         </Draggable>
       ) : (
@@ -834,12 +809,12 @@ const User = ({ data }) => {
       ) : (
         ""
       )}
-      {windowComponent === "info cookies" || windowComponent === "info strongness" || windowComponent === "info toevoegen" ?
+      {windowComponent === "info cookies" || windowComponent === "info strongness" || windowComponent === "info toevoegen" || windowComponent === "info vpn" ?
       <PopupInfo subject={windowComponent} handleClickMoreInfo={(subject) => handleClickMoreInfo(subject)}/>   
      : ""}
      <div className={styles.rules} >
-       <Link href={`/spelregels`}>
-          <a>      
+       <Link href={`/spelregels?tab=new`}>
+          <a target="_blank">      
             <Image
               src={`/assets/img/rulesicon.svg`}
               alt="Picture of the user"

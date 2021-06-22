@@ -164,7 +164,7 @@ const Home = () => {
                 <div className={styles.inside}>
                   <p className={styles.title}>Start een nieuw spel</p>
                   <p className={styles.text}>
-                    Start een nieuw spel en deel de game code met je tegenspeler
+                    Eén speler start een nieuw spel en deelt de game code met de tegenspeler
                   </p>
                   <button
                     onClick={() => {

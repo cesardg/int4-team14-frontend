@@ -54,7 +54,7 @@ const HackerDecryption = ({ gameData, handleUpdatedDiscoveries, action }) => {
           }
         }
       }
-      console.log("werkt dit?");
+      
     });
 
     discoveryArr.map((discovery, index) => {
@@ -132,7 +132,7 @@ const HackerDecryption = ({ gameData, handleUpdatedDiscoveries, action }) => {
             </span>
           ))}
         </p>
-        {console.log(info)}
+     
         {info !== "" ? (
           <button
             onClick={() => handleUpdatedDiscoveries(gameData, null)}

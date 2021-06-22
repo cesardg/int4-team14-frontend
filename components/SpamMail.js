@@ -27,7 +27,7 @@ const SpamMail = ({ handleClickSpamMail, player, playerinfo }) => {
             <p className={styles.label}>van</p>
             <p className={styles.email}>Albert, Baron Frère</p>
             <p className={styles.label}>naar</p>
-            <p className={styles.email}>{playerinfo.email}</p>
+            <p className={styles.email}>{playerinfo.username}@mail.be</p>
             <p className={styles.borderTop}>
               Deze boodschap komt van Albert, Baron Frère, een Belgische
               zakenman en de rijkste man van België

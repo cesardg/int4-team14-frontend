@@ -32,7 +32,7 @@ const UserInfo = ({ userinfo, option }) => {
 
       <p className={styles.username}>{userinfo.username}</p>
       <p className={styles.title}>e-mail</p>
-      <p className={styles.text}>{userinfo.email}</p>
+      <p className={styles.text}>{userinfo.username}@mail.be</p>
       <p className={styles.title}>interesses</p>
       <ul className={styles.interests}>
         {interArr.map((item, index) => (

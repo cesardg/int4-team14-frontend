@@ -42,8 +42,6 @@ const HackerInfo = ({ hackerinfo, option }) => {
       <p className={styles.username}>{hackerinfo.username}</p>
       <p className={styles.title}>status</p>
       <p className={styles.textOnline}>online</p>
-      <p className={styles.title}>e-mail</p>
-      <p className={styles.text}>{hackerinfo.email}</p>
       <p className={styles.title}>Gehackte interesses</p>
       {interests.length > 0 ? (
         <ul className={styles.interests}>

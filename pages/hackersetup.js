@@ -1,13 +1,14 @@
-import Head from "next/head";
+// styling
 import styles from "./../styles/Setup.module.css";
-import Image from "next/image";
-import { useState } from "react";
+// components
 import Radiobutton from "../components/Radiobutton";
-import { useRouter } from "next/router";
 import Layout from "../components/Layout";
 import WindowLayout from "../components/WindowLayout";
-import Router from "next/router";
 import { useChannel } from "../components/ChatReactEffect";
+// imports
+import { useRouter } from "next/router";
+import Image from "next/image";
+import { useState } from "react";
 
 const Hackersetup = () => {
   const router = useRouter();
@@ -15,8 +16,8 @@ const Hackersetup = () => {
   const profilePicturesOptions = ["pf1", "pf2", "pf3", "pf4"];
   const [profilePicture, setProfilePicture] = useState("pf1");
   const [currentField, setCurrentField] = useState("account");
-  const [profileError, setProfileError] = useState({ username: "", email: "" });
-  const [profileInput, setProfileInput] = useState({ username: "", email: "" });
+  const [profileError, setProfileError] = useState({ username: "" });
+  const [profileInput, setProfileInput] = useState({ username: "" });
 
   // channel
   const [channel] = useChannel(gamecode, (message) => {
@@ -36,7 +37,6 @@ const Hackersetup = () => {
     const data = {
       username: profileInput.username,
       picture: profilePicture,
-      email: profileInput.email,
     };
     e.target.reset();
     onSubmit(data);
@@ -184,23 +184,6 @@ const Hackersetup = () => {
                           name="username"
                           value={profileInput.username}
                           onChange={(value) => setInput("username", value)}
-                          required
-                        />
-                      </label>
-                      <label className={styles.hackerLabel}>
-                        Emailadres
-                        <span className={styles.error}>
-                          {profileError.email}
-                        </span>
-                        <span className={styles.hackerEmailInfo}>
-                          Dit e-mailadres mag volledig zelf verzonnen zijn.
-                        </span>
-                        <input
-                          className={styles.hackerInput}
-                          type="email"
-                          name="mail"
-                          value={profileInput.email}
-                          onChange={(value) => setInput("email", value)}
                           required
                         />
                       </label>

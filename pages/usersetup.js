@@ -31,12 +31,10 @@ const Usersetup = () => {
   const [profileInput, setProfileInput] = useState({
     username: "",
     password: "",
-    email: "",
   });
   const [profileError, setProfileError] = useState({
     username: "",
     password: "",
-    email: "",
   });
   const [currentField, setCurrentField] = useState("account");
 
@@ -70,7 +68,6 @@ const Usersetup = () => {
       username: profileInput.username,
       interests: userInterests.join("-"),
       picture: profilePicture,
-      email: profileInput.email,
     };
 
     e.target.reset();
@@ -325,24 +322,7 @@ const Usersetup = () => {
                           required
                         />
                       </label>
-                      <label className={styles.label}>
-                        Emailadres
-                        <span className={styles.error}>
-                          {profileError.email}
-                        </span>
-                        <span className={styles.passwordInfo}>
-                          Dit e-mailadres mag volledig zelf verzonnen zijn.
-                        </span>
-                        <input
-                          className={styles.input}
-                          type="email"
-                          name="mail"
-                          value={profileInput.email}
-                          onChange={(value) => setInput("email", value)}
-                          required
-                        />
-                      </label>
-
+                     
                       <label className={styles.label}>
                         Wachtwoord
                         <span className={styles.error}>

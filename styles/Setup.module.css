@@ -239,11 +239,6 @@ margin-bottom: 3.1rem;
   border: .2rem solid var(--brown);
 }
 
-.hackerEmailInfo{
-  composes:  passwordInfo;
-  color: var(--brown)
-}
-
 .hackerPrimButton{
   composes: primButton;
   box-shadow:

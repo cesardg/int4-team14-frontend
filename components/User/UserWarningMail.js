@@ -48,7 +48,7 @@ const UserWarningMail = ({gameData, onClickButtonMail}) => {
           <p className={styles.label}>van</p>
           <p className={styles.email}>beveiliging@hack-tic.be</p>
           <p className={styles.label}>naar</p>
-          <p className={styles.email}>{gameData.userinfo.email}</p>
+          <p className={styles.email}>{gameData.userinfo.username}@mail.be</p>
           <p className={styles.borderTop}>
             Er probeerde zojuist iemand in te loggen op je account vanaf een
             nieuw apparaat. Je ontvangt deze e-mail omdat we zeker willen zijn

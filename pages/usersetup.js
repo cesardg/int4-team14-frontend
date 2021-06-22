@@ -349,9 +349,12 @@ const Usersetup = () => {
                           {profileError.password}
                         </span>
                         <span className={styles.passwordInfo}>
-                          Je wachtwoord moet exact 6 kleine letters bevatten.
-                          Hoofdletters, leestekens of speciale tekens zijn niet
-                          toegelaten.
+                          Je wachtwoord moet
+                          <span className={styles.bold}>
+                            exact 6 kleine letters
+                          </span>
+                          bevatten. Hoofdletters, leestekens of speciale tekens
+                          zijn niet toegelaten.
                         </span>
                         <div className={styles.passwordWrapper}>
                           <input

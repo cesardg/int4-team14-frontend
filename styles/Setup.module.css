@@ -130,6 +130,11 @@
   margin-bottom: 1rem;
 }
 
+.bold {
+  font-family: sohne-semifett;
+  padding: 0 .5rem;
+}
+
 .label{
   display: flex;
   flex-direction: column;

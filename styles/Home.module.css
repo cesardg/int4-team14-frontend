@@ -24,21 +24,75 @@
 
 /* start */
 .introContainer {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 7rem 1fr;
+  grid-template-rows: 1fr 7rem 1fr;
   margin: 5rem auto;
   width: 90%;
 }
 
+.introImg1 {
+  align-self: flex-end;
+  grid-column: 3 / span 1;
+  grid-row: 1 / span 1;
+  justify-self: flex-end;
+  margin: 0 5rem -7rem 0;
+  width: 20vw;
+  z-index: 1;
+}
+
+.introImg2 {
+  align-self: flex-end;
+  grid-column: 3 / span 1;
+  grid-row: 1 / span 1;
+  justify-self: flex-end;
+  margin: 0 31rem -8rem 0;
+  width: 24vw;
+  z-index: 1;
+}
+
+.introDiceImg {
+  align-self: center;
+  grid-column: 1 / span 1;
+  grid-row: 3 / span 1;
+  justify-self: center;
+  width: 14rem;
+}
+
+.introDiceImg1 {
+  composes: introDiceImg;
+  margin-bottom: 9rem;
+}
+
+.introDiceImg2 {
+  composes: introDiceImg;
+  margin: 12rem 27rem 0rem 0rem;
+  transform: rotate(-15deg);
+}
+
+.introDiceImg3 {
+  composes: introDiceImg;
+  margin: 21rem 0 0 18rem;
+  transform: rotate(-15deg);
+}
+
+.introItem {
+  width: 95%;
+  z-index: 2;
+}
+
 .introItemLeft {
+  composes: introItem;
   align-self: flex-start;
-  width: 55%;
+  grid-column: 1 / span 2;
+  grid-row: 1 / span 2;
 }
 
 .introItemRight {
+  composes: introItem;
   align-self: flex-end;
-  margin-top: -7rem;
-  width: 55%;
+  grid-column: 2 / span 2;
+  grid-row: 2 / span 2;
 }
 
 .startContainer {

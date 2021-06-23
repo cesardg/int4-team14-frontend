@@ -128,6 +128,22 @@ const Home = () => {
               </div>
             </WindowLayout>
           </div>
+          <div className={styles.introImg1}>
+            <Image
+              src={`/assets/img/userpicstr/pf3.svg`}
+              alt="logo"
+              width={416}
+              height={331}
+            />
+          </div>
+          <div className={styles.introImg2}>
+            <Image
+              src={`/assets/img/hackerpicstr/pf3.svg`}
+              alt="logo"
+              width={416}
+              height={331}
+            />
+          </div>
           <div className={styles.introItemRight}>
             <WindowLayout
               title={"spelregels"}
@@ -146,6 +162,31 @@ const Home = () => {
               </div>
             </WindowLayout>
           </div>
+          <div className={styles.introDiceImg1}>
+            <Image
+              src={`/assets/img/dice.svg`}
+              alt="logo"
+              width={416}
+              height={331}
+            />
+          </div>
+          <div className={styles.introDiceImg2}>
+            <Image
+              src={`/assets/img/dice.svg`}
+              alt="logo"
+              width={416}
+              height={331}
+            />
+          </div>
+          <div className={styles.introDiceImg3}>
+            <Image
+              src={`/assets/img/dice.svg`}
+              alt="logo"
+              width={416}
+              height={331}
+            />
+          </div>
+
         </section>
       ) : (
         ""
@@ -164,7 +205,8 @@ const Home = () => {
                 <div className={styles.inside}>
                   <p className={styles.title}>Start een nieuw spel</p>
                   <p className={styles.text}>
-                    Eén speler start een nieuw spel en deelt de game code met de tegenspeler
+                    Eén speler start een nieuw spel en deelt de game code met de
+                    tegenspeler
                   </p>
                   <button
                     onClick={() => {

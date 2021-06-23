@@ -445,11 +445,13 @@ const Usersetup = () => {
                           interesses
                         </p>
                       ) : (
+                        <div className={styles.primButtonContainer}>
                         <input
                           className={styles.primButton}
                           type="submit"
                           value="Naar het spelbord ->"
                         />
+                        </div>
                       )}
                     </legend>
                   ) : (

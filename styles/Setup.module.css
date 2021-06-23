@@ -219,6 +219,13 @@ text-align: center;
   border: .1rem solid;
 }
 
+.primButtonContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
 .checkBoxLegend{
   display: flex;
   flex-direction: column;

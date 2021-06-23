@@ -1,6 +1,6 @@
 .article {
   background-color: var(--black);
-  border: 2px solid var(--yellow);
+  border: 2px solid var(--gridyellow);
   border-right: none;
   display: grid;
   grid-template-columns: auto auto;
@@ -10,7 +10,7 @@
 }
 
 .img {
-  border-bottom: 2px solid var(--yellow);
+  border-bottom: 2px solid var(--gridyellow);
   grid-column: 1 / span 2;
   grid-row: 1 / span 1;
 }
@@ -35,7 +35,7 @@
   font-family: sohne-breit-fett;
   font-size: 1.4rem;
   grid-column: 1 / span 2;
-  padding: 3rem 2rem 0;
+  padding: 2.9rem 2rem 0;
   text-transform: uppercase;
 }
 

@@ -22,7 +22,7 @@ const UserInfo = ({ userinfo, option }) => {
         /> :     "" }
 
         {option.length === 0 ?    <Image
-          src={`/assets/img/userpics/${userinfo.picture}.svg`}
+          src={`/assets/img/userpicsnoborder/${userinfo.picture}.svg`}
           alt="Picture of the user"
           width={385}
           height={246}

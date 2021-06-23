@@ -11,7 +11,7 @@ const Turn = ({ who, pic}) => {
       <div className={styles.container}>
         <div className={styles.img}>
           <Image
-            src={`/assets/img/${who}pics/${pic}.svg`}
+            src={`/assets/img/${who}picsnoborder/${pic}.svg`}
             alt="Picture of the user"
             width={700}
             height={450}

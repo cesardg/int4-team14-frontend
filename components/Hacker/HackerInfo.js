@@ -32,7 +32,7 @@ const HackerInfo = ({ hackerinfo, option }) => {
         /> :     "" }
 
         {option.length === 0 ?    <Image
-          src={`/assets/img/hackerpics/${hackerinfo.picture}.svg`}
+          src={`/assets/img/hackerpicsnoborder/${hackerinfo.picture}.svg`}
           alt="Picture of the user"
           width={385}
           height={246}

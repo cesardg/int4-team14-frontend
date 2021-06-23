@@ -6,4 +6,4 @@ Er wordt gebruik gemaakt van websockets om de beide schemren realtime up to date
 
 We gebruiken strapi als node js backend (https://github.com/cesardg/int4-team14-backend) om alle gegevens op te slaan. 
 
-https://hack-tic.vercel.app/
+Te bewonderen op https://hack-tic.vercel.app/

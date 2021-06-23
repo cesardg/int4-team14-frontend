@@ -35,3 +35,11 @@
   border: 1px solid var(--yellow);
 outline: none;
 }
+
+.feedbackText {
+  color: var(--red);
+  text-align: center;
+  margin-bottom: 1rem;
+  font-family: "sohne-fett";
+
+}

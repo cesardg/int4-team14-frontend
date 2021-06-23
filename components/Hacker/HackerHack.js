@@ -8,7 +8,6 @@ import { useState } from "react";
 
 const HackerHack = ({ handleSubmitForm, feedback, start }) => {
   const [view, setView] = useState("button");
-// console.log("feedback", feedback);
   return (
     <GameWindowLayout title="hacking" bg="var(--black)" border="var(--green)">
       <div className={styles.container}>
@@ -47,15 +46,17 @@ const HackerHack = ({ handleSubmitForm, feedback, start }) => {
           ""
         )}
         {start ? (
+     
           <p className={styles.subtext}>
             Je hebt 1 poging om de user te hacken!
           </p>
+       
         ) : (
           <p className={styles.subtext}>
             Je kan de user proberen hacken nadat je start gepasseerd bent
           </p>
         )}
-        <p>{feedback}</p>
+         <p className={styles.feedbackText}>{feedback}</p>
       </div>
     </GameWindowLayout>
   );

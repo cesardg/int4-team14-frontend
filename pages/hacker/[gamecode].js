@@ -545,7 +545,10 @@ const Hacker = ({ data }) => {
   const handleFormGuessPass = (e) => {
     e.preventDefault();
     if (e.target.hackpass.value == gameData.userinfo.password) {
-      setHackerGuessFeedback("het is juist, de hacker heeft gewonnen");
+      putData("hackerinfos", gameData.hackerinfo.id, {
+        latestguess: e.target.hackpass.value,
+      });
+      setHackerGuessFeedback("");
       putData("games", gameData.id, { winner: "hacker" });
       channel.publish({
         name: gamecode,
@@ -553,11 +556,15 @@ const Hacker = ({ data }) => {
       });
     } else {
       setHackerStart(false);
-      setHackerGuessFeedback("het paswoord is niet juist!");
+      setHackerGuessFeedback("het wachtwoord is niet juist!");
       putData("hackerinfos", gameData.hackerinfo.id, {
         latestguess: e.target.hackpass.value,
       });
     }
+    timeout();
+    setTimeout(() => {
+     setHackerGuessFeedback("")
+    }, 5000);
   };
 
   const handleClickSpamMail = (reaction) => {

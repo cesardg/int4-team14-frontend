@@ -47,6 +47,7 @@
   text-align: left;
   transition: 0.2s all ease;
   width: 40%;
+  font-family: Helvetica, sans-serif;
 }
 
 .actionButton:hover {

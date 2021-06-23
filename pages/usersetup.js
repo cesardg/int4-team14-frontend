@@ -371,6 +371,8 @@ const Usersetup = () => {
                             value={profilePass[2]}
                             onChange={(value) => handelChangePas(value, "2")}
                             required
+                            autoCorrect="off"
+                            autoCapitalize="none"
                           />
                           <span className={styles.smallInputStripe}>-</span>
                           <input

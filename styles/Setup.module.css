@@ -206,6 +206,9 @@ height: 4rem;
 .checkBoxInfo{
 font-size: 2rem;
 margin-bottom: 3.1rem;
+padding-left: 3rem;
+padding-right: 3rem;
+text-align: center;
 }
 
 .checkBoxInfoNummer{

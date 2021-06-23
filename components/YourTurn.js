@@ -18,7 +18,7 @@ const YourTurn = () => {
             height={400}
           />
         </div>
-        <p className={styles.subtitle}>gooi met de dobbelstenen</p>
+        <p className={styles.subtitle}>gooi met de dobbelsteen</p>
       </div>
     </GameWindowLayout>
   );

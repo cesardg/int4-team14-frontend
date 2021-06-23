@@ -24,7 +24,7 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
         <div className={styles.actionsContainer}>
           {passwordLength <= 15 ? (
             <>
-            <button
+            <div
               className={styles.actionButton}
               onClick={() => onClickButton("add2letters")}
             >
@@ -40,7 +40,7 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
               <p className={styles.actionSubtitle}>
                 Voeg twee kleine letters toe
               </p>
-            </button>
+            </div>
             <div className={styles.moreInfoImg} onClick={() => handleClickMoreInfo("info toevoegen")}>
                  <Image
                 src={`/assets/img/moreinfo.svg`}
@@ -71,7 +71,7 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
             </button>
           )}
 
-          <button
+          <div
             className={styles.actionButton}
             onClick={() => onClickButton("deletescookies")}
           >
@@ -87,7 +87,7 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
             <p className={styles.actionSubtitle}>
               Zo kan de hacker jouw interesses niet gebruiken voor zijn aanval
             </p>
-          </button>
+          </div>
                <div className={styles.moreInfoImg} onClick={() => handleClickMoreInfo("info cookies")}>
                  <Image
                 src={`/assets/img/moreinfo.svg`}

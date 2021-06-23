@@ -1,17 +1,29 @@
 .container {
+  display: flex;
+}
+
+.imgRight {
+  height: 100%;
+}
+
+.imgLeftConfetti {
+  transform: scaleX(-1);
+}
+
+.content {
   align-items: center;
-  background-image: url(../../public/assets/img/end/confetti.svg), url(../../public/assets/img/end/confetti.svg);
   background-position: center left, center right;
   background-repeat: no-repeat;
   background-size: contain;
   display: flex;
   flex-direction: column;
-  padding: 3rem 5rem;
+  margin: 0 -2rem;
+  padding: 3rem 0;
   text-align: center;
 }
 
-.containerHacker {
-  composes: container;
+.contentHacker {
+  composes: content;
   color: var(--white);
 }
 

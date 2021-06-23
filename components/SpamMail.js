@@ -69,7 +69,7 @@ const SpamMail = ({ handleClickSpamMail, player, playerinfo }) => {
                 setMail("closed");
               }}
             >
-              Verwijderen
+              Email verwijderen
             </button>
           </div>
         </GameWindowLayout>

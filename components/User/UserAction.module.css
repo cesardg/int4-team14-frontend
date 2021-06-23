@@ -6,20 +6,20 @@
 }
 
 .title {
-  font-family: sohne-breit-fett;
+  font-family: "sohne-breit-fett", Helvetica, sans-serif;
   font-size: 4rem;
   text-transform: uppercase;
 }
 
 .subtitle {
-  font-family: sohne-breit-semifett;
+  font-family: "sohne-breit-semifett" , Helvetica, sans-serif;;
   font-size: 2rem;
   margin-top: 4rem;
   text-transform: uppercase;
 }
 
 .text {
-  font-family: sohne-breit;
+  font-family: "sohne-breit" , Helvetica, sans-serif;;
   padding: 1rem 0 0;
   text-align: center;
   width: 50%;
@@ -47,6 +47,7 @@
   text-align: left;
   transition: 0.2s all ease;
   width: 40%;
+  font-family: Helvetica, sans-serif;
 }
 
 .actionButton:hover {
@@ -94,14 +95,14 @@
 
 .actionTitle {
   align-self: flex-end;
-  font-family: sohne-breit-fett;
+  font-family: "sohne-breit-fett", Helvetica, sans-serif;
   grid-column: 2 / span 1;
   grid-row: 1 / span 1;
   padding: 1.5rem 0 0.5rem;
 }
 
 .actionSubtitle {
-  font-family: sohne;
+  font-family: "sohne", Helvetica, sans-serif;
   grid-column: 2 / span 1;
   grid-row: 2 / span 1;
   padding: 0 0 1.5rem;
@@ -112,7 +113,7 @@
 }
 
 .actionExtra {
-  font-family: sohne;
+  font-family: "sohne", Helvetica, sans-serif;
   font-size: 1.3rem;
   grid-column: 2 / span 1;
   grid-row: 3 / span 1;
@@ -120,7 +121,7 @@
 }
 
 .actionBottomText {
-  font-family: sohne-breit, Helvetica, sans-serif;
+  font-family: "sohne-breit", Helvetica, sans-serif;
   padding-bottom: 5rem;
 }
 

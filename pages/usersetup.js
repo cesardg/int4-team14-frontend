@@ -371,6 +371,8 @@ const Usersetup = () => {
                             value={profilePass[2]}
                             onChange={(value) => handelChangePas(value, "2")}
                             required
+                            autoCorrect="off"
+                            autoCapitalize="none"
                           />
                           <span className={styles.smallInputStripe}>-</span>
                           <input
@@ -443,11 +445,13 @@ const Usersetup = () => {
                           interesses
                         </p>
                       ) : (
+                        <div className={styles.primButtonContainer}>
                         <input
                           className={styles.primButton}
                           type="submit"
                           value="Naar het spelbord ->"
                         />
+                        </div>
                       )}
                     </legend>
                   ) : (

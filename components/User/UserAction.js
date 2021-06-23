@@ -24,7 +24,7 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
         <div className={styles.actionsContainer}>
           {passwordLength <= 15 ? (
             <>
-            <button
+            <div
               className={styles.actionButton}
               onClick={() => onClickButton("add2letters")}
             >
@@ -40,7 +40,7 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
               <p className={styles.actionSubtitle}>
                 Voeg twee kleine letters toe
               </p>
-            </button>
+            </div>
             <div className={styles.moreInfoImg} onClick={() => handleClickMoreInfo("info toevoegen")}>
                  <Image
                 src={`/assets/img/moreinfo.svg`}
@@ -51,7 +51,7 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
               </div>
               </>
           ) : (
-            <button
+            <div
               className={styles.actionButton}
               onClick={() => onClickButton("add2letters")}
               disabled={true}
@@ -68,10 +68,10 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
               <p className={styles.actionSubtitle}>
                 Voeg twee kleine letters toe
               </p>
-            </button>
+            </div>
           )}
 
-          <button
+          <div
             className={styles.actionButton}
             onClick={() => onClickButton("deletescookies")}
           >
@@ -87,7 +87,7 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
             <p className={styles.actionSubtitle}>
               Zo kan de hacker jouw interesses niet gebruiken voor zijn aanval
             </p>
-          </button>
+          </div>
                <div className={styles.moreInfoImg} onClick={() => handleClickMoreInfo("info cookies")}>
                  <Image
                 src={`/assets/img/moreinfo.svg`}
@@ -97,7 +97,7 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
               />
               </div>
           {passwordLength <= 15 ? (
-            <button
+            <div
               className={styles.actionButton}
               onClick={() => onClickButton("add1capital")}
             >
@@ -111,9 +111,9 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
               </div>
               <p className={styles.actionTitle}>Versterk je wachtwoord</p>
               <p className={styles.actionSubtitle}>Voeg 1 hoofdletter toe</p>
-            </button>
+            </div>
           ) : (
-            <button
+            <div
               className={styles.actionButton}
               onClick={() => onClickButton("change1capital")}
             >
@@ -127,10 +127,10 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
               </div>
               <p className={styles.actionTitle}>Versterk je wachtwoord</p>
               <p className={styles.actionSubtitle}>Verander 1 karakter in een hoofdletter</p>
-            </button>
+            </div>
           )}
 
-          <button
+          <div
             className={styles.actionButton}
             onClick={() => onClickButton("waarschuwingsmail")}
           >
@@ -146,10 +146,10 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
             <p className={styles.actionSubtitle}>
               Ontdek de laatste zet van de hacker
             </p>
-          </button>
+          </div>
 
           {passwordLength <= 15 ? (
-            <button
+            <div
               className={styles.actionButton}
               onClick={() => onClickButton("add1number")}
             >
@@ -163,9 +163,9 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
               </div>
               <p className={styles.actionTitle}>Versterk je wachtwoord</p>
               <p className={styles.actionSubtitle}>Voeg 1 cijfer toe</p>
-            </button>
+            </div>
           ) : (
-            <button
+            <div
               className={styles.actionButton}
               onClick={() => onClickButton("change1number")}
             >
@@ -181,10 +181,10 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
               <p className={styles.actionSubtitle}>
                 Verander 1 karakter in een cijfer
               </p>
-            </button>
+            </div>
           )}
 
-          <button
+          <div
             className={
               start ? styles.actionButtonVpn : styles.actionButtonDisabled
             }
@@ -212,8 +212,8 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
             <p className={styles.actionSubtitle}>
               De hacker moet 2 beurten overslaan
             </p>
-          </button>
-                    <div className={styles.moreInfoImg} onClick={() => handleClickMoreInfo("info vpn")}>
+          </div>
+              <div className={styles.moreInfoImg} onClick={() => handleClickMoreInfo("info vpn")}>
                  <Image
                 src={`/assets/img/moreinfo.svg`}
                 alt="icon"

@@ -12,7 +12,7 @@ const HackerAction = ({ onClickButton, ads }) => {
         <p className={styles.subtitle}>je staat op een</p>
         <p className={styles.title}>actievak</p>
         <div className={styles.actionsContainer}>
-          <button
+          <div
             className={styles.actionButton}
             onClick={() => onClickButton("get2letters")}
           >
@@ -26,8 +26,8 @@ const HackerAction = ({ onClickButton, ads }) => {
             </div>
             <p className={styles.actionTitle}>Wachtwoord ontsleutelaar</p>
             <p className={styles.actionSubtitle}>Ontdek 2 kleine letters</p>
-          </button>{" "}
-          <button
+          </div>
+          <div
             className={styles.actionButton}
             onClick={() => onClickButton("get interest")}
           >
@@ -43,8 +43,8 @@ const HackerAction = ({ onClickButton, ads }) => {
             <p className={styles.actionSubtitle}>
               Ontdek de interesses van de gebruiker om een reclame te sturen
             </p>
-          </button>
-          <button
+          </div>
+          <div
             className={styles.actionButton}
             onClick={() => onClickButton("get1capital")}
           >
@@ -58,12 +58,12 @@ const HackerAction = ({ onClickButton, ads }) => {
             </div>
             <p className={styles.actionTitle}>Wachtwoord ontsleutelaar</p>
             <p className={styles.actionSubtitle}>Ontdek 1 hoofdletter</p>
-          </button>
-          <button
+          </div>
+          <div
             className={styles.actionButton}
             onClick={() => onClickButton("screencapture")}
           >
-            {" "}
+          
             <div className={styles.actionImg}>
               <Image
                 src={`/assets/img/hackeractions/screencapture.svg`}
@@ -76,8 +76,8 @@ const HackerAction = ({ onClickButton, ads }) => {
             <p className={styles.actionSubtitle}>
               Ontdek de laatste aanpassing van de gebruiker aan het wachtwoord
             </p>
-          </button>
-          <button
+          </div>
+          <div
             className={styles.actionButton}
             onClick={() => onClickButton("get1number")}
           >
@@ -91,8 +91,8 @@ const HackerAction = ({ onClickButton, ads }) => {
             </div>
             <p className={styles.actionTitle}>Wachtwoord ontsleutelaar</p>
             <p className={styles.actionSubtitle}>Ontdek 1 cijfer</p>
-          </button>
-          <button
+          </div>
+          <div
             className={
               ads ? styles.actionButtonVpn : styles.actionButtonDisabled
             }
@@ -120,7 +120,7 @@ const HackerAction = ({ onClickButton, ads }) => {
             <p className={styles.actionSubtitle}>
               De gebruiker moet 2 beurten overslaan
             </p>
-          </button>
+          </div>
         </div>
         <p className={styles.actionBottomText}>
           Hoe ga jij je de gebruiker zijn wachtwoord ontdekken?

@@ -27,7 +27,7 @@
   padding: .8rem 1.5rem;
   text-align: center;
   width: fit-content;
-  z-index: 1;
+  z-index: 0;
 }
 
 .title {

@@ -9,19 +9,19 @@ const Layout = ({ children, style, vpnIcon, realtimeGameData }) => {
 
     let today = new Date()
     let tempTime = today.getHours() + ':' + today.getMinutes();
-    // const [time, setTime] = useState(tempTime);
+    const [time, setTime] = useState(tempTime);
 
     const [popupDice, setPopupDice] = useState("none");
     const [popupVpn, setPopupVpn] = useState("none");
 
-    // useEffect(() => {
-    //   const interval = setInterval(() => {
-    //     today = new Date()
-    //     tempTime = today.getHours() + ':' + today.getMinutes();
-    //     setTime(tempTime);
-    //   }, 10000);
-    //   return () => clearInterval(interval);
-    // }, []);
+    useEffect(() => {
+      const interval = setInterval(() => {
+        today = new Date()
+        tempTime = today.getHours() + ':' + today.getMinutes();
+         setTime(tempTime);
+       }, 10000);
+       return () => clearInterval(interval);
+     }, []);
 
     const handleClickPopup = (icon) => {
       if (icon === "dice"){
@@ -91,7 +91,7 @@ const Layout = ({ children, style, vpnIcon, realtimeGameData }) => {
                 <p className={styles.popupText}>Spelvak gebruiker: {realtimeGameData.fieldUser} </p>
                 </div>
               </div>
-            {/* <p className={styles.time}>{time}</p> */}
+            <p className={styles.time}>{time}</p> 
           </div>
       </header>
       <main className={styles.main}>{children}</main>

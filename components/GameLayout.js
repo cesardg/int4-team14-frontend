@@ -65,7 +65,7 @@ const Layout = ({ children, style, vpnIcon, realtimeGameData }) => {
               <div style={vpnIcon? {filter : "opacity(1)"} : {filter : "opacity(.4)"}}>
               <Image
                 src={`/assets/img/vpnicon.svg`}
-                alt="Picture of the dice"
+                alt="dice icon"
                 width={22}
                 height={22}
             

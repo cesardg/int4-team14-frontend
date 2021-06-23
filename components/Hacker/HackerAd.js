@@ -32,7 +32,7 @@ const HackerAd = ({ gameData, onClickButton }) => {
               <div className={styles.actionImg}>
                 <Image
                   src={`/assets/img/hackeractions/ad.svg`}
-                  alt="Picture of the user"
+                  alt="ad icon"
                   width={100}
                   height={80}
                 />
@@ -59,7 +59,7 @@ const HackerAd = ({ gameData, onClickButton }) => {
                 <div className={styles.interestImg}>
                   <Image
                     src={`/assets/img/hackeractions/ad-icons/${item}.svg`}
-                    alt="Picture of the user"
+                    alt="ad icon"
                     width={100}
                     height={80}
                   />
@@ -81,11 +81,10 @@ const HackerAd = ({ gameData, onClickButton }) => {
         {adWindow === "ad" ? (
           <div className={styles.adImg}>
             <Image
-              src={`/assets/img/hackeractions/ads/${currentInterest.substring(0,3)}.png`}
-              // src={`/assets/img/hackeractions/ads/slijm maken.png`}
-              alt="Picture of the user"
-              width={450}
-              height={250}
+              src={`/assets/img/hackeractions/ads/sli.gif`}
+              alt="Picture of ad"
+              width={640}
+              height={360}
             />
           </div>
         ) : (

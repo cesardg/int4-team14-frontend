@@ -4,7 +4,6 @@ import GameWindowLayout from "../../components/GameWindowLayout";
 import styles from "./Password.module.css";
 
 const Password = ({ data }) => {
-  console.log(data);
   return (
     <GameWindowLayout
       title="hackerinfo"
@@ -15,9 +14,17 @@ const Password = ({ data }) => {
         <p className={styles.title}>Wat wist de hacker?</p>
         <p className={styles.label}>Wachtwoord</p>
         <div className={styles.password}>
-          {data.hackerinfo.latestguess.split("").map((char, index) => (
-            <p className={styles.char} key={index}>{char}</p>
-          ))}
+          {data.hackerinfo.latestguess ? (
+            data.hackerinfo.latestguess.split("").map((char, index) => (
+              <p className={styles.char} key={index}>
+                {char}
+              </p>
+            ))
+          ) : (
+            <p className={styles.char}>
+              De hacker heeft nog niet gegokt
+            </p>
+          )}
         </div>
         <p className={styles.label}>Gehackte interesses</p>
         {data.hackerinfo.obtainedInterests != null ? (
@@ -32,7 +39,7 @@ const Password = ({ data }) => {
           </ul>
         ) : (
           <p className={styles.empty}>
-           De hacker had geen interesses meer van jou
+            De hacker had geen interesses meer van jou
           </p>
         )}
       </div>

@@ -26,9 +26,13 @@ const Discoveries = ({ data }) => {
             wachtwoord te ontdekken
           </p>
         )}
-        <p className={styles.text}>Wachtwoord gevonden!</p>
+        {data.winner === "user" ? (
+          <p className={styles.text}>Het wachtwoord was</p>
+        ) : (
+          <p className={styles.text}>Wachtwoord gevonden!</p>
+        )}
         <div className={styles.password}>
-          {data.hackerinfo.latestguess.split("").map((char, index) => (
+          {data.userinfo.password.split("").map((char, index) => (
             <p className={styles.char} key={index}>
               {char}
             </p>

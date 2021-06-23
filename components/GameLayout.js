@@ -51,12 +51,7 @@ const Layout = ({ children, style, vpnIcon, realtimeGameData }) => {
         <h1 className={styles.title}>Hack-tic</h1>
           <Link href="/">
             <a className={styles.logo}>
-              <Image
-                src={`/assets/img/logo.svg`}
-                alt="Picture of the user"
-                width={154}
-                height={35}
-                />
+              
             </a>
           </Link>
           <div className={styles.headerRight}>

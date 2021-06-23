@@ -18,7 +18,7 @@
 .username {
   align-self: flex-end;
   background-color: var(--green);
-  border: 2px solid var(--gridorange);
+  border: .2rem solid var(--gridorange);
   font-family: pixel;
   font-size: 1.6rem;
   grid-column: 1 / span 1;
@@ -28,13 +28,14 @@
   text-align: center;
   width: fit-content;
   z-index: 0;
+  margin-left: -.2rem;
 }
 
 .title {
   font-family: sohne-breit-fett;
   font-size: 1.4rem;
   grid-column: 1 / span 2;
-  padding: 3rem 2rem 0;
+  padding: 2.9rem 2rem 0;
   text-transform: uppercase;
 }
 

@@ -121,18 +121,23 @@
   box-shadow: none;
 }
 
-.passwordInfo{
-  font-size: 1.4rem;
+.passwordInfo {
+  font-size: 1.8rem;
   font-family: "sohne";
   text-transform: none;
   width: 40rem;
   color: var(--black);
-  margin-bottom: 1rem;
+  margin: 0rem 0 1.5rem;
+}
+
+.usernameInfo {
+  composes: passwordInfo;
+  color: var(--white);
 }
 
 .bold {
   font-family: sohne-semifett;
-  padding: 0 .5rem;
+  margin: 0 .5rem;
 }
 
 .label{

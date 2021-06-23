@@ -112,14 +112,6 @@ const Hackersetup = () => {
               ) : (
                 ""
               )}
-              {currentField === "account" ? (
-                <p className={styles.hackerInfo}>
-                  Elke succesvolle hacker heeft schuilnaam nodig, zo kan de
-                  computer politie jou niet snel ontdekken en ontmaskeren
-                </p>
-              ) : (
-                ""
-              )}
               <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
                 <div className={styles.formContainer}>
                   <legend className={styles.legend}>
@@ -177,6 +169,11 @@ const Hackersetup = () => {
                         Gebruikersnaam
                         <span className={styles.error}>
                           {profileError.username}
+                        </span>
+                        <span className={styles.usernameInfo}>
+                          Elke succesvolle hacker heeft een schuilnaam nodig, zo kan
+                          de computerpolitie jou niet snel ontdekken en
+                          ontmaskeren
                         </span>
                         <input
                           className={styles.hackerInput}

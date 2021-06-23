@@ -333,8 +333,7 @@ const Usersetup = () => {
                           <span className={styles.bold}>
                             exact 6 kleine letters
                           </span>
-                          bevatten. Hoofdletters, leestekens of speciale tekens
-                          zijn niet toegelaten.
+                          bevatten. Later kan je ook hoofdletters en cijfers toevoegen.
                         </span>
                         <div className={styles.passwordWrapper}>
                           <input

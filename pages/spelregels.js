@@ -85,11 +85,11 @@ const Rules = () => {
                   <article className={styles.article}>
                     <h3 className={styles.subTitle}>Het spel in het kort</h3>
                     <p className={styles.text}>
-                      Hack-Tic is een spel waarbij een hacker en een gebruikers
-                      account het tegen elkaar opnemen in de strijd om de
-                      gegevens van een account. De beide spelers beginnen bij
+                      Hack-Tic is een digitaal bordspel waarbij een <span className={styles.importantText}> hacker en een gebruikers
+                      account</span> het tegen elkaar opnemen in de <span className={styles.importantText}> strijd  om de
+                      gegevens van een account.</span> De beide spelers beginnen bij
                       “START” en verplaatsen hun pion tijdens hun beurt zoveel
-                      vakjes over het speelbord als ze gegooid hebben met de
+                      vakjes op het bord als ze gegooid hebben met de
                       dobbelsteen. Naar gelang het vakje waar de speler op
                       belandt, zijn er verschillende acties die hem vooruit
                       kunnen helpen tijdens het spel. Dit spel wordt zowel
@@ -134,29 +134,28 @@ const Rules = () => {
                 <article className={styles.article}>
                   <h3 className={styles.subTitle}>Opstart</h3>
                   <p className={styles.para}>
-                    Dit spel kan gespeeld worden met twee laptops of met een
-                    laptop en een tablet. Voor je het spel kan beginnen, moet
+                    Dit spel kan gespeeld worden met <span className={styles.importantText}> twee laptops </span>of met een
+                    <span className={styles.importantText}> laptop en een tablet</span>. Voor je het spel kan beginnen, moet
                     het spelbord eerst correct aangesloten worden door de
-                    usb-kabel bij de laptop in te steken.
+                    <span className={styles.importantText}> usb-kabel bij de laptop in te steken.</span>
                   </p>
                   <p className={styles.para}>
-                    Eén speler start een nieuw spel, deze speler krijgt als
-                    eerste de keuze welke rol hij wilt aannemen tijdens het spel
-                    : hacker of gebruiker? Daarna ontvangt hij een code die de
-                    tegenspeler correct moet invoeren in het “neem deel aan een
+                    <span className={styles.importantText}>Eén speler start een nieuw spel</span>, deze speler krijgt als
+                    eerste de keuze <span className={styles.importantText}>welke rol</span> hij wilt aannemen tijdens het spel: <span className={styles.importantText}>hacker of gebruiker?</span> Daarna ontvangt hij een <span className={styles.importantText}>code die de
+                    tegenspeler correct moet invoeren</span> in het “neem deel aan een
                     spel”-vak. De tegenspeler krijgt automatisch de andere rol
                     toegewezen.
                   </p>
                   <p className={styles.para}>
                     De gebruiker moet een account aanmaken met een
-                    gebruikersnaam, e-mailadres, profielfoto, sterk wachtwoord
+                    gebruikersnaam, profielfoto, start wachtwoord
                     en enkele interesses. Maar ook de hacker krijgt de kans om
-                    een avatar te kiezen en een schuilnaam en e-mailadres in te
+                    een avatar te kiezen en een schuilnaam in te
                     voeren.
                   </p>
                   <p className={styles.para}>
-                    Wanneer alle gegevens correct zijn ingegeven, nemen beide
-                    pionnen plaats op het startvak. De computer beslist welke
+                    Wanneer alle gegevens correct zijn ingegeven, <span className={styles.importantText}> nemen beide
+                    pionnen plaats op het startvak.</span> De computer beslist welke
                     speler mag beginnen. Dit zal weergegeven worden op het
                     scherm.
                   </p>
@@ -184,8 +183,8 @@ const Rules = () => {
                 <article className={styles.article}>
                   <h3 className={styles.subTitle}>Het spel</h3>
                   <p className={styles.text}>
-                    Als u aan de beurt bent gooit u de dobbelsteen en verplaatst
-                    u uw pion het gegooide aantal vakjes. Zorg ervoor dat u
+                    Als u aan de beurt bent <span className={styles.importantText}>gooit u de dobbelsteen en verplaatst
+                    u uw pion</span> het gegooide aantal vakjes. Zorg ervoor dat u
                     enkel stevig doorklikt op het laatste vakje waar de pion
                     moet blijven staan. Afhankelijk van het vakje waarop u
                     terecht komt, heeft u verschillende positieve of negatieve
@@ -274,8 +273,8 @@ const Rules = () => {
                       <div>
                         <p className={styles.text}>
                           Elke keer wanneer je voorbij de start passeert,
-                          ontgrendel je de mogelijkheid om je VPN in te
-                          schakelen.
+                          ontgrendel je de <span className={styles.importantText}> mogelijkheid om je VPN in te
+                          schakelen.</span>
                         </p>
                         <p className={styles.red}>
                           <span className={styles.warning}>Opgepast! </span>
@@ -421,8 +420,8 @@ const Rules = () => {
                       <div>
                         <p className={styles.text}>
                           Elke keer wanneer je voorbij de start passeert,
-                          ontgrendel je de mogelijkheid om het wachtwoord van de
-                          gebruiker te raden.{" "}
+                          ontgrendel je de <span className={styles.importantText}>mogelijkheid om het wachtwoord van de
+                          gebruiker te raden.</span>
                         </p>
                         <p className={styles.red}>
                           <span className={styles.warning}>Opgepast! </span>

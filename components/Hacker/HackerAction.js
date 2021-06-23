@@ -97,7 +97,7 @@ const HackerAction = ({ onClickButton, ads }) => {
               ads ? styles.actionButtonVpn : styles.actionButtonDisabled
             }
             onClick={() => onClickButton("send ad")}
-            disabled={ads ? false : true}
+           
           >
             <div className={styles.actionImg}>
               <Image

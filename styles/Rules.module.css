@@ -304,6 +304,11 @@
     font-size: 2rem;
 }
 
+.importantText{
+    font-family: "sohne-semifett", Helvetica, sans-serif;
+    font-weight: 600;
+}
+
 @media only screen and (max-width: 1350px) {
 
   .startShortWrapper{

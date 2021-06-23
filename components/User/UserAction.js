@@ -52,9 +52,8 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
               </>
           ) : (
             <div
-              className={styles.actionButton}
+              className={styles.actionButtonDisabled}
               onClick={() => onClickButton("add2letters")}
-              disabled={true}
             >
               <div className={styles.actionImg}>
                 <Image
@@ -189,7 +188,6 @@ const UserAction = ({ onClickButton, start, password, handleClickMoreInfo}) => {
               start ? styles.actionButtonVpn : styles.actionButtonDisabled
             }
             onClick={() => onClickButton("vpn")}
-            disabled={start ? false : true}
           >
             <div className={styles.actionImgVpn}>
               <Image

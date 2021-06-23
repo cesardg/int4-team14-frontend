@@ -55,6 +55,8 @@
 
 .actionButtonDisabled {
   composes: actionButtonVpn;
+  pointer-events: none;
+  opacity: .5;
 }
 
 .actionButtonDisabled:hover {

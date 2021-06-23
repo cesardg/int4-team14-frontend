@@ -61,7 +61,7 @@
 }
 
 .text {
-  font-family: sohne-breit-fett;
+  font-family: "sohne-breit-fett", Helvetica, sans-serif;
   font-size: 2.5rem;
   padding: 2rem 0 2rem;
   max-width: 50%;

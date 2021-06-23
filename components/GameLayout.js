@@ -52,7 +52,7 @@ const Layout = ({ children, style, vpnIcon, realtimeGameData }) => {
           <Link href="/">
             <a className={styles.logo}>
               <Image
-              src={/assets/img/logo.svg}
+              src={`/assets/img/logo.svg`}
               alt="logo"
               width={154}
               height={35}

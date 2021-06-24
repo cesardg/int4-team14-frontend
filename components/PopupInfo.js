@@ -93,7 +93,7 @@ const PopupInfo = ({subject, handleClickMoreInfo}) => {
         </div>
         <p className={styles.subtitle}> Een VPN zorgt voor een <span className={styles.strong}>beveiligde verbinding</span> tussen jou en het internet.
 De verbinding is veiliger dan wifi en <span className={styles.strong}>houdt veel hackers tegen</span>.</p>
-<p className={styles.subtitle}>Voer deze actie uit zodat de hacker een beurt moet overslaan</p>
+<p className={styles.subtitle}>Voer deze actie uit zodat de hacker 2 beurten moet overslaan</p>
         
         
         <div className={styles.buttonContainer}>
